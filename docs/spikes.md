@@ -2,7 +2,7 @@
 
 Run through the live bridge on 2026-09-23. Test character: the **CC4 Camila template** (`D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Camila.ccAvatar`, underwear only, no hair). For spikes 5, 3 and 6 she also wore Basic T-shirts, Biker_Jeans and Canvas Shoes. Raw outputs are in `spikes-output/` (git-ignored); the scripts are in `tools/spikes/`. Triangle and material counts come from the exported FBX via `tools/fbx_stats.py`.
 
-Status: spikes 0, 1, 3, 4, 5, 6, 8 and 9 are done. Spike 2 is partial (deferred: no known iContent item to test with; confirm on the go). Spike 7 is pending a UI step.
+Status: **Phase 1b complete.** All spikes are done except spike 2, which is partial (deferred: no known iContent item to test with; confirm on the go).
 
 ---
 
@@ -98,3 +98,20 @@ The user set InstaLOD **Merge Materials → by type** in CC4's Export FBX dialog
 ## Spike 8: Game Base → Single Material ✅ (UI only; recorded, not used)
 
 The user confirmed CC4 4.70 still offers **Convert to Game Base → Single Material** in the UI. The static RLPy search found no Python entry point (only read-only `EAvatarGeneration_CC_Game_Base_*` enums), and CC4 ships neutral Game Base avatars (`Program/CCBaseData/NeutralAvatar/RL_CharacterCreator_Base_Game_G1_One_UV.ccAvatar`, etc.). Not used on production characters: it merges the tongue into the body (SALSA OneClick risk).
+
+## Spike 7: Optimize & Decimate "Custom" ✅ (UI only → manual step)
+
+CC4 4.70's **Modify › Optimize and Decimate** dialog offers four targets (**actorBUILD, LOD 1, LOD 2, Custom**) with only *Convert* / *Cancel*. There's no "save profile" control, and the note says polycount, bones, texture resolution and facial detail are adjusted per conversion. Python's `EConvertCharacterLevel` has only `ActorBuild`, `LOD1` and `LOD2` (no Custom), and `ConvertTo` takes no profile argument; the static search for Profile/Decimate/Custom found nothing.
+
+**Decision:** Custom decimation is a **one-time manual step per archetype**, done in the UI on a saved copy. `convert_lod` covers `actorbuild`, `lod1` and `lod2` only.
+
+## Summary: what this means for Phase 2
+
+| Pipeline step | Automation |
+|---|---|
+| Base load, morphs, clothing, colors, renders, save-as, export (+ JSON, texture cap, hidden/tearline removal) | **Automated** (verified) |
+| Morph catalog readiness | Automated check: reload the base if the catalog shows only "Actor Parts" |
+| ActorBUILD / LOD1 / LOD2 | **Semi-automated**: `convert_lod` job + a human clicks OK on two CC4 dialogs |
+| Material merge (clothing/accessories) | **Automated** via `MergeMaterialUV` (reduces materials/textures, not draw calls) |
+| InstaLOD merge-by-type, Custom decimation, Game Base single material | **Manual checklist** (UI only) |
+| License check | Callable; only ever observed returning `true` so far |
