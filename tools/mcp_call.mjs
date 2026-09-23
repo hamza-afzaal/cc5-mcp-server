@@ -30,7 +30,7 @@ await client.connect(new StdioClientTransport({
   command: process.execPath,
   args: [path.join(root, "build", "index.js")],
   env: { ...process.env },
-  stderr: "ignore",
+  stderr: process.env.MCP_CALL_STDERR ? "inherit" : "ignore",
 }));
 
 try {
@@ -53,6 +53,12 @@ try {
         } else {
           console.log(c.text);
         }
+      }
+      const out = res.content.map((c) => c.text ?? "").join("\n");
+      if (!step.optional && /^(Recipe not applied|Refused|Failed|CC4 bridge error)|: FAILED/m.test(out)) {
+        console.error(`\nStopping: step '${step.tool}' failed (mark it "optional": true to continue).`);
+        process.exitCode = 1;
+        break;
       }
       if (step.wait_job) {
         const id = /job_\d+/.exec(res.content.map((c) => c.text ?? "").join(" "))?.[0];

@@ -99,11 +99,15 @@ The user set InstaLOD **Merge Materials → by type** in CC4's Export FBX dialog
 
 The user confirmed CC4 4.70 still offers **Convert to Game Base → Single Material** in the UI. The static RLPy search found no Python entry point (only read-only `EAvatarGeneration_CC_Game_Base_*` enums), and CC4 ships neutral Game Base avatars (`Program/CCBaseData/NeutralAvatar/RL_CharacterCreator_Base_Game_G1_One_UV.ccAvatar`, etc.). Not used on production characters: it merges the tongue into the body (SALSA OneClick risk).
 
-## Spike 7: Optimize & Decimate "Custom" ✅ (UI only → manual step)
+## Spike 7: Optimize & Decimate "Custom" ✅ (UI only; templates can be saved)
 
-CC4 4.70's **Modify › Optimize and Decimate** dialog offers four targets (**actorBUILD, LOD 1, LOD 2, Custom**) with only *Convert* / *Cancel*. There's no "save profile" control, and the note says polycount, bones, texture resolution and facial detail are adjusted per conversion. Python's `EConvertCharacterLevel` has only `ActorBuild`, `LOD1` and `LOD2` (no Custom), and `ConvertTo` takes no profile argument; the static search for Profile/Decimate/Custom found nothing.
+**Correction (2026-09-23, decimation test):** the Custom dialog (*Custom LOD Settings*) **does** save reusable templates. Its Template dropdown lists Custom / Default / LOD 1 / LOD 2, and a **+** button saves the current settings as a named template. The dialog has four tabs:
+- **Skeleton:** template, e.g. Standard (101); twist/share bones; which face bones to keep.
+- **Mesh:** Polygon Reduction by *Optimization* (keeps meshes and materials; recommended / % / face count) or by *Remesher* (one mesh, one material).
+- **Texture:** max size, optional bake, channels.
+- **Facial.**
 
-**Decision:** Custom decimation is a **one-time manual step per archetype**, done in the UI on a saved copy. `convert_lod` covers `actorbuild`, `lod1` and `lod2` only.
+Python still has no route to it (`EConvertCharacterLevel` has no Custom). It stays a UI step per character, but the settings are reusable.
 
 ## Summary: what this means for Phase 2
 
@@ -115,3 +119,26 @@ CC4 4.70's **Modify › Optimize and Decimate** dialog offers four targets (**ac
 | Material merge (clothing/accessories) | **Automated** via `MergeMaterialUV` (reduces materials/textures, not draw calls) |
 | InstaLOD merge-by-type, Custom decimation, Game Base single material | **Manual checklist** (UI only) |
 | License check | Callable; only ever observed returning `true` so far |
+
+## Decimation test: Game Base vs Custom (2026-09-23, UI conversions, measured via the bridge)
+
+The same character each time, rebuilt from `characters/_testbench/decimation-test/recipe.json`: Camila + morphs + purchased **Soft Waves Lob** hair + T-shirt, jeans and canvas shoes. Unity export profile (hidden mesh + tearline removed, JSON, 2048 cap). The user ran the conversions in CC4's UI on saved copies.
+
+| | Baseline | **Convert to Game Base**: Single Material, separate eyelash, 2048 | **Custom**: Optimization 50%, Standard (101) skeleton, 2048, no bake |
+|---|---|---|---|
+| Triangles | 44,882 | **32,370** | 28,210 |
+| Draw calls (material slots) | 20 | **17** (body 6 → 2) | 21 |
+| Bones in FBX | 101 | **73** | 105 |
+| Blendshapes | 408 | **401** (body 152, brows 180, tongue 41, hair 26, eyes 2) | **0** ❌ |
+| Textures | 40 | 30 | 43 |
+| Meshes | 10 | 10 | 11 (hidden-mesh removal no longer applied: Bra/underwear back) |
+| Body mesh | `CC_Base_Body` 18,942 | `CC_Game_Body` 6,922 | `CC_Base_Body` 14,044 |
+| Clothing / teeth / hair | unchanged | unchanged | all ~50% (shoes 3.3k, shirt 2.3k, jeans 2.3k, teeth 2.4k, hair 1.3k) |
+| Face (scene) | CC4Extended, 164 sliders, 15 visemes | same | same in the scene, but **no blendshapes in the FBX** |
+| Avatar type after | Standard | StandardSeries, generation 9 | **NonStandard (2)**, generation 10; clothes/hair become "accessories" |
+
+**Readings**
+- **Game Base (Single Material) is the best CC4-side hero option.** It gives −28% triangles and −3 draw calls, keeps every blendshape SALSA needs, and matches Ava's build (`CC_Game_Body` ~7–9k). The head render shows darker eye sockets (the eye occlusion looks baked in); check at Gate 1.
+- **Custom Optimization at 50% is unusable for a hero:** the export has no blendshapes (so no SALSA), and the character turns NonStandard, which breaks item roles and hidden-mesh removal. Unknown whether a Facial-tab setting would keep the blendshapes; untested.
+- **Neither route reduces clothing without harm.** Game Base leaves clothing alone, and Custom halves everything, face included. Per-item clothing decimation (shoes 6.7k, shirt/jeans 4.5k) and mesh merging for draw calls belong in the **Blender stage**.
+- Draw calls stay 17–21 because every clothing/teeth/eye material is its own slot. For comparison, Unity-measured Ava is 17 draw calls / 51.8k triangles and is known OK at 72 FPS in the reference scene (Unity project baseline, 2026-09-23).
