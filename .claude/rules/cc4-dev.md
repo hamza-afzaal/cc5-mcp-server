@@ -15,6 +15,8 @@
 - No arbitrary code execution. Use the `diagnostics` allowlist for introspection; extend the allowlist with read-only queries only.
 
 ## RLPy constraints
+- **Never iterate SWIG pair types** (`FloatPair` and other `std::pair` proxies): their `__getitem__` is `index % 2` and never raises `IndexError`, so `list(pair)` / `for v in pair` loops forever and hangs CC4's main thread (it happened in spike 0: CC4 reached 35 GB before it was killed). Use `.first` / `.second`. SWIG vectors (`*Vector`) iterate normally.
+- A hung main thread can't be interrupted from the bridge. If `/health` shows `queue_depth` growing and actions time out, check `Get-Process CharacterCreator` (Responding / memory) before sending more work.
 - RLPy is not thread-safe: only call it from actions dispatched by the QTimer queue.
 - Wrap every mutating call in `RGlobal.BeginAction()` / `EndAction()` (try/finally) and call `RGlobal.ObjectModified()` afterwards.
 - `ConvertTo` (ActorBUILD / LOD) is irreversible: only on a project saved-as in this session (design D6).

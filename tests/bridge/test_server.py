@@ -137,6 +137,11 @@ class BridgeHttpTest(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(data["result"]["values"]["EExportFbxOptions3_ExportJson"], 1)
 
+    def test_morph_minmax_reads_floatpair_without_iterating(self):
+        status, data = self.request("POST", "/diagnostics", {"query": "morph_minmax", "arg": "cc embed morphs/embed_full_body5"})
+        self.assertEqual(status, 200, data)
+        self.assertEqual((data["result"]["min"], data["result"]["max"]), (-1.0, 1.0))
+
     def test_diagnostics_unknown_query_rejected(self):
         status, data = self.request("POST", "/diagnostics", {"query": "exec", "arg": "import os"})
         self.assertEqual(status, 400)

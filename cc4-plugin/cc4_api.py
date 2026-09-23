@@ -17,6 +17,7 @@ import os
 import sys
 import base64
 import tempfile
+import time
 import urllib.parse
 from typing import Any
 
@@ -1855,16 +1856,10 @@ def _diag_morph_minmax(avatar, arg: str) -> Any:
     if arg not in _get_all_morph_ids():
         return {"success": False, "error": f"Unknown morph ID: {arg}"}
     raw = shaping.GetShapingMorphMinMax(arg)
-    # FloatPair unpacking is itself under test (spike 0): report every shape we can read.
-    out: dict[str, Any] = {"id": arg, "repr": repr(raw), "type": type(raw).__name__}
-    for attr in ("first", "second"):
-        if hasattr(raw, attr):
-            out[attr] = getattr(raw, attr)
-    try:
-        out["as_list"] = [float(v) for v in raw]
-    except Exception:
-        pass
-    return out
+    # FloatPair (SWIG std::pair) must NOT be iterated: its __getitem__ is
+    # `index % 2` and never raises IndexError, so list(pair) never terminates
+    # (this hung CC4 during spike 0). Read .first / .second only.
+    return {"id": arg, "min": float(raw.first), "max": float(raw.second)}
 
 
 DIAGNOSTIC_QUERIES: dict[str, Any] = {
@@ -2033,3 +2028,197 @@ POST_ROUTES: dict[str, str] = {
 # status is answered from the HTTP thread (server.py job table), so a long export
 # does not tie up a request for its whole duration.
 JOB_ACTIONS: set[str] = {"export_fbx", "load_asset", "create_default_avatar"}
+
+
+# --- Phase 1b spike actions (dev mode only; removed after the spikes) ---
+#
+# Registered only when CC4_DEV_MODE=1. Irreversible calls (ConvertTo,
+# MergeMaterialUV) refuse to run unless the current project is a copy saved
+# under SPIKE_DIR by spike_save_project in this session (design D6).
+
+SPIKE_DIR = os.path.join(CC4_EXPORT_DIR, "spikes")
+_spike_saved_paths: set[str] = set()
+
+
+def _norm(path: str) -> str:
+    return os.path.normcase(os.path.realpath(path))
+
+
+def _current_project_path() -> str:
+    return RLPy.RApplication.GetCurrentProjectPath() or ""
+
+
+def _status_ok(status: Any) -> bool:
+    return status is None or not hasattr(RLPy, "RStatus") or status == RLPy.RStatus.Success
+
+
+def _spike_path(name: str, ext: str) -> str | None:
+    """Resolve a bare file name inside SPIKE_DIR (no directories, fixed extension)."""
+    if not name or os.path.basename(name) != name or ".." in name:
+        return None
+    if not name.lower().endswith(ext):
+        name += ext
+    os.makedirs(SPIKE_DIR, exist_ok=True)
+    return os.path.join(SPIKE_DIR, name)
+
+
+def _on_spike_copy() -> str | None:
+    """Error message unless the open project is a spike copy saved this session."""
+    current = _current_project_path()
+    if not current or _norm(current) not in _spike_saved_paths:
+        return (f"Refusing: current project '{current}' is not a copy saved via "
+                f"spike_save_project this session (under {SPIKE_DIR})")
+    return None
+
+
+def _avatar_snapshot(avatar) -> dict[str, Any]:
+    snap: dict[str, Any] = {}
+    try:
+        per_mesh = _materials_per_mesh(avatar)
+        snap["meshes"] = len(per_mesh)
+        snap["materials"] = sum(len(v) for v in per_mesh.values())
+        snap["per_mesh"] = {k: len(v) for k, v in per_mesh.items()}
+    except Exception as e:
+        snap["materials_error"] = str(e)
+    for key, fn in (
+        ("generation", lambda: int(avatar.GetGeneration())),
+        ("skin_bones", lambda: len(avatar.GetSkeletonComponent().GetSkinBones())),
+        ("facial_profile", lambda: _facial_profile_type(avatar)),
+        ("expression_categories", lambda: len(list(avatar.GetFacialProfileComponent().GetExpressionCategoryNames()))),
+        ("expression_sliders", lambda: sum(len(list(avatar.GetFacialProfileComponent().GetExpressionSliderNames(c) or []))
+                                           for c in avatar.GetFacialProfileComponent().GetExpressionCategoryNames())),
+        ("visemes", lambda: len(list(avatar.GetVisemeComponent().GetVisemeNames() or []))),
+    ):
+        try:
+            snap[key] = fn()
+        except Exception as e:
+            snap[key + "_error"] = str(e)
+    return snap
+
+
+def spike_save_project(name: str) -> dict[str, Any]:
+    path = _spike_path(name, ".ccproject")
+    if path is None:
+        return {"success": False, "error": "name must be a bare file name"}
+    before = _current_project_path()
+    t0 = time.time()
+    status = RLPy.RFileIO.SaveProject(path)
+    seconds = round(time.time() - t0, 2)
+    after = _current_project_path()
+    ok = _status_ok(status) and os.path.exists(path)
+    if ok:
+        _spike_saved_paths.add(_norm(path))
+    return {
+        "success": ok, "path": path, "status": str(status), "seconds": seconds,
+        "project_before": before, "project_after": after,
+        "current_switched_to_copy": _norm(after) == _norm(path) if after else False,
+        "size_bytes": os.path.getsize(path) if os.path.exists(path) else None,
+    }
+
+
+def spike_load_project(path: str) -> dict[str, Any]:
+    if not path.lower().endswith(".ccproject") or ".." in path or not os.path.isfile(path):
+        return {"success": False, "error": f"Not an existing .ccProject: {path}"}
+    t0 = time.time()
+    status = RLPy.RFileIO.LoadProject(path)
+    _invalidate_caches()
+    return {"success": _status_ok(status), "status": str(status), "seconds": round(time.time() - t0, 2),
+            "project_after": _current_project_path(), "avatars": [a.GetName() for a in RLPy.RScene.GetAvatars()]}
+
+
+def spike_license() -> dict[str, Any]:
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    fn = RLPy.RFileIO.CheckExportFbxHasLicense
+    out: dict[str, Any] = {"avatar": {avatar.GetName(): fn(avatar)}}
+    for label, getter in (("clothes", avatar.GetClothes), ("hair", avatar.GetHairs),
+                          ("accessories", lambda: avatar.GetAccessories(True))):
+        out[label] = {}
+        for obj in getter():
+            try:
+                out[label][obj.GetName()] = fn(obj)
+            except Exception as e:
+                out[label][obj.GetName()] = f"error: {e}"
+    return out
+
+
+_CONVERT_LEVELS = {"actorbuild": "EConvertCharacterLevel_ActorBuild",
+                   "lod1": "EConvertCharacterLevel_LOD1", "lod2": "EConvertCharacterLevel_LOD2"}
+_REDUCE_POSES = {"default": "EReduceBonePose_Default", "tpose": "EReduceBonePose_TPose",
+                 "current": "EReduceBonePose_Current"}
+
+
+def spike_convert_lod(level: str, bake_expression: bool, bake_texture: bool, pose: str) -> dict[str, Any]:
+    guard = _on_spike_copy()
+    if guard:
+        return {"success": False, "error": guard}
+    level_enum = getattr(RLPy, _CONVERT_LEVELS.get(level.lower(), ""), None)
+    pose_enum = getattr(RLPy, _REDUCE_POSES.get(pose.lower(), ""), None)
+    if level_enum is None or pose_enum is None:
+        return {"success": False, "error": f"level in {sorted(_CONVERT_LEVELS)}, pose in {sorted(_REDUCE_POSES)}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    before = _avatar_snapshot(avatar)
+    t0 = time.time()
+    status = avatar.ConvertTo(level_enum, bool(bake_expression), bool(bake_texture), pose_enum)
+    seconds = round(time.time() - t0, 2)
+    _invalidate_caches()
+    avatar = get_first_avatar()
+    return {"success": _status_ok(status), "status": str(status), "seconds": seconds,
+            "args": {"level": level, "bake_expression": bake_expression, "bake_texture": bake_texture, "pose": pose},
+            "before": before, "after": _avatar_snapshot(avatar) if avatar else None}
+
+
+def spike_merge_material_uv(mesh_names: list, texture_size: int) -> dict[str, Any]:
+    guard = _on_spike_copy()
+    if guard:
+        return {"success": False, "error": guard}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    known = set(avatar.GetMeshNames(True))
+    unknown = [m for m in mesh_names if m not in known]
+    if unknown or not mesh_names:
+        return {"success": False, "error": f"Unknown meshes: {unknown}", "available": sorted(known)}
+    if int(texture_size) not in (256, 512, 1024, 2048, 4096):
+        return {"success": False, "error": "texture_size must be 256..4096"}
+    before = _avatar_snapshot(avatar)
+    t0 = time.time()
+    status = avatar.GetMaterialComponent().MergeMaterialUV(list(mesh_names), int(texture_size), RLPy.EExportTextureFormat_Png, 2)
+    seconds = round(time.time() - t0, 2)
+    return {"success": _status_ok(status), "status": str(status), "seconds": seconds,
+            "before": before, "after": _avatar_snapshot(get_first_avatar())}
+
+
+def spike_snapshot() -> dict[str, Any]:
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    return {"project": _current_project_path(), **_avatar_snapshot(avatar)}
+
+
+DIAGNOSTIC_QUERIES["plugin_path"] = lambda _arg: {"cc4_api": __file__}
+
+if os.environ.get("CC4_DEV_MODE") == "1":
+    ACTIONS.update({
+        "spike_save_project": (lambda p: spike_save_project(p["name"]), ["name"], LONG_TIMEOUT_S),
+        "spike_load_project": (lambda p: spike_load_project(p["path"]), ["path"], LONG_TIMEOUT_S),
+        "spike_license":      (lambda p: spike_license(), [], DEFAULT_TIMEOUT_S),
+        "spike_snapshot":     (lambda p: spike_snapshot(), [], DEFAULT_TIMEOUT_S),
+        "spike_convert_lod":  (lambda p: spike_convert_lod(
+            p["level"], bool(p.get("bake_expression", True)), bool(p.get("bake_texture", True)), p.get("pose", "default"),
+        ), ["level"], LONG_TIMEOUT_S),
+        "spike_merge_material_uv": (lambda p: spike_merge_material_uv(list(p["mesh_names"]), int(p.get("texture_size", 1024))),
+                                    ["mesh_names"], LONG_TIMEOUT_S),
+    })
+    POST_ROUTES.update({
+        "/spike/save_project": "spike_save_project",
+        "/spike/load_project": "spike_load_project",
+        "/spike/license": "spike_license",
+        "/spike/snapshot": "spike_snapshot",
+        "/spike/convert_lod": "spike_convert_lod",
+        "/spike/merge_material_uv": "spike_merge_material_uv",
+    })
+    JOB_ACTIONS.update({"spike_convert_lod", "spike_merge_material_uv", "spike_save_project", "spike_load_project"})
