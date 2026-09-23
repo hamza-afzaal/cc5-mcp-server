@@ -111,8 +111,16 @@ export function registerPipelineTools(
   );
 
   server.tool(
+    "set_character",
+    "Choose where bare output names go: <workspace>/<character id>/{projects,exports,renders}. apply_recipe sets this to the recipe id automatically. Omit the id for <workspace>/_testbench. The workspace defaults to D:/Business/Code/art/characters; the bridge refuses to write outside it.",
+    { character: z.string().regex(/^([a-z0-9][a-z0-9_-]{0,63})?$/).optional().describe("Character id (lowercase, digits, - and _), or omit for _testbench") },
+    async ({ character }) => bridgeCall(() => bridge.setCharacter(character ?? ""),
+      (w) => `Output now goes to ${w.folder}`),
+  );
+
+  server.tool(
     "save_project_as",
-    "Save the current project as a NEW .ccProject; the copy becomes the current project. Required before convert_lod or merge_materials (design D6). A bare name goes to %USERPROFILE%\\CC4Export\\projects. Never overwrites.",
+    "Save the current project as a NEW .ccProject; the copy becomes the current project. Required before convert_lod or merge_materials (design D6). A bare name goes to <workspace>/<character>/projects (see set_character). Paths outside the workspace are refused. Never overwrites.",
     { path: z.string().min(1).max(1024).describe("File name or absolute path, e.g. 'patient-older-m-01_lod0'") },
     async ({ path: p }) => bridgeCall(() => bridge.saveProjectAs(p),
       (r) => (r.success ? `Saved ${r.path} (${Math.round((r.size_bytes ?? 0) / 1e6)} MB). Current project is now the copy: ${r.is_current}.` : `Failed: ${r.error}`)),
@@ -170,7 +178,7 @@ export function registerPipelineTools(
     "start_export_fbx",
     "Start a Unity FBX export job for the current avatar. Always sets the Unity preset and the JSON sidecar (CCiC Unity Tools). Hidden-mesh and tearline/occlusion removal default ON (spike 5). Poll get_export_status for the result and a design §4 budget check.",
     {
-      path: z.string().min(1).max(1024).describe("File name (goes to %USERPROFILE%\\CC4Export) or absolute .fbx path"),
+      path: z.string().min(1).max(1024).describe("File name (goes to <workspace>/<character>/exports) or an absolute .fbx path inside the workspace"),
       lod_label: z.enum(["LOD0", "LOD1", "LOD2"]).optional().describe("Appended to the file name and used for the budget check"),
       texture_size_cap: z.union([z.literal(256), z.literal(512), z.literal(1024), z.literal(2048), z.literal(4096)]).optional()
         .describe("One max texture size for the whole export (design §4: 2048 LOD0, 1024 LOD1, 512 LOD2)"),

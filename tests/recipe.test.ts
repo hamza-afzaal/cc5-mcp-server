@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { describe, it, expect, beforeEach } from "vitest";
 import { applyRecipe, exportRecipe, RecipeSchema, resolveRecipe, setLastAppliedRecipe, type Recipe } from "../src/recipe.js";
 import { createMockBridge, type MockBridge } from "./helpers/mock-bridge.js";
@@ -19,10 +22,13 @@ const RAW = {
 };
 const recipe = (over: Record<string, unknown> = {}): Recipe => RecipeSchema.parse({ ...RAW, ...over });
 
+const CHAR_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "cc4-char-"));
+
 const EMPTY_ITEMS = { avatar: "Camila", clothes: [], hair: [], accessories: [] };
 
 function happyBridge(): MockBridge {
   const b = createMockBridge();
+  b.setCharacter.mockResolvedValue({ root: os.tmpdir(), character: RAW.id, folder: CHAR_DIR });
   b.getAvatars.mockResolvedValue([{ id: "1", name: "Default", type: "1" }]);
   b.deleteAvatar.mockResolvedValue({ success: true, removed: ["Default"] });
   b.loadItem.mockImplementation(async (p: string) => ({
@@ -90,8 +96,10 @@ describe("applyRecipe", () => {
     const report = await applyRecipe(b as never, fixtureAllowlist(), recipe());
     expect(report.ok).toBe(true);
     expect(report.steps.map((s) => s.step)).toEqual([
-      "clear_scene", "load_base", "morphs", "load_hair", "load_clothes", "load_clothes", "color_eyes",
+      "set_character", "clear_scene", "load_base", "morphs", "load_hair", "load_clothes", "load_clothes", "color_eyes",
     ]);
+    expect(b.setCharacter).toHaveBeenCalledWith(RAW.id);
+    expect(JSON.parse(fs.readFileSync(path.join(CHAR_DIR, "recipe.applied.json"), "utf-8")).id).toBe(RAW.id);
     expect(b.loadItem.mock.calls.map((c) => c[0])).toEqual([
       "D:/T/Actor/CC4 Camila.ccAvatar", "D:/T/Hair/Short Grey.rlHair",
       "D:/T/Cloth/Basic T-shirts.ccCloth", "D:/T/Cloth/Canvas Shoes.ccShoes",

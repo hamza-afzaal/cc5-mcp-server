@@ -27,5 +27,8 @@ Claude ⇄ stdio ⇄ src/ (Node/TS) ⇄ HTTP 127.0.0.1:5101 ⇄ cc4-plugin/ (Pyt
 - Health: `curl -s http://127.0.0.1:5101/health`; API listing: `curl -s http://127.0.0.1:5101/api`
 - Hot reload (only when CC4 was started with `CC4_DEV_MODE=1` and `CC4_RELOAD_SECRET`): `curl -X POST -H "Content-Type: application/json" -H "X-Reload-Token: $CC4_RELOAD_SECRET" -d "{}" http://127.0.0.1:5101/reload`
 
+## Where files go
+Everything stays under `D:\Business\Codert`: the repo, and `characters/` as the workspace (`<recipe id>/` folders plus `_testbench/`). The bridge refuses to write outside the workspace. Program Files holds only the plugin junction.
+
 ## Never commit
 Exported FBX/JSON/textures or saved project copies.

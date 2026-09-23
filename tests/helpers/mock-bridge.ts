@@ -43,6 +43,8 @@ export function createMockBridge(): MockBridge {
     startJob: vi.fn(),
     getJobStatus: vi.fn(),
     getMorphStatus: vi.fn(),
+    getWorkspace: vi.fn(),
+    setCharacter: vi.fn(),
     searchMorphs: vi.fn(),
     setMorphs: vi.fn(),
     listItems: vi.fn(),

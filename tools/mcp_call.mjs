@@ -6,18 +6,17 @@
  *   node tools/mcp_call.mjs <tool> '<json args>' [<tool> '<json args>' ...]
  *   node tools/mcp_call.mjs --file steps.json      # [{"tool": "...", "args": {...}}, ...]
  *
- * Images in results are saved to %TEMP%/cc4_mcp_call/ and replaced by their path.
+ * Images in results are saved to <art>/characters/_testbench/mcp_call/ and replaced by their path.
  */
 
 import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const imgDir = path.join(os.tmpdir(), "cc4_mcp_call");
+const imgDir = path.join(root, "..", "characters", "_testbench", "mcp_call");
 
 function parseSteps(argv) {
   if (argv[0] === "--file") return JSON.parse(fs.readFileSync(argv[1], "utf-8"));

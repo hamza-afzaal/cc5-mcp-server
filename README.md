@@ -15,17 +15,30 @@ RLPy is not thread-safe. The plugin's HTTP threads queue each action, and a QTim
 ## Setup
 
 1. Build the MCP server: `npm install && npm run build`
-2. Install the plugin (Administrator PowerShell, CC4 closed):
+2. Link the plugin into CC4 (Administrator PowerShell, CC4 closed; once):
    `powershell -ExecutionPolicy Bypass -File install-plugin.ps1`
+   This makes `...\Character Creator 4\Bin64\OpenPlugin\CC4_MCP_Bridge` a directory junction to `cc4-plugin/`. No code is copied into Program Files, and `-Uninstall` removes the link.
 3. Launch CC4. The bridge starts with the plugin: `curl http://127.0.0.1:5101/health`
 4. Register with Claude Code:
    `claude mcp add --scope user --transport stdio cc4 -- node <abs path>\build\index.js`
 
-## Tools (44)
+## Where files go
+
+Everything the bridge writes stays under `D:\Business\Codert` (the folder that holds this repo):
+
+```
+art  cc5-mcp-server\          this repo (code, tests, docs, recipes\, assetsllowlist.json)
+  characters\              workspace (not in git)
+    <recipe id>\           recipe.applied.json, projects\, exports\, renders\, reports    _testbench\            spikes, E2E runs, anything without a character
+```
+
+`apply_recipe` selects the recipe's folder; `set_character` does it by hand. Bare file names go to the current character's folder, and the bridge **refuses to write outside the workspace**.
+
+## Tools (45)
 
 | Area | Tools |
 |---|---|
-| Connection & scene | `check_connection`, `list_avatars`, `get_avatar_info`, `create_avatar`, `delete_avatar`, `undo`, `redo` |
+| Connection & scene | `check_connection`, `list_avatars`, `get_avatar_info`, `create_avatar`, `delete_avatar`, `set_character`, `undo`, `redo` |
 | Recipes (S1, design §6) | `apply_recipe`, `export_recipe`; sample: `recipes/sample-camila-01.json` |
 | Morphs | `search_morphs` (display name → id, min/max), `set_morphs` (batch, one undo, fails loudly on unknown names) |
 | Content (S0 allowlist) | `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `browse_content`, `set_color` |
@@ -49,9 +62,8 @@ Set these in the environment of the process that launches CC4 (plugin side) or t
 | `CC4_ALLOWLIST` | Node | `<repo>/assets/allowlist.json` | Asset allowlist (S0) |
 | `CC4_REQUEST_TIMEOUT_MS` | Node | `30000` | Default request timeout (export/load/render use 310 s) |
 | `CC4_BRIDGE_PORT` | CC4 | `5101` | Bridge port |
-| `CC4_EXPORT_DIR` | CC4 | `%USERPROFILE%\CC4Export` | Where bare export filenames go |
+| `CC4_WORKSPACE` | CC4 | `<art>\characters` | Workspace root; the bridge never writes outside it |
 | `CC4_DEV_MODE` | CC4 | `0` | `1` enables `POST /reload` (hot reload of `cc4_api.py`) |
-| `CC4_PLUGIN_DEV_DIR` | CC4 | *(empty)* | Dev mode only: load plugin code from this folder (e.g. the repo's `cc4-plugin/`) |
 | `CC4_RELOAD_SECRET` | CC4 | *(empty)* | Required `X-Reload-Token` for `/reload`; reload is refused while empty |
 | `CC4_ROOT` | CC4 | auto | CC4 install folder if auto-detection fails |
 

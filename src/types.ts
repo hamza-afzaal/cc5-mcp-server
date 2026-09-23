@@ -381,5 +381,15 @@ export interface CaptureViewsResult extends OperationResult {
   views?: ViewResult[];
 }
 
+export interface WorkspaceInfo {
+  /** Root folder all bridge output goes to (default <art>/characters). */
+  root: string;
+  exists?: boolean;
+  /** Current character id, or null for _testbench. */
+  character: string | null;
+  /** Folder that receives bare output names now. */
+  folder: string;
+}
+
 export type ViewPreset = "full" | "head" | "three_quarter";
 export type LodLevel = "actorbuild" | "lod1" | "lod2";

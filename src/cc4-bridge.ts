@@ -41,6 +41,7 @@ import type {
   LicenseResult,
   CaptureViewsResult,
   ViewPreset,
+  WorkspaceInfo,
   LodLevel,
   JobInfo,
 } from "./types.js";
@@ -221,6 +222,17 @@ export class CC4Bridge {
 
   async setColor(target: "eyes" | "hair", r: number, g: number, b: number): Promise<ColorResult> {
     return this.request<ColorResult>("/color", "POST", { target, r, g, b });
+  }
+
+  // --- Workspace ---
+
+  async getWorkspace(): Promise<WorkspaceInfo> {
+    return this.request<WorkspaceInfo>("/workspace");
+  }
+
+  /** Route bare output names to <workspace>/<id>/...; "" selects _testbench. */
+  async setCharacter(characterId: string): Promise<WorkspaceInfo> {
+    return this.request<WorkspaceInfo>("/workspace/character", "POST", { character: characterId });
   }
 
   // --- Project / optimize / export ---

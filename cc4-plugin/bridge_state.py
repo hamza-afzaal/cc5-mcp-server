@@ -10,3 +10,7 @@ from __future__ import annotations
 # convert_lod / merge_materials only run while the current project is one of these
 # (design D6: irreversible operations only on saved copies).
 saved_as_paths: set = set()
+
+# Character id whose folder receives bare output names (<workspace>/<id>/...);
+# None means <workspace>/_testbench. Set by apply_recipe via set_character.
+current_character = None

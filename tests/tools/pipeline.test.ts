@@ -23,7 +23,7 @@ beforeEach(() => {
 describe("registerPipelineTools", () => {
   it("registers the Phase 2 pipeline tools", () => {
     expect(server.tool.mock.calls.map((c) => c[0])).toEqual([
-      "apply_recipe", "export_recipe", "save_project_as", "convert_lod", "merge_materials", "capture_views",
+      "apply_recipe", "export_recipe", "set_character", "save_project_as", "convert_lod", "merge_materials", "capture_views",
       "start_export_fbx", "get_export_status", "check_export_license", "export_motions",
     ]);
   });

@@ -21,9 +21,13 @@ PLUGIN_DIR = os.path.normpath(os.path.join(HERE, "..", "..", "cc4-plugin"))
 sys.path.insert(0, HERE)
 sys.path.insert(0, PLUGIN_DIR)
 
+import tempfile  # noqa: E402
+
 import fake_rlpy  # noqa: E402
 
 sys.modules["RLPy"] = fake_rlpy
+WORKSPACE = tempfile.mkdtemp(prefix="cc4_ws_")
+os.environ["CC4_WORKSPACE"] = WORKSPACE
 os.environ.pop("CC4_DEV_MODE", None)
 os.environ.pop("CC4_RELOAD_SECRET", None)
 
@@ -184,6 +188,46 @@ class BridgeHttpTest(unittest.TestCase):
     def test_unknown_job_is_404(self):
         status, _ = self.request("POST", "/job/status", {"job_id": "job_nope"})
         self.assertEqual(status, 404)
+
+
+    # --- workspace: every file the bridge writes stays inside CC4_WORKSPACE ---
+
+    def tearDown(self) -> None:
+        self.request("POST", "/workspace/character", {"character": ""})
+
+    def test_workspace_info_defaults_to_testbench(self):
+        status, data = self.request("GET", "/workspace")
+        self.assertEqual(status, 200)
+        self.assertEqual(os.path.normcase(data["result"]["root"]), os.path.normcase(os.path.realpath(WORKSPACE)))
+        self.assertTrue(data["result"]["folder"].endswith("_testbench"))
+
+    def test_set_character_routes_bare_names(self):
+        status, data = self.request("POST", "/workspace/character", {"character": "sample-camila-01"})
+        self.assertEqual(status, 200)
+        self.assertTrue(data["result"]["folder"].endswith("sample-camila-01"))
+        import cc4_api
+        path, err = cc4_api.workspace_path("x_LOD0.fbx", "exports")
+        self.assertIsNone(err)
+        self.assertEqual(path, os.path.join(os.path.realpath(WORKSPACE), "sample-camila-01", "exports", "x_LOD0.fbx"))
+
+    def test_set_character_rejects_bad_ids(self):
+        for bad in ("../evil", "Camila", "a b", "_hidden"):
+            status, _ = self.request("POST", "/workspace/character", {"character": bad})
+            self.assertEqual(status, 400, bad)
+
+    def test_writes_outside_workspace_are_refused(self):
+        import cc4_api
+        for outside in (os.path.join(tempfile.gettempdir(), "elsewhere.fbx"), os.path.join("C:" + os.sep, "Users", "x", "CC4Export", "a.fbx")):
+            path, err = cc4_api.workspace_path(outside, "exports")
+            self.assertIsNone(path)
+            self.assertIn("outside the workspace", err)
+        _, err = cc4_api.workspace_path(os.path.join(WORKSPACE, "..", "x.fbx"), "exports")
+        self.assertIn("Unsafe", err)
+
+    def test_absolute_paths_inside_workspace_are_allowed(self):
+        import cc4_api
+        inside = os.path.join(WORKSPACE, "_testbench", "exports", "a.fbx")
+        self.assertEqual(cc4_api.workspace_path(inside, "exports"), (inside, None))
 
 
 class Python38CompatTest(unittest.TestCase):

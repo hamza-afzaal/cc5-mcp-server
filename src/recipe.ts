@@ -6,6 +6,8 @@
  * before CC4 is touched, so a bad recipe fails without half-applying.
  */
 
+import fs from "node:fs";
+import path from "node:path";
 import { z } from "zod";
 import type { CC4Bridge } from "./cc4-bridge.js";
 import { AllowlistIndex, refId, type AllowlistItem, type ItemType } from "./allowlist.js";
@@ -135,7 +137,7 @@ export async function applyRecipe(
     return { recipe_id: recipe.id, ok: false, steps, warnings };
   };
   // The bridge client throws on bridge errors (HTTP 4xx/5xx); turn that into a failed step.
-  let current = "clear_scene";
+  let current = "set_character";
   try {
     return await replay();
   } catch (e) {
@@ -144,7 +146,13 @@ export async function applyRecipe(
 
   async function replay(): Promise<ApplyReport> {
 
+  // 0. Route this character's projects/exports/renders to <workspace>/<recipe id>/.
+  current = "set_character";
+  const workspace = await bridge.setCharacter(recipe.id);
+  steps.push({ step: "set_character", ok: true, detail: workspace.folder });
+
   // 1. Base: clear the scene, load the base, make sure the morph catalog is bound (spike 0).
+  current = "clear_scene";
   const avatars = await bridge.getAvatars();
   if (avatars.length) {
     const del = await bridge.deleteAvatar("");
@@ -212,6 +220,13 @@ export async function applyRecipe(
   if (recipe.motions.length) warnings.push("motions are exported separately with export_motions, not applied to the scene.");
 
   setLastAppliedRecipe(recipe, baseBrought, baseMorphs);
+  // Keep a copy of exactly what was applied next to the character's artifacts.
+  try {
+    fs.mkdirSync(workspace.folder, { recursive: true });
+    fs.writeFileSync(path.join(workspace.folder, "recipe.applied.json"), `${JSON.stringify(recipe, null, 2)}\n`);
+  } catch (e) {
+    warnings.push(`Could not write recipe.applied.json: ${(e as Error).message}`);
+  }
   return { recipe_id: recipe.id, ok: true, steps, warnings };
   }
 }

@@ -16,7 +16,6 @@ from __future__ import annotations
 import os
 import sys
 import base64
-import tempfile
 import time
 import urllib.parse
 from typing import Any
@@ -35,12 +34,63 @@ MAX_IMAGE_BYTES = 10 * 1024 * 1024  # 10 MB
 
 MAX_MORPH_ID_LENGTH = 256
 
-# Export directory for FBX exports and renders given a bare filename (no directory
-# component). Overridable via the CC4_EXPORT_DIR environment variable.
-CC4_EXPORT_DIR = os.environ.get(
-    "CC4_EXPORT_DIR",
-    os.path.join(os.path.expanduser("~"), "CC4Export"),
-)
+# --- Workspace: every file the bridge writes stays under one folder ---
+#
+# Default: <art>/characters, found from this file's real location
+# (<art>/cc5-mcp-server/cc4-plugin/cc4_api.py; realpath follows the OpenPlugin
+# junction). CC4_WORKSPACE overrides it. Layout:
+#   <workspace>/<character id>/{projects,exports,renders,reports}
+#   <workspace>/_testbench/{projects,exports,renders,reports}   (no character set)
+
+import bridge_state
+
+WORKSPACE_ROOT = os.path.realpath(os.environ.get("CC4_WORKSPACE") or os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), "..", "..", "characters"))
+TESTBENCH = "_testbench"
+_CHARACTER_ID_CHARS = set("abcdefghijklmnopqrstuvwxyz0123456789-_")
+
+
+def _is_within(path: str, root: str) -> bool:
+    try:
+        return os.path.commonpath([os.path.normcase(os.path.realpath(path)), os.path.normcase(root)]) == os.path.normcase(root)
+    except ValueError:  # different drives
+        return False
+
+
+def character_dir(kind: str = "") -> str:
+    """Folder for the current character (or _testbench), optionally a subfolder."""
+    base = os.path.join(WORKSPACE_ROOT, bridge_state.current_character or TESTBENCH)
+    return os.path.join(base, kind) if kind else base
+
+
+def workspace_path(path: str, kind: str) -> tuple[str | None, str | None]:
+    """Resolve an output path. Bare names go to <character>/<kind>/; anything else
+    must already be inside the workspace. Returns (path, error)."""
+    decoded = urllib.parse.unquote(path or "")
+    if not decoded or "\x00" in decoded or ".." in decoded:
+        return None, "Unsafe or empty path"
+    if not os.path.isdir(WORKSPACE_ROOT):
+        return None, f"Workspace folder does not exist: {WORKSPACE_ROOT} (create it or set CC4_WORKSPACE)"
+    if os.path.dirname(path) == "":
+        path = os.path.join(character_dir(kind), path)
+    if not _is_within(path, WORKSPACE_ROOT):
+        return None, f"Refusing to write outside the workspace ({WORKSPACE_ROOT}): {path}"
+    return path, None
+
+
+def set_character(character_id: str = "") -> dict[str, Any]:
+    """Select where bare output names go: <workspace>/<id>/..., or _testbench when empty."""
+    cid = (character_id or "").strip()
+    if cid and (not set(cid) <= _CHARACTER_ID_CHARS or cid.startswith(("-", "_")) or len(cid) > 64):
+        return {"success": False, "error": "character id must be lowercase letters, digits, '-' or '_' (max 64)"}
+    bridge_state.current_character = cid or None
+    folder = character_dir()
+    return {"success": True, "character": bridge_state.current_character, "folder": folder}
+
+
+def workspace_info() -> dict[str, Any]:
+    return {"root": WORKSPACE_ROOT, "exists": os.path.isdir(WORKSPACE_ROOT),
+            "character": bridge_state.current_character, "folder": character_dir()}
 
 # UR-25: prefer EObjectModifiedType_Material for material/color changes.
 # Falls back to _Attribute if _Material is not in this build.
@@ -397,7 +447,7 @@ def export_fbx(
 
     Args:
         output_path: .fbx destination. A bare filename (no directory component)
-            is resolved under CC4_EXPORT_DIR (default ``%USERPROFILE%\\CC4Export``).
+            goes to <workspace>/<character>/exports/; other paths must be inside the workspace.
         options_flags: Raw EExportFbxOptions bitmask. If 0, defaults are computed from named flags.
         target_tool: "Unity" | "UE5" | "Maya" | "" - sets the base flag preset.
         sub_d_level: 0|1|2 export subdivision level via SetExportLevel (no scene mutation).
@@ -428,9 +478,9 @@ def export_fbx(
 
     notes: list[str] = []
 
-    if os.path.dirname(output_path) == "":
-        output_path = os.path.join(CC4_EXPORT_DIR, output_path)
-        notes.append(f"bare filename resolved under CC4_EXPORT_DIR ({CC4_EXPORT_DIR})")
+    output_path, path_error = workspace_path(output_path, "exports")
+    if path_error:
+        return {"success": False, "error": path_error}
 
     resolved = os.path.realpath(output_path)
     if not resolved.lower().endswith(".fbx"):
@@ -696,10 +746,9 @@ def capture_viewport(output_path: str = "", width: int = 1280, height: int = 720
     screenshot captures whatever window is on top, which is not a render.
     """
     try:
-        if not output_path:
-            output_path = os.path.join(tempfile.gettempdir(), "cc4_viewport.png")
-
-        _path_error = _validate_path(output_path, {".png"})
+        output_path, _path_error = workspace_path(output_path or "viewport.png", "renders")
+        if not _path_error:
+            _path_error = _validate_path(output_path, {".png"})
         if _path_error:
             return {"success": False, "error": _path_error}
 
@@ -1757,10 +1806,7 @@ def reset_all_morphs(avatar_name: str = "") -> dict[str, Any]:
 
 import math
 
-import bridge_state
-
 MORPH_HARD_LIMIT = 1.0  # values outside [-1, 1] are clamped (SWIG safety)
-PROJECTS_DIR = os.path.join(CC4_EXPORT_DIR, "projects")
 
 
 def _norm_path(path: str) -> str:
@@ -2004,11 +2050,9 @@ def set_color(target: str, r: float, g: float, b: float) -> Any:
 
 def save_project_as(path: str) -> dict[str, Any]:
     """Save the current project to a new .ccProject; that copy becomes the current project."""
-    decoded = urllib.parse.unquote(path or "")
-    if not decoded or "\x00" in decoded or ".." in decoded:
-        return {"success": False, "error": "Unsafe or empty path"}
-    if os.path.dirname(path) == "":
-        path = os.path.join(PROJECTS_DIR, path)
+    path, path_error = workspace_path(path, "projects")
+    if path_error:
+        return {"success": False, "error": path_error}
     if not path.lower().endswith(".ccproject"):
         path += ".ccProject"
     if os.path.exists(path):
@@ -2181,7 +2225,9 @@ def capture_views(presets: list | None = None, width: int = 1280, height: int = 
     cam = RLPy.RScene.GetCurrentCamera()
     if not avatar or not cam:
         return {"success": False, "error": "Need an avatar and a camera"}
-    out_dir = output_dir or os.path.join(CC4_EXPORT_DIR, "renders")
+    out_dir = output_dir or character_dir("renders")
+    if not _is_within(out_dir, WORKSPACE_ROOT):
+        return {"success": False, "error": f"Refusing to write outside the workspace ({WORKSPACE_ROOT}): {out_dir}"}
     views = []
     for preset in presets:
         entry: dict[str, Any] = {"preset": preset}
@@ -2437,6 +2483,9 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "set_diffuse_color":     (lambda p: set_diffuse_color(p["mesh_name"], p["material_name"], float(p["r"]), float(p["g"]), float(p["b"])), ["mesh_name", "material_name", "r", "g", "b"], DEFAULT_TIMEOUT_S),
     "get_shader_parameters": (lambda p: get_shader_parameters(p["mesh_name"], p["material_name"]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
     "set_shader_parameter":  (lambda p: set_shader_parameter(p["mesh_name"], p["material_name"], p["parameter_name"], list(p["values"])), ["mesh_name", "material_name", "parameter_name", "values"], DEFAULT_TIMEOUT_S),
+    # Workspace
+    "set_character":         (lambda p: set_character(p.get("character", "")), [], DEFAULT_TIMEOUT_S),
+    "workspace_info":        (lambda p: workspace_info(), [], DEFAULT_TIMEOUT_S),
     # Introspection
     "diagnostics":           (lambda p: diagnostics(p["query"], p.get("arg", "")), ["query"], DEFAULT_TIMEOUT_S),
 }
@@ -2452,6 +2501,7 @@ GET_ROUTES: dict[str, str] = {
     "/visual/settings": "get_visual_settings",
     "/expressions":     "get_expression_info",
     "/material/info":   "get_material_info",
+    "/workspace":       "workspace_info",
 }
 
 POST_ROUTES: dict[str, str] = {
@@ -2485,6 +2535,7 @@ POST_ROUTES: dict[str, str] = {
     "/material/shader/get": "get_shader_parameters",
     "/material/shader/set": "set_shader_parameter",
     "/diagnostics":         "diagnostics",
+    "/workspace/character": "set_character",
 }
 
 # Actions that may also be started asynchronously via POST /job/start. The job's

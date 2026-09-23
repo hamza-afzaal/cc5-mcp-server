@@ -4,8 +4,8 @@ CC4 MCP Bridge Plugin - Entry Point
 Starts a local HTTP server inside Character Creator 4 so the MCP server
 can control CC4 via the RLPy API.
 
-Install location:
-  C:/Program Files/Reallusion/Character Creator 4/Bin64/OpenPlugin/CC4_MCP_Bridge/
+Install location: C:/Program Files/Reallusion/Character Creator 4/Bin64/OpenPlugin/CC4_MCP_Bridge
+is a directory junction to this folder (install-plugin.ps1), so the code lives in the repo.
 """
 
 from __future__ import annotations
@@ -18,21 +18,13 @@ _plugin_dir = os.path.dirname(os.path.abspath(__file__))
 if _plugin_dir not in sys.path:
     sys.path.insert(0, _plugin_dir)
 
-# Dev mode only: load server/cc4_api from a working copy (e.g. the repo's
-# cc4-plugin/) so POST /reload picks up edits without reinstalling into
-# Program Files. Ignored unless CC4_DEV_MODE=1.
-_dev_dir = os.environ.get("CC4_PLUGIN_DEV_DIR", "")
-if os.environ.get("CC4_DEV_MODE") == "1" and _dev_dir and os.path.isfile(os.path.join(_dev_dir, "cc4_api.py")):
-    sys.path.insert(0, _dev_dir)
-    print(f"[CC4 MCP Bridge] DEV: loading plugin modules from {_dev_dir}")
-
 import RLPy
 from PySide2.QtCore import QTimer  # CC4 ships PySide2
 
 import server as bridge_server
 
 # Plugin metadata required for auto-loading. CC4 runs on the iClone 8 engine;
-# whether CC4 4.70 accepts this value is checked in spike 0 (docs/spikes.md).
+# CC4 4.70 accepts this value (verified in spike 0, docs/spikes.md).
 rl_plugin_info = {
     "ap": "iClone",
     "ap_version": "8.0",
