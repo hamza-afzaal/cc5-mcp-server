@@ -21,7 +21,7 @@ if (Test-Path $dest) {
 }
 
 New-Item -ItemType Directory -Force -Path $dest | Out-Null
-foreach ($f in "main.py", "server.py", "cc4_api.py", "config.json", "config.xml") {
+foreach ($f in "main.py", "server.py", "cc4_api.py", "bridge_state.py", "config.json", "config.xml") {
     Copy-Item (Join-Path $source $f) $dest
 }
 

@@ -323,7 +323,7 @@ def create_default_avatar() -> dict[str, Any]:
 
     NOTE: this neutral base has NO skin/eye textures, eyebrows, eyelashes or hair —
     it renders like a pale, blank-eyed mannequin. For a real, textured human face,
-    load a character template (e.g. Camila) with load_asset instead.
+    load a character template (e.g. Camila) with load_item instead.
     Use delete_avatar first if you want to replace what's already in the scene.
     """
     cc4_root = _get_cc4_root()
@@ -370,29 +370,6 @@ def delete_avatar(name: str = "") -> dict[str, Any]:
     return {"success": True, "removed": removed}
 
 
-def load_asset(file_path: str) -> dict[str, Any]:
-    """Load a CC4 asset file (.ccAvatar, .ccCloth, .ccHair, .iAvatar, etc.)."""
-    # Defense-in-depth: validate path even though TypeScript also validates.
-    # For the extension, accept the explicit list OR any CC/iClone content family
-    # (.cc*/.i*), which is what browse_content returns.
-    decoded = urllib.parse.unquote(file_path)
-    if "\x00" in file_path or "\x00" in decoded:
-        return {"success": False, "error": "Path contains null byte"}
-    if ".." in file_path or ".." in decoded:
-        return {"success": False, "error": "Path traversal ('..') is not allowed"}
-    ext = os.path.splitext(os.path.realpath(file_path))[1].lower()
-    if ext not in _ALLOWED_LOAD_EXTENSIONS and not (ext.startswith(".cc") or ext.startswith(".i")):
-        return {"success": False, "error": f"Disallowed file extension: {ext}"}
-
-    if not os.path.exists(file_path):
-        return {"success": False, "error": f"File not found: {file_path}"}
-
-    try:
-        result = RLPy.RFileIO.LoadFile(file_path)
-        _invalidate_caches()
-        return {"success": True, "path": file_path}
-    except Exception as e:
-        return {"success": False, "error": str(e)}
 
 
 def export_fbx(
@@ -413,6 +390,8 @@ def export_fbx(
     texture_size: int | None = None,
     export_json: bool = False,
     instalod_preset: bool = False,
+    include_motion_path: str = "",
+    motion_only: bool = False,
 ) -> dict[str, Any]:
     """Export the current avatar as FBX via RExportFbxSetting (CC4 export dialog parity).
 
@@ -434,7 +413,9 @@ def export_fbx(
         convert_image_format: EExportFbxOptions_ConvertTifToPNG.
         texture_size: max texture size in px (0 = original).
         export_json: EExportFbxOptions3_ExportJson (needed by CCiC Unity Tools).
-        instalod_preset: EExportFbxOptions2_InstaLodPreset (applies the InstaLOD settings saved in CC4's export dialog; spike 1).
+        instalod_preset: EExportFbxOptions2_InstaLodPreset. No effect from Python (spike 1); kept for completeness.
+        include_motion_path: motion file exported with the avatar (RExportFbxSetting.SetIncludeMotionPath).
+        motion_only: EExportFbxOptions_RemoveAllMesh (skeleton + animation only).
 
     There is deliberately no flag-less 2-arg fallback: if RExportFbxSetting fails
     the export fails, so a result never claims options that were not applied.
@@ -512,6 +493,12 @@ def export_fbx(
         flags3 |= _safe_flag("EExportFbxOptions3_ExportJson")
     if instalod_preset:
         flags2 |= _safe_flag("EExportFbxOptions2_InstaLodPreset")
+    if motion_only:
+        flags |= _safe_flag("EExportFbxOptions_RemoveAllMesh")
+    if include_motion_path:
+        if ".." in include_motion_path or not os.path.isfile(include_motion_path):
+            return {"success": False, "error": f"Motion file not found: {include_motion_path}"}
+        export_motion = True
 
     applied: dict[str, Any] = {}
     try:
@@ -552,6 +539,9 @@ def export_fbx(
             setting.SetTextureSize(int(texture_size))
             applied["texture_size"] = int(texture_size)
 
+        if include_motion_path:
+            setting.SetIncludeMotionPath(include_motion_path)
+            applied["include_motion_path"] = include_motion_path
         status = RLPy.RFileIO.ExportFbxFile(avatar, output_path, setting)
         if status is not None and hasattr(RLPy, "RStatus") and status != RLPy.RStatus.Success:
             return {"success": False, "error": f"ExportFbxFile returned {status}", "notes": notes}
@@ -660,8 +650,12 @@ def get_avatar_info() -> dict[str, Any] | None:
         active: list[dict[str, Any]] = []
         if not shaping_comp:
             return active
+        seen: set[str] = set()
         for cat, entries in get_morph_catalog().items():
             for entry in entries:
+                if entry["id"] in seen:
+                    continue  # the same morph can be listed under several categories
+                seen.add(entry["id"])
                 weight = shaping_comp.GetShapingMorphWeight(entry["id"])
                 if abs(weight) > 1e-6:
                     active.append({
@@ -1529,7 +1523,7 @@ def browse_content(folder_type: str = "cloth_upper") -> list[str]:
         "accessory_body": "EContentRootFolder_AccessoryOthers",
         # 'cloth' is an alias for the full-body clothing folder.
         "cloth": "EContentRootFolder_FullBody",
-        # Animation / scene content — all loadable via load_asset (.cc*/.i*).
+        # Animation / scene content (.cc*/.i*/.rl*).
         # pose/motion may be empty on a base install (no pose packs) but resolve
         # correctly and will list files once content is installed.
         "pose": "EContentRootFolder_Pose",
@@ -1576,7 +1570,6 @@ def browse_content(folder_type: str = "cloth_upper") -> list[str]:
 
         # CC content files use .cc* extensions (e.g. .ccCloth, .ccAvatar);
         # legacy CC3/iClone content uses .i* (e.g. .iAvatar, .iShoe). Accept both.
-        # (_ALLOWED_LOAD_EXTENSIONS is for load_asset and excludes .cc* content files.)
         results: list[str] = []
         seen: set[str] = set()
         for fs in folder_strs:
@@ -1758,6 +1751,461 @@ def reset_all_morphs(avatar_name: str = "") -> dict[str, Any]:
     return {"success": True, "reset_count": count}
 
 
+# --- Pipeline actions (Phase 2: S1 author, S2 optimize, S3 export) ---
+#
+# Facts these rely on are in docs/spikes.md.
+
+import math
+
+import bridge_state
+
+MORPH_HARD_LIMIT = 1.0  # values outside [-1, 1] are clamped (SWIG safety)
+PROJECTS_DIR = os.path.join(CC4_EXPORT_DIR, "projects")
+
+
+def _norm_path(path: str) -> str:
+    return os.path.normcase(os.path.realpath(path))
+
+
+def current_project_path() -> str:
+    return RLPy.RApplication.GetCurrentProjectPath() or ""
+
+
+def _ok(status: Any) -> bool:
+    return status is None or not hasattr(RLPy, "RStatus") or status == RLPy.RStatus.Success
+
+
+def morph_catalog_status() -> dict[str, Any]:
+    """Whether the shaping catalog is fully bound.
+
+    Spike 0: an avatar loaded too soon after CC4 starts exposes only the
+    "Actor Parts" categories; reloading the avatar fixes it.
+    """
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    _invalidate_caches()
+    catalog = get_morph_catalog()
+    full = [c for c in catalog if not c.startswith("Actor Parts")]
+    return {
+        "ready": bool(full),
+        "categories": len(catalog),
+        "morphs": sum(len(v) for v in catalog.values()),
+    }
+
+
+def _morph_index() -> dict[str, dict[str, Any]]:
+    """id -> {display_name, categories[]} over the whole catalog."""
+    index: dict[str, dict[str, Any]] = {}
+    for cat, entries in get_morph_catalog().items():
+        for e in entries:
+            slot = index.setdefault(e["id"], {"display_name": e["display_name"], "categories": []})
+            slot["categories"].append(cat)
+    return index
+
+
+def _minmax(shaping, morph_id: str) -> tuple[float, float]:
+    pair = shaping.GetShapingMorphMinMax(morph_id)
+    # Never iterate FloatPair (see .claude/rules/cc4-dev.md).
+    return float(pair.first), float(pair.second)
+
+
+def search_morphs_v2(query: str, category: str = "", limit: int = 25) -> Any:
+    """Search shaping morphs by display name (then ID). Ranked: exact, prefix, substring."""
+    q = (query or "").strip().lower()
+    if not q:
+        return {"success": False, "error": "query is required"}
+    limit = max(1, min(int(limit), MAX_SEARCH_RESULTS))
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    shaping = avatar.GetAvatarShapingComponent()
+    ranked: list[tuple[int, str, str, str]] = []
+    for morph_id, info in _morph_index().items():
+        cats = info["categories"]
+        if category and not any(c.lower().startswith(category.lower()) for c in cats):
+            continue
+        name = info["display_name"].lower()
+        if name == q:
+            rank = 0
+        elif name.startswith(q):
+            rank = 1
+        elif q in name:
+            rank = 2
+        elif q in morph_id.lower():
+            rank = 3
+        else:
+            continue
+        ranked.append((rank, info["display_name"], morph_id, cats[0]))
+    ranked.sort()
+    results = []
+    for _rank, name, morph_id, cat in ranked[:limit]:
+        lo, hi = _minmax(shaping, morph_id)
+        results.append({"id": morph_id, "display_name": name, "category": cat, "min": lo, "max": hi})
+    return {"results": results, "total_matches": len(ranked)}
+
+
+def set_morphs(entries: list) -> dict[str, Any]:
+    """Set shaping morphs by display name or ID in ONE undoable action.
+
+    Every entry is resolved before anything is applied; an unknown or ambiguous
+    name fails the whole call. Values are clamped to [-1, 1]. GetShapingMorphMinMax
+    is only the UI default range (spike 0: not enforced), so values outside it are
+    applied with a warning instead of being clamped.
+    """
+    if not isinstance(entries, list) or not entries:
+        return {"success": False, "error": "morphs must be a non-empty list"}
+    if len(entries) > MAX_MORPH_BATCH:
+        return {"success": False, "error": f"Too many morphs: {len(entries)}, max {MAX_MORPH_BATCH}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    status = morph_catalog_status()
+    if not status.get("ready"):
+        return {"success": False, "error": "Morph catalog not ready (only 'Actor Parts' bound). "
+                                           "Reload the base avatar, then retry.", "catalog": status}
+    shaping = avatar.GetAvatarShapingComponent()
+    index = _morph_index()
+    by_name: dict[str, list[str]] = {}
+    for morph_id, info in index.items():
+        by_name.setdefault(info["display_name"].lower(), []).append(morph_id)
+
+    errors: list[dict[str, Any]] = []
+    resolved: list[tuple[str, float, dict[str, Any]]] = []
+    seen: set[str] = set()
+    for i, e in enumerate(entries):
+        if not isinstance(e, dict) or "value" not in e:
+            errors.append({"index": i, "error": "entry needs 'value' and 'display_name' or 'id'"})
+            continue
+        try:
+            value = float(e["value"])
+        except (TypeError, ValueError):
+            errors.append({"index": i, "error": "value must be a number"})
+            continue
+        morph_id = e.get("id")
+        name = e.get("display_name")
+        if morph_id:
+            if morph_id not in index:
+                errors.append({"index": i, "id": morph_id, "error": "unknown morph ID"})
+                continue
+        elif name:
+            candidates = by_name.get(str(name).lower(), [])
+            cat = e.get("category")
+            if cat:
+                candidates = [c for c in candidates if any(k.lower().startswith(cat.lower()) for k in index[c]["categories"])]
+            if not candidates:
+                errors.append({"index": i, "display_name": name, "error": "unknown display name"})
+                continue
+            if len(candidates) > 1:
+                errors.append({"index": i, "display_name": name, "error": "ambiguous display name; add 'category' or use 'id'",
+                               "candidates": [{"id": c, "categories": index[c]["categories"]} for c in candidates]})
+                continue
+            morph_id = candidates[0]
+        else:
+            errors.append({"index": i, "error": "entry needs 'display_name' or 'id'"})
+            continue
+        if morph_id in seen:
+            errors.append({"index": i, "id": morph_id, "error": "duplicate morph in batch"})
+            continue
+        seen.add(morph_id)
+        info: dict[str, Any] = {"id": morph_id, "display_name": index[morph_id]["display_name"], "requested": value}
+        clamped = max(-MORPH_HARD_LIMIT, min(MORPH_HARD_LIMIT, value))
+        if clamped != value:
+            info["warning"] = f"clamped to {clamped} (hard limit ±{MORPH_HARD_LIMIT})"
+        lo, hi = _minmax(shaping, morph_id)
+        if not lo <= clamped <= hi:
+            info["warning"] = (info.get("warning", "") + "; " if "warning" in info else "") + \
+                f"outside the UI default range [{lo}, {hi}] (applied anyway)"
+        resolved.append((morph_id, clamped, info))
+
+    if errors:
+        return {"success": False, "error": f"{len(errors)} morph entr{'y' if len(errors) == 1 else 'ies'} could not be resolved; nothing applied",
+                "problems": errors}
+
+    applied = []
+    try:
+        RLPy.RGlobal.BeginAction("Set Morphs")
+        for morph_id, value, info in resolved:
+            shaping.SetShapingMorphWeight(morph_id, value)
+            info["value"] = float(shaping.GetShapingMorphWeight(morph_id))
+            applied.append(info)
+        RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
+    finally:
+        RLPy.RGlobal.EndAction()
+    return {"success": True, "applied": applied}
+
+
+_ITEM_EXTENSIONS = (".ccavatar", ".ccproject", ".cccloth", ".ccshoes", ".ccacc", ".ccaccessory", ".cchair",
+                    ".rlhair", ".rlhairstyle", ".ccskin", ".ccavatarpreset", ".iavatar", ".iclothes", ".ihair",
+                    ".iaccessory", ".ishoe", ".iskin")
+
+
+def _item_names(avatar) -> dict[str, list[str]]:
+    return {
+        "clothes": [c.GetName() for c in avatar.GetClothes()],
+        "hair": [h.GetName() for h in avatar.GetHairs()],
+        "accessories": [a.GetName() for a in avatar.GetAccessories(True)],
+    }
+
+
+def list_items() -> Any:
+    """Clothes, hair and accessories on the current avatar, with their scene mesh names."""
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    out: dict[str, list[dict[str, Any]]] = {}
+    for label, getter in (("clothes", avatar.GetClothes), ("hair", avatar.GetHairs),
+                          ("accessories", lambda: avatar.GetAccessories(True))):
+        out[label] = []
+        for obj in getter():
+            entry: dict[str, Any] = {"name": obj.GetName()}
+            try:
+                entry["meshes"] = list(obj.GetMeshNames(True))
+            except Exception:
+                entry["meshes"] = []
+            out[label].append(entry)
+    return {"avatar": avatar.GetName(), **out}
+
+
+def load_item(file_path: str) -> dict[str, Any]:
+    """Load a content file (base avatar, clothing, hair, accessory, skin, project).
+
+    Path allowlisting (assets/allowlist.json) is enforced by the MCP server
+    before this is called; this only checks path safety and existence.
+    """
+    decoded = urllib.parse.unquote(file_path)
+    if "\x00" in decoded or ".." in decoded:
+        return {"success": False, "error": "Unsafe path"}
+    if not file_path.lower().endswith(_ITEM_EXTENSIONS):
+        return {"success": False, "error": f"Unsupported item type: {os.path.splitext(file_path)[1]}"}
+    if not os.path.isfile(file_path):
+        return {"success": False, "error": f"File not found: {file_path}"}
+    avatar = get_first_avatar()
+    before = _item_names(avatar) if avatar else {}
+    t0 = time.time()
+    status = RLPy.RFileIO.LoadFile(file_path)
+    seconds = round(time.time() - t0, 2)
+    _invalidate_caches()
+    avatar = get_first_avatar()
+    after = _item_names(avatar) if avatar else {}
+    added = {k: [n for n in after.get(k, []) if n not in before.get(k, [])] for k in after}
+    return {"success": _ok(status), "path": file_path, "seconds": seconds,
+            "avatar": avatar.GetName() if avatar else None, "added": added}
+
+
+def set_color(target: str, r: float, g: float, b: float) -> Any:
+    t = (target or "").lower()
+    if t in ("eye", "eyes"):
+        return set_eye_color(r, g, b)
+    if t == "hair":
+        return set_hair_color(r, g, b)
+    return {"success": False, "error": "target must be 'eyes' or 'hair'"}
+
+
+def save_project_as(path: str) -> dict[str, Any]:
+    """Save the current project to a new .ccProject; that copy becomes the current project."""
+    decoded = urllib.parse.unquote(path or "")
+    if not decoded or "\x00" in decoded or ".." in decoded:
+        return {"success": False, "error": "Unsafe or empty path"}
+    if os.path.dirname(path) == "":
+        path = os.path.join(PROJECTS_DIR, path)
+    if not path.lower().endswith(".ccproject"):
+        path += ".ccProject"
+    if os.path.exists(path):
+        return {"success": False, "error": f"Refusing to overwrite existing project: {path}"}
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    before = current_project_path()
+    t0 = time.time()
+    status = RLPy.RFileIO.SaveProject(path)
+    seconds = round(time.time() - t0, 2)
+    after = current_project_path()
+    if not (_ok(status) and os.path.exists(path)):
+        return {"success": False, "error": f"SaveProject failed ({status})", "path": path}
+    bridge_state.saved_as_paths.add(_norm_path(path))
+    return {"success": True, "path": path, "seconds": seconds, "previous_project": before,
+            "current_project": after, "is_current": _norm_path(after) == _norm_path(path) if after else False,
+            "size_bytes": os.path.getsize(path)}
+
+
+def _require_saved_copy() -> str | None:
+    current = current_project_path()
+    if not current or _norm_path(current) not in bridge_state.saved_as_paths:
+        return (f"Refusing: the current project ('{current or 'unsaved'}') was not created by save_project_as "
+                "in this CC4 session. Run save_project_as first (design D6: irreversible operations only on copies).")
+    return None
+
+
+_LOD_LEVELS = {"actorbuild": "EConvertCharacterLevel_ActorBuild", "lod1": "EConvertCharacterLevel_LOD1",
+               "lod2": "EConvertCharacterLevel_LOD2"}
+_CONVERTED_GENERATIONS = {6, 10}  # observed after ActorBUILD (6) and LOD1/LOD2 (10), spikes 3/6
+
+
+def _avatar_summary(avatar) -> dict[str, Any]:
+    summary: dict[str, Any] = {}
+    for key, fn in (
+        ("generation", lambda: int(avatar.GetGeneration())),
+        ("skin_bones", lambda: len(avatar.GetSkeletonComponent().GetSkinBones())),
+        ("materials", lambda: {k: len(v) for k, v in _materials_per_mesh(avatar).items()}),
+        ("visemes", lambda: len(list(avatar.GetVisemeComponent().GetVisemeNames() or []))),
+    ):
+        try:
+            summary[key] = fn()
+        except Exception as e:
+            summary[key + "_error"] = str(e)
+    return summary
+
+
+def convert_lod(level: str, bake_expression: bool = True) -> dict[str, Any]:
+    """ActorBUILD / LOD1 / LOD2 conversion (irreversible) on a saved copy.
+
+    CC4 shows two confirmation dialogs; the job stays 'running' until a human clicks OK.
+    """
+    guard = _require_saved_copy()
+    if guard:
+        return {"success": False, "error": guard}
+    enum_name = _LOD_LEVELS.get((level or "").lower())
+    if not enum_name:
+        return {"success": False, "error": f"level must be one of {sorted(_LOD_LEVELS)}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    if int(avatar.GetGeneration()) in _CONVERTED_GENERATIONS:
+        return {"success": False, "error": "This avatar is already converted. Reload the authored base, save_project_as a new copy, then convert."}
+    before = _avatar_summary(avatar)
+    t0 = time.time()
+    status = avatar.ConvertTo(getattr(RLPy, enum_name), bool(bake_expression), True,
+                              RLPy.EReduceBonePose_Default)
+    seconds = round(time.time() - t0, 2)
+    _invalidate_caches()
+    avatar = get_first_avatar()
+    return {"success": _ok(status), "level": level.lower(), "seconds_including_dialogs": seconds,
+            "project": current_project_path(), "before": before,
+            "after": _avatar_summary(avatar) if avatar else None}
+
+
+def merge_materials(mesh_names: list | None = None, texture_size: int = 1024) -> dict[str, Any]:
+    """Merge materials of clothing/accessory meshes into one atlas (MergeMaterialUV, spike 9).
+
+    Defaults to every clothing + accessory mesh. The body/game body is refused
+    (per-region skin materials and SALSA binding are an M2 decision).
+    """
+    guard = _require_saved_copy()
+    if guard:
+        return {"success": False, "error": guard}
+    if int(texture_size) not in (256, 512, 1024, 2048, 4096):
+        return {"success": False, "error": "texture_size must be 256, 512, 1024, 2048 or 4096"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    if not mesh_names:
+        mesh_names = []
+        for obj in list(avatar.GetClothes()) + list(avatar.GetAccessories(True)):
+            mesh_names.extend(obj.GetMeshNames(True))
+    protected = [m for m in mesh_names if m.startswith(("CC_Base_", "CC_Game_"))]
+    if protected:
+        return {"success": False, "error": f"Refusing to merge base meshes: {protected}"}
+    known = set(avatar.GetMeshNames(True))
+    unknown = [m for m in mesh_names if m not in known]
+    if unknown or len(mesh_names) < 2:
+        return {"success": False, "error": f"Need at least two known meshes; unknown: {unknown}", "available": sorted(known)}
+    before = _materials_per_mesh(avatar)
+    t0 = time.time()
+    status = avatar.GetMaterialComponent().MergeMaterialUV(list(mesh_names), int(texture_size),
+                                                           RLPy.EExportTextureFormat_Png, 2)
+    after = _materials_per_mesh(get_first_avatar())
+    return {"success": _ok(status), "seconds": round(time.time() - t0, 2), "meshes": mesh_names,
+            "unique_materials_before": len({m for v in before.values() for m in v}),
+            "unique_materials_after": len({m for v in after.values() for m in v}),
+            "merged_material": sorted({m for k in mesh_names for m in after.get(k, [])})}
+
+
+def check_export_license(item: str = "") -> dict[str, Any]:
+    """RFileIO.CheckExportFbxHasLicense for the avatar ('' / 'avatar') or a named item."""
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    fn = RLPy.RFileIO.CheckExportFbxHasLicense
+    if not item or item.lower() == "avatar":
+        return {"item": avatar.GetName(), "exportable": bool(fn(avatar))}
+    for obj in list(avatar.GetClothes()) + list(avatar.GetHairs()) + list(avatar.GetAccessories(True)):
+        if obj.GetName() == item:
+            return {"item": item, "exportable": bool(fn(obj))}
+    return {"success": False, "error": f"Item not found on avatar: {item}"}
+
+
+# --- capture_views ---
+
+_VIEW_PRESETS = {"full": "ECameraLocationType_Front", "head": "ECameraLocationType_Face",
+                 "three_quarter": "ECameraLocationType_Front"}
+THREE_QUARTER_DEG = 35.0
+
+
+def _up_axis(avatar) -> tuple:
+    mx, center, mn = RLPy.RVector3(), RLPy.RVector3(), RLPy.RVector3()
+    avatar.GetBounds(mx, center, mn)
+    extents = [mx.x - mn.x, mx.y - mn.y, mx.z - mn.z]
+    return extents.index(max(extents)), center
+
+
+def _turn_avatar(avatar, degrees: float):
+    """Rotate the avatar about its vertical axis for a three-quarter shot.
+
+    The preview camera has no Transform control in CC4 4.70, so the subject
+    turns instead of the camera orbiting. Returns the original transform so
+    the caller can restore it.
+    """
+    axis_index, _center = _up_axis(avatar)
+    axis = RLPy.RVector3(*[1.0 if i == axis_index else 0.0 for i in range(3)])
+    ctrl = avatar.GetControl("Transform")
+    if ctrl is None:
+        raise RuntimeError("avatar has no Transform control")
+    now = RLPy.RGlobal.GetTime()
+    original = RLPy.RTransform()
+    ctrl.GetValue(now, original)
+    q = RLPy.RQuaternion(axis, math.radians(degrees))
+    ctrl.SetValue(now, RLPy.RTransform(original.S(), q.Multiply(original.R()), original.T()))
+    RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Transform)
+    return ctrl, now, RLPy.RTransform(original)
+
+
+def capture_views(presets: list | None = None, width: int = 1280, height: int = 720,
+                  output_dir: str = "", prefix: str = "view") -> dict[str, Any]:
+    """Render framed review views (Gate 1): full body, head close-up, three-quarter."""
+    presets = presets or ["full", "head", "three_quarter"]
+    bad = [p for p in presets if p not in _VIEW_PRESETS]
+    if bad:
+        return {"success": False, "error": f"Unknown presets {bad}; valid: {sorted(_VIEW_PRESETS)}"}
+    if not prefix.replace("-", "").replace("_", "").isalnum():
+        return {"success": False, "error": "prefix must be alphanumeric (plus - and _)"}
+    avatar = get_first_avatar()
+    cam = RLPy.RScene.GetCurrentCamera()
+    if not avatar or not cam:
+        return {"success": False, "error": "Need an avatar and a camera"}
+    out_dir = output_dir or os.path.join(CC4_EXPORT_DIR, "renders")
+    views = []
+    for preset in presets:
+        entry: dict[str, Any] = {"preset": preset}
+        try:
+            restore = None
+            if preset == "three_quarter":
+                restore = _turn_avatar(avatar, THREE_QUARTER_DEG)
+                entry["method"] = f"avatar turned {THREE_QUARTER_DEG:g} degrees, then restored"
+            try:
+                cam.SetCameraLocation(getattr(RLPy, _VIEW_PRESETS[preset]))
+                if hasattr(RLPy.RGlobal, "ForceViewportUpdate"):
+                    RLPy.RGlobal.ForceViewportUpdate()
+                shot = capture_viewport(os.path.join(out_dir, f"{prefix}_{preset}.png"), width, height)
+            finally:
+                if restore is not None:
+                    ctrl, now, original = restore
+                    ctrl.SetValue(now, original)
+                    RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Transform)
+            entry.update({k: v for k, v in shot.items() if k != "success"})
+            entry["success"] = bool(shot.get("success"))
+        except Exception as e:
+            entry.update({"success": False, "error": str(e)})
+        views.append(entry)
+    return {"success": all(v["success"] for v in views), "views": views}
 
 
 # --- Diagnostics (fixed allowlist of read-only introspection queries) ---
@@ -1879,6 +2327,8 @@ DIAGNOSTIC_QUERIES: dict[str, Any] = {
     "materials_per_mesh": _with_avatar(lambda a, _: _materials_per_mesh(a)),
     "morph_minmax": _with_avatar(_diag_morph_minmax),
     "content_files": lambda arg: browse_content(arg or "cloth_upper"),
+    "plugin_path": lambda _arg: {"cc4_api": __file__},
+    "morph_catalog_status": lambda _arg: morph_catalog_status(),
     "project_path": lambda _arg: {"path": RLPy.RApplication.GetCurrentProjectPath()},
 }
 
@@ -1927,6 +2377,8 @@ def _export_fbx_action(p: dict) -> Any:
         texture_size=_opt_int(p, "texture_size"),
         export_json=bool(p.get("export_json", False)),
         instalod_preset=bool(p.get("instalod_preset", False)),
+        include_motion_path=str(p.get("include_motion_path", "")),
+        motion_only=bool(p.get("motion_only", False)),
     )
 
 
@@ -1934,21 +2386,35 @@ DEFAULT_TIMEOUT_S = 30.0
 LONG_TIMEOUT_S = 300.0
 
 ACTIONS: dict[str, tuple[Any, list[str], float]] = {
+    # Avatar / scene
     "get_avatars":           (lambda p: get_avatars(), [], DEFAULT_TIMEOUT_S),
     "get_avatar_info":       (lambda p: get_avatar_info(), [], DEFAULT_TIMEOUT_S),
-    "get_morph_catalog":     (lambda p: get_morph_catalog(), [], DEFAULT_TIMEOUT_S),
-    "search_morphs":         (lambda p: search_morphs(p["query"], p.get("category", "")), ["query"], DEFAULT_TIMEOUT_S),
-    "get_morph_value":       (lambda p: get_morph_value(p["morph_id"]), ["morph_id"], DEFAULT_TIMEOUT_S),
-    "set_morph_value":       (lambda p: set_morph_value(p["morph_id"], float(p["value"])), ["morph_id", "value"], DEFAULT_TIMEOUT_S),
-    "set_multiple_morphs":   (lambda p: set_multiple_morphs(p["morphs"]), ["morphs"], DEFAULT_TIMEOUT_S),
-    "reset_all_morphs":      (lambda p: reset_all_morphs(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
     "create_default_avatar": (lambda p: create_default_avatar(), [], LONG_TIMEOUT_S),
     "delete_avatar":         (lambda p: delete_avatar(p.get("name", "")), [], DEFAULT_TIMEOUT_S),
-    "load_asset":            (lambda p: load_asset(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
-    "export_fbx":            (_export_fbx_action, ["output_path"], LONG_TIMEOUT_S),
-    "capture_viewport":      (lambda p: capture_viewport(p.get("output_path", ""), int(p.get("width", 1280)), int(p.get("height", 720))), [], LONG_TIMEOUT_S),
     "undo":                  (lambda p: undo(), [], DEFAULT_TIMEOUT_S),
     "redo":                  (lambda p: redo(), [], DEFAULT_TIMEOUT_S),
+    # Morphs
+    "get_morph_catalog":     (lambda p: get_morph_catalog(), [], DEFAULT_TIMEOUT_S),
+    "morph_catalog_status":  (lambda p: morph_catalog_status(), [], DEFAULT_TIMEOUT_S),
+    "search_morphs":         (lambda p: search_morphs_v2(p["query"], p.get("category", ""), int(p.get("limit", 25))), ["query"], DEFAULT_TIMEOUT_S),
+    "get_morph_value":       (lambda p: get_morph_value(p["morph_id"]), ["morph_id"], DEFAULT_TIMEOUT_S),
+    "set_morphs":            (lambda p: set_morphs(p["morphs"]), ["morphs"], DEFAULT_TIMEOUT_S),
+    "reset_all_morphs":      (lambda p: reset_all_morphs(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
+    # Items
+    "list_items":            (lambda p: list_items(), [], DEFAULT_TIMEOUT_S),
+    "load_item":             (lambda p: load_item(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
+    "remove_item":           (lambda p: remove_scene_item(p["item_name"]), ["item_name"], DEFAULT_TIMEOUT_S),
+    "browse_content":        (lambda p: browse_content(p.get("folder_type", "cloth_upper")), [], DEFAULT_TIMEOUT_S),
+    "set_color":             (lambda p: set_color(p["target"], float(p["r"]), float(p["g"]), float(p["b"])), ["target", "r", "g", "b"], DEFAULT_TIMEOUT_S),
+    # Project / optimize / export
+    "save_project_as":       (lambda p: save_project_as(p["path"]), ["path"], LONG_TIMEOUT_S),
+    "convert_lod":           (lambda p: convert_lod(p["level"], bool(p.get("bake_expression", True))), ["level"], LONG_TIMEOUT_S),
+    "merge_materials":       (lambda p: merge_materials(p.get("mesh_names"), int(p.get("texture_size", 1024))), [], LONG_TIMEOUT_S),
+    "check_export_license":  (lambda p: check_export_license(p.get("item", "")), [], DEFAULT_TIMEOUT_S),
+    "export_fbx":            (_export_fbx_action, ["output_path"], LONG_TIMEOUT_S),
+    "capture_views":         (lambda p: capture_views(p.get("presets"), int(p.get("width", 1280)), int(p.get("height", 720)),
+                                                      p.get("output_dir", ""), p.get("prefix", "view")), [], LONG_TIMEOUT_S),
+    # Look-dev (kept per Phase 0 review)
     "get_camera_info":       (lambda p: get_camera_info(), [], DEFAULT_TIMEOUT_S),
     "set_camera_focal_length": (lambda p: set_camera_focal_length(float(p["focal_length"])), ["focal_length"], DEFAULT_TIMEOUT_S),
     "frame_camera":          (lambda p: frame_camera(p.get("view", "face")), [], DEFAULT_TIMEOUT_S),
@@ -1971,13 +2437,7 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "set_diffuse_color":     (lambda p: set_diffuse_color(p["mesh_name"], p["material_name"], float(p["r"]), float(p["g"]), float(p["b"])), ["mesh_name", "material_name", "r", "g", "b"], DEFAULT_TIMEOUT_S),
     "get_shader_parameters": (lambda p: get_shader_parameters(p["mesh_name"], p["material_name"]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
     "set_shader_parameter":  (lambda p: set_shader_parameter(p["mesh_name"], p["material_name"], p["parameter_name"], list(p["values"])), ["mesh_name", "material_name", "parameter_name", "values"], DEFAULT_TIMEOUT_S),
-    "list_clothes":          (lambda p: list_clothes(), [], DEFAULT_TIMEOUT_S),
-    "list_hair":             (lambda p: list_hair(), [], DEFAULT_TIMEOUT_S),
-    "list_accessories":      (lambda p: list_accessories(), [], DEFAULT_TIMEOUT_S),
-    "remove_scene_item":     (lambda p: remove_scene_item(p["item_name"]), ["item_name"], DEFAULT_TIMEOUT_S),
-    "browse_content":        (lambda p: browse_content(p.get("folder_type", "cloth_upper")), [], DEFAULT_TIMEOUT_S),
-    "set_eye_color":         (lambda p: set_eye_color(float(p["r"]), float(p["g"]), float(p["b"])), ["r", "g", "b"], DEFAULT_TIMEOUT_S),
-    "set_hair_color":        (lambda p: set_hair_color(float(p["r"]), float(p["g"]), float(p["b"])), ["r", "g", "b"], DEFAULT_TIMEOUT_S),
+    # Introspection
     "diagnostics":           (lambda p: diagnostics(p["query"], p.get("arg", "")), ["query"], DEFAULT_TIMEOUT_S),
 }
 
@@ -1985,29 +2445,31 @@ GET_ROUTES: dict[str, str] = {
     "/avatars":         "get_avatars",
     "/avatar/info":     "get_avatar_info",
     "/morphs/catalog":  "get_morph_catalog",
+    "/morphs/status":   "morph_catalog_status",
+    "/items":           "list_items",
     "/camera/info":     "get_camera_info",
     "/lights":          "get_lights",
     "/visual/settings": "get_visual_settings",
     "/expressions":     "get_expression_info",
     "/material/info":   "get_material_info",
-    "/clothes":         "list_clothes",
-    "/hair":            "list_hair",
-    "/accessories":     "list_accessories",
 }
 
 POST_ROUTES: dict[str, str] = {
-    "/morphs/search":       "search_morphs",
-    "/morph/get":           "get_morph_value",
-    "/morph/set":           "set_morph_value",
-    "/morphs/set":          "set_multiple_morphs",
-    "/morphs/reset":        "reset_all_morphs",
     "/avatar/create":       "create_default_avatar",
     "/avatar/delete":       "delete_avatar",
-    "/asset/load":          "load_asset",
-    "/export/fbx":          "export_fbx",
-    "/viewport/capture":    "capture_viewport",
     "/undo":                "undo",
     "/redo":                "redo",
+    "/morphs/search":       "search_morphs",
+    "/morph/get":           "get_morph_value",
+    "/morphs/set":          "set_morphs",
+    "/morphs/reset":        "reset_all_morphs",
+    "/item/load":           "load_item",
+    "/item/remove":         "remove_item",
+    "/content/browse":      "browse_content",
+    "/color":               "set_color",
+    "/project/save_as":     "save_project_as",
+    "/license/check":       "check_export_license",
+    "/views/capture":       "capture_views",
     "/camera/focal":        "set_camera_focal_length",
     "/camera/frame":        "frame_camera",
     "/light/color":         "set_light_color",
@@ -2022,219 +2484,11 @@ POST_ROUTES: dict[str, str] = {
     "/material/color/set":  "set_diffuse_color",
     "/material/shader/get": "get_shader_parameters",
     "/material/shader/set": "set_shader_parameter",
-    "/item/remove":         "remove_scene_item",
-    "/content/browse":      "browse_content",
-    "/color/eye":           "set_eye_color",
-    "/color/hair":          "set_hair_color",
     "/diagnostics":         "diagnostics",
 }
 
 # Actions that may also be started asynchronously via POST /job/start. The job's
 # status is answered from the HTTP thread (server.py job table), so a long export
 # does not tie up a request for its whole duration.
-JOB_ACTIONS: set[str] = {"export_fbx", "load_asset", "create_default_avatar"}
-
-
-# --- Phase 1b spike actions (dev mode only; removed after the spikes) ---
-#
-# Registered only when CC4_DEV_MODE=1. Irreversible calls (ConvertTo,
-# MergeMaterialUV) refuse to run unless the current project is a copy saved
-# under SPIKE_DIR by spike_save_project in this session (design D6).
-
-SPIKE_DIR = os.path.join(CC4_EXPORT_DIR, "spikes")
-_spike_saved_paths: set[str] = set()
-
-
-def _norm(path: str) -> str:
-    return os.path.normcase(os.path.realpath(path))
-
-
-def _current_project_path() -> str:
-    return RLPy.RApplication.GetCurrentProjectPath() or ""
-
-
-def _status_ok(status: Any) -> bool:
-    return status is None or not hasattr(RLPy, "RStatus") or status == RLPy.RStatus.Success
-
-
-def _spike_path(name: str, ext: str) -> str | None:
-    """Resolve a bare file name inside SPIKE_DIR (no directories, fixed extension)."""
-    if not name or os.path.basename(name) != name or ".." in name:
-        return None
-    if not name.lower().endswith(ext):
-        name += ext
-    os.makedirs(SPIKE_DIR, exist_ok=True)
-    return os.path.join(SPIKE_DIR, name)
-
-
-def _on_spike_copy() -> str | None:
-    """Error message unless the open project is a spike copy saved this session."""
-    current = _current_project_path()
-    if not current or _norm(current) not in _spike_saved_paths:
-        return (f"Refusing: current project '{current}' is not a copy saved via "
-                f"spike_save_project this session (under {SPIKE_DIR})")
-    return None
-
-
-def _avatar_snapshot(avatar) -> dict[str, Any]:
-    snap: dict[str, Any] = {}
-    try:
-        per_mesh = _materials_per_mesh(avatar)
-        snap["meshes"] = len(per_mesh)
-        snap["materials"] = sum(len(v) for v in per_mesh.values())
-        snap["per_mesh"] = {k: len(v) for k, v in per_mesh.items()}
-    except Exception as e:
-        snap["materials_error"] = str(e)
-    for key, fn in (
-        ("generation", lambda: int(avatar.GetGeneration())),
-        ("skin_bones", lambda: len(avatar.GetSkeletonComponent().GetSkinBones())),
-        ("facial_profile", lambda: _facial_profile_type(avatar)),
-        ("expression_categories", lambda: len(list(avatar.GetFacialProfileComponent().GetExpressionCategoryNames()))),
-        ("expression_sliders", lambda: sum(len(list(avatar.GetFacialProfileComponent().GetExpressionSliderNames(c) or []))
-                                           for c in avatar.GetFacialProfileComponent().GetExpressionCategoryNames())),
-        ("visemes", lambda: len(list(avatar.GetVisemeComponent().GetVisemeNames() or []))),
-    ):
-        try:
-            snap[key] = fn()
-        except Exception as e:
-            snap[key + "_error"] = str(e)
-    return snap
-
-
-def spike_save_project(name: str) -> dict[str, Any]:
-    path = _spike_path(name, ".ccproject")
-    if path is None:
-        return {"success": False, "error": "name must be a bare file name"}
-    before = _current_project_path()
-    t0 = time.time()
-    status = RLPy.RFileIO.SaveProject(path)
-    seconds = round(time.time() - t0, 2)
-    after = _current_project_path()
-    ok = _status_ok(status) and os.path.exists(path)
-    if ok:
-        _spike_saved_paths.add(_norm(path))
-    return {
-        "success": ok, "path": path, "status": str(status), "seconds": seconds,
-        "project_before": before, "project_after": after,
-        "current_switched_to_copy": _norm(after) == _norm(path) if after else False,
-        "size_bytes": os.path.getsize(path) if os.path.exists(path) else None,
-    }
-
-
-def spike_load_project(path: str) -> dict[str, Any]:
-    if not path.lower().endswith(".ccproject") or ".." in path or not os.path.isfile(path):
-        return {"success": False, "error": f"Not an existing .ccProject: {path}"}
-    t0 = time.time()
-    status = RLPy.RFileIO.LoadProject(path)
-    _invalidate_caches()
-    return {"success": _status_ok(status), "status": str(status), "seconds": round(time.time() - t0, 2),
-            "project_after": _current_project_path(), "avatars": [a.GetName() for a in RLPy.RScene.GetAvatars()]}
-
-
-def spike_license() -> dict[str, Any]:
-    avatar = get_first_avatar()
-    if not avatar:
-        return {"success": False, "error": "No avatar in scene"}
-    fn = RLPy.RFileIO.CheckExportFbxHasLicense
-    out: dict[str, Any] = {"avatar": {avatar.GetName(): fn(avatar)}}
-    for label, getter in (("clothes", avatar.GetClothes), ("hair", avatar.GetHairs),
-                          ("accessories", lambda: avatar.GetAccessories(True))):
-        out[label] = {}
-        for obj in getter():
-            try:
-                out[label][obj.GetName()] = fn(obj)
-            except Exception as e:
-                out[label][obj.GetName()] = f"error: {e}"
-    return out
-
-
-_CONVERT_LEVELS = {"actorbuild": "EConvertCharacterLevel_ActorBuild",
-                   "lod1": "EConvertCharacterLevel_LOD1", "lod2": "EConvertCharacterLevel_LOD2"}
-_REDUCE_POSES = {"default": "EReduceBonePose_Default", "tpose": "EReduceBonePose_TPose",
-                 "current": "EReduceBonePose_Current"}
-
-
-def spike_convert_lod(level: str, bake_expression: bool, bake_texture: bool, pose: str) -> dict[str, Any]:
-    guard = _on_spike_copy()
-    if guard:
-        return {"success": False, "error": guard}
-    level_enum = getattr(RLPy, _CONVERT_LEVELS.get(level.lower(), ""), None)
-    pose_enum = getattr(RLPy, _REDUCE_POSES.get(pose.lower(), ""), None)
-    if level_enum is None or pose_enum is None:
-        return {"success": False, "error": f"level in {sorted(_CONVERT_LEVELS)}, pose in {sorted(_REDUCE_POSES)}"}
-    avatar = get_first_avatar()
-    if not avatar:
-        return {"success": False, "error": "No avatar in scene"}
-    before = _avatar_snapshot(avatar)
-    t0 = time.time()
-    status = avatar.ConvertTo(level_enum, bool(bake_expression), bool(bake_texture), pose_enum)
-    seconds = round(time.time() - t0, 2)
-    _invalidate_caches()
-    avatar = get_first_avatar()
-    return {"success": _status_ok(status), "status": str(status), "seconds": seconds,
-            "args": {"level": level, "bake_expression": bake_expression, "bake_texture": bake_texture, "pose": pose},
-            "before": before, "after": _avatar_snapshot(avatar) if avatar else None}
-
-
-def spike_merge_material_uv(mesh_names: list, texture_size: int) -> dict[str, Any]:
-    guard = _on_spike_copy()
-    if guard:
-        return {"success": False, "error": guard}
-    avatar = get_first_avatar()
-    if not avatar:
-        return {"success": False, "error": "No avatar in scene"}
-    known = set(avatar.GetMeshNames(True))
-    unknown = [m for m in mesh_names if m not in known]
-    if unknown or not mesh_names:
-        return {"success": False, "error": f"Unknown meshes: {unknown}", "available": sorted(known)}
-    if int(texture_size) not in (256, 512, 1024, 2048, 4096):
-        return {"success": False, "error": "texture_size must be 256..4096"}
-    before = _avatar_snapshot(avatar)
-    t0 = time.time()
-    status = avatar.GetMaterialComponent().MergeMaterialUV(list(mesh_names), int(texture_size), RLPy.EExportTextureFormat_Png, 2)
-    seconds = round(time.time() - t0, 2)
-    return {"success": _status_ok(status), "status": str(status), "seconds": seconds,
-            "before": before, "after": _avatar_snapshot(get_first_avatar())}
-
-
-def spike_select_avatar() -> dict[str, Any]:
-    avatar = get_first_avatar()
-    if not avatar:
-        return {"success": False, "error": "No avatar in scene"}
-    RLPy.RScene.SelectObject(avatar)
-    _invalidate_caches()
-    return {"success": True, "selected": [o.GetName() for o in RLPy.RScene.GetSelectedObjects()]}
-
-
-def spike_snapshot() -> dict[str, Any]:
-    avatar = get_first_avatar()
-    if not avatar:
-        return {"success": False, "error": "No avatar in scene"}
-    return {"project": _current_project_path(), **_avatar_snapshot(avatar)}
-
-
-DIAGNOSTIC_QUERIES["plugin_path"] = lambda _arg: {"cc4_api": __file__}
-
-if os.environ.get("CC4_DEV_MODE") == "1":
-    ACTIONS.update({
-        "spike_save_project": (lambda p: spike_save_project(p["name"]), ["name"], LONG_TIMEOUT_S),
-        "spike_load_project": (lambda p: spike_load_project(p["path"]), ["path"], LONG_TIMEOUT_S),
-        "spike_license":      (lambda p: spike_license(), [], DEFAULT_TIMEOUT_S),
-        "spike_snapshot":     (lambda p: spike_snapshot(), [], DEFAULT_TIMEOUT_S),
-        "spike_select_avatar": (lambda p: spike_select_avatar(), [], DEFAULT_TIMEOUT_S),
-        "spike_convert_lod":  (lambda p: spike_convert_lod(
-            p["level"], bool(p.get("bake_expression", True)), bool(p.get("bake_texture", True)), p.get("pose", "default"),
-        ), ["level"], LONG_TIMEOUT_S),
-        "spike_merge_material_uv": (lambda p: spike_merge_material_uv(list(p["mesh_names"]), int(p.get("texture_size", 1024))),
-                                    ["mesh_names"], LONG_TIMEOUT_S),
-    })
-    POST_ROUTES.update({
-        "/spike/save_project": "spike_save_project",
-        "/spike/load_project": "spike_load_project",
-        "/spike/license": "spike_license",
-        "/spike/snapshot": "spike_snapshot",
-        "/spike/select_avatar": "spike_select_avatar",
-        "/spike/convert_lod": "spike_convert_lod",
-        "/spike/merge_material_uv": "spike_merge_material_uv",
-    })
-    JOB_ACTIONS.update({"spike_convert_lod", "spike_merge_material_uv", "spike_save_project", "spike_load_project"})
+JOB_ACTIONS: set[str] = {"export_fbx", "load_item", "create_default_avatar", "convert_lod", "merge_materials",
+                         "save_project_as", "capture_views"}

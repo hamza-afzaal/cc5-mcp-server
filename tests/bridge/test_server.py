@@ -91,7 +91,8 @@ class BridgeHttpTest(unittest.TestCase):
         self.assertEqual(status, 404)
 
     def test_metahuman_and_mixer_routes_are_gone(self):
-        for path in ("/export/head_mh", "/actor_mixer/create", "/skin/bake", "/subdivision", "/item/visible"):
+        for path in ("/export/head_mh", "/actor_mixer/create", "/skin/bake", "/subdivision", "/item/visible",
+                     "/spike/save_project", "/spike/convert_lod"):
             status, _ = self.request("POST", path, {})
             self.assertEqual(status, 404, path)
 
@@ -168,7 +169,7 @@ class BridgeHttpTest(unittest.TestCase):
 
     def test_job_runs_and_reports_failure_result(self):
         status, data = self.request("POST", "/job/start", {
-            "action": "load_asset",
+            "action": "load_item",
             "params": {"file_path": r"C:\does\not\exist.ccCloth"},
         })
         self.assertEqual(status, 200)
@@ -187,12 +188,12 @@ class BridgeHttpTest(unittest.TestCase):
 
 class Python38CompatTest(unittest.TestCase):
     def test_plugin_parses_as_python_38(self):
-        for name in ("main.py", "server.py", "cc4_api.py"):
+        for name in ("main.py", "server.py", "cc4_api.py", "bridge_state.py"):
             with open(os.path.join(PLUGIN_DIR, name), encoding="utf-8") as f:
                 ast.parse(f.read(), filename=name, feature_version=(3, 8))
 
     def test_plugin_uses_postponed_annotations(self):
-        for name in ("main.py", "server.py", "cc4_api.py"):
+        for name in ("main.py", "server.py", "cc4_api.py", "bridge_state.py"):
             with open(os.path.join(PLUGIN_DIR, name), encoding="utf-8") as f:
                 self.assertIn("from __future__ import annotations", f.read(), name)
 
