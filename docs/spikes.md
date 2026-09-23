@@ -2,7 +2,7 @@
 
 Run through the live bridge on 2026-09-23. Test character: the **CC4 Camila template** (`D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Camila.ccAvatar`, underwear only, no hair). For spikes 5, 3 and 6 she also wore Basic T-shirts, Biker_Jeans and Canvas Shoes. Raw outputs are in `spikes-output/` (git-ignored); the scripts are in `tools/spikes/`. Triangle and material counts come from the exported FBX via `tools/fbx_stats.py`.
 
-Status: **in progress.** Spikes 0, 2 (partial), 3 (ActorBUILD), 4, 5 and 9 are done. Spikes 1, 6, 7, 8 and LOD1/LOD2 are open.
+Status: **in progress.** Spikes 0, 2 (partial), 3, 4, 5, 6 and 9 are done. Spikes 1, 7 and 8 (need UI steps) and the rest of 2 (needs an iContent item) are open.
 
 ---
 
@@ -71,3 +71,20 @@ On a saved copy of clothed Camila: `MergeMaterialUV(["Basic_T_shirts", "Biker_Je
 - FBX after hidden/tearline removal: 42,224 triangles, **19 material slots (unchanged)**, 17 unique materials (down from 19), 33 textures (down from 37).
 - **Reading:** the merge is automatable and cuts materials and texture memory, but the meshes stay separate, so Unity still issues one draw call per mesh×material. **Design §4 "draw calls (materials) ≤ 8" needs mesh merging too** (InstaLOD, the kickoff's spike 1, or the Blender S4 stage). The body alone contributes 6 slots (head/body/arm/leg skin, nails, eyelash). Merging those means atlasing across the CCiC skin shader's per-region materials, which M2 should decide together with SALSA binding.
 - Safe candidate for `merge_materials`: clothing + accessories (+ shoes), never `CC_Base_Body`/`CC_Game_Body` without an M2 check.
+
+## Spike 6: ActorBUILD `bakeTexture` and LOD1/LOD2 ✅
+
+Each run: saved copy of clothed Camila → `ConvertTo` → Unity export (JSON, hidden + tearline removed). Times include the human clicking OK on CC4's dialogs.
+
+| Variant | Time | FBX meshes | Triangles | Material slots | Bones | Blendshapes | Textures |
+|---|---|---|---|---|---|---|---|
+| ActorBUILD, bakeTexture=True (spike 3) | (760 s incl. dialogs) | 9 | 29,712 | 19 | 101 | 375 | 37 (skin 2048²) |
+| ActorBUILD, bakeTexture=**False** | 513 s incl. dialogs | 9 | 29,712 | 19 | 101 | 375 | 37 (skin **still** baked `Ga_Skin_*` 2048²) |
+| **LOD1** | 99 s | **1** (`CC3_Base_Plus`, remeshed, clothing merged in) | **7,000** | **1** (`remesh_9_combined_Bake`) | 54 | **1** | 2 (1024² diffuse + normal) |
+| **LOD2** | 91 s | **1** | **800** | **1** | 22 | **1** | 2 (512²) |
+
+**Readings**
+- `bakeTexture=False` made **no observable difference** for ActorBUILD (same counts, skin still baked to 2K). Treat the argument as a no-op for ActorBUILD.
+- **LOD1 and LOD2 meet design §4** on triangles, materials and bones (LOD1 ≤ 25k / ≤ 5 / ≤ ~100; LOD2 ≤ 10k / ≤ 2). They're remeshed into one mesh with one baked atlas, which also solves draw calls for background characters.
+- **But LOD1 exports no facial blendshapes** (1 shape), even though the scene still reports the CC4Extended profile with 160 sliders (presumably bone-driven). Design §4 wants "SALSA visemes only" on LOD1, so at M2 check whether SALSA can drive LOD1 through the jaw bone, or use ActorBUILD as LOD1.
+- Proposed LOD chain for `convert_lod` / S2: **LOD0 = ActorBUILD** (+ hidden-mesh removal, + `MergeMaterialUV` on clothing), **LOD1/LOD2 = `ConvertTo(LOD1/LOD2)`**, each from its own saved copy of the authored base. Every `ConvertTo` needs a human OK in CC4.
