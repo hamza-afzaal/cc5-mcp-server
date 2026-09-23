@@ -9,7 +9,7 @@
 - Port 5101; health: `curl -s http://127.0.0.1:5101/health` (answered from the HTTP thread, never touches RLPy).
 - The action registry (`ACTIONS`, `GET_ROUTES`, `POST_ROUTES`, `JOB_ACTIONS`, `DIAGNOSTIC_QUERIES`) lives in `cc4-plugin/cc4_api.py`. Add or change actions there only.
 - Workspace: every file the bridge writes stays under `<art>/characters` (`CC4_WORKSPACE`). Bare names go to `<character>/{projects,exports,renders}` (`set_character`; `_testbench` when none). Never write to the user profile, `%TEMP%` or Program Files.
-- Hot reload of `cc4_api.py` only: `POST /reload` with header `X-Reload-Token: $CC4_RELOAD_SECRET`, and only when CC4 was started with `CC4_DEV_MODE=1` and a non-empty `CC4_RELOAD_SECRET`. A change to `server.py` or `main.py` needs a CC4 restart.
+- Hot reload of `cc4_api.py` only: `POST /reload` with header `X-Reload-Token: $CC4_RELOAD_SECRET`, and only when CC4 was started with `CC4_DEV_MODE=1` and a non-empty `CC4_RELOAD_SECRET`. A change to `server.py`, `main.py` or `bridge_state.py` needs a CC4 restart (no reinstall: the plugin folder is a junction).
 - Long actions (`export_fbx`, `load_asset`, `create_default_avatar`) can run as jobs: `POST /job/start {action, params}` → `POST /job/status {job_id}`.
 - The bridge refuses browser-origin requests (Origin / Sec-Fetch-Site), non-loopback Host headers, and POSTs without `Content-Type: application/json`.
 - No arbitrary code execution. Use the `diagnostics` allowlist for introspection; extend the allowlist with read-only queries only.
