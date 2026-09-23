@@ -15,21 +15,21 @@ describe("bridgeCall", () => {
     expect(result.content[0].type).toBe("text");
   });
 
-  it("returns CC5 bridge error text when fn rejects with an Error", async () => {
+  it("returns CC4 bridge error text when fn rejects with an Error", async () => {
     const result = await bridgeCall(
       () => Promise.reject(new Error("timeout")),
       () => "should not reach"
     );
-    expect(result.content[0].text).toContain("CC5 bridge error: timeout");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: timeout");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 
-  it("returns CC5 bridge error text when fn rejects with a string", async () => {
+  it("returns CC4 bridge error text when fn rejects with a string", async () => {
     const result = await bridgeCall(
       () => Promise.reject("plain string error"),
       () => "should not reach"
     );
-    expect(result.content[0].text).toContain("CC5 bridge error: plain string error");
+    expect(result.content[0].text).toContain("CC4 bridge error: plain string error");
   });
 
   it("returns a single content item", async () => {

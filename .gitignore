@@ -2,7 +2,7 @@ node_modules/
 build/
 *.js.map
 *.d.ts
-cc5-plugin/libs/
+cc4-plugin/libs/
 
 # Test / build artifacts
 coverage/
@@ -14,9 +14,15 @@ debug.log
 # Local Claude settings (machine-specific permissions)
 .claude/settings.local.json
 
-# Verification screenshots / scratch images
-cc5-restart-verify.png
 
 # Python caches
 __pycache__/
 *.pyc
+
+# Exported assets and working copies - never commit (kickoff rule)
+*.fbx
+*.fbm/
+*.ccProject
+*.ccAvatar
+CC4Export/
+spikes-output/

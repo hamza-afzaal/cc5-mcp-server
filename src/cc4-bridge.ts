@@ -1,10 +1,10 @@
 /**
- * HTTP client for communicating with the CC5 Python bridge plugin.
+ * HTTP client for communicating with the CC4 Python bridge plugin.
  */
 
 import type {
-  CC5Avatar,
-  CC5Response,
+  CC4Avatar,
+  CC4Response,
   MorphCatalog,
   AvatarInfo,
   OperationResult,
@@ -24,15 +24,10 @@ import type {
   SetAmbientResult,
   SetIblResult,
   ExpressionInfo,
-  ExpressionItem,
-  ExpressionSetResult,
-  ExpressionResetResult,
   ResetMorphsResult,
   MaterialInfo,
   DiffuseColor,
   SetDiffuseColorResult,
-  MaterialProperties,
-  SetMaterialPropertyResult,
   ShaderParameters,
   SetShaderParameterResult,
   ClothingItem,
@@ -40,35 +35,43 @@ import type {
   AccessoryItem,
   RemoveItemResult,
   ColorResult,
-  SetVisibleResult,
-  SceneObject,
   ExportFbxOptions,
   ExportFbxResult,
-  BakeSkinResult,
-  ExportHeadMetaHumanResult,
-  CreateActorMixerOptions,
-  CreateActorMixerResult,
+  DiagnosticQuery,
+  JobInfo,
 } from "./types.js";
 
 const DEFAULT_BASE_URL = "http://127.0.0.1:5101";
-const _rawTimeout = parseInt(process.env.CC5_REQUEST_TIMEOUT_MS ?? "30000", 10);
+const _rawTimeout = parseInt(process.env.CC4_REQUEST_TIMEOUT_MS ?? "30000", 10);
 const REQUEST_TIMEOUT_MS = Number.isFinite(_rawTimeout) && _rawTimeout > 0 && _rawTimeout <= 300_000
   ? _rawTimeout
   : 30_000;
+/** Timeout for calls the bridge itself allows 300 s for (export, load, render). */
+export const LONG_REQUEST_TIMEOUT_MS = 310_000;
 
-export class CC5Bridge {
+export interface BridgeHealth {
+  status: string;
+  service: string;
+  version: string;
+  dev_mode: boolean;
+  python: string;
+  queue_depth: number;
+  port: number;
+}
+
+export class CC4Bridge {
   private baseUrl: string;
 
   constructor(baseUrl?: string) {
-    const url = baseUrl ?? process.env.CC5_BRIDGE_URL ?? DEFAULT_BASE_URL;
+    const url = baseUrl ?? process.env.CC4_BRIDGE_URL ?? DEFAULT_BASE_URL;
     try {
       const parsed = new URL(url);
       if (!["127.0.0.1", "localhost", "::1", "[::1]"].includes(parsed.hostname)) {
-        throw new Error(`CC5_BRIDGE_URL must point to localhost, got: ${parsed.hostname}`);
+        throw new Error(`CC4_BRIDGE_URL must point to localhost, got: ${parsed.hostname}`);
       }
     } catch (e) {
       if (e instanceof TypeError) {
-        throw new Error(`Invalid CC5_BRIDGE_URL: ${url}`);
+        throw new Error(`Invalid CC4_BRIDGE_URL: ${url}`);
       }
       throw e;
     }
@@ -78,10 +81,11 @@ export class CC5Bridge {
   private async request<T>(
     path: string,
     method: "GET" | "POST" = "GET",
-    body?: unknown
+    body?: unknown,
+    timeoutMs: number = REQUEST_TIMEOUT_MS,
   ): Promise<T> {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
     try {
       const options: RequestInit = {
@@ -99,18 +103,18 @@ export class CC5Bridge {
       if (!response.ok) {
         const errorBody = await response.text();
         throw new Error(
-          `CC5 bridge error (${response.status}): ${errorBody}`
+          `CC4 bridge error (${response.status}): ${errorBody}`
         );
       }
 
-      const data = (await response.json()) as CC5Response<T>;
+      const data = (await response.json()) as CC4Response<T>;
 
       if (data.error) {
-        throw new Error(`CC5 error: ${data.error}`);
+        throw new Error(`CC4 error: ${data.error}`);
       }
 
       if (data.result === undefined) {
-        throw new Error("CC5 bridge returned empty result");
+        throw new Error("CC4 bridge returned empty result");
       }
 
       return data.result;
@@ -120,17 +124,37 @@ export class CC5Bridge {
   }
 
   async healthCheck(): Promise<boolean> {
+    return (await this.getHealth()) !== null;
+  }
+
+  /** Bridge health details, or null if the bridge is unreachable. */
+  async getHealth(): Promise<BridgeHealth | null> {
     try {
-      await this.request<{ status: string }>("/health");
-      return true;
+      return await this.request<BridgeHealth>("/health");
     } catch (err) {
-      console.error("[CC5 Bridge] healthCheck failed:", err);
-      return false;
+      console.error("[CC4 Bridge] health check failed:", err);
+      return null;
     }
   }
 
-  async getAvatars(): Promise<CC5Avatar[]> {
-    return this.request<CC5Avatar[]>("/avatars");
+  // --- Diagnostics (fixed allowlist of read-only queries) ---
+
+  async diagnostics(query: DiagnosticQuery, arg?: string): Promise<unknown> {
+    return this.request<unknown>("/diagnostics", "POST", { query, arg: arg ?? "" });
+  }
+
+  // --- Jobs (long actions answered from the bridge's HTTP thread) ---
+
+  async startJob(action: string, params: Record<string, unknown>): Promise<{ job_id: string; status: string }> {
+    return this.request<{ job_id: string; status: string }>("/job/start", "POST", { action, params });
+  }
+
+  async getJobStatus<T = unknown>(jobId: string): Promise<JobInfo<T>> {
+    return this.request<JobInfo<T>>("/job/status", "POST", { job_id: jobId });
+  }
+
+  async getAvatars(): Promise<CC4Avatar[]> {
+    return this.request<CC4Avatar[]>("/avatars");
   }
 
   async getAvatarInfo(): Promise<AvatarInfo | null> {
@@ -170,7 +194,7 @@ export class CC5Bridge {
   }
 
   async createDefaultAvatar(): Promise<CreateAvatarResult> {
-    return this.request<CreateAvatarResult>("/avatar/create", "POST", {});
+    return this.request<CreateAvatarResult>("/avatar/create", "POST", {}, LONG_REQUEST_TIMEOUT_MS);
   }
 
   async deleteAvatar(name: string): Promise<DeleteAvatarResult> {
@@ -180,7 +204,7 @@ export class CC5Bridge {
   async loadAsset(filePath: string): Promise<OperationResult> {
     return this.request<OperationResult>("/asset/load", "POST", {
       file_path: filePath,
-    });
+    }, LONG_REQUEST_TIMEOUT_MS);
   }
 
   async exportFbx(
@@ -205,25 +229,8 @@ export class CC5Bridge {
     if (extra.motion_range !== undefined) body.motion_range = extra.motion_range;
     if (extra.convert_image_format !== undefined) body.convert_image_format = extra.convert_image_format;
     if (extra.texture_size !== undefined) body.texture_size = extra.texture_size;
-    return this.request<ExportFbxResult>("/export/fbx", "POST", body);
-  }
-
-  // --- Mesh-to-MetaHuman pipeline ---
-
-  async bakeSkinTextures(resolution: number = 4096): Promise<BakeSkinResult> {
-    return this.request<BakeSkinResult>("/skin/bake", "POST", { resolution });
-  }
-
-  async exportHeadMetaHuman(
-    outputDir: string,
-    characterName: string,
-    gender: "Male" | "Female" = "Female",
-  ): Promise<ExportHeadMetaHumanResult> {
-    return this.request<ExportHeadMetaHumanResult>("/export/head_mh", "POST", {
-      output_dir: outputDir,
-      character_name: characterName,
-      gender,
-    });
+    if (extra.export_json !== undefined) body.export_json = extra.export_json;
+    return this.request<ExportFbxResult>("/export/fbx", "POST", body, LONG_REQUEST_TIMEOUT_MS);
   }
 
   async captureViewport(outputPath?: string, width?: number, height?: number): Promise<CaptureResult> {
@@ -231,11 +238,7 @@ export class CC5Bridge {
     if (outputPath) body.output_path = outputPath;
     if (width !== undefined) body.width = width;
     if (height !== undefined) body.height = height;
-    return this.request<CaptureResult>("/viewport/capture", "POST", body);
-  }
-
-  async setSubdivisionLevel(level: number): Promise<OperationResult> {
-    return this.request<OperationResult>("/subdivision", "POST", { level });
+    return this.request<CaptureResult>("/viewport/capture", "POST", body, LONG_REQUEST_TIMEOUT_MS);
   }
 
   // --- Undo / Redo ---
@@ -347,18 +350,6 @@ export class CC5Bridge {
     return this.request<ExpressionInfo>("/expressions");
   }
 
-  async setExpression(
-    expressions: ExpressionItem[]
-  ): Promise<ExpressionSetResult> {
-    return this.request<ExpressionSetResult>("/expression/set", "POST", {
-      expressions,
-    });
-  }
-
-  async resetExpression(): Promise<ExpressionResetResult> {
-    return this.request<ExpressionResetResult>("/expression/reset", "POST", {});
-  }
-
   // --- Reset Morphs ---
 
   async resetAllMorphs(avatarName?: string): Promise<ResetMorphsResult> {
@@ -395,52 +386,6 @@ export class CC5Bridge {
       r,
       g,
       b,
-    });
-  }
-
-  async getMaterialProperties(
-    meshName: string,
-    materialName: string
-  ): Promise<MaterialProperties> {
-    return this.request<MaterialProperties>("/material/properties", "POST", {
-      mesh_name: meshName,
-      material_name: materialName,
-    });
-  }
-
-  async setMaterialOpacity(
-    meshName: string,
-    materialName: string,
-    opacity: number
-  ): Promise<SetMaterialPropertyResult> {
-    return this.request<SetMaterialPropertyResult>("/material/opacity", "POST", {
-      mesh_name: meshName,
-      material_name: materialName,
-      opacity,
-    });
-  }
-
-  async setMaterialGlossiness(
-    meshName: string,
-    materialName: string,
-    glossiness: number
-  ): Promise<SetMaterialPropertyResult> {
-    return this.request<SetMaterialPropertyResult>("/material/glossiness", "POST", {
-      mesh_name: meshName,
-      material_name: materialName,
-      glossiness,
-    });
-  }
-
-  async setMaterialSpecular(
-    meshName: string,
-    materialName: string,
-    specular: number
-  ): Promise<SetMaterialPropertyResult> {
-    return this.request<SetMaterialPropertyResult>("/material/specular", "POST", {
-      mesh_name: meshName,
-      material_name: materialName,
-      specular,
     });
   }
 
@@ -504,44 +449,4 @@ export class CC5Bridge {
     return this.request<ColorResult>("/color/hair", "POST", { r, g, b });
   }
 
-  async setLipColor(r: number, g: number, b: number): Promise<ColorResult> {
-    return this.request<ColorResult>("/color/lip", "POST", { r, g, b });
-  }
-
-  async setSkinColor(r: number, g: number, b: number): Promise<ColorResult> {
-    return this.request<ColorResult>("/color/skin", "POST", { r, g, b });
-  }
-
-  // --- Visibility & Scene (Tier 4) ---
-
-  async setItemVisible(itemName: string, visible: boolean): Promise<SetVisibleResult> {
-    return this.request<SetVisibleResult>("/item/visible", "POST", {
-      item_name: itemName,
-      visible,
-    });
-  }
-
-  async getSceneObjects(): Promise<SceneObject[]> {
-    return this.request<SceneObject[]>("/scene/objects");
-  }
-
-  async execPython(code: string): Promise<{ success: boolean; output?: string; result?: string; error?: string }> {
-    return this.request<{ success: boolean; output?: string; result?: string; error?: string }>("/exec/python", "POST", { code });
-  }
-
-  // --- ActorMIXER PRO: Create Mixer Assets ---
-
-  async createActorMixer(opts: CreateActorMixerOptions): Promise<CreateActorMixerResult> {
-    const body: Record<string, unknown> = {
-      confirm_create: opts.confirm_create ?? false,
-    };
-    if (opts.morph_name !== undefined) body.morph_name = opts.morph_name;
-    if (opts.slider_path !== undefined) body.slider_path = opts.slider_path;
-    if (opts.use_parts_folder !== undefined) body.use_parts_folder = opts.use_parts_folder;
-    if (opts.head_parts !== undefined) body.head_parts = opts.head_parts;
-    if (opts.body_parts !== undefined) body.body_parts = opts.body_parts;
-    if (opts.save_presets !== undefined) body.save_presets = opts.save_presets;
-    if (opts.save_avatar_presets !== undefined) body.save_avatar_presets = opts.save_avatar_presets;
-    return this.request<CreateActorMixerResult>("/actor_mixer/create", "POST", body);
-  }
 }

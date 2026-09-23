@@ -115,8 +115,8 @@ describe("get_camera_info handler", () => {
     bridge.getCameraInfo.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("get_camera_info");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 });
 
@@ -159,8 +159,8 @@ describe("set_camera_focal_length handler", () => {
     bridge.setCameraFocalLength.mockRejectedValue(new Error("connection lost"));
     const handler = server.getRegisteredTool("set_camera_focal_length");
     const result = await handler({ focal_length: 50 });
-    expect(result.content[0].text).toContain("CC5 bridge error: connection lost");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: connection lost");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 
   it("works with wide angle focal length (35mm)", async () => {

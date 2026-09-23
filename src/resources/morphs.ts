@@ -5,16 +5,16 @@
  */
 
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CC5Bridge } from "../cc5-bridge.js";
+import type { CC4Bridge } from "../cc4-bridge.js";
 
-export function registerMorphResources(server: McpServer, bridge: CC5Bridge) {
+export function registerMorphResources(server: McpServer, bridge: CC4Bridge) {
   // Static resource: full morph catalog
   server.resource(
     "morph-catalog",
-    "cc5://morphs/catalog",
+    "cc4://morphs/catalog",
     {
       description:
-        "Complete catalog of all available morph sliders in CC5, grouped by category. " +
+        "Complete catalog of all available morph sliders in CC4, grouped by category. " +
         "Read this resource first to understand which morph IDs you can use with adjust_morph and adjust_multiple_morphs tools.",
       mimeType: "application/json",
     },
@@ -37,8 +37,8 @@ export function registerMorphResources(server: McpServer, bridge: CC5Bridge) {
               uri: uri.href,
               mimeType: "application/json",
               text: JSON.stringify({
-                error: "CC5 bridge not available. Make sure CC5 is running with the MCP Bridge plugin.",
-                hint: "Use check_cc5_connection tool to verify connectivity.",
+                error: "CC4 bridge not available. Make sure CC4 is running with the MCP Bridge plugin.",
+                hint: "Use check_cc4_connection tool to verify connectivity.",
               }),
             },
           ],
@@ -50,7 +50,7 @@ export function registerMorphResources(server: McpServer, bridge: CC5Bridge) {
   // Static resource: current avatar state
   server.resource(
     "avatar-state",
-    "cc5://avatar/current",
+    "cc4://avatar/current",
     {
       description:
         "Current state of the active avatar, including all non-zero morph values. " +
@@ -75,7 +75,7 @@ export function registerMorphResources(server: McpServer, bridge: CC5Bridge) {
             {
               uri: uri.href,
               mimeType: "application/json",
-              text: JSON.stringify({ error: "CC5 bridge not available" }),
+              text: JSON.stringify({ error: "CC4 bridge not available" }),
             },
           ],
         };

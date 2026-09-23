@@ -1,0 +1,9 @@
+{
+  "Name": "CC4 MCP Bridge",
+  "Version": "2.0.0",
+  "Author": "CC4 MCP Bridge (fork of mackatwentytsuru/cc5-mcp-server)",
+  "Description": "Local HTTP bridge for MCP integration with Character Creator 4",
+  "Icon": "",
+  "PluginType": "Python",
+  "PythonFile": "main.py"
+}

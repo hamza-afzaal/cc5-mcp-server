@@ -1,6 +1,6 @@
 # Phase 0 — CC4 bridge porting plan
 
-**Status:** for review. Nothing in the code has changed yet.
+**Status:** reviewed 2026-09-23. Decisions are recorded in section 8 and override the tables above where they differ.
 **Inputs read:** the whole repo (plugin `cc5-plugin/*.py`, the TS server `src/**`, tests, scripts, install/launch files, README/SETUP/CLAUDE.md, existing docs), `docs/cc4-bridge-kickoff-v2.md`, the design v0.3, the color & realism spec, `probe1.json`, and `probe2.json`.
 **Extra evidence gathered:** CC4 4.70's SWIG wrapper `C:\Program Files\Reallusion\Character Creator 4\Bin64\RLPy.py` (23,245 lines) is on this machine. I checked signatures in it **statically**; CC4 was not running. "Static ✓" below means the symbol and signature exist in CC4's wrapper but haven't been called at runtime.
 
@@ -190,3 +190,10 @@ These close the Section 0 findings. They're flagged here so you can veto any of 
 2. **Drop list.** Are you OK with removing all light, material-edit, shader, expression, and camera tools rather than keeping them behind a flag?
 3. **§11 extras.** Should `get_inventory` (trivial) join the Phase 2 set? And `export_motions`: include it in Phase 2 after a small spike, or defer to M2?
 4. **Rename depth.** Should I also rename the repo folder, package, and bin to `cc4-mcp-server` (the GitHub repo name stays under your control)?
+
+## 8. Decisions (review, 2026-09-23)
+
+1. **LICENSE:** not now. The README credits the original author; no LICENSE file is added.
+2. **Tools:** dropped only where they're clearly unnecessary. **Kept** (ported in 1a): lights/ambient/IBL (consistent Gate 1 lighting), camera tools (feed `capture_views`), `get_material_info`, `get/set_diffuse_color`, `get/set_shader_parameter(s)` (realism fixes such as roughness, sclera and teeth travel to Unity through the CCiC JSON), `get_expression_info`, `browse_content` (allowlist authoring), `create_avatar`/`delete_avatar` (recipe base), `redo`. **Dropped:** `exec_python`, MetaHuman, ActorMIXER, `set_expression`/`reset_expression` (they write keyframes, and SALSA owns the face), `set_skin_color` (flat multiply violates spec A3/C1), `set_lip_color` (no lip material on CC base), `set_item_visible`, `get_scene_objects`, `describe_character`, `apply_body_preset` (CC5 morph IDs), `set_subdivision_level`, `get_material_properties` and `set_material_{opacity,glossiness,specular}` (superseded by shader parameters), plus the screenshot fallbacks and the CC5 dialog-automation scripts.
+3. **§11 extras:** `get_inventory` and `export_motions` both join Phase 2.
+4. **Rename:** package/bin `cc4-mcp-server`, plugin folder `cc4-plugin/` → installed as `OpenPlugin/CC4_MCP_Bridge`, `cc4_api.py`, `CC4_*` env vars, `cc4://` resources.

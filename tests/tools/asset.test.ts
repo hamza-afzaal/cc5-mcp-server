@@ -81,10 +81,10 @@ describe("load_asset handler – success cases", () => {
   });
 
   it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.loadAsset.mockRejectedValue(new Error("CC5 not connected"));
+    bridge.loadAsset.mockRejectedValue(new Error("CC4 not connected"));
     const handler = server.getRegisteredTool("load_asset");
     const result = await handler({ file_path: "C:/file.iAvatar" });
-    expect(result.content[0].text).toContain("CC5 bridge error: CC5 not connected");
+    expect(result.content[0].text).toContain("CC4 bridge error: CC4 not connected");
   });
 });
 
@@ -192,11 +192,11 @@ describe("export_fbx handler – success cases", () => {
     bridge.exportFbx.mockRejectedValue(new Error("disk full"));
     const handler = server.getRegisteredTool("export_fbx");
     const result = await handler({ output_path: "C:/out.fbx" });
-    expect(result.content[0].text).toContain("CC5 bridge error: disk full");
+    expect(result.content[0].text).toContain("CC4 bridge error: disk full");
   });
 });
 
-// ── export_fbx – CC5 dialog options pass-through ─────────────────────────────
+// ── export_fbx – CC4 dialog options pass-through ─────────────────────────────
 
 describe("export_fbx handler – dialog options forwarding", () => {
   it("forwards the recommended Unreal options to the bridge", async () => {

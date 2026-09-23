@@ -1,11 +1,11 @@
 /**
- * Asset loading and export tools for CC5.
+ * Asset loading and export tools for CC4.
  */
 
 import path from "node:path";
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CC5Bridge } from "../cc5-bridge.js";
+import type { CC4Bridge } from "../cc4-bridge.js";
 import { bridgeCall } from "../util.js";
 
 const ALLOWED_ASSET_EXTENSIONS = new Set([
@@ -20,8 +20,8 @@ function validateAssetPath(filePath: string): string | null {
   }
   const normalized = path.resolve(filePath);
   const ext = path.extname(normalized).toLowerCase();
-  // Accept the explicit allowlist OR any CC5.1 / iClone content family (.cc*/.i*) —
-  // browse_content returns .cc* content files (e.g. .ccShoes) that load_asset accepts.
+  // Accept the explicit list OR any CC / iClone content family (.cc*/.i*) —
+  // browse_content returns .cc* content files (e.g. .ccCloth) that load_asset accepts.
   if (!ALLOWED_ASSET_EXTENSIONS.has(ext) && !ext.startsWith(".cc") && !ext.startsWith(".i")) {
     return `Disallowed file extension: ${ext}`;
   }
@@ -40,12 +40,12 @@ function validateExportPath(filePath: string): string | null {
   return null;
 }
 
-export function registerAssetTools(server: McpServer, bridge: CC5Bridge) {
+export function registerAssetTools(server: McpServer, bridge: CC4Bridge) {
   server.tool(
     "load_asset",
-    "Load a CC5 asset file into the scene. Supports .iAvatar, .ccm (character), .iClothes (clothing), .iHair (hair), .iProp (prop), and other CC5 formats.",
+    "Load a CC4 asset file into the scene: characters (.ccAvatar/.ccProject/.iAvatar), clothing, hair, accessories and other CC/iClone content (.cc*/.i*).",
     {
-      file_path: z.string().describe("Absolute path to the CC5 asset file (e.g., 'C:/Assets/MyChar.iAvatar')"),
+      file_path: z.string().describe("Absolute path to the CC4 asset file (e.g., 'C:/Assets/MyChar.iAvatar')"),
     },
     async ({ file_path }) => {
       const pathError = validateAssetPath(file_path);
@@ -61,9 +61,9 @@ export function registerAssetTools(server: McpServer, bridge: CC5Bridge) {
 
   server.tool(
     "export_fbx",
-    "Export the current avatar as an FBX file, mirroring the CC5 'Export FBX' dialog (target tool preset, mesh+motion, subdivision, embed textures, frame rate). A bare filename (no directory) exports into D:\\CC5Export (override via the CC5_EXPORT_DIR env var). Recommended Unreal call: target_tool='UE5', export_motion=true, embed_textures=true, fps=30, sub_d_level=0.",
+    "Export the current avatar as an FBX file, mirroring the CC4 'Export FBX' dialog (target tool preset, mesh+motion, subdivision, texture size, JSON sidecar). A bare filename (no directory) exports into %USERPROFILE%\\CC4Export (override via the CC4_EXPORT_DIR env var on the CC4 side). Unity/CCiC call: target_tool='Unity', export_json=true, sub_d_level=0, delete_hidden_faces=true, remove_tearline_occlusion=true.",
     {
-      output_path: z.string().describe("Path for the exported FBX file. A bare filename (e.g. 'character.fbx') exports into D:\\CC5Export; an absolute path (e.g. 'C:/Export/character.fbx') is used as-is."),
+      output_path: z.string().describe("Path for the exported FBX file. A bare filename (e.g. 'character.fbx') exports into %USERPROFILE%\\CC4Export; an absolute path is used as-is."),
       target_tool: z.enum(["UE5", "Default", "Maya", "Unity", "Unreal"]).optional()
         .describe("Target Tool Preset. 'UE5'/'Unreal' applies Unreal-friendly flags (Y-up, UE bone axis)."),
       sub_d_level: z.number().int().min(0).max(2).optional()
@@ -73,13 +73,13 @@ export function registerAssetTools(server: McpServer, bridge: CC5Bridge) {
       delete_hidden_faces: z.boolean().optional()
         .describe("If true, removes hidden mesh faces from the exported FBX (EExportFbxOptions_RemoveHiddenMesh)."),
       use_smooth_mesh: z.boolean().optional()
-        .describe("If true, uses CC5's 'Use Smooth Mesh' option (RExportFbxSetting.EnableBakeSubdivision). Emulated via sub_d_level if unavailable."),
+        .describe("If true, uses CC4's 'Use Smooth Mesh' option (RExportFbxSetting.EnableBakeSubdivision)."),
       remove_eyelash: z.boolean().optional()
-        .describe("If true, removes eyelash mesh (EExportFbxOptions_RemoveEyelash). Recommended for MetaHuman."),
+        .describe("If true, removes eyelash mesh (EExportFbxOptions_RemoveEyelash)."),
       remove_tearline_occlusion: z.boolean().optional()
-        .describe("If true, removes tear line + occlusion mesh (EExportFbxOptions_RemoveTearLineAndOcclusion). Recommended for MetaHuman."),
+        .describe("If true, removes tear line + eye occlusion meshes (EExportFbxOptions_RemoveTearLineAndOcclusion). Recommended for Quest budgets (design §4)."),
       embed_textures: z.boolean().optional()
-        .describe("Texture Settings 'Embed Textures': bundle textures into the FBX. Recommended for Unreal."),
+        .describe("Texture Settings 'Embed Textures': bundle textures into the FBX."),
       export_motion: z.boolean().optional()
         .describe("FBX Options: true = 'Mesh and Motion' (default), false = 'Mesh' (mesh only)."),
       fps: z.number().int().positive().optional()
@@ -88,8 +88,10 @@ export function registerAssetTools(server: McpServer, bridge: CC5Bridge) {
         .describe("Include Motion frame range [start, end]. Omit for 'All' (the dialog default)."),
       convert_image_format: z.boolean().optional()
         .describe("Texture Settings 'Convert Image Format' (TIF -> PNG)."),
-      texture_size: z.number().int().min(0).optional()
-        .describe("Texture Settings 'Max Texture Size' in pixels (0 = original)."),
+      texture_size: z.union([z.literal(0), z.literal(256), z.literal(512), z.literal(1024), z.literal(2048), z.literal(4096)]).optional()
+        .describe("Texture Settings 'Max Texture Size' in pixels: 256/512/1024/2048/4096, or 0 = original."),
+      export_json: z.boolean().optional()
+        .describe("Write the .json material sidecar next to the FBX (EExportFbxOptions3_ExportJson). Required by CCiC Unity Tools."),
       options: z.number().int().optional()
         .describe("Raw EExportFbxOptions bitmask (advanced; usually leave 0)."),
     },
@@ -104,7 +106,8 @@ export function registerAssetTools(server: McpServer, bridge: CC5Bridge) {
         (result) => {
           if (!result.success) return `Export failed: ${result.error}${result.notes ? `\nNotes: ${result.notes.join("; ")}` : ""}`;
           const notes = result.notes && result.notes.length ? `\nNotes: ${result.notes.join("; ")}` : "";
-          return `FBX exported to: ${output_path} (target=${result.target_tool ?? "default"})${notes}`;
+          const json = result.json_exists === undefined ? "" : `, json sidecar: ${result.json_exists ? "yes" : "MISSING"}`;
+          return `FBX exported to: ${result.path ?? output_path} (target=${result.target_tool ?? "default"}${json})${notes}`;
         },
       );
     }

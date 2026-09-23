@@ -1,5393 +1,5572 @@
-# RLPy API Complete Reference
+# RLPy API Reference (Character Creator 4)
 
-> Auto-generated from `C:\Program Files\Reallusion\Character Creator 5\Bin64\RLPy.py`
-
-> SWIG-generated Python wrapper | 206 classes | 1188 constants | 287 functions
-
-
-## Table of Contents
-
-- [Enums](#enums)
-  - [EAPILoadMediaAction](#eapiloadmediaaction)
-  - [EAlignAxis](#ealignaxis)
-  - [EAnimContent](#eanimcontent)
-  - [EAttributeFlag](#eattributeflag)
-  - [EAttributeType](#eattributetype)
-  - [EAvatarGeneration](#eavatargeneration)
-  - [EAvatarPartType](#eavatarparttype)
-  - [EAvatarType](#eavatartype)
-  - [EAxisSetting](#eaxissetting)
-  - [EBodyActivePart](#ebodyactivepart)
-  - [ECSSType](#ecsstype)
-  - [ECameraFitResolution](#ecamerafitresolution)
-  - [EChooseBase](#echoosebase)
-  - [EClotheType](#eclothetype)
-  - [EContentRootFolder](#econtentrootfolder)
-  - [EControlType](#econtroltype)
-  - [EConvertCharacterLevel](#econvertcharacterlevel)
-  - [ECoordinateAxes](#ecoordinateaxes)
-  - [ECoordinateAxis](#ecoordinateaxis)
-  - [ECoordinateSpace](#ecoordinatespace)
-  - [ECoordinateSystem](#ecoordinatesystem)
-  - [EDeviceType](#edevicetype)
-  - [EDialogType](#edialogtype)
-  - [EDockWidgetAreas](#edockwidgetareas)
-  - [EDockWidgetFeatures](#edockwidgetfeatures)
-  - [EEulerOrder](#eeulerorder)
-  - [EExportFbxOptions](#eexportfbxoptions)
-  - [EExportGoZPose](#eexportgozpose)
-  - [EExportMeshMotionMode](#eexportmeshmotionmode)
-  - [EExportTextureFormat](#eexporttextureformat)
-  - [EExportTextureSize](#eexporttexturesize)
-  - [EFaceHairType](#efacehairtype)
-  - [EFacialAnimationMode](#efacialanimationmode)
-  - [EFacialProfile](#efacialprofile)
-  - [EFloatControlAttribute](#efloatcontrolattribute)
-  - [EFloorContactType](#efloorcontacttype)
-  - [EHSBodyType](#ehsbodytype)
-  - [EHSLevel](#ehslevel)
-  - [EHSMode](#ehsmode)
-  - [EHairType](#ehairtype)
-  - [EHandDataSource](#ehanddatasource)
-  - [EHandJoin](#ehandjoin)
-  - [EHandJoinType](#ehandjointype)
-  - [EHikEffector](#ehikeffector)
-  - [EHikEffectorType](#ehikeffectortype)
-  - [EImportExpressionPart](#eimportexpressionpart)
-  - [EImportFbxOption](#eimportfbxoption)
-  - [EIncludeMotionType](#eincludemotiontype)
-  - [ELanguage](#elanguage)
-  - [ELevelCharacterTemplateType](#elevelcharactertemplatetype)
-  - [ELinkObjectAlignType](#elinkobjectaligntype)
-  - [ELoadFileOption](#eloadfileoption)
-  - [EMDpropCrowdExitType](#emdpropcrowdexittype)
-  - [EMaterialTextureChannel](#ematerialtexturechannel)
-  - [EMaterialType](#ematerialtype)
-  - [EMenu](#emenu)
-  - [EMocapState](#emocapstate)
-  - [EModeType](#emodetype)
-  - [EMotionApplyMode](#emotionapplymode)
-  - [EMotionSettingOption](#emotionsettingoption)
-  - [EMsgButton](#emsgbutton)
-  - [EObjectEventType](#eobjecteventtype)
-  - [EObjectModifiedType](#eobjectmodifiedtype)
-  - [EObjectType](#eobjecttype)
-  - [EPathType](#epathtype)
-  - [EPopcornFxSamplerType](#epopcornfxsamplertype)
-  - [EPositionUnit](#epositionunit)
-  - [EPostEffect](#eposteffect)
-  - [EPropertyType](#epropertytype)
-  - [EQuaternionOrder](#equaternionorder)
-  - [EReduceBonePose](#ereducebonepose)
-  - [EReplaceMeshOption](#ereplacemeshoption)
-  - [EResolutionType](#eresolutiontype)
-  - [ERotationType](#erotationtype)
-  - [ERotationUnit](#erotationunit)
-  - [ESaveFacialAnimationOption](#esavefacialanimationoption)
-  - [ESaveFileType](#esavefiletype)
-  - [ESaveMotionClipOption](#esavemotionclipoption)
-  - [ESaveMotionPlusOption](#esavemotionplusoption)
-  - [ESetCategory](#esetcategory)
-  - [ETagType](#etagtype)
-  - [ETangentType](#etangenttype)
-  - [ETemplateRootFolder](#etemplaterootfolder)
-  - [ETimecodeSource](#etimecodesource)
-  - [ETransitionType](#etransitiontype)
-  - [EUnrealBoneStructure](#eunrealbonestructure)
-  - [EVisemeID](#evisemeid)
-  - [EWrinkleFacePart](#ewrinklefacepart)
-  - [EWrinkleLayerType](#ewrinklelayertype)
-  - [EWrinkleTextureChannel](#ewrinkletexturechannel)
-- [Constants (Non-Enum)](#constants-non-enum)
-- [Classes](#classes)
-  - [Vector/Container Types](#vectorcontainer-types)
-  - [Core API Classes](#core-api-classes)
-    - [FloatPair](#floatpair)
-    - [ImportExpressionOptions](#importexpressionoptions)
-    - [MaterialSettings](#materialsettings)
-    - [PixelStreamCaptureFrame](#pixelstreamcaptureframe)
-    - [RApplication](#rapplication)
-    - [RAttribute](#rattribute)
-    - [RAudio](#raudio)
-    - [RAudioRecorder](#raudiorecorder)
-    - [RAudioRecorderCallback](#raudiorecordercallback)
-    - [RBeginCommandOption](#rbegincommandoption)
-    - [RBodySetting](#rbodysetting)
-    - [RCallback](#rcallback)
-    - [RCameraDofData](#rcameradofdata)
-    - [RColor](#rcolor)
-    - [RControl](#rcontrol)
-    - [RCustomValue](#rcustomvalue)
-    - [RCustomValueArray](#rcustomvaluearray)
-    - [RCustomValueMap](#rcustomvaluemap)
-    - [RDataBlock](#rdatablock)
-    - [RDepthParam](#rdepthparam)
-    - [RDeviceSetting](#rdevicesetting)
-    - [RDialogCallback](#rdialogcallback)
-    - [REdgeDetectionCannyParam](#redgedetectioncannyparam)
-    - [REventCallback](#reventcallback)
-    - [REventHandler](#reventhandler)
-    - [RExportAudioParameter](#rexportaudioparameter)
-    - [RExportCommonParameter](#rexportcommonparameter)
-    - [RExportFbxSetting](#rexportfbxsetting)
-    - [RExportGlbSetting](#rexportglbsetting)
-    - [RExportGoZMeshOption](#rexportgozmeshoption)
-    - [RExportImageParameter](#rexportimageparameter)
-    - [RExportImageSequenceParameter](#rexportimagesequenceparameter)
-    - [RExportOutputRangeParameter](#rexportoutputrangeparameter)
-    - [RExportVideoParameter](#rexportvideoparameter)
-    - [RFacialSetting](#rfacialsetting)
-    - [RFileIO](#rfileio)
-    - [RFlattenWrinkleImageMap](#rflattenwrinkleimagemap)
-    - [RFloatControl](#rfloatcontrol)
-    - [RFloatKey](#rfloatkey)
-    - [RFps](#rfps)
-    - [RGlobal](#rglobal)
-    - [RHandSetting](#rhandsetting)
-    - [RHeadshot](#rheadshot)
-    - [RHeadshotOption](#rheadshotoption)
-    - [RIAccessory](#riaccessory)
-    - [RIAudioObject](#riaudioobject)
-    - [RIAvatar](#riavatar)
-    - [RIAvatarPart](#riavatarpart)
-    - [RIAvatarShapingComponent](#riavatarshapingcomponent)
-    - [RIBase](#ribase)
-    - [RIBodyDevice](#ribodydevice)
-    - [RIBuildingGeneratorObject](#ribuildinggeneratorobject)
-    - [RIBuildingObject](#ribuildingobject)
-    - [RICamera](#ricamera)
-    - [RIClip](#riclip)
-    - [RICloth](#ricloth)
-    - [RIDeviceBase](#ridevicebase)
-    - [RIDialog](#ridialog)
-    - [RIDirectionalLight](#ridirectionallight)
-    - [RIDockWidget](#ridockwidget)
-    - [RIEffector](#rieffector)
-    - [RIElementObject](#rielementobject)
-    - [RIEventListener](#rieventlistener)
-    - [RIFaceComponent](#rifacecomponent)
-    - [RIFacialDevice](#rifacialdevice)
-    - [RIFacialProfileComponent](#rifacialprofilecomponent)
-    - [RIFloorObject](#rifloorobject)
-    - [RIHair](#rihair)
-    - [RIHandDevice](#rihanddevice)
-    - [RIHikEffectorComponent](#rihikeffectorcomponent)
-    - [RIImage](#riimage)
-    - [RILight](#rilight)
-    - [RILightAvatar](#rilightavatar)
-    - [RILookAtComponent](#rilookatcomponent)
-    - [RIMDProp](#rimdprop)
-    - [RIMaterialComponent](#rimaterialcomponent)
-    - [RIMesh](#rimesh)
-    - [RIMocapManager](#rimocapmanager)
-    - [RIMorphComponent](#rimorphcomponent)
-    - [RIMotionDirectorManager](#rimotiondirectormanager)
-    - [RINode](#rinode)
-    - [RINodeTransformPair](#rinodetransformpair)
-    - [RINodeTransformPairs](#rinodetransformpairs)
-    - [RIObject](#riobject)
-    - [RIOmniConnectorManager](#riomniconnectormanager)
-    - [RIParticle](#riparticle)
-    - [RIPath](#ripath)
-    - [RIPhysicsComponent](#riphysicscomponent)
-    - [RIPointLight](#ripointlight)
-    - [RIPopcornFXObject](#ripopcornfxobject)
-    - [RIProp](#riprop)
-    - [RIReach](#rireach)
-    - [RISaveFileOptionBase](#risavefileoptionbase)
-    - [RISkeletonComponent](#riskeletoncomponent)
-    - [RISky](#risky)
-    - [RISpotLight](#rispotlight)
-    - [RIStdMaterial](#ristdmaterial)
-    - [RIUnitObject](#riunitobject)
-    - [RIVisemeComponent](#rivisemecomponent)
-    - [RIVisualSettingComponent](#rivisualsettingcomponent)
-    - [RIWallObject](#riwallobject)
-    - [RImage](#rimage)
-    - [RImportExpressionSetting](#rimportexpressionsetting)
-    - [RInsertBoneInfo](#rinsertboneinfo)
-    - [RKey](#rkey)
-    - [RMath](#rmath)
-    - [RMatrix3](#rmatrix3)
-    - [RMatrix4](#rmatrix4)
-    - [RMessageBoxButton](#rmessageboxbutton)
-    - [RMorphSliderSetting](#rmorphslidersetting)
-    - [ROpenPoseKeyPointParam](#ropenposekeypointparam)
-    - [RPositionSetting](#rpositionsetting)
-    - [RPropertyFloatMap](#rpropertyfloatmap)
-    - [RPyTimer](#rpytimer)
-    - [RPyTimerCallback](#rpytimercallback)
-    - [RQuaternion](#rquaternion)
-    - [RRangePair](#rrangepair)
-    - [RReachKey](#rreachkey)
-    - [RRgb](#rrgb)
-    - [RRotationSetting](#rrotationsetting)
-    - [RSBuildingSettings](#rsbuildingsettings)
-    - [RSUsdExportOption](#rsusdexportoption)
-    - [RSaveFacialAnimationOption](#rsavefacialanimationoption)
-    - [RSaveFileSetting](#rsavefilesetting)
-    - [RSaveMotionPlusOption](#rsavemotionplusoption)
-    - [RSaveRangePair](#rsaverangepair)
-    - [RScene](#rscene)
-    - [RStGenPackElementInfo](#rstgenpackelementinfo)
-    - [RStGenPackFloorInfo](#rstgenpackfloorinfo)
-    - [RStGenPackMaterialInfo](#rstgenpackmaterialinfo)
-    - [RStGenPackStyleInfo](#rstgenpackstyleinfo)
-    - [RStGenPackWallInfo](#rstgenpackwallinfo)
-    - [RStatus](#rstatus)
-    - [RTcpCallback](#rtcpcallback)
-    - [RTcpClient](#rtcpclient)
-    - [RTick](#rtick)
-    - [RTime](#rtime)
-    - [RTime2IntMap](#rtime2intmap)
-    - [RTransform](#rtransform)
-    - [RTransformControl](#rtransformcontrol)
-    - [RTransformKey](#rtransformkey)
-    - [RUdpCallback](#rudpcallback)
-    - [RUdpClient](#rudpclient)
-    - [RUi](#rui)
-    - [RVariant](#rvariant)
-    - [RVector2](#rvector2)
-    - [RVector3](#rvector3)
-    - [RVector4](#rvector4)
-    - [RVideo](#rvideo)
-    - [RVisemeKey](#rvisemekey)
-    - [RVisemeSmoothOption](#rvisemesmoothoption)
-    - [RWin32ApiKit](#rwin32apikit)
-    - [RWinMessageCallback](#rwinmessagecallback)
-    - [RWordData](#rworddata)
-    - [SwitchCameraFramePair](#switchcameraframepair)
-    - [SwitchCameraFramePairs](#switchcameraframepairs)
-    - [WBoneQniqueNameMap](#wboneqniquenamemap)
-    - [WStr2FloatMap](#wstr2floatmap)
-    - [WStr2Matrix4fMap](#wstr2matrix4fmap)
-    - [WStrMap](#wstrmap)
-    - [WStrTransformMap](#wstrtransformmap)
-    - [WStrTransformVectorMap](#wstrtransformvectormap)
-    - [WallPosition](#wallposition)
-- [Global Functions](#global-functions)
-  - [RApplication](#rapplication)
-  - [RAudio](#raudio)
-  - [RDataBlock](#rdatablock)
-  - [REventHandler](#reventhandler)
-  - [RFileIO](#rfileio)
-  - [RGlobal](#rglobal)
-  - [RHeadshot](#rheadshot)
-  - [RIBuildingGeneratorObject](#ribuildinggeneratorobject)
-  - [RImage](#rimage)
-  - [RMath](#rmath)
-  - [RMatrix3](#rmatrix3)
-  - [RQuaternion](#rquaternion)
-  - [RScene](#rscene)
-  - [RStatus](#rstatus)
-  - [RTick](#rtick)
-  - [RTime](#rtime)
-  - [RUi](#rui)
-  - [RVideo](#rvideo)
-  - [RWin32ApiKit](#rwin32apikit)
-  - [Other Functions](#other-functions)
-
----
+> Generated by `tools/gen_rlpy_reference.py` from `C:\Program Files\Reallusion\Character Creator 4\Bin64\RLPy.py`.
+> Static read of the SWIG wrapper: signatures come from SWIG docstrings; nothing here was called at runtime.
+> 209 classes | 98 enum groups (1120 values) | 297 module functions
 
 ## Enums
 
 ### EAPILoadMediaAction
 
-- `EAPILoadMediaAction_IMAGELAYER` = `EAPILoadMediaAction_IMAGELAYER`
-- `EAPILoadMediaAction_PLANE` = `EAPILoadMediaAction_PLANE`
-- `EAPILoadMediaAction_BILLBOARD` = `EAPILoadMediaAction_BILLBOARD`
-- `EAPILoadMediaAction_BACKGROUND` = `EAPILoadMediaAction_BACKGROUND`
+- `EAPILoadMediaAction_BACKGROUND`
+- `EAPILoadMediaAction_BILLBOARD`
+- `EAPILoadMediaAction_IMAGELAYER`
+- `EAPILoadMediaAction_PLANE`
 
 ### EAlignAxis
 
-- `EAlignAxis_INVALID` = `EAlignAxis_INVALID`
-- `EAlignAxis_X_AXIS` = `EAlignAxis_X_AXIS`
-- `EAlignAxis_Y_AXIS` = `EAlignAxis_Y_AXIS`
-- `EAlignAxis_Z_AXIS` = `EAlignAxis_Z_AXIS`
-- `EAlignAxis_ROTATE_AXIZ` = `EAlignAxis_ROTATE_AXIZ`
+- `EAlignAxis_INVALID`
+- `EAlignAxis_ROTATE_AXIZ`
+- `EAlignAxis_X_AXIS`
+- `EAlignAxis_Y_AXIS`
+- `EAlignAxis_Z_AXIS`
 
 ### EAnimContent
 
-- `EAnimContent_Unknown` = `EAnimContent_Unknown`
-- `EAnimContent_ObjectTransform` = `EAnimContent_ObjectTransform`
-- `EAnimContent_LayerEditor` = `EAnimContent_LayerEditor`
-- `EAnimContent_Constraint` = `EAnimContent_Constraint`
-- `EAnimContent_Reach` = `EAnimContent_Reach`
-- `EAnimContent_All` = `EAnimContent_All`
+- `EAnimContent_All`
+- `EAnimContent_Constraint`
+- `EAnimContent_LayerEditor`
+- `EAnimContent_ObjectTransform`
+- `EAnimContent_Reach`
+- `EAnimContent_Unknown`
 
 ### EAttributeFlag
 
-- `EAttributeFlag__None` = `EAttributeFlag__None`
-- `EAttributeFlag_Keyable` = `EAttributeFlag_Keyable`
-- `EAttributeFlag_Storable` = `EAttributeFlag_Storable`
-- `EAttributeFlag_Default` = `EAttributeFlag_Default`
+- `EAttributeFlag_Default`
+- `EAttributeFlag_Keyable`
+- `EAttributeFlag_Storable`
+- `EAttributeFlag__None`
 
 ### EAttributeType
 
-- `EAttributeType_Group` = `EAttributeType_Group`
-- `EAttributeType_Position` = `EAttributeType_Position`
-- `EAttributeType_Rotation` = `EAttributeType_Rotation`
-- `EAttributeType_Scale` = `EAttributeType_Scale`
-- `EAttributeType_Float` = `EAttributeType_Float`
-- `EAttributeType_Int` = `EAttributeType_Int`
-- `EAttributeType_String` = `EAttributeType_String`
-- `EAttributeType_Bool` = `EAttributeType_Bool`
-- `EAttributeType_Image` = `EAttributeType_Image`
+- `EAttributeType_Bool`
+- `EAttributeType_Float`
+- `EAttributeType_Group`
+- `EAttributeType_Image`
+- `EAttributeType_Int`
+- `EAttributeType_Position`
+- `EAttributeType_Rotation`
+- `EAttributeType_Scale`
+- `EAttributeType_String`
 
 ### EAvatarGeneration
 
-- `EAvatarGeneration__None` = `EAvatarGeneration__None`
-- `EAvatarGeneration_CC_G1_Avatar` = `EAvatarGeneration_CC_G1_Avatar`
-- `EAvatarGeneration_CC_G3_Avatar` = `EAvatarGeneration_CC_G3_Avatar`
-- `EAvatarGeneration_CC_G3_Plus_Avatar` = `EAvatarGeneration_CC_G3_Plus_Avatar`
-- `EAvatarGeneration_CC_Game_Base_One` = `EAvatarGeneration_CC_Game_Base_One`
-- `EAvatarGeneration_CC_Game_Base_Multi` = `EAvatarGeneration_CC_Game_Base_Multi`
-- `EAvatarGeneration_ActorBuild` = `EAvatarGeneration_ActorBuild`
-- `EAvatarGeneration_ActorScan` = `EAvatarGeneration_ActorScan`
-- `EAvatarGeneration_AccuRig` = `EAvatarGeneration_AccuRig`
-- `EAvatarGeneration_CC_Game_Base_Divide` = `EAvatarGeneration_CC_Game_Base_Divide`
-- `EAvatarGeneration_CC_LOD` = `EAvatarGeneration_CC_LOD`
+- `EAvatarGeneration_AccuRig`
+- `EAvatarGeneration_ActorBuild`
+- `EAvatarGeneration_ActorScan`
+- `EAvatarGeneration_CC_G1_Avatar`
+- `EAvatarGeneration_CC_G3_Avatar`
+- `EAvatarGeneration_CC_G3_Plus_Avatar`
+- `EAvatarGeneration_CC_Game_Base_Divide`
+- `EAvatarGeneration_CC_Game_Base_Multi`
+- `EAvatarGeneration_CC_Game_Base_One`
+- `EAvatarGeneration_CC_LOD`
+- `EAvatarGeneration__None`
 
 ### EAvatarPartType
 
-- `EAvatarPartType__None` = `EAvatarPartType__None`
-- `EAvatarPartType_Eyes` = `EAvatarPartType_Eyes`
-- `EAvatarPartType_Teeth` = `EAvatarPartType_Teeth`
-- `EAvatarPartType_Tongue` = `EAvatarPartType_Tongue`
-- `EAvatarPartType_Custom` = `EAvatarPartType_Custom`
-- `EAvatarPartType_EyeOcclusion` = `EAvatarPartType_EyeOcclusion`
-- `EAvatarPartType_TearLine` = `EAvatarPartType_TearLine`
-- `EAvatarPartType_Beard` = `EAvatarPartType_Beard`
-- `EAvatarPartType_Brow` = `EAvatarPartType_Brow`
-- `EAvatarPartType_Eyelash` = `EAvatarPartType_Eyelash`
-- `EAvatarPartType_Upper` = `EAvatarPartType_Upper`
-- `EAvatarPartType_Lower` = `EAvatarPartType_Lower`
-- `EAvatarPartType_Shoes` = `EAvatarPartType_Shoes`
-- `EAvatarPartType_Gloves` = `EAvatarPartType_Gloves`
-- `EAvatarPartType_Accessory` = `EAvatarPartType_Accessory`
+- `EAvatarPartType_Accessory`
+- `EAvatarPartType_Beard`
+- `EAvatarPartType_Brow`
+- `EAvatarPartType_Custom`
+- `EAvatarPartType_EyeOcclusion`
+- `EAvatarPartType_Eyelash`
+- `EAvatarPartType_Eyes`
+- `EAvatarPartType_Gloves`
+- `EAvatarPartType_Lower`
+- `EAvatarPartType_Shoes`
+- `EAvatarPartType_TearLine`
+- `EAvatarPartType_Teeth`
+- `EAvatarPartType_Tongue`
+- `EAvatarPartType_Upper`
+- `EAvatarPartType__None`
 
 ### EAvatarType
 
-- `EAvatarType__None` = `EAvatarType__None`
-- `EAvatarType_Standard` = `EAvatarType_Standard`
-- `EAvatarType_NonStandard` = `EAvatarType_NonStandard`
-- `EAvatarType_NonHuman` = `EAvatarType_NonHuman`
-- `EAvatarType_StandardSeries` = `EAvatarType_StandardSeries`
-- `EAvatarType_All` = `EAvatarType_All`
-- `EAvatarType_AllEditable` = `EAvatarType_AllEditable`
-- `EAvatarType_LightAvatarStandard` = `EAvatarType_LightAvatarStandard`
-- `EAvatarType_LightAvatarNonStandard` = `EAvatarType_LightAvatarNonStandard`
-- `EAvatarType_LightAvatarNonHuman` = `EAvatarType_LightAvatarNonHuman`
-- `EAvatarType_LightAvatarStandardSeries` = `EAvatarType_LightAvatarStandardSeries`
-- `EAvatarType_AllNonEditable` = `EAvatarType_AllNonEditable`
-- `EAvatarType_LightAvatar` = `EAvatarType_LightAvatar`
-- `EAvatarType_AllWithLight` = `EAvatarType_AllWithLight`
+- `EAvatarType_All`
+- `EAvatarType_AllEditable`
+- `EAvatarType_AllNonEditable`
+- `EAvatarType_AllWithLight`
+- `EAvatarType_LightAvatar`
+- `EAvatarType_LightAvatarNonHuman`
+- `EAvatarType_LightAvatarNonStandard`
+- `EAvatarType_LightAvatarStandard`
+- `EAvatarType_LightAvatarStandardSeries`
+- `EAvatarType_NonHuman`
+- `EAvatarType_NonStandard`
+- `EAvatarType_Standard`
+- `EAvatarType_StandardSeries`
+- `EAvatarType__None`
 
 ### EAxisSetting
 
-- `EAxisSetting__None` = `EAxisSetting__None`
-- `EAxisSetting_YUp` = `EAxisSetting_YUp`
-- `EAxisSetting_ZUp` = `EAxisSetting_ZUp`
+- `EAxisSetting_YUp`
+- `EAxisSetting_ZUp`
+- `EAxisSetting__None`
 
 ### EBodyActivePart
 
-- `EBodyActivePart_Unknown` = `EBodyActivePart_Unknown`
-- `EBodyActivePart_Head` = `EBodyActivePart_Head`
-- `EBodyActivePart_Body` = `EBodyActivePart_Body`
-- `EBodyActivePart_UpperArm_R` = `EBodyActivePart_UpperArm_R`
-- `EBodyActivePart_ForeArm_R` = `EBodyActivePart_ForeArm_R`
-- `EBodyActivePart_Hand_R` = `EBodyActivePart_Hand_R`
-- `EBodyActivePart_Finger_R` = `EBodyActivePart_Finger_R`
-- `EBodyActivePart_UpperArm_L` = `EBodyActivePart_UpperArm_L`
-- `EBodyActivePart_ForeArm_L` = `EBodyActivePart_ForeArm_L`
-- `EBodyActivePart_Hand_L` = `EBodyActivePart_Hand_L`
-- `EBodyActivePart_Finger_L` = `EBodyActivePart_Finger_L`
-- `EBodyActivePart_UpperLeg_R` = `EBodyActivePart_UpperLeg_R`
-- `EBodyActivePart_Leg_R` = `EBodyActivePart_Leg_R`
-- `EBodyActivePart_Foot_R` = `EBodyActivePart_Foot_R`
-- `EBodyActivePart_UpperLeg_L` = `EBodyActivePart_UpperLeg_L`
-- `EBodyActivePart_Leg_L` = `EBodyActivePart_Leg_L`
-- `EBodyActivePart_Foot_L` = `EBodyActivePart_Foot_L`
-- `EBodyActivePart_FullBody` = `EBodyActivePart_FullBody`
-- `EBodyActivePart_UpperBody` = `EBodyActivePart_UpperBody`
+- `EBodyActivePart_Body`
+- `EBodyActivePart_Finger_L`
+- `EBodyActivePart_Finger_R`
+- `EBodyActivePart_Foot_L`
+- `EBodyActivePart_Foot_R`
+- `EBodyActivePart_ForeArm_L`
+- `EBodyActivePart_ForeArm_R`
+- `EBodyActivePart_FullBody`
+- `EBodyActivePart_Hand_L`
+- `EBodyActivePart_Hand_R`
+- `EBodyActivePart_Head`
+- `EBodyActivePart_Leg_L`
+- `EBodyActivePart_Leg_R`
+- `EBodyActivePart_Unknown`
+- `EBodyActivePart_UpperArm_L`
+- `EBodyActivePart_UpperArm_R`
+- `EBodyActivePart_UpperBody`
+- `EBodyActivePart_UpperLeg_L`
+- `EBodyActivePart_UpperLeg_R`
 
 ### ECSSType
 
-- `ECSSType_Color_0` = `ECSSType_Color_0`
-- `ECSSType_Color_1` = `ECSSType_Color_1`
+- `ECSSType_Color_0`
+- `ECSSType_Color_1`
 
 ### ECameraFitResolution
 
-- `ECameraFitResolution__None` = `ECameraFitResolution__None`
-- `ECameraFitResolution_Horizontal` = `ECameraFitResolution_Horizontal`
-- `ECameraFitResolution_Vertical` = `ECameraFitResolution_Vertical`
+- `ECameraFitResolution_Horizontal`
+- `ECameraFitResolution_Vertical`
+- `ECameraFitResolution__None`
+
+### ECameraLocationType
+
+- `ECameraLocationType_All`
+- `ECameraLocationType_Back`
+- `ECameraLocationType_Bottom`
+- `ECameraLocationType_Face`
+- `ECameraLocationType_Fix_up_vec`
+- `ECameraLocationType_Focus`
+- `ECameraLocationType_Front`
+- `ECameraLocationType_Home`
+- `ECameraLocationType_Left`
+- `ECameraLocationType_Right`
+- `ECameraLocationType_Top`
 
 ### EChooseBase
 
-- `EChooseBase_Default` = `EChooseBase_Default`
-- `EChooseBase_Current` = `EChooseBase_Current`
-- `EChooseBase_File` = `EChooseBase_File`
+- `EChooseBase_Current`
+- `EChooseBase_Default`
+- `EChooseBase_File`
 
 ### EClotheType
 
-- `EClotheType_Unknown` = `EClotheType_Unknown`
-- `EClotheType_Upper` = `EClotheType_Upper`
-- `EClotheType_Lower` = `EClotheType_Lower`
-- `EClotheType_Shoes` = `EClotheType_Shoes`
-- `EClotheType_Gloves` = `EClotheType_Gloves`
-- `EClotheType_Accessory` = `EClotheType_Accessory`
+- `EClotheType_Accessory`
+- `EClotheType_Gloves`
+- `EClotheType_Lower`
+- `EClotheType_Shoes`
+- `EClotheType_Unknown`
+- `EClotheType_Upper`
+
+### EContentManagerSearchMainTab
+
+- `EContentManagerSearchMainTab_AIStudio`
+- `EContentManagerSearchMainTab_Marketplace`
+
+### EContentManagerSearchMode
+
+- `EContentManagerSearchMode_General`
+- `EContentManagerSearchMode_Smart`
+
+### EContentManagerSearchSubTab
+
+- `EContentManagerSearchSubTab_Item`
+- `EContentManagerSearchSubTab_Pack`
+- `EContentManagerSearchSubTab_PackItems`
 
 ### EContentRootFolder
 
-- `EContentRootFolder_Project` = `EContentRootFolder_Project`
-- `EContentRootFolder_Character` = `EContentRootFolder_Character`
-- `EContentRootFolder_AvatarControl` = `EContentRootFolder_AvatarControl`
-- `EContentRootFolder_FacialProfile` = `EContentRootFolder_FacialProfile`
-- `EContentRootFolder_Teeth` = `EContentRootFolder_Teeth`
-- `EContentRootFolder_Eye` = `EContentRootFolder_Eye`
-- `EContentRootFolder_Face` = `EContentRootFolder_Face`
-- `EContentRootFolder_RLHead` = `EContentRootFolder_RLHead`
-- `EContentRootFolder_Oral` = `EContentRootFolder_Oral`
-- `EContentRootFolder_Upper` = `EContentRootFolder_Upper`
-- `EContentRootFolder_Lower` = `EContentRootFolder_Lower`
-- `EContentRootFolder_FullBodyMorphSkin` = `EContentRootFolder_FullBodyMorphSkin`
-- `EContentRootFolder_HeadMorphSkin` = `EContentRootFolder_HeadMorphSkin`
-- `EContentRootFolder_FullBodyMorph` = `EContentRootFolder_FullBodyMorph`
-- `EContentRootFolder_BodyMorph` = `EContentRootFolder_BodyMorph`
-- `EContentRootFolder_HeadMorph` = `EContentRootFolder_HeadMorph`
-- `EContentRootFolder_AvatarPresetEyelash` = `EContentRootFolder_AvatarPresetEyelash`
-- `EContentRootFolder_Nail` = `EContentRootFolder_Nail`
-- `EContentRootFolder_MixerPreset_Leg` = `EContentRootFolder_MixerPreset_Leg`
-- `EContentRootFolder_MixerPreset_Arm` = `EContentRootFolder_MixerPreset_Arm`
-- `EContentRootFolder_MixerPreset_BodyAdjust` = `EContentRootFolder_MixerPreset_BodyAdjust`
-- `EContentRootFolder_MixerPreset_HeadAdjust` = `EContentRootFolder_MixerPreset_HeadAdjust`
-- `EContentRootFolder_MixerPreset_Chin` = `EContentRootFolder_MixerPreset_Chin`
-- `EContentRootFolder_MixerPreset_Brow` = `EContentRootFolder_MixerPreset_Brow`
-- `EContentRootFolder_MixerPreset_Ear` = `EContentRootFolder_MixerPreset_Ear`
-- `EContentRootFolder_MixerPreset_Mouth` = `EContentRootFolder_MixerPreset_Mouth`
-- `EContentRootFolder_MixerPreset_Nose` = `EContentRootFolder_MixerPreset_Nose`
-- `EContentRootFolder_MixerPreset_Eye` = `EContentRootFolder_MixerPreset_Eye`
-- `EContentRootFolder_MixerPreset_Body` = `EContentRootFolder_MixerPreset_Body`
-- `EContentRootFolder_MixerPreset_Head` = `EContentRootFolder_MixerPreset_Head`
-- `EContentRootFolder_MixerPreset_FullCharacter` = `EContentRootFolder_MixerPreset_FullCharacter`
-- `EContentRootFolder_MixerPreset_Torso` = `EContentRootFolder_MixerPreset_Torso`
-- `EContentRootFolder_MixerPresetSet` = `EContentRootFolder_MixerPresetSet`
-- `EContentRootFolder_MixerPresetPackage` = `EContentRootFolder_MixerPresetPackage`
-- `EContentRootFolder_Overall` = `EContentRootFolder_Overall`
-- `EContentRootFolder_Skin_Head` = `EContentRootFolder_Skin_Head`
-- `EContentRootFolder_FullSkin` = `EContentRootFolder_FullSkin`
-- `EContentRootFolder_SkinBase` = `EContentRootFolder_SkinBase`
-- `EContentRootFolder_NormalEffects` = `EContentRootFolder_NormalEffects`
-- `EContentRootFolder_SkinDetails` = `EContentRootFolder_SkinDetails`
-- `EContentRootFolder_Blemish` = `EContentRootFolder_Blemish`
-- `EContentRootFolder_Acquired` = `EContentRootFolder_Acquired`
-- `EContentRootFolder_BodyHair` = `EContentRootFolder_BodyHair`
-- `EContentRootFolder_Nails` = `EContentRootFolder_Nails`
-- `EContentRootFolder_SkinGenTools` = `EContentRootFolder_SkinGenTools`
-- `EContentRootFolder_WrinkleMasks` = `EContentRootFolder_WrinkleMasks`
-- `EContentRootFolder_FullMakeup` = `EContentRootFolder_FullMakeup`
-- `EContentRootFolder_FoundationMakeup` = `EContentRootFolder_FoundationMakeup`
-- `EContentRootFolder_EyeMakeup` = `EContentRootFolder_EyeMakeup`
-- `EContentRootFolder_MakeupEyelash` = `EContentRootFolder_MakeupEyelash`
-- `EContentRootFolder_LipMakeup` = `EContentRootFolder_LipMakeup`
-- `EContentRootFolder_Eyebrow` = `EContentRootFolder_Eyebrow`
-- `EContentRootFolder_Miscellaneous` = `EContentRootFolder_Miscellaneous`
-- `EContentRootFolder_MakeupSkinGenTools` = `EContentRootFolder_MakeupSkinGenTools`
-- `EContentRootFolder_Style` = `EContentRootFolder_Style`
-- `EContentRootFolder_Group` = `EContentRootFolder_Group`
-- `EContentRootFolder_Element` = `EContentRootFolder_Element`
-- `EContentRootFolder_Underwear` = `EContentRootFolder_Underwear`
-- `EContentRootFolder_Shirts` = `EContentRootFolder_Shirts`
-- `EContentRootFolder_Pants` = `EContentRootFolder_Pants`
-- `EContentRootFolder_Skirts` = `EContentRootFolder_Skirts`
-- `EContentRootFolder_Coats` = `EContentRootFolder_Coats`
-- `EContentRootFolder_FullBody` = `EContentRootFolder_FullBody`
-- `EContentRootFolder_ClothOthers` = `EContentRootFolder_ClothOthers`
-- `EContentRootFolder_Gloves` = `EContentRootFolder_Gloves`
-- `EContentRootFolder_Shoes` = `EContentRootFolder_Shoes`
-- `EContentRootFolder_Head` = `EContentRootFolder_Head`
-- `EContentRootFolder_Torso` = `EContentRootFolder_Torso`
-- `EContentRootFolder_Arm` = `EContentRootFolder_Arm`
-- `EContentRootFolder_Leg` = `EContentRootFolder_Leg`
-- `EContentRootFolder_AccessoryOthers` = `EContentRootFolder_AccessoryOthers`
-- `EContentRootFolder_MotionPlus` = `EContentRootFolder_MotionPlus`
-- `EContentRootFolder_Motion` = `EContentRootFolder_Motion`
-- `EContentRootFolder_Expression` = `EContentRootFolder_Expression`
-- `EContentRootFolder_Gesture` = `EContentRootFolder_Gesture`
-- `EContentRootFolder_Pose` = `EContentRootFolder_Pose`
-- `EContentRootFolder_MotionDirector` = `EContentRootFolder_MotionDirector`
-- `EContentRootFolder_Persona` = `EContentRootFolder_Persona`
-- `EContentRootFolder_iAnimation` = `EContentRootFolder_iAnimation`
-- `EContentRootFolder_LightRoom` = `EContentRootFolder_LightRoom`
-- `EContentRootFolder_Atmosphere` = `EContentRootFolder_Atmosphere`
-- `EContentRootFolder_Camera` = `EContentRootFolder_Camera`
-- `EContentRootFolder_Light` = `EContentRootFolder_Light`
-- `EContentRootFolder_PostEffect` = `EContentRootFolder_PostEffect`
-- `EContentRootFolder_ImageLayer` = `EContentRootFolder_ImageLayer`
-- `EContentRootFolder_Scene3D` = `EContentRootFolder_Scene3D`
-- `EContentRootFolder_Material` = `EContentRootFolder_Material`
-- `EContentRootFolder_MaterialPlus` = `EContentRootFolder_MaterialPlus`
-- `EContentRootFolder_Background2D` = `EContentRootFolder_Background2D`
-- `EContentRootFolder_Texture` = `EContentRootFolder_Texture`
-- `EContentRootFolder_Diffuse` = `EContentRootFolder_Diffuse`
-- `EContentRootFolder_Opacity` = `EContentRootFolder_Opacity`
-- `EContentRootFolder_Bump` = `EContentRootFolder_Bump`
-- `EContentRootFolder_Glow` = `EContentRootFolder_Glow`
-- `EContentRootFolder_Reflection` = `EContentRootFolder_Reflection`
-- `EContentRootFolder_Specular` = `EContentRootFolder_Specular`
-- `EContentRootFolder_Blend` = `EContentRootFolder_Blend`
-- `EContentRootFolder_Displacement` = `EContentRootFolder_Displacement`
-- `EContentRootFolder_IBL` = `EContentRootFolder_IBL`
-- `EContentRootFolder_WeightMap` = `EContentRootFolder_WeightMap`
-- `EContentRootFolder_Metallic` = `EContentRootFolder_Metallic`
-- `EContentRootFolder_Roughness` = `EContentRootFolder_Roughness`
-- `EContentRootFolder_AO` = `EContentRootFolder_AO`
-- `EContentRootFolder_LensFlare` = `EContentRootFolder_LensFlare`
-- `EContentRootFolder_IES` = `EContentRootFolder_IES`
-- `EContentRootFolder_IMDL` = `EContentRootFolder_IMDL`
-- `EContentRootFolder_Tree` = `EContentRootFolder_Tree`
-- `EContentRootFolder_Grass` = `EContentRootFolder_Grass`
-- `EContentRootFolder_Particle` = `EContentRootFolder_Particle`
-- `EContentRootFolder_Terrain` = `EContentRootFolder_Terrain`
-- `EContentRootFolder_Water` = `EContentRootFolder_Water`
-- `EContentRootFolder_Sky` = `EContentRootFolder_Sky`
-- `EContentRootFolder_MotionPath` = `EContentRootFolder_MotionPath`
-- `EContentRootFolder_Props` = `EContentRootFolder_Props`
-- `EContentRootFolder_Building` = `EContentRootFolder_Building`
-- `EContentRootFolder_Sound` = `EContentRootFolder_Sound`
-- `EContentRootFolder_Video` = `EContentRootFolder_Video`
-- `EContentRootFolder_Digital_Human_Shader_Resource` = `EContentRootFolder_Digital_Human_Shader_Resource`
-- `EContentRootFolder_SSS_Shader_Resource` = `EContentRootFolder_SSS_Shader_Resource`
-- `EContentRootFolder_Spring` = `EContentRootFolder_Spring`
-- `EContentRootFolder_LuaScript` = `EContentRootFolder_LuaScript`
-- `EContentRootFolder_Fashion_Gen_Resource` = `EContentRootFolder_Fashion_Gen_Resource`
-- `EContentRootFolder_MotionPuppet` = `EContentRootFolder_MotionPuppet`
-- `EContentRootFolder_FacePuppet` = `EContentRootFolder_FacePuppet`
-- `EContentRootFolder_SubstancePreset` = `EContentRootFolder_SubstancePreset`
-- `EContentRootFolder_ContentPatch` = `EContentRootFolder_ContentPatch`
-- `EContentRootFolder_SpringProfile` = `EContentRootFolder_SpringProfile`
-- `EContentRootFolder_Dictionary` = `EContentRootFolder_Dictionary`
-- `EContentRootFolder_Quantity` = `EContentRootFolder_Quantity`
-- `EContentRootFolder_Invalid` = `EContentRootFolder_Invalid`
+- `EContentRootFolder_AO`
+- `EContentRootFolder_AccessoryOthers`
+- `EContentRootFolder_Acquired`
+- `EContentRootFolder_Arm`
+- `EContentRootFolder_Atmosphere`
+- `EContentRootFolder_AvatarControl`
+- `EContentRootFolder_AvatarPresetEyelash`
+- `EContentRootFolder_Background2D`
+- `EContentRootFolder_Blemish`
+- `EContentRootFolder_Blend`
+- `EContentRootFolder_BodyHair`
+- `EContentRootFolder_BodyMorph`
+- `EContentRootFolder_Building`
+- `EContentRootFolder_Bump`
+- `EContentRootFolder_Camera`
+- `EContentRootFolder_Character`
+- `EContentRootFolder_ClothOthers`
+- `EContentRootFolder_Coats`
+- `EContentRootFolder_ContentPatch`
+- `EContentRootFolder_Dictionary`
+- `EContentRootFolder_Diffuse`
+- `EContentRootFolder_Digital_Human_Shader_Resource`
+- `EContentRootFolder_Displacement`
+- `EContentRootFolder_Element`
+- `EContentRootFolder_Expression`
+- `EContentRootFolder_Eye`
+- `EContentRootFolder_EyeMakeup`
+- `EContentRootFolder_Eyebrow`
+- `EContentRootFolder_Face`
+- `EContentRootFolder_FacePuppet`
+- `EContentRootFolder_FacialProfile`
+- `EContentRootFolder_Fashion_Gen_Resource`
+- `EContentRootFolder_FoundationMakeup`
+- `EContentRootFolder_FullBody`
+- `EContentRootFolder_FullBodyMorph`
+- `EContentRootFolder_FullBodyMorphSkin`
+- `EContentRootFolder_FullMakeup`
+- `EContentRootFolder_FullSkin`
+- `EContentRootFolder_Gesture`
+- `EContentRootFolder_Gloves`
+- `EContentRootFolder_Glow`
+- `EContentRootFolder_Grass`
+- `EContentRootFolder_Group`
+- `EContentRootFolder_Head`
+- `EContentRootFolder_HeadMorph`
+- `EContentRootFolder_HeadMorphSkin`
+- `EContentRootFolder_IBL`
+- `EContentRootFolder_IES`
+- `EContentRootFolder_IMDL`
+- `EContentRootFolder_ImageLayer`
+- `EContentRootFolder_Invalid`
+- `EContentRootFolder_Leg`
+- `EContentRootFolder_LensFlare`
+- `EContentRootFolder_Light`
+- `EContentRootFolder_LightRoom`
+- `EContentRootFolder_LipMakeup`
+- `EContentRootFolder_Lower`
+- `EContentRootFolder_LuaScript`
+- `EContentRootFolder_MakeupEyelash`
+- `EContentRootFolder_MakeupSkinGenTools`
+- `EContentRootFolder_Material`
+- `EContentRootFolder_MaterialPlus`
+- `EContentRootFolder_Metallic`
+- `EContentRootFolder_Miscellaneous`
+- `EContentRootFolder_MixerPresetPackage`
+- `EContentRootFolder_MixerPresetSet`
+- `EContentRootFolder_MixerPreset_Arm`
+- `EContentRootFolder_MixerPreset_Body`
+- `EContentRootFolder_MixerPreset_BodyAdjust`
+- `EContentRootFolder_MixerPreset_Brow`
+- `EContentRootFolder_MixerPreset_Chin`
+- `EContentRootFolder_MixerPreset_Ear`
+- `EContentRootFolder_MixerPreset_Eye`
+- `EContentRootFolder_MixerPreset_FullCharacter`
+- `EContentRootFolder_MixerPreset_Head`
+- `EContentRootFolder_MixerPreset_HeadAdjust`
+- `EContentRootFolder_MixerPreset_Leg`
+- `EContentRootFolder_MixerPreset_Mouth`
+- `EContentRootFolder_MixerPreset_Nose`
+- `EContentRootFolder_MixerPreset_Torso`
+- `EContentRootFolder_Motion`
+- `EContentRootFolder_MotionDirector`
+- `EContentRootFolder_MotionPath`
+- `EContentRootFolder_MotionPlus`
+- `EContentRootFolder_MotionPuppet`
+- `EContentRootFolder_Nail`
+- `EContentRootFolder_Nails`
+- `EContentRootFolder_NormalEffects`
+- `EContentRootFolder_Opacity`
+- `EContentRootFolder_Oral`
+- `EContentRootFolder_Overall`
+- `EContentRootFolder_Pants`
+- `EContentRootFolder_Particle`
+- `EContentRootFolder_Persona`
+- `EContentRootFolder_Pose`
+- `EContentRootFolder_PostEffect`
+- `EContentRootFolder_Project`
+- `EContentRootFolder_Props`
+- `EContentRootFolder_Quantity`
+- `EContentRootFolder_RLHead`
+- `EContentRootFolder_Reflection`
+- `EContentRootFolder_Roughness`
+- `EContentRootFolder_SSS_Shader_Resource`
+- `EContentRootFolder_Scene3D`
+- `EContentRootFolder_Shirts`
+- `EContentRootFolder_Shoes`
+- `EContentRootFolder_SkinBase`
+- `EContentRootFolder_SkinDetails`
+- `EContentRootFolder_SkinGenTools`
+- `EContentRootFolder_Skin_Head`
+- `EContentRootFolder_Skirts`
+- `EContentRootFolder_Sky`
+- `EContentRootFolder_Sound`
+- `EContentRootFolder_Specular`
+- `EContentRootFolder_Spring`
+- `EContentRootFolder_SpringProfile`
+- `EContentRootFolder_Style`
+- `EContentRootFolder_SubstancePreset`
+- `EContentRootFolder_Teeth`
+- `EContentRootFolder_Terrain`
+- `EContentRootFolder_Texture`
+- `EContentRootFolder_Torso`
+- `EContentRootFolder_Tree`
+- `EContentRootFolder_Underwear`
+- `EContentRootFolder_Upper`
+- `EContentRootFolder_Video`
+- `EContentRootFolder_Water`
+- `EContentRootFolder_WeightMap`
+- `EContentRootFolder_WrinkleMasks`
+- `EContentRootFolder_iAnimation`
 
 ### EControlType
 
-- `EControlType_Float` = `EControlType_Float`
-- `EControlType_Transform` = `EControlType_Transform`
+- `EControlType_Float`
+- `EControlType_Transform`
 
 ### EConvertCharacterLevel
 
-- `EConvertCharacterLevel_ActorBuild` = `EConvertCharacterLevel_ActorBuild`
-- `EConvertCharacterLevel_LOD1` = `EConvertCharacterLevel_LOD1`
-- `EConvertCharacterLevel_LOD2` = `EConvertCharacterLevel_LOD2`
+- `EConvertCharacterLevel_ActorBuild`
+- `EConvertCharacterLevel_LOD1`
+- `EConvertCharacterLevel_LOD2`
 
 ### ECoordinateAxes
 
-- `ECoordinateAxes_Unknown` = `ECoordinateAxes_Unknown`
-- `ECoordinateAxes_X` = `ECoordinateAxes_X`
-- `ECoordinateAxes_Y` = `ECoordinateAxes_Y`
-- `ECoordinateAxes_Z` = `ECoordinateAxes_Z`
-- `ECoordinateAxes_XY` = `ECoordinateAxes_XY`
-- `ECoordinateAxes_YZ` = `ECoordinateAxes_YZ`
-- `ECoordinateAxes_XZ` = `ECoordinateAxes_XZ`
-- `ECoordinateAxes_All` = `ECoordinateAxes_All`
+- `ECoordinateAxes_All`
+- `ECoordinateAxes_Unknown`
+- `ECoordinateAxes_X`
+- `ECoordinateAxes_XY`
+- `ECoordinateAxes_XZ`
+- `ECoordinateAxes_Y`
+- `ECoordinateAxes_YZ`
+- `ECoordinateAxes_Z`
 
 ### ECoordinateAxis
 
-- `ECoordinateAxis_X` = `ECoordinateAxis_X`
-- `ECoordinateAxis_NegativeX` = `ECoordinateAxis_NegativeX`
-- `ECoordinateAxis_Y` = `ECoordinateAxis_Y`
-- `ECoordinateAxis_NegativeY` = `ECoordinateAxis_NegativeY`
-- `ECoordinateAxis_Z` = `ECoordinateAxis_Z`
-- `ECoordinateAxis_NegativeZ` = `ECoordinateAxis_NegativeZ`
+- `ECoordinateAxis_NegativeX`
+- `ECoordinateAxis_NegativeY`
+- `ECoordinateAxis_NegativeZ`
+- `ECoordinateAxis_X`
+- `ECoordinateAxis_Y`
+- `ECoordinateAxis_Z`
 
 ### ECoordinateSpace
 
-- `ECoordinateSpace_World` = `ECoordinateSpace_World`
-- `ECoordinateSpace_Local` = `ECoordinateSpace_Local`
+- `ECoordinateSpace_Local`
+- `ECoordinateSpace_World`
 
 ### ECoordinateSystem
 
-- `ECoordinateSystem_RightHand` = `ECoordinateSystem_RightHand`
-- `ECoordinateSystem_LeftHand` = `ECoordinateSystem_LeftHand`
+- `ECoordinateSystem_LeftHand`
+- `ECoordinateSystem_RightHand`
 
 ### EDeviceType
 
-- `EDeviceType_Facial` = `EDeviceType_Facial`
-- `EDeviceType_Body` = `EDeviceType_Body`
-- `EDeviceType_Hand` = `EDeviceType_Hand`
-- `EDeviceType_All` = `EDeviceType_All`
+- `EDeviceType_All`
+- `EDeviceType_Body`
+- `EDeviceType_Facial`
+- `EDeviceType_Hand`
 
 ### EDialogType
 
-- `EDialogType_Normal` = `EDialogType_Normal`
-- `EDialogType_Exclusive` = `EDialogType_Exclusive`
+- `EDialogType_Exclusive`
+- `EDialogType_Normal`
 
 ### EDockWidgetAreas
 
-- `EDockWidgetAreas_NoDockwidgetArea` = `EDockWidgetAreas_NoDockwidgetArea`
-- `EDockWidgetAreas_LeftDockWidgetArea` = `EDockWidgetAreas_LeftDockWidgetArea`
-- `EDockWidgetAreas_RightDockWidgetArea` = `EDockWidgetAreas_RightDockWidgetArea`
-- `EDockWidgetAreas_TopDockWidgetArea` = `EDockWidgetAreas_TopDockWidgetArea`
-- `EDockWidgetAreas_BottomDockWidgetArea` = `EDockWidgetAreas_BottomDockWidgetArea`
-- `EDockWidgetAreas_AllFeatures` = `EDockWidgetAreas_AllFeatures`
+- `EDockWidgetAreas_AllFeatures`
+- `EDockWidgetAreas_BottomDockWidgetArea`
+- `EDockWidgetAreas_LeftDockWidgetArea`
+- `EDockWidgetAreas_NoDockwidgetArea`
+- `EDockWidgetAreas_RightDockWidgetArea`
+- `EDockWidgetAreas_TopDockWidgetArea`
 
 ### EDockWidgetFeatures
 
-- `EDockWidgetFeatures_NoFeatures` = `EDockWidgetFeatures_NoFeatures`
-- `EDockWidgetFeatures_Closable` = `EDockWidgetFeatures_Closable`
-- `EDockWidgetFeatures_Movable` = `EDockWidgetFeatures_Movable`
-- `EDockWidgetFeatures_Floatable` = `EDockWidgetFeatures_Floatable`
-- `EDockWidgetFeatures_VerticalTitleBar` = `EDockWidgetFeatures_VerticalTitleBar`
-- `EDockWidgetFeatures_AllFeatures` = `EDockWidgetFeatures_AllFeatures`
+- `EDockWidgetFeatures_AllFeatures`
+- `EDockWidgetFeatures_Closable`
+- `EDockWidgetFeatures_Floatable`
+- `EDockWidgetFeatures_Movable`
+- `EDockWidgetFeatures_NoFeatures`
+- `EDockWidgetFeatures_VerticalTitleBar`
 
 ### EEulerOrder
 
-- `EEulerOrder_XYZ` = `EEulerOrder_XYZ`
-- `EEulerOrder_ZYX` = `EEulerOrder_ZYX`
-- `EEulerOrder_XZY` = `EEulerOrder_XZY`
-- `EEulerOrder_YZX` = `EEulerOrder_YZX`
-- `EEulerOrder_YXZ` = `EEulerOrder_YXZ`
-- `EEulerOrder_ZXY` = `EEulerOrder_ZXY`
+- `EEulerOrder_XYZ`
+- `EEulerOrder_XZY`
+- `EEulerOrder_YXZ`
+- `EEulerOrder_YZX`
+- `EEulerOrder_ZXY`
+- `EEulerOrder_ZYX`
+
+### EExport3DFileOption
+
+- `EExport3DFileOption_AbortExportIfMaterialNamesDuplicate`
+- `EExport3DFileOption_AllClothes`
+- `EExport3DFileOption_AxisYUp`
+- `EExport3DFileOption_BakeSubdivision`
+- `EExport3DFileOption_BodyPart`
+- `EExport3DFileOption_ExportExtraMaterial`
+- `EExport3DFileOption_ExportFacialAnimation`
+- `EExport3DFileOption_ExportMaterial`
+- `EExport3DFileOption_EyePart`
+- `EExport3DFileOption_FullBodyPart`
+- `EExport3DFileOption_GenerateDrmProtectedFile`
+- `EExport3DFileOption_GenerateMeshGroupIni`
+- `EExport3DFileOption_RemoveHiddenMesh`
+- `EExport3DFileOption_ResetToBindPose`
+- `EExport3DFileOption_TeethPart`
+- `EExport3DFileOption_TextureMapsAreShaderGenerated`
+- `EExport3DFileOption__None`
 
 ### EExportFbxOptions
 
-- `EExportFbxOptions__None` = `EExportFbxOptions__None`
-- `EExportFbxOptions_FbxKey` = `EExportFbxOptions_FbxKey`
-- `EExportFbxOptions_LightWaveYUp` = `EExportFbxOptions_LightWaveYUp`
-- `EExportFbxOptions_LightWaveReferenceBone` = `EExportFbxOptions_LightWaveReferenceBone`
-- `EExportFbxOptions_AutoSkinRigidMesh` = `EExportFbxOptions_AutoSkinRigidMesh`
-- `EExportFbxOptions_AutoSkinRigidMeshWithDifferentBoneName` = `EExportFbxOptions_AutoSkinRigidMeshWithDifferentBoneName`
-- `EExportFbxOptions_SaveHideMeshStateInOneSelectionSet` = `EExportFbxOptions_SaveHideMeshStateInOneSelectionSet`
-- `EExportFbxOptions_ForceTrangleExport` = `EExportFbxOptions_ForceTrangleExport`
-- `EExportFbxOptions_ExportMotion30SecOnly` = `EExportFbxOptions_ExportMotion30SecOnly`
-- `EExportFbxOptions_TPoseOnMotionFirstFrame` = `EExportFbxOptions_TPoseOnMotionFirstFrame`
-- `EExportFbxOptions_FirstMotionNotOffset` = `EExportFbxOptions_FirstMotionNotOffset`
-- `EExportFbxOptions_ExportRootMotion` = `EExportFbxOptions_ExportRootMotion`
-- `EExportFbxOptions_ZeroMotionRoot` = `EExportFbxOptions_ZeroMotionRoot`
-- `EExportFbxOptions_TPoseForCreateMorphTargetMesh` = `EExportFbxOptions_TPoseForCreateMorphTargetMesh`
-- `EExportFbxOptions_RemoveAllUnused` = `EExportFbxOptions_RemoveAllUnused`
-- `EExportFbxOptions_RemoveBoneRoot` = `EExportFbxOptions_RemoveBoneRoot`
-- `EExportFbxOptions_RemoveHiddenMesh` = `EExportFbxOptions_RemoveHiddenMesh`
-- `EExportFbxOptions_RemoveUnusedMorph` = `EExportFbxOptions_RemoveUnusedMorph`
-- `EExportFbxOptions_RemoveEyelash` = `EExportFbxOptions_RemoveEyelash`
-- `EExportFbxOptions_RemoveTearLineAndOcclusion` = `EExportFbxOptions_RemoveTearLineAndOcclusion`
-- `EExportFbxOptions_RemoveAllMesh` = `EExportFbxOptions_RemoveAllMesh`
-- `EExportFbxOptions_RemoveAllMeshKeepMorph` = `EExportFbxOptions_RemoveAllMeshKeepMorph`
-- `EExportFbxOptions_EmbedTexture` = `EExportFbxOptions_EmbedTexture`
-- `EExportFbxOptions_ExportPbrTextureAsImageInDiffuseLayer` = `EExportFbxOptions_ExportPbrTextureAsImageInDiffuseLayer`
-- `EExportFbxOptions_ExportPbrTextureAsImageInOneDirectory` = `EExportFbxOptions_ExportPbrTextureAsImageInOneDirectory`
-- `EExportFbxOptions_ExportPbrTextureAsImageInFormatDirectory` = `EExportFbxOptions_ExportPbrTextureAsImageInFormatDirectory`
-- `EExportFbxOptions_ExportPbrTextureAsSbsar` = `EExportFbxOptions_ExportPbrTextureAsSbsar`
-- `EExportFbxOptions_ExportMetallicAlpha` = `EExportFbxOptions_ExportMetallicAlpha`
-- `EExportFbxOptions_InverseNormalY` = `EExportFbxOptions_InverseNormalY`
-- `EExportFbxOptions_InverseOpacity` = `EExportFbxOptions_InverseOpacity`
-- `EExportFbxOptions_MergeDiffuseOpacityMap` = `EExportFbxOptions_MergeDiffuseOpacityMap`
-- `EExportFbxOptions_MayaAdjustMaterial` = `EExportFbxOptions_MayaAdjustMaterial`
-- `EExportFbxOptions_ConvertTifToPNG` = `EExportFbxOptions_ConvertTifToPNG`
+- `EExportFbxOptions_AutoSkinRigidMesh`
+- `EExportFbxOptions_AutoSkinRigidMeshWithDifferentBoneName`
+- `EExportFbxOptions_ConvertTifToPNG`
+- `EExportFbxOptions_EmbedTexture`
+- `EExportFbxOptions_ExportMetallicAlpha`
+- `EExportFbxOptions_ExportMotion30SecOnly`
+- `EExportFbxOptions_ExportPbrTextureAsImageInDiffuseLayer`
+- `EExportFbxOptions_ExportPbrTextureAsImageInFormatDirectory`
+- `EExportFbxOptions_ExportPbrTextureAsImageInOneDirectory`
+- `EExportFbxOptions_ExportPbrTextureAsSbsar`
+- `EExportFbxOptions_ExportRootMotion`
+- `EExportFbxOptions_FbxKey`
+- `EExportFbxOptions_FirstMotionNotOffset`
+- `EExportFbxOptions_ForceTrangleExport`
+- `EExportFbxOptions_InverseNormalY`
+- `EExportFbxOptions_InverseOpacity`
+- `EExportFbxOptions_LightWaveReferenceBone`
+- `EExportFbxOptions_LightWaveYUp`
+- `EExportFbxOptions_MayaAdjustMaterial`
+- `EExportFbxOptions_MergeDiffuseOpacityMap`
+- `EExportFbxOptions_RemoveAllMesh`
+- `EExportFbxOptions_RemoveAllMeshKeepMorph`
+- `EExportFbxOptions_RemoveAllUnused`
+- `EExportFbxOptions_RemoveBoneRoot`
+- `EExportFbxOptions_RemoveEyelash`
+- `EExportFbxOptions_RemoveHiddenMesh`
+- `EExportFbxOptions_RemoveTearLineAndOcclusion`
+- `EExportFbxOptions_RemoveUnusedMorph`
+- `EExportFbxOptions_SaveHideMeshStateInOneSelectionSet`
+- `EExportFbxOptions_TPoseForCreateMorphTargetMesh`
+- `EExportFbxOptions_TPoseOnMotionFirstFrame`
+- `EExportFbxOptions_ZeroMotionRoot`
+- `EExportFbxOptions__None`
+
+### EExportFbxOptions2
+
+- `EExportFbxOptions2_AsciiFormat`
+- `EExportFbxOptions2_AvoidTextureIntoIndexedMode`
+- `EExportFbxOptions2_BakeMouthOpenMotionToMesh`
+- `EExportFbxOptions2_BoneNubAttribute`
+- `EExportFbxOptions2_ExtraWordForUnityAndUnreal`
+- `EExportFbxOptions2_InstaLodPreset`
+- `EExportFbxOptions2_IsNotCloneObject`
+- `EExportFbxOptions2_IsNotRenamePivot`
+- `EExportFbxOptions2_PrefixAndPostfix`
+- `EExportFbxOptions2_RenameBoneOnStd`
+- `EExportFbxOptions2_RenameBoneRootToGameType`
+- `EExportFbxOptions2_RenameBoneToLowerCase`
+- `EExportFbxOptions2_RenameDuplicateBoneName`
+- `EExportFbxOptions2_RenameDuplicateMaterialName`
+- `EExportFbxOptions2_RenameDuplicateMorphName`
+- `EExportFbxOptions2_RenameGameBodyMesh`
+- `EExportFbxOptions2_RenameMorphInvalidCharacter`
+- `EExportFbxOptions2_RenameTransparencyWithPostFix`
+- `EExportFbxOptions2_ResetBoneScale`
+- `EExportFbxOptions2_ResetSelfillumination`
+- `EExportFbxOptions2_ResetSkinPose`
+- `EExportFbxOptions2_SourceUpAxisSameAsTarget`
+- `EExportFbxOptions2_UnityPreset`
+- `EExportFbxOptions2_UnrealEngine4BoneAxis`
+- `EExportFbxOptions2_UnrealIkBone`
+- `EExportFbxOptions2_UnrealPreset`
+- `EExportFbxOptions2_XUp`
+- `EExportFbxOptions2_YUp`
+- `EExportFbxOptions2__None`
+
+### EExportFbxOptions3
+
+- `EExportFbxOptions3_ExportJson`
+- `EExportFbxOptions3_ExportVertexColor`
+- `EExportFbxOptions3_RestoreStandardSeriesBoneAxis`
+- `EExportFbxOptions3_TraditionalUv`
+- `EExportFbxOptions3__None`
 
 ### EExportGoZPose
 
-- `EExportGoZPose_Current` = `EExportGoZPose_Current`
-- `EExportGoZPose_TPose` = `EExportGoZPose_TPose`
-- `EExportGoZPose_APose` = `EExportGoZPose_APose`
+- `EExportGoZPose_APose`
+- `EExportGoZPose_Current`
+- `EExportGoZPose_TPose`
 
 ### EExportMeshMotionMode
 
-- `EExportMeshMotionMode_MeshOnly` = `EExportMeshMotionMode_MeshOnly`
-- `EExportMeshMotionMode_MotionOnly` = `EExportMeshMotionMode_MotionOnly`
-- `EExportMeshMotionMode_MeshWithMotion` = `EExportMeshMotionMode_MeshWithMotion`
+- `EExportMeshMotionMode_MeshOnly`
+- `EExportMeshMotionMode_MeshWithMotion`
+- `EExportMeshMotionMode_MotionOnly`
 
 ### EExportTextureFormat
 
-- `EExportTextureFormat_Default` = `EExportTextureFormat_Default`
-- `EExportTextureFormat_Bmp` = `EExportTextureFormat_Bmp`
-- `EExportTextureFormat_Jpeg` = `EExportTextureFormat_Jpeg`
-- `EExportTextureFormat_Tga` = `EExportTextureFormat_Tga`
-- `EExportTextureFormat_Png` = `EExportTextureFormat_Png`
-- `EExportTextureFormat_Tif` = `EExportTextureFormat_Tif`
+- `EExportTextureFormat_Bmp`
+- `EExportTextureFormat_Default`
+- `EExportTextureFormat_Jpeg`
+- `EExportTextureFormat_Png`
+- `EExportTextureFormat_Tga`
+- `EExportTextureFormat_Tif`
 
 ### EExportTextureSize
 
-- `EExportTextureSize_Original` = `EExportTextureSize_Original`
-- `EExportTextureSize_Size_256` = `EExportTextureSize_Size_256`
-- `EExportTextureSize_Size_512` = `EExportTextureSize_Size_512`
-- `EExportTextureSize_Size_1024` = `EExportTextureSize_Size_1024`
-- `EExportTextureSize_Size_2048` = `EExportTextureSize_Size_2048`
-- `EExportTextureSize_Size_4096` = `EExportTextureSize_Size_4096`
+- `EExportTextureSize_Original`
+- `EExportTextureSize_Size_1024`
+- `EExportTextureSize_Size_2048`
+- `EExportTextureSize_Size_256`
+- `EExportTextureSize_Size_4096`
+- `EExportTextureSize_Size_512`
 
 ### EFaceHairType
 
-- `EFaceHairType_NOT_FACEHAIR` = `EFaceHairType_NOT_FACEHAIR`
-- `EFaceHairType_Eyebrows` = `EFaceHairType_Eyebrows`
-- `EFaceHairType_Beard_Mustache` = `EFaceHairType_Beard_Mustache`
-- `EFaceHairType_Beard_Goatee` = `EFaceHairType_Beard_Goatee`
-- `EFaceHairType_Beard_Sideburns` = `EFaceHairType_Beard_Sideburns`
-- `EFaceHairType_Beard_SoulPatch` = `EFaceHairType_Beard_SoulPatch`
-- `EFaceHairType_Beard_FullBeard` = `EFaceHairType_Beard_FullBeard`
-- `EFaceHairType_Beard_Accessory` = `EFaceHairType_Beard_Accessory`
+- `EFaceHairType_Beard_Accessory`
+- `EFaceHairType_Beard_FullBeard`
+- `EFaceHairType_Beard_Goatee`
+- `EFaceHairType_Beard_Mustache`
+- `EFaceHairType_Beard_Sideburns`
+- `EFaceHairType_Beard_SoulPatch`
+- `EFaceHairType_Eyebrows`
+- `EFaceHairType_NOT_FACEHAIR`
 
 ### EFacialAnimationMode
 
-- `EFacialAnimationMode_CreateNew` = `EFacialAnimationMode_CreateNew`
-- `EFacialAnimationMode_Replace` = `EFacialAnimationMode_Replace`
-- `EFacialAnimationMode_Blend` = `EFacialAnimationMode_Blend`
+- `EFacialAnimationMode_Blend`
+- `EFacialAnimationMode_CreateNew`
+- `EFacialAnimationMode_Replace`
 
 ### EFacialProfile
 
-- `EFacialProfile__None` = `EFacialProfile__None`
-- `EFacialProfile_CC5MetaHuman` = `EFacialProfile_CC5MetaHuman`
-- `EFacialProfile_CC4Extended` = `EFacialProfile_CC4Extended`
-- `EFacialProfile_CC4Standard` = `EFacialProfile_CC4Standard`
-- `EFacialProfile_Traditional` = `EFacialProfile_Traditional`
+- `EFacialProfile_CC4Extended`
+- `EFacialProfile_CC4Standard`
+- `EFacialProfile_CC5MetaHuman`
+- `EFacialProfile_Traditional`
+- `EFacialProfile__None`
 
 ### EFloatControlAttribute
 
-- `EFloatControlAttribute__None` = `EFloatControlAttribute__None`
-- `EFloatControlAttribute_NonZeroValue` = `EFloatControlAttribute_NonZeroValue`
+- `EFloatControlAttribute_NonZeroValue`
+- `EFloatControlAttribute__None`
 
 ### EFloorContactType
 
-- `EFloorContactType_HandBottom` = `EFloorContactType_HandBottom`
-- `EFloorContactType_HandBack` = `EFloorContactType_HandBack`
-- `EFloorContactType_HandMiddle` = `EFloorContactType_HandMiddle`
-- `EFloorContactType_HandFront` = `EFloorContactType_HandFront`
-- `EFloorContactType_HandIn` = `EFloorContactType_HandIn`
-- `EFloorContactType_HandOut` = `EFloorContactType_HandOut`
-- `EFloorContactType_FootBottom` = `EFloorContactType_FootBottom`
-- `EFloorContactType_FootBack` = `EFloorContactType_FootBack`
-- `EFloorContactType_FootMiddle` = `EFloorContactType_FootMiddle`
-- `EFloorContactType_FootFront` = `EFloorContactType_FootFront`
-- `EFloorContactType_FootIn` = `EFloorContactType_FootIn`
-- `EFloorContactType_FootOut` = `EFloorContactType_FootOut`
-- `EFloorContactType_All` = `EFloorContactType_All`
+- `EFloorContactType_All`
+- `EFloorContactType_FootBack`
+- `EFloorContactType_FootBottom`
+- `EFloorContactType_FootFront`
+- `EFloorContactType_FootIn`
+- `EFloorContactType_FootMiddle`
+- `EFloorContactType_FootOut`
+- `EFloorContactType_HandBack`
+- `EFloorContactType_HandBottom`
+- `EFloorContactType_HandFront`
+- `EFloorContactType_HandIn`
+- `EFloorContactType_HandMiddle`
+- `EFloorContactType_HandOut`
 
 ### EHSBodyType
 
-- `EHSBodyType_Male` = `EHSBodyType_Male`
-- `EHSBodyType_Female` = `EHSBodyType_Female`
-- `EHSBodyType_Baby` = `EHSBodyType_Baby`
-- `EHSBodyType_Neutral` = `EHSBodyType_Neutral`
-- `EHSBodyType_Current` = `EHSBodyType_Current`
+- `EHSBodyType_Baby`
+- `EHSBodyType_Current`
+- `EHSBodyType_Female`
+- `EHSBodyType_Male`
+- `EHSBodyType_Neutral`
 
 ### EHSLevel
 
-- `EHSLevel_Zero` = `EHSLevel_Zero`
-- `EHSLevel_One` = `EHSLevel_One`
-- `EHSLevel_Two` = `EHSLevel_Two`
+- `EHSLevel_One`
+- `EHSLevel_Two`
+- `EHSLevel_Zero`
 
 ### EHSMode
 
-- `EHSMode_Pro` = `EHSMode_Pro`
-- `EHSMode_Auto` = `EHSMode_Auto`
+- `EHSMode_Auto`
+- `EHSMode_Pro`
 
 ### EHairType
 
-- `EHairType_UNKNOWN` = `EHairType_UNKNOWN`
-- `EHairType_Hair_Top` = `EHairType_Hair_Top`
-- `EHairType_Hair_Base` = `EHairType_Hair_Base`
-- `EHairType_Hair_Rear` = `EHairType_Hair_Rear`
-- `EHairType_Hair_Bangs` = `EHairType_Hair_Bangs`
-- `EHairType_Hair_Accessory` = `EHairType_Hair_Accessory`
+- `EHairType_Hair_Accessory`
+- `EHairType_Hair_Bangs`
+- `EHairType_Hair_Base`
+- `EHairType_Hair_Rear`
+- `EHairType_Hair_Top`
+- `EHairType_UNKNOWN`
 
 ### EHandDataSource
 
-- `EHandDataSource_RightHand` = `EHandDataSource_RightHand`
-- `EHandDataSource_LeftHand` = `EHandDataSource_LeftHand`
+- `EHandDataSource_LeftHand`
+- `EHandDataSource_RightHand`
 
 ### EHandJoin
 
-- `EHandJoin_Shoulder` = `EHandJoin_Shoulder`
-- `EHandJoin_Elbow` = `EHandJoin_Elbow`
-- `EHandJoin_Wrist` = `EHandJoin_Wrist`
-- `EHandJoin_Hand` = `EHandJoin_Hand`
-- `EHandJoin_Invalid` = `EHandJoin_Invalid`
+- `EHandJoin_Elbow`
+- `EHandJoin_Hand`
+- `EHandJoin_Invalid`
+- `EHandJoin_Shoulder`
+- `EHandJoin_Wrist`
 
 ### EHandJoinType
 
-- `EHandJoinType_UseParentBone` = `EHandJoinType_UseParentBone`
-- `EHandJoinType_UseChildBone` = `EHandJoinType_UseChildBone`
+- `EHandJoinType_UseChildBone`
+- `EHandJoinType_UseParentBone`
 
 ### EHikEffector
 
-- `EHikEffector_Invalid` = `EHikEffector_Invalid`
-- `EHikEffector_Hip` = `EHikEffector_Hip`
-- `EHikEffector_LeftFoot` = `EHikEffector_LeftFoot`
-- `EHikEffector_RightFoot` = `EHikEffector_RightFoot`
-- `EHikEffector_LeftHand` = `EHikEffector_LeftHand`
-- `EHikEffector_RightHand` = `EHikEffector_RightHand`
-- `EHikEffector_LeftKnee` = `EHikEffector_LeftKnee`
-- `EHikEffector_RightKnee` = `EHikEffector_RightKnee`
-- `EHikEffector_LeftElbow` = `EHikEffector_LeftElbow`
-- `EHikEffector_RightElbow` = `EHikEffector_RightElbow`
-- `EHikEffector_ChestOrigin` = `EHikEffector_ChestOrigin`
-- `EHikEffector_Neck` = `EHikEffector_Neck`
-- `EHikEffector_LeftToe` = `EHikEffector_LeftToe`
-- `EHikEffector_RightToe` = `EHikEffector_RightToe`
-- `EHikEffector_LeftShoulder` = `EHikEffector_LeftShoulder`
-- `EHikEffector_RightShoulder` = `EHikEffector_RightShoulder`
-- `EHikEffector_Head` = `EHikEffector_Head`
-- `EHikEffector_LeftHip` = `EHikEffector_LeftHip`
-- `EHikEffector_RightHip` = `EHikEffector_RightHip`
-- `EHikEffector_Quantity` = `EHikEffector_Quantity`
+- `EHikEffector_ChestOrigin`
+- `EHikEffector_Head`
+- `EHikEffector_Hip`
+- `EHikEffector_Invalid`
+- `EHikEffector_LeftElbow`
+- `EHikEffector_LeftFoot`
+- `EHikEffector_LeftHand`
+- `EHikEffector_LeftHip`
+- `EHikEffector_LeftKnee`
+- `EHikEffector_LeftShoulder`
+- `EHikEffector_LeftToe`
+- `EHikEffector_Neck`
+- `EHikEffector_Quantity`
+- `EHikEffector_RightElbow`
+- `EHikEffector_RightFoot`
+- `EHikEffector_RightHand`
+- `EHikEffector_RightHip`
+- `EHikEffector_RightKnee`
+- `EHikEffector_RightShoulder`
+- `EHikEffector_RightToe`
 
 ### EHikEffectorType
 
-- `EHikEffectorType_Translate` = `EHikEffectorType_Translate`
-- `EHikEffectorType_Rotate` = `EHikEffectorType_Rotate`
+- `EHikEffectorType_Rotate`
+- `EHikEffectorType_Translate`
 
 ### EImportExpressionPart
 
-- `EImportExpressionPart_Body` = `EImportExpressionPart_Body`
-- `EImportExpressionPart_Eyes` = `EImportExpressionPart_Eyes`
-- `EImportExpressionPart_Teeth` = `EImportExpressionPart_Teeth`
-- `EImportExpressionPart_Tongue` = `EImportExpressionPart_Tongue`
+- `EImportExpressionPart_Body`
+- `EImportExpressionPart_Eyes`
+- `EImportExpressionPart_Teeth`
+- `EImportExpressionPart_Tongue`
 
 ### EImportFbxOption
 
-- `EImportFbxOption__None` = `EImportFbxOption__None`
-- `EImportFbxOption_StandardHumanCharacter` = `EImportFbxOption_StandardHumanCharacter`
-- `EImportFbxOption_Humanoid` = `EImportFbxOption_Humanoid`
-- `EImportFbxOption_Creature` = `EImportFbxOption_Creature`
-- `EImportFbxOption_Prop` = `EImportFbxOption_Prop`
+- `EImportFbxOption_Creature`
+- `EImportFbxOption_Humanoid`
+- `EImportFbxOption_Prop`
+- `EImportFbxOption_StandardHumanCharacter`
+- `EImportFbxOption__None`
 
 ### EIncludeMotionType
 
-- `EIncludeMotionType_Current_Pose` = `EIncludeMotionType_Current_Pose`
-- `EIncludeMotionType_Current_Animation` = `EIncludeMotionType_Current_Animation`
-- `EIncludeMotionType_Custom` = `EIncludeMotionType_Custom`
+- `EIncludeMotionType_Current_Animation`
+- `EIncludeMotionType_Current_Pose`
+- `EIncludeMotionType_Custom`
 
 ### ELanguage
 
-- `ELanguage_TW` = `ELanguage_TW`
-- `ELanguage_US` = `ELanguage_US`
+- `ELanguage_TW`
+- `ELanguage_US`
 
 ### ELevelCharacterTemplateType
 
-- `ELevelCharacterTemplateType_High` = `ELevelCharacterTemplateType_High`
-- `ELevelCharacterTemplateType_Middle` = `ELevelCharacterTemplateType_Middle`
-- `ELevelCharacterTemplateType_Low` = `ELevelCharacterTemplateType_Low`
-- `ELevelCharacterTemplateType_Custom` = `ELevelCharacterTemplateType_Custom`
+- `ELevelCharacterTemplateType_Custom`
+- `ELevelCharacterTemplateType_High`
+- `ELevelCharacterTemplateType_Low`
+- `ELevelCharacterTemplateType_Middle`
 
 ### ELinkObjectAlignType
 
-- `ELinkObjectAlignType__None` = `ELinkObjectAlignType__None`
-- `ELinkObjectAlignType_Position` = `ELinkObjectAlignType_Position`
-- `ELinkObjectAlignType_Position_And_Rotation` = `ELinkObjectAlignType_Position_And_Rotation`
-- `ELinkObjectAlignType_NO_OFFSET` = `ELinkObjectAlignType_NO_OFFSET`
+- `ELinkObjectAlignType_NO_OFFSET`
+- `ELinkObjectAlignType_Position`
+- `ELinkObjectAlignType_Position_And_Rotation`
+- `ELinkObjectAlignType__None`
 
 ### ELoadFileOption
 
-- `ELoadFileOption__None` = `ELoadFileOption__None`
-- `ELoadFileOption_NoProgress` = `ELoadFileOption_NoProgress`
+- `ELoadFileOption_NoProgress`
+- `ELoadFileOption__None`
 
 ### EMDpropCrowdExitType
 
-- `EMDpropCrowdExitType_DefaultRate` = `EMDpropCrowdExitType_DefaultRate`
-- `EMDpropCrowdExitType_InteractTimes` = `EMDpropCrowdExitType_InteractTimes`
-- `EMDpropCrowdExitType_NeverExit` = `EMDpropCrowdExitType_NeverExit`
+- `EMDpropCrowdExitType_DefaultRate`
+- `EMDpropCrowdExitType_InteractTimes`
+- `EMDpropCrowdExitType_NeverExit`
 
 ### EMaterialTextureChannel
 
-- `EMaterialTextureChannel_Metallic` = `EMaterialTextureChannel_Metallic`
-- `EMaterialTextureChannel_Diffuse` = `EMaterialTextureChannel_Diffuse`
-- `EMaterialTextureChannel_Specular` = `EMaterialTextureChannel_Specular`
-- `EMaterialTextureChannel_Shininess` = `EMaterialTextureChannel_Shininess`
-- `EMaterialTextureChannel_Glow` = `EMaterialTextureChannel_Glow`
-- `EMaterialTextureChannel_Displacement` = `EMaterialTextureChannel_Displacement`
-- `EMaterialTextureChannel_Opacity` = `EMaterialTextureChannel_Opacity`
-- `EMaterialTextureChannel_DiffuseBlend` = `EMaterialTextureChannel_DiffuseBlend`
-- `EMaterialTextureChannel_Bump` = `EMaterialTextureChannel_Bump`
-- `EMaterialTextureChannel_Reflection` = `EMaterialTextureChannel_Reflection`
-- `EMaterialTextureChannel_Refraction` = `EMaterialTextureChannel_Refraction`
-- `EMaterialTextureChannel_Cube` = `EMaterialTextureChannel_Cube`
-- `EMaterialTextureChannel_AmbientOcclusion` = `EMaterialTextureChannel_AmbientOcclusion`
-- `EMaterialTextureChannel_Normal` = `EMaterialTextureChannel_Normal`
-- `EMaterialTextureChannel_VectorDisplacement` = `EMaterialTextureChannel_VectorDisplacement`
-- `EMaterialTextureChannel_Quantity` = `EMaterialTextureChannel_Quantity`
-- `EMaterialTextureChannel_Roughness` = `EMaterialTextureChannel_Roughness`
+- `EMaterialTextureChannel_AmbientOcclusion`
+- `EMaterialTextureChannel_Bump`
+- `EMaterialTextureChannel_Cube`
+- `EMaterialTextureChannel_Diffuse`
+- `EMaterialTextureChannel_DiffuseBlend`
+- `EMaterialTextureChannel_Displacement`
+- `EMaterialTextureChannel_Glow`
+- `EMaterialTextureChannel_Metallic`
+- `EMaterialTextureChannel_Normal`
+- `EMaterialTextureChannel_Opacity`
+- `EMaterialTextureChannel_Quantity`
+- `EMaterialTextureChannel_Reflection`
+- `EMaterialTextureChannel_Refraction`
+- `EMaterialTextureChannel_Roughness`
+- `EMaterialTextureChannel_Shininess`
+- `EMaterialTextureChannel_Specular`
+- `EMaterialTextureChannel_VectorDisplacement`
 
 ### EMaterialType
 
-- `EMaterialType_RTX_Real_Time` = `EMaterialType_RTX_Real_Time`
-- `EMaterialType_RTX_Path_Traced` = `EMaterialType_RTX_Path_Traced`
+- `EMaterialType_RTX_Path_Traced`
+- `EMaterialType_RTX_Real_Time`
 
 ### EMenu
 
-- `EMenu_Plugins` = `EMenu_Plugins`
+- `EMenu_Plugins`
 
 ### EMocapState
 
-- `EMocapState_Unknown` = `EMocapState_Unknown`
-- `EMocapState_Preview` = `EMocapState_Preview`
-- `EMocapState_Record` = `EMocapState_Record`
-- `EMocapState_PreviewWithoutPlay` = `EMocapState_PreviewWithoutPlay`
+- `EMocapState_Preview`
+- `EMocapState_PreviewWithoutPlay`
+- `EMocapState_Record`
+- `EMocapState_Unknown`
 
 ### EModeType
 
-- `EModeType__None` = `EModeType__None`
-- `EModeType_DirectPuppet` = `EModeType_DirectPuppet`
-- `EModeType_MotionPuppet` = `EModeType_MotionPuppet`
-- `EModeType_PropPuppet` = `EModeType_PropPuppet`
-- `EModeType_AvatarProport` = `EModeType_AvatarProport`
-- `EModeType_AvatarPoseOffset` = `EModeType_AvatarPoseOffset`
-- `EModeType_Duplicate` = `EModeType_Duplicate`
-- `EModeType_IkEditing` = `EModeType_IkEditing`
-- `EModeType_ReachTarget` = `EModeType_ReachTarget`
-- `EModeType_QuickLight` = `EModeType_QuickLight`
-- `EModeType_FacePuppet` = `EModeType_FacePuppet`
-- `EModeType_FaceKey` = `EModeType_FaceKey`
-- `EModeType_VisemeSmooth` = `EModeType_VisemeSmooth`
-- `EModeType_EditMeshByFace` = `EModeType_EditMeshByFace`
-- `EModeType_EditMeshByVertex` = `EModeType_EditMeshByVertex`
-- `EModeType_EditMeshByElement` = `EModeType_EditMeshByElement`
-- `EModeType_MorphAnimation` = `EModeType_MorphAnimation`
-- `EModeType_AdjustTPose` = `EModeType_AdjustTPose`
-- `EModeType_EditNormal` = `EModeType_EditNormal`
-- `EModeType_PaintMaskByBrush` = `EModeType_PaintMaskByBrush`
-- `EModeType_MotionMatching` = `EModeType_MotionMatching`
-- `EModeType_AutoRig` = `EModeType_AutoRig`
-- `EModeType_AiPosing` = `EModeType_AiPosing`
-- `EModeType_AdjustMixerSliderBoneTranslate` = `EModeType_AdjustMixerSliderBoneTranslate`
-- `EModeType_Unknown` = `EModeType_Unknown`
+- `EModeType_AdjustMixerSliderBoneTranslate`
+- `EModeType_AdjustTPose`
+- `EModeType_AiPosing`
+- `EModeType_AutoRig`
+- `EModeType_AvatarPoseOffset`
+- `EModeType_AvatarProport`
+- `EModeType_DirectPuppet`
+- `EModeType_Duplicate`
+- `EModeType_EditMeshByElement`
+- `EModeType_EditMeshByFace`
+- `EModeType_EditMeshByVertex`
+- `EModeType_EditNormal`
+- `EModeType_FaceKey`
+- `EModeType_FacePuppet`
+- `EModeType_IkEditing`
+- `EModeType_MorphAnimation`
+- `EModeType_MotionMatching`
+- `EModeType_MotionPuppet`
+- `EModeType_PaintMaskByBrush`
+- `EModeType_PropPuppet`
+- `EModeType_QuickLight`
+- `EModeType_ReachTarget`
+- `EModeType_Unknown`
+- `EModeType_VisemeSmooth`
+- `EModeType__None`
 
 ### EMotionApplyMode
 
-- `EMotionApplyMode_ReferenceToAvatar` = `EMotionApplyMode_ReferenceToAvatar`
-- `EMotionApplyMode_ReferenceToCoordinate` = `EMotionApplyMode_ReferenceToCoordinate`
+- `EMotionApplyMode_ReferenceToAvatar`
+- `EMotionApplyMode_ReferenceToCoordinate`
 
 ### EMotionSettingOption
 
-- `EMotionSettingOption__None` = `EMotionSettingOption__None`
-- `EMotionSettingOption_ResetMotionRoot` = `EMotionSettingOption_ResetMotionRoot`
-- `EMotionSettingOption_ResetMotionRootRotate` = `EMotionSettingOption_ResetMotionRootRotate`
-- `EMotionSettingOption_AlignActorMotion` = `EMotionSettingOption_AlignActorMotion`
-- `EMotionSettingOption_AlignToActorOrientation` = `EMotionSettingOption_AlignToActorOrientation`
+- `EMotionSettingOption_AlignActorMotion`
+- `EMotionSettingOption_AlignToActorOrientation`
+- `EMotionSettingOption_ResetMotionRoot`
+- `EMotionSettingOption_ResetMotionRootRotate`
+- `EMotionSettingOption__None`
 
 ### EMsgButton
 
-- `EMsgButton_NoButton` = `EMsgButton_NoButton`
-- `EMsgButton_Ok` = `EMsgButton_Ok`
-- `EMsgButton_Save` = `EMsgButton_Save`
-- `EMsgButton_SaveAll` = `EMsgButton_SaveAll`
-- `EMsgButton_Open` = `EMsgButton_Open`
-- `EMsgButton_Yes` = `EMsgButton_Yes`
-- `EMsgButton_YesToAll` = `EMsgButton_YesToAll`
-- `EMsgButton_No` = `EMsgButton_No`
-- `EMsgButton_NoToAll` = `EMsgButton_NoToAll`
-- `EMsgButton_Abort` = `EMsgButton_Abort`
-- `EMsgButton_Retry` = `EMsgButton_Retry`
-- `EMsgButton_Overlook` = `EMsgButton_Overlook`
-- `EMsgButton_Close` = `EMsgButton_Close`
-- `EMsgButton_Cancel` = `EMsgButton_Cancel`
-- `EMsgButton_Discard` = `EMsgButton_Discard`
-- `EMsgButton_Help` = `EMsgButton_Help`
-- `EMsgButton_Apply` = `EMsgButton_Apply`
-- `EMsgButton_Reset` = `EMsgButton_Reset`
-- `EMsgButton_RestoreDefaults` = `EMsgButton_RestoreDefaults`
-- `EMsgButton_OkDontAskAgain` = `EMsgButton_OkDontAskAgain`
+- `EMsgButton_Abort`
+- `EMsgButton_Apply`
+- `EMsgButton_Cancel`
+- `EMsgButton_Close`
+- `EMsgButton_Discard`
+- `EMsgButton_Help`
+- `EMsgButton_No`
+- `EMsgButton_NoButton`
+- `EMsgButton_NoToAll`
+- `EMsgButton_Ok`
+- `EMsgButton_OkDontAskAgain`
+- `EMsgButton_Open`
+- `EMsgButton_Overlook`
+- `EMsgButton_Reset`
+- `EMsgButton_RestoreDefaults`
+- `EMsgButton_Retry`
+- `EMsgButton_Save`
+- `EMsgButton_SaveAll`
+- `EMsgButton_Yes`
+- `EMsgButton_YesToAll`
 
 ### EObjectEventType
 
-- `EObjectEventType_VisemeChangeEvent` = `EObjectEventType_VisemeChangeEvent`
+- `EObjectEventType_VisemeChangeEvent`
 
 ### EObjectModifiedType
 
-- `EObjectModifiedType_Transform` = `EObjectModifiedType_Transform`
-- `EObjectModifiedType_Attribute` = `EObjectModifiedType_Attribute`
-- `EObjectModifiedType_Material` = `EObjectModifiedType_Material`
-- `EObjectModifiedType_MorphWeight` = `EObjectModifiedType_MorphWeight`
-- `EObjectModifiedType_Motion` = `EObjectModifiedType_Motion`
-- `EObjectModifiedType_Texture` = `EObjectModifiedType_Texture`
-- `EObjectModifiedType_Wrinkle` = `EObjectModifiedType_Wrinkle`
+- `EObjectModifiedType_Attribute`
+- `EObjectModifiedType_Material`
+- `EObjectModifiedType_MorphWeight`
+- `EObjectModifiedType_Motion`
+- `EObjectModifiedType_Texture`
+- `EObjectModifiedType_Transform`
+- `EObjectModifiedType_Wrinkle`
 
 ### EObjectType
 
-- `EObjectType_Object` = `EObjectType_Object`
-- `EObjectType_Avatar` = `EObjectType_Avatar`
-- `EObjectType_Hair` = `EObjectType_Hair`
-- `EObjectType_Cloth` = `EObjectType_Cloth`
-- `EObjectType_Accessory` = `EObjectType_Accessory`
-- `EObjectType_Prop` = `EObjectType_Prop`
-- `EObjectType_Camera` = `EObjectType_Camera`
-- `EObjectType_Particle` = `EObjectType_Particle`
-- `EObjectType_Light` = `EObjectType_Light`
-- `EObjectType_SpotLight` = `EObjectType_SpotLight`
-- `EObjectType_PointLight` = `EObjectType_PointLight`
-- `EObjectType_DirectionalLight` = `EObjectType_DirectionalLight`
-- `EObjectType_PopcornFX` = `EObjectType_PopcornFX`
-- `EObjectType_Path` = `EObjectType_Path`
-- `EObjectType_Sky` = `EObjectType_Sky`
-- `EObjectType_LightAvatar` = `EObjectType_LightAvatar`
-- `EObjectType_MDProp` = `EObjectType_MDProp`
-- `EObjectType_ImageLayer` = `EObjectType_ImageLayer`
+- `EObjectType_Accessory`
+- `EObjectType_Avatar`
+- `EObjectType_Camera`
+- `EObjectType_Cloth`
+- `EObjectType_DirectionalLight`
+- `EObjectType_Hair`
+- `EObjectType_ImageLayer`
+- `EObjectType_Light`
+- `EObjectType_LightAvatar`
+- `EObjectType_MDProp`
+- `EObjectType_Object`
+- `EObjectType_Particle`
+- `EObjectType_Path`
+- `EObjectType_PointLight`
+- `EObjectType_PopcornFX`
+- `EObjectType_Prop`
+- `EObjectType_Sky`
+- `EObjectType_SpotLight`
 
 ### EPathType
 
-- `EPathType_Temp` = `EPathType_Temp`
-- `EPathType_TemplateContent` = `EPathType_TemplateContent`
-- `EPathType_CustomContent` = `EPathType_CustomContent`
-- `EPathType_ProgramDefault` = `EPathType_ProgramDefault`
-- `EPathType_Puppet` = `EPathType_Puppet`
-- `EPathType_FacialLayer` = `EPathType_FacialLayer`
-- `EPathType_ShareTemplateContent` = `EPathType_ShareTemplateContent`
-- `EPathType_Thumb` = `EPathType_Thumb`
-- `EPathType_Image` = `EPathType_Image`
-- `EPathType_CreatorAssets` = `EPathType_CreatorAssets`
-- `EPathType_Resource` = `EPathType_Resource`
-- `EPathType_FacialSystem` = `EPathType_FacialSystem`
-- `EPathType_CustomWidget` = `EPathType_CustomWidget`
-- `EPathType_iCloneAssets` = `EPathType_iCloneAssets`
-- `EPathType_CCBaseData` = `EPathType_CCBaseData`
+- `EPathType_CCBaseData`
+- `EPathType_CreatorAssets`
+- `EPathType_CustomContent`
+- `EPathType_CustomWidget`
+- `EPathType_FacialLayer`
+- `EPathType_FacialSystem`
+- `EPathType_Image`
+- `EPathType_ProgramDefault`
+- `EPathType_Puppet`
+- `EPathType_Resource`
+- `EPathType_ShareTemplateContent`
+- `EPathType_Temp`
+- `EPathType_TemplateContent`
+- `EPathType_Thumb`
+- `EPathType_iCloneAssets`
 
 ### EPopcornFxSamplerType
 
-- `EPopcornFxSamplerType_MESH` = `EPopcornFxSamplerType_MESH`
-- `EPopcornFxSamplerType_IMAGE` = `EPopcornFxSamplerType_IMAGE`
-- `EPopcornFxSamplerType_SOUND` = `EPopcornFxSamplerType_SOUND`
-- `EPopcornFxSamplerType_TEXT` = `EPopcornFxSamplerType_TEXT`
-- `EPopcornFxSamplerType_PATH` = `EPopcornFxSamplerType_PATH`
-- `EPopcornFxSamplerType_CURVE` = `EPopcornFxSamplerType_CURVE`
+- `EPopcornFxSamplerType_CURVE`
+- `EPopcornFxSamplerType_IMAGE`
+- `EPopcornFxSamplerType_MESH`
+- `EPopcornFxSamplerType_PATH`
+- `EPopcornFxSamplerType_SOUND`
+- `EPopcornFxSamplerType_TEXT`
 
 ### EPositionUnit
 
-- `EPositionUnit_Centimeters` = `EPositionUnit_Centimeters`
-- `EPositionUnit_Meters` = `EPositionUnit_Meters`
+- `EPositionUnit_Centimeters`
+- `EPositionUnit_Meters`
 
 ### EPostEffect
 
-- `EPostEffect__None` = `EPostEffect__None`
-- `EPostEffect_Default` = `EPostEffect_Default`
-- `EPostEffect_Faded` = `EPostEffect_Faded`
-- `EPostEffect_Cold_Weak` = `EPostEffect_Cold_Weak`
-- `EPostEffect_Cold_Strong` = `EPostEffect_Cold_Strong`
-- `EPostEffect_Warm_Weak` = `EPostEffect_Warm_Weak`
-- `EPostEffect_Warn_Strong` = `EPostEffect_Warn_Strong`
-- `EPostEffect_Aged` = `EPostEffect_Aged`
-- `EPostEffect_Retro` = `EPostEffect_Retro`
-- `EPostEffect_Corrupted_purple` = `EPostEffect_Corrupted_purple`
-- `EPostEffect_Black_And_White` = `EPostEffect_Black_And_White`
+- `EPostEffect_Aged`
+- `EPostEffect_Black_And_White`
+- `EPostEffect_Cold_Strong`
+- `EPostEffect_Cold_Weak`
+- `EPostEffect_Corrupted_purple`
+- `EPostEffect_Default`
+- `EPostEffect_Faded`
+- `EPostEffect_Retro`
+- `EPostEffect_Warm_Weak`
+- `EPostEffect_Warn_Strong`
+- `EPostEffect__None`
 
 ### EPropertyType
 
-- `EPropertyType_PT_LeftHandThumbSize` = `EPropertyType_PT_LeftHandThumbSize`
-- `EPropertyType_PT_LeftHandIndexSize` = `EPropertyType_PT_LeftHandIndexSize`
-- `EPropertyType_PT_LeftHandMiddleSize` = `EPropertyType_PT_LeftHandMiddleSize`
-- `EPropertyType_PT_LeftHandRingSize` = `EPropertyType_PT_LeftHandRingSize`
-- `EPropertyType_PT_LeftHandPinkySize` = `EPropertyType_PT_LeftHandPinkySize`
-- `EPropertyType_PT_LeftHandExtraSize` = `EPropertyType_PT_LeftHandExtraSize`
-- `EPropertyType_PT_RightHandThumbSize` = `EPropertyType_PT_RightHandThumbSize`
-- `EPropertyType_PT_RightHandIndexSize` = `EPropertyType_PT_RightHandIndexSize`
-- `EPropertyType_PT_RightHandMiddleSize` = `EPropertyType_PT_RightHandMiddleSize`
-- `EPropertyType_PT_RightHandRingSize` = `EPropertyType_PT_RightHandRingSize`
-- `EPropertyType_PT_RightHandPinkySize` = `EPropertyType_PT_RightHandPinkySize`
-- `EPropertyType_PT_RightHandExtraSize` = `EPropertyType_PT_RightHandExtraSize`
-- `EPropertyType_PT_LeftFootThumbSize` = `EPropertyType_PT_LeftFootThumbSize`
-- `EPropertyType_PT_LeftFootIndexSize` = `EPropertyType_PT_LeftFootIndexSize`
-- `EPropertyType_PT_LeftFootMiddleSize` = `EPropertyType_PT_LeftFootMiddleSize`
-- `EPropertyType_PT_LeftFootRingSize` = `EPropertyType_PT_LeftFootRingSize`
-- `EPropertyType_PT_LeftFootPinkySize` = `EPropertyType_PT_LeftFootPinkySize`
-- `EPropertyType_PT_LeftFootExtraSize` = `EPropertyType_PT_LeftFootExtraSize`
-- `EPropertyType_PT_RightFootThumbSize` = `EPropertyType_PT_RightFootThumbSize`
-- `EPropertyType_PT_RightFootIndexSize` = `EPropertyType_PT_RightFootIndexSize`
-- `EPropertyType_PT_RightFootMiddleSize` = `EPropertyType_PT_RightFootMiddleSize`
-- `EPropertyType_PT_RightFootRingSize` = `EPropertyType_PT_RightFootRingSize`
-- `EPropertyType_PT_RightFootPinkySize` = `EPropertyType_PT_RightFootPinkySize`
-- `EPropertyType_PT_RightFootExtraSize` = `EPropertyType_PT_RightFootExtraSize`
-- `EPropertyType_PT_HandBottomToWrist` = `EPropertyType_PT_HandBottomToWrist`
-- `EPropertyType_PT_HandMiddleToWrist` = `EPropertyType_PT_HandMiddleToWrist`
-- `EPropertyType_PT_HandBackToWrist` = `EPropertyType_PT_HandBackToWrist`
-- `EPropertyType_PT_HandFrontToMiddle` = `EPropertyType_PT_HandFrontToMiddle`
-- `EPropertyType_PT_HandInToWrist` = `EPropertyType_PT_HandInToWrist`
-- `EPropertyType_PT_HandOutToWrist` = `EPropertyType_PT_HandOutToWrist`
-- `EPropertyType_PT_FootBottomToAnkle` = `EPropertyType_PT_FootBottomToAnkle`
-- `EPropertyType_PT_FootMiddleToAnkle` = `EPropertyType_PT_FootMiddleToAnkle`
-- `EPropertyType_PT_FootBackToAnkle` = `EPropertyType_PT_FootBackToAnkle`
-- `EPropertyType_PT_FootFrontToMiddle` = `EPropertyType_PT_FootFrontToMiddle`
-- `EPropertyType_PT_FootInToAnkle` = `EPropertyType_PT_FootInToAnkle`
-- `EPropertyType_PT_FootOutToAnkle` = `EPropertyType_PT_FootOutToAnkle`
-- `EPropertyType_PT_RealisticShoulder` = `EPropertyType_PT_RealisticShoulder`
-- `EPropertyType_PT_Quantity_Version26` = `EPropertyType_PT_Quantity_Version26`
-- `EPropertyType_PT_LeftUpLegRoll` = `EPropertyType_PT_LeftUpLegRoll`
-- `EPropertyType_PT_LeftLegRoll` = `EPropertyType_PT_LeftLegRoll`
-- `EPropertyType_PT_RightUpLegRoll` = `EPropertyType_PT_RightUpLegRoll`
-- `EPropertyType_PT_RightLegRoll` = `EPropertyType_PT_RightLegRoll`
-- `EPropertyType_PT_LeftArmRoll` = `EPropertyType_PT_LeftArmRoll`
-- `EPropertyType_PT_LeftForeArmRoll` = `EPropertyType_PT_LeftForeArmRoll`
-- `EPropertyType_PT_RightArmRoll` = `EPropertyType_PT_RightArmRoll`
-- `EPropertyType_PT_RightForeArmRoll` = `EPropertyType_PT_RightForeArmRoll`
-- `EPropertyType_PT_Quantity_Version29` = `EPropertyType_PT_Quantity_Version29`
-- `EPropertyType_PT_AnkleHeightCompensation` = `EPropertyType_PT_AnkleHeightCompensation`
-- `EPropertyType_PT_AnkleProximityCompensation` = `EPropertyType_PT_AnkleProximityCompensation`
-- `EPropertyType_PT_HipsHeightCompensation` = `EPropertyType_PT_HipsHeightCompensation`
-- `EPropertyType_PT_HipsTOffsetZ` = `EPropertyType_PT_HipsTOffsetZ`
-- `EPropertyType_PT_RollExtractionMode` = `EPropertyType_PT_RollExtractionMode`
-- `EPropertyType_PT_Quantity_Version210` = `EPropertyType_PT_Quantity_Version210`
-- `EPropertyType_PT_SpineStiffness` = `EPropertyType_PT_SpineStiffness`
-- `EPropertyType_PT_CtrlNeckStiffness` = `EPropertyType_PT_CtrlNeckStiffness`
-- `EPropertyType_PT_FootContactStiffness` = `EPropertyType_PT_FootContactStiffness`
-- `EPropertyType_PT_CtrlResistMaximumExtensionLeftKnee` = `EPropertyType_PT_CtrlResistMaximumExtensionLeftKnee`
-- `EPropertyType_PT_CtrlResistMaximumExtensionRightKnee` = `EPropertyType_PT_CtrlResistMaximumExtensionRightKnee`
-- `EPropertyType_PT_CtrlResistMaximumExtensionLeftElbow` = `EPropertyType_PT_CtrlResistMaximumExtensionLeftElbow`
-- `EPropertyType_PT_CtrlResistMaximumExtensionRightElbow` = `EPropertyType_PT_CtrlResistMaximumExtensionRightElbow`
-- `EPropertyType_PT_CtrlResistCompressionFactorLeftKnee` = `EPropertyType_PT_CtrlResistCompressionFactorLeftKnee`
-- `EPropertyType_PT_CtrlResistCompressionFactorRightKnee` = `EPropertyType_PT_CtrlResistCompressionFactorRightKnee`
-- `EPropertyType_PT_CtrlResistCompressionFactorLeftElbow` = `EPropertyType_PT_CtrlResistCompressionFactorLeftElbow`
-- `EPropertyType_PT_CtrlResistCompressionFactorRightElbow` = `EPropertyType_PT_CtrlResistCompressionFactorRightElbow`
-- `EPropertyType_PT_HandFingerContactRollStiffness` = `EPropertyType_PT_HandFingerContactRollStiffness`
-- `EPropertyType_PT_FootFingerContactRollStiffness` = `EPropertyType_PT_FootFingerContactRollStiffness`
-- `EPropertyType_PT_HandContactStiffness` = `EPropertyType_PT_HandContactStiffness`
-- `EPropertyType_PT_PullIterationCount` = `EPropertyType_PT_PullIterationCount`
-- `EPropertyType_PT_LeftLegMaxExtensionAngle` = `EPropertyType_PT_LeftLegMaxExtensionAngle`
-- `EPropertyType_PT_RightLegMaxExtensionAngle` = `EPropertyType_PT_RightLegMaxExtensionAngle`
-- `EPropertyType_PT_LeftArmMaxExtensionAngle` = `EPropertyType_PT_LeftArmMaxExtensionAngle`
-- `EPropertyType_PT_RightArmMaxExtensionAngle` = `EPropertyType_PT_RightArmMaxExtensionAngle`
-- `EPropertyType_PT_ExtraCollarRatio` = `EPropertyType_PT_ExtraCollarRatio`
-- `EPropertyType_PT_CollarStiffnessX` = `EPropertyType_PT_CollarStiffnessX`
-- `EPropertyType_PT_CollarStiffnessY` = `EPropertyType_PT_CollarStiffnessY`
-- `EPropertyType_PT_CollarStiffnessZ` = `EPropertyType_PT_CollarStiffnessZ`
-- `EPropertyType_PT_ReachActorLeftShoulder` = `EPropertyType_PT_ReachActorLeftShoulder`
-- `EPropertyType_PT_ReachActorRightShoulder` = `EPropertyType_PT_ReachActorRightShoulder`
-- `EPropertyType_PT_RealisticLeftKneeSolving` = `EPropertyType_PT_RealisticLeftKneeSolving`
-- `EPropertyType_PT_RealisticRightKneeSolving` = `EPropertyType_PT_RealisticRightKneeSolving`
-- `EPropertyType_PT_StretchStartArmsAndLegs` = `EPropertyType_PT_StretchStartArmsAndLegs`
-- `EPropertyType_PT_StretchStopArmsAndLegs` = `EPropertyType_PT_StretchStopArmsAndLegs`
-- `EPropertyType_PT_TopSpineCorrection` = `EPropertyType_PT_TopSpineCorrection`
-- `EPropertyType_PT_SnSScaleArmsAndLegs` = `EPropertyType_PT_SnSScaleArmsAndLegs`
-- `EPropertyType_PT_SnSReachLeftWrist` = `EPropertyType_PT_SnSReachLeftWrist`
-- `EPropertyType_PT_SnSReachRightWrist` = `EPropertyType_PT_SnSReachRightWrist`
-- `EPropertyType_PT_SnSReachLeftAnkle` = `EPropertyType_PT_SnSReachLeftAnkle`
-- `EPropertyType_PT_SnSReachRightAnkle` = `EPropertyType_PT_SnSReachRightAnkle`
-- `EPropertyType_PT_SnSScaleSpine` = `EPropertyType_PT_SnSScaleSpine`
-- `EPropertyType_PT_SnSScaleSpineChildren` = `EPropertyType_PT_SnSScaleSpineChildren`
-- `EPropertyType_PT_SnSSpineFreedom` = `EPropertyType_PT_SnSSpineFreedom`
-- `EPropertyType_PT_SnSReachChestEnd` = `EPropertyType_PT_SnSReachChestEnd`
-- `EPropertyType_PT_SnSScaleNeck` = `EPropertyType_PT_SnSScaleNeck`
-- `EPropertyType_PT_SnSNeckFreedom` = `EPropertyType_PT_SnSNeckFreedom`
-- `EPropertyType_PT_SnSReachHead` = `EPropertyType_PT_SnSReachHead`
-- `EPropertyType_PT_LeftUpLegRollEx` = `EPropertyType_PT_LeftUpLegRollEx`
-- `EPropertyType_PT_LeftLegRollEx` = `EPropertyType_PT_LeftLegRollEx`
-- `EPropertyType_PT_RightUpLegRollEx` = `EPropertyType_PT_RightUpLegRollEx`
-- `EPropertyType_PT_RightLegRollEx` = `EPropertyType_PT_RightLegRollEx`
-- `EPropertyType_PT_LeftArmRollEx` = `EPropertyType_PT_LeftArmRollEx`
-- `EPropertyType_PT_LeftForeArmRollEx` = `EPropertyType_PT_LeftForeArmRollEx`
-- `EPropertyType_PT_RightArmRollEx` = `EPropertyType_PT_RightArmRollEx`
-- `EPropertyType_PT_RightForeArmRollEx` = `EPropertyType_PT_RightForeArmRollEx`
-- `EPropertyType_PT_LeftAnkle` = `EPropertyType_PT_LeftAnkle`
-- `EPropertyType_PT_RightAnkle` = `EPropertyType_PT_RightAnkle`
-- `EPropertyType_PT_Chest` = `EPropertyType_PT_Chest`
-- `EPropertyType_PT_LeftWrist` = `EPropertyType_PT_LeftWrist`
-- `EPropertyType_PT_RightWrist` = `EPropertyType_PT_RightWrist`
-- `EPropertyType_PT_LeftKnee` = `EPropertyType_PT_LeftKnee`
-- `EPropertyType_PT_RightKnee` = `EPropertyType_PT_RightKnee`
-- `EPropertyType_PT_Head` = `EPropertyType_PT_Head`
-- `EPropertyType_PT_LeftElbow` = `EPropertyType_PT_LeftElbow`
-- `EPropertyType_PT_RightElbow` = `EPropertyType_PT_RightElbow`
-- `EPropertyType_PT_LeftAnkleRotation` = `EPropertyType_PT_LeftAnkleRotation`
-- `EPropertyType_PT_RightAnkleRotation` = `EPropertyType_PT_RightAnkleRotation`
-- `EPropertyType_PT_HeadRotation` = `EPropertyType_PT_HeadRotation`
-- `EPropertyType_PT_LeftWristRotation` = `EPropertyType_PT_LeftWristRotation`
-- `EPropertyType_PT_RightWristRotation` = `EPropertyType_PT_RightWristRotation`
-- `EPropertyType_PT_LeftFingerBase` = `EPropertyType_PT_LeftFingerBase`
-- `EPropertyType_PT_RightFingerBase` = `EPropertyType_PT_RightFingerBase`
-- `EPropertyType_PT_LeftToesBase` = `EPropertyType_PT_LeftToesBase`
-- `EPropertyType_PT_RightToesBase` = `EPropertyType_PT_RightToesBase`
-- `EPropertyType_PT_LeftFingerBaseRotation` = `EPropertyType_PT_LeftFingerBaseRotation`
-- `EPropertyType_PT_RightFingerBaseRotation` = `EPropertyType_PT_RightFingerBaseRotation`
-- `EPropertyType_PT_LeftToesBaseRotation` = `EPropertyType_PT_LeftToesBaseRotation`
-- `EPropertyType_PT_RightToesBaseRotation` = `EPropertyType_PT_RightToesBaseRotation`
-- `EPropertyType_PT_ChestRotation` = `EPropertyType_PT_ChestRotation`
-- `EPropertyType_PT_LowerChestRotation` = `EPropertyType_PT_LowerChestRotation`
-- `EPropertyType_PT_LeftHandThumb` = `EPropertyType_PT_LeftHandThumb`
-- `EPropertyType_PT_LeftHandIndex` = `EPropertyType_PT_LeftHandIndex`
-- `EPropertyType_PT_LeftHandMiddle` = `EPropertyType_PT_LeftHandMiddle`
-- `EPropertyType_PT_LeftHandRing` = `EPropertyType_PT_LeftHandRing`
-- `EPropertyType_PT_LeftHandPinky` = `EPropertyType_PT_LeftHandPinky`
-- `EPropertyType_PT_LeftHandExtraFinger` = `EPropertyType_PT_LeftHandExtraFinger`
-- `EPropertyType_PT_RightHandThumb` = `EPropertyType_PT_RightHandThumb`
-- `EPropertyType_PT_RightHandIndex` = `EPropertyType_PT_RightHandIndex`
-- `EPropertyType_PT_RightHandMiddle` = `EPropertyType_PT_RightHandMiddle`
-- `EPropertyType_PT_RightHandRing` = `EPropertyType_PT_RightHandRing`
-- `EPropertyType_PT_RightHandPinky` = `EPropertyType_PT_RightHandPinky`
-- `EPropertyType_PT_RightHandExtraFinger` = `EPropertyType_PT_RightHandExtraFinger`
-- `EPropertyType_PT_LeftFootThumb` = `EPropertyType_PT_LeftFootThumb`
-- `EPropertyType_PT_LeftFootIndex` = `EPropertyType_PT_LeftFootIndex`
-- `EPropertyType_PT_LeftFootMiddle` = `EPropertyType_PT_LeftFootMiddle`
-- `EPropertyType_PT_LeftFootRing` = `EPropertyType_PT_LeftFootRing`
-- `EPropertyType_PT_LeftFootPinky` = `EPropertyType_PT_LeftFootPinky`
-- `EPropertyType_PT_LeftFootExtraFinger` = `EPropertyType_PT_LeftFootExtraFinger`
-- `EPropertyType_PT_RightFootThumb` = `EPropertyType_PT_RightFootThumb`
-- `EPropertyType_PT_RightFootIndex` = `EPropertyType_PT_RightFootIndex`
-- `EPropertyType_PT_RightFootMiddle` = `EPropertyType_PT_RightFootMiddle`
-- `EPropertyType_PT_RightFootRing` = `EPropertyType_PT_RightFootRing`
-- `EPropertyType_PT_RightFootPinky` = `EPropertyType_PT_RightFootPinky`
-- `EPropertyType_PT_RightFootExtraFinger` = `EPropertyType_PT_RightFootExtraFinger`
-- `EPropertyType_PT_CtrlPullLeftFoot` = `EPropertyType_PT_CtrlPullLeftFoot`
-- `EPropertyType_PT_CtrlPullRightFoot` = `EPropertyType_PT_CtrlPullRightFoot`
-- `EPropertyType_PT_CtrlPullLeftHand` = `EPropertyType_PT_CtrlPullLeftHand`
-- `EPropertyType_PT_CtrlPullRightHand` = `EPropertyType_PT_CtrlPullRightHand`
-- `EPropertyType_PT_CtrlPullHead` = `EPropertyType_PT_CtrlPullHead`
-- `EPropertyType_PT_CtrlPullLeftToeBase` = `EPropertyType_PT_CtrlPullLeftToeBase`
-- `EPropertyType_PT_CtrlPullLeftKnee` = `EPropertyType_PT_CtrlPullLeftKnee`
-- `EPropertyType_PT_CtrlPullRightToeBase` = `EPropertyType_PT_CtrlPullRightToeBase`
-- `EPropertyType_PT_CtrlPullRightKnee` = `EPropertyType_PT_CtrlPullRightKnee`
-- `EPropertyType_PT_CtrlPullLeftFingerBase` = `EPropertyType_PT_CtrlPullLeftFingerBase`
-- `EPropertyType_PT_CtrlPullLeftElbow` = `EPropertyType_PT_CtrlPullLeftElbow`
-- `EPropertyType_PT_CtrlPullRightFingerBase` = `EPropertyType_PT_CtrlPullRightFingerBase`
-- `EPropertyType_PT_CtrlPullRightElbow` = `EPropertyType_PT_CtrlPullRightElbow`
-- `EPropertyType_PT_CtrlPullChestPullLeftHand` = `EPropertyType_PT_CtrlPullChestPullLeftHand`
-- `EPropertyType_PT_CtrlPullChestPullRightHand` = `EPropertyType_PT_CtrlPullChestPullRightHand`
-- `EPropertyType_PT_CtrlPullResistHipsPosition` = `EPropertyType_PT_CtrlPullResistHipsPosition`
-- `EPropertyType_PT_CtrlPullEnforceGravity` = `EPropertyType_PT_CtrlPullEnforceGravity`
-- `EPropertyType_PT_CtrlResistHipsOrientation` = `EPropertyType_PT_CtrlResistHipsOrientation`
-- `EPropertyType_PT_CtrlResistChestPosition` = `EPropertyType_PT_CtrlResistChestPosition`
-- `EPropertyType_PT_CtrlResistChestOrientation` = `EPropertyType_PT_CtrlResistChestOrientation`
-- `EPropertyType_PT_CtrlResistLeftCollar` = `EPropertyType_PT_CtrlResistLeftCollar`
-- `EPropertyType_PT_CtrlResistRightCollar` = `EPropertyType_PT_CtrlResistRightCollar`
-- `EPropertyType_PT_CtrlResistLeftKnee` = `EPropertyType_PT_CtrlResistLeftKnee`
-- `EPropertyType_PT_CtrlResistRightKnee` = `EPropertyType_PT_CtrlResistRightKnee`
-- `EPropertyType_PT_CtrlResistLeftElbow` = `EPropertyType_PT_CtrlResistLeftElbow`
-- `EPropertyType_PT_CtrlResistRightElbow` = `EPropertyType_PT_CtrlResistRightElbow`
-- `EPropertyType_PT_HipsTOffsetX` = `EPropertyType_PT_HipsTOffsetX`
-- `EPropertyType_PT_HipsTOffsetY` = `EPropertyType_PT_HipsTOffsetY`
-- `EPropertyType_PT_ChestTOffsetX` = `EPropertyType_PT_ChestTOffsetX`
-- `EPropertyType_PT_ChestTOffsetY` = `EPropertyType_PT_ChestTOffsetY`
-- `EPropertyType_PT_ChestTOffsetZ` = `EPropertyType_PT_ChestTOffsetZ`
-- `EPropertyType_PT_Quantity` = `EPropertyType_PT_Quantity`
+- `EPropertyType_PT_AnkleHeightCompensation`
+- `EPropertyType_PT_AnkleProximityCompensation`
+- `EPropertyType_PT_Chest`
+- `EPropertyType_PT_ChestRotation`
+- `EPropertyType_PT_ChestTOffsetX`
+- `EPropertyType_PT_ChestTOffsetY`
+- `EPropertyType_PT_ChestTOffsetZ`
+- `EPropertyType_PT_CollarStiffnessX`
+- `EPropertyType_PT_CollarStiffnessY`
+- `EPropertyType_PT_CollarStiffnessZ`
+- `EPropertyType_PT_CtrlNeckStiffness`
+- `EPropertyType_PT_CtrlPullChestPullLeftHand`
+- `EPropertyType_PT_CtrlPullChestPullRightHand`
+- `EPropertyType_PT_CtrlPullEnforceGravity`
+- `EPropertyType_PT_CtrlPullHead`
+- `EPropertyType_PT_CtrlPullLeftElbow`
+- `EPropertyType_PT_CtrlPullLeftFingerBase`
+- `EPropertyType_PT_CtrlPullLeftFoot`
+- `EPropertyType_PT_CtrlPullLeftHand`
+- `EPropertyType_PT_CtrlPullLeftKnee`
+- `EPropertyType_PT_CtrlPullLeftToeBase`
+- `EPropertyType_PT_CtrlPullResistHipsPosition`
+- `EPropertyType_PT_CtrlPullRightElbow`
+- `EPropertyType_PT_CtrlPullRightFingerBase`
+- `EPropertyType_PT_CtrlPullRightFoot`
+- `EPropertyType_PT_CtrlPullRightHand`
+- `EPropertyType_PT_CtrlPullRightKnee`
+- `EPropertyType_PT_CtrlPullRightToeBase`
+- `EPropertyType_PT_CtrlResistChestOrientation`
+- `EPropertyType_PT_CtrlResistChestPosition`
+- `EPropertyType_PT_CtrlResistCompressionFactorLeftElbow`
+- `EPropertyType_PT_CtrlResistCompressionFactorLeftKnee`
+- `EPropertyType_PT_CtrlResistCompressionFactorRightElbow`
+- `EPropertyType_PT_CtrlResistCompressionFactorRightKnee`
+- `EPropertyType_PT_CtrlResistHipsOrientation`
+- `EPropertyType_PT_CtrlResistLeftCollar`
+- `EPropertyType_PT_CtrlResistLeftElbow`
+- `EPropertyType_PT_CtrlResistLeftKnee`
+- `EPropertyType_PT_CtrlResistMaximumExtensionLeftElbow`
+- `EPropertyType_PT_CtrlResistMaximumExtensionLeftKnee`
+- `EPropertyType_PT_CtrlResistMaximumExtensionRightElbow`
+- `EPropertyType_PT_CtrlResistMaximumExtensionRightKnee`
+- `EPropertyType_PT_CtrlResistRightCollar`
+- `EPropertyType_PT_CtrlResistRightElbow`
+- `EPropertyType_PT_CtrlResistRightKnee`
+- `EPropertyType_PT_ExtraCollarRatio`
+- `EPropertyType_PT_FootBackToAnkle`
+- `EPropertyType_PT_FootBottomToAnkle`
+- `EPropertyType_PT_FootContactStiffness`
+- `EPropertyType_PT_FootFingerContactRollStiffness`
+- `EPropertyType_PT_FootFrontToMiddle`
+- `EPropertyType_PT_FootInToAnkle`
+- `EPropertyType_PT_FootMiddleToAnkle`
+- `EPropertyType_PT_FootOutToAnkle`
+- `EPropertyType_PT_HandBackToWrist`
+- `EPropertyType_PT_HandBottomToWrist`
+- `EPropertyType_PT_HandContactStiffness`
+- `EPropertyType_PT_HandFingerContactRollStiffness`
+- `EPropertyType_PT_HandFrontToMiddle`
+- `EPropertyType_PT_HandInToWrist`
+- `EPropertyType_PT_HandMiddleToWrist`
+- `EPropertyType_PT_HandOutToWrist`
+- `EPropertyType_PT_Head`
+- `EPropertyType_PT_HeadRotation`
+- `EPropertyType_PT_HipsHeightCompensation`
+- `EPropertyType_PT_HipsTOffsetX`
+- `EPropertyType_PT_HipsTOffsetY`
+- `EPropertyType_PT_HipsTOffsetZ`
+- `EPropertyType_PT_LeftAnkle`
+- `EPropertyType_PT_LeftAnkleRotation`
+- `EPropertyType_PT_LeftArmMaxExtensionAngle`
+- `EPropertyType_PT_LeftArmRoll`
+- `EPropertyType_PT_LeftArmRollEx`
+- `EPropertyType_PT_LeftElbow`
+- `EPropertyType_PT_LeftFingerBase`
+- `EPropertyType_PT_LeftFingerBaseRotation`
+- `EPropertyType_PT_LeftFootExtraFinger`
+- `EPropertyType_PT_LeftFootExtraSize`
+- `EPropertyType_PT_LeftFootIndex`
+- `EPropertyType_PT_LeftFootIndexSize`
+- `EPropertyType_PT_LeftFootMiddle`
+- `EPropertyType_PT_LeftFootMiddleSize`
+- `EPropertyType_PT_LeftFootPinky`
+- `EPropertyType_PT_LeftFootPinkySize`
+- `EPropertyType_PT_LeftFootRing`
+- `EPropertyType_PT_LeftFootRingSize`
+- `EPropertyType_PT_LeftFootThumb`
+- `EPropertyType_PT_LeftFootThumbSize`
+- `EPropertyType_PT_LeftForeArmRoll`
+- `EPropertyType_PT_LeftForeArmRollEx`
+- `EPropertyType_PT_LeftHandExtraFinger`
+- `EPropertyType_PT_LeftHandExtraSize`
+- `EPropertyType_PT_LeftHandIndex`
+- `EPropertyType_PT_LeftHandIndexSize`
+- `EPropertyType_PT_LeftHandMiddle`
+- `EPropertyType_PT_LeftHandMiddleSize`
+- `EPropertyType_PT_LeftHandPinky`
+- `EPropertyType_PT_LeftHandPinkySize`
+- `EPropertyType_PT_LeftHandRing`
+- `EPropertyType_PT_LeftHandRingSize`
+- `EPropertyType_PT_LeftHandThumb`
+- `EPropertyType_PT_LeftHandThumbSize`
+- `EPropertyType_PT_LeftKnee`
+- `EPropertyType_PT_LeftLegMaxExtensionAngle`
+- `EPropertyType_PT_LeftLegRoll`
+- `EPropertyType_PT_LeftLegRollEx`
+- `EPropertyType_PT_LeftToesBase`
+- `EPropertyType_PT_LeftToesBaseRotation`
+- `EPropertyType_PT_LeftUpLegRoll`
+- `EPropertyType_PT_LeftUpLegRollEx`
+- `EPropertyType_PT_LeftWrist`
+- `EPropertyType_PT_LeftWristRotation`
+- `EPropertyType_PT_LowerChestRotation`
+- `EPropertyType_PT_PullIterationCount`
+- `EPropertyType_PT_Quantity`
+- `EPropertyType_PT_Quantity_Version210`
+- `EPropertyType_PT_Quantity_Version26`
+- `EPropertyType_PT_Quantity_Version29`
+- `EPropertyType_PT_ReachActorLeftShoulder`
+- `EPropertyType_PT_ReachActorRightShoulder`
+- `EPropertyType_PT_RealisticLeftKneeSolving`
+- `EPropertyType_PT_RealisticRightKneeSolving`
+- `EPropertyType_PT_RealisticShoulder`
+- `EPropertyType_PT_RightAnkle`
+- `EPropertyType_PT_RightAnkleRotation`
+- `EPropertyType_PT_RightArmMaxExtensionAngle`
+- `EPropertyType_PT_RightArmRoll`
+- `EPropertyType_PT_RightArmRollEx`
+- `EPropertyType_PT_RightElbow`
+- `EPropertyType_PT_RightFingerBase`
+- `EPropertyType_PT_RightFingerBaseRotation`
+- `EPropertyType_PT_RightFootExtraFinger`
+- `EPropertyType_PT_RightFootExtraSize`
+- `EPropertyType_PT_RightFootIndex`
+- `EPropertyType_PT_RightFootIndexSize`
+- `EPropertyType_PT_RightFootMiddle`
+- `EPropertyType_PT_RightFootMiddleSize`
+- `EPropertyType_PT_RightFootPinky`
+- `EPropertyType_PT_RightFootPinkySize`
+- `EPropertyType_PT_RightFootRing`
+- `EPropertyType_PT_RightFootRingSize`
+- `EPropertyType_PT_RightFootThumb`
+- `EPropertyType_PT_RightFootThumbSize`
+- `EPropertyType_PT_RightForeArmRoll`
+- `EPropertyType_PT_RightForeArmRollEx`
+- `EPropertyType_PT_RightHandExtraFinger`
+- `EPropertyType_PT_RightHandExtraSize`
+- `EPropertyType_PT_RightHandIndex`
+- `EPropertyType_PT_RightHandIndexSize`
+- `EPropertyType_PT_RightHandMiddle`
+- `EPropertyType_PT_RightHandMiddleSize`
+- `EPropertyType_PT_RightHandPinky`
+- `EPropertyType_PT_RightHandPinkySize`
+- `EPropertyType_PT_RightHandRing`
+- `EPropertyType_PT_RightHandRingSize`
+- `EPropertyType_PT_RightHandThumb`
+- `EPropertyType_PT_RightHandThumbSize`
+- `EPropertyType_PT_RightKnee`
+- `EPropertyType_PT_RightLegMaxExtensionAngle`
+- `EPropertyType_PT_RightLegRoll`
+- `EPropertyType_PT_RightLegRollEx`
+- `EPropertyType_PT_RightToesBase`
+- `EPropertyType_PT_RightToesBaseRotation`
+- `EPropertyType_PT_RightUpLegRoll`
+- `EPropertyType_PT_RightUpLegRollEx`
+- `EPropertyType_PT_RightWrist`
+- `EPropertyType_PT_RightWristRotation`
+- `EPropertyType_PT_RollExtractionMode`
+- `EPropertyType_PT_SnSNeckFreedom`
+- `EPropertyType_PT_SnSReachChestEnd`
+- `EPropertyType_PT_SnSReachHead`
+- `EPropertyType_PT_SnSReachLeftAnkle`
+- `EPropertyType_PT_SnSReachLeftWrist`
+- `EPropertyType_PT_SnSReachRightAnkle`
+- `EPropertyType_PT_SnSReachRightWrist`
+- `EPropertyType_PT_SnSScaleArmsAndLegs`
+- `EPropertyType_PT_SnSScaleNeck`
+- `EPropertyType_PT_SnSScaleSpine`
+- `EPropertyType_PT_SnSScaleSpineChildren`
+- `EPropertyType_PT_SnSSpineFreedom`
+- `EPropertyType_PT_SpineStiffness`
+- `EPropertyType_PT_StretchStartArmsAndLegs`
+- `EPropertyType_PT_StretchStopArmsAndLegs`
+- `EPropertyType_PT_TopSpineCorrection`
 
 ### EQuaternionOrder
 
-- `EQuaternionOrder_XYZW` = `EQuaternionOrder_XYZW`
-- `EQuaternionOrder_WXYZ` = `EQuaternionOrder_WXYZ`
+- `EQuaternionOrder_WXYZ`
+- `EQuaternionOrder_XYZW`
 
 ### EReduceBonePose
 
-- `EReduceBonePose__None` = `EReduceBonePose__None`
-- `EReduceBonePose_TPose` = `EReduceBonePose_TPose`
-- `EReduceBonePose_Default` = `EReduceBonePose_Default`
-- `EReduceBonePose_Current` = `EReduceBonePose_Current`
-- `EReduceBonePose_Custom` = `EReduceBonePose_Custom`
+- `EReduceBonePose_Current`
+- `EReduceBonePose_Custom`
+- `EReduceBonePose_Default`
+- `EReduceBonePose_TPose`
+- `EReduceBonePose__None`
 
 ### EReplaceMeshOption
 
-- `EReplaceMeshOption_YUp` = `EReplaceMeshOption_YUp`
-- `EReplaceMeshOption_ZUp` = `EReplaceMeshOption_ZUp`
+- `EReplaceMeshOption_YUp`
+- `EReplaceMeshOption_ZUp`
 
 ### EResolutionType
 
-- `EResolutionType_Large` = `EResolutionType_Large`
-- `EResolutionType_Original` = `EResolutionType_Original`
-- `EResolutionType_Small` = `EResolutionType_Small`
+- `EResolutionType_Large`
+- `EResolutionType_Original`
+- `EResolutionType_Small`
 
 ### ERotationType
 
-- `ERotationType_Euler` = `ERotationType_Euler`
-- `ERotationType_Quaternion` = `ERotationType_Quaternion`
+- `ERotationType_Euler`
+- `ERotationType_Quaternion`
 
 ### ERotationUnit
 
-- `ERotationUnit_Radians` = `ERotationUnit_Radians`
-- `ERotationUnit_Degrees` = `ERotationUnit_Degrees`
+- `ERotationUnit_Degrees`
+- `ERotationUnit_Radians`
 
 ### ESaveFacialAnimationOption
 
-- `ESaveFacialAnimationOption__None` = `ESaveFacialAnimationOption__None`
-- `ESaveFacialAnimationOption_Expression` = `ESaveFacialAnimationOption_Expression`
-- `ESaveFacialAnimationOption_Viseme` = `ESaveFacialAnimationOption_Viseme`
-- `ESaveFacialAnimationOption_VisemeRawData` = `ESaveFacialAnimationOption_VisemeRawData`
-- `ESaveFacialAnimationOption_All` = `ESaveFacialAnimationOption_All`
+- `ESaveFacialAnimationOption_All`
+- `ESaveFacialAnimationOption_Expression`
+- `ESaveFacialAnimationOption_Viseme`
+- `ESaveFacialAnimationOption_VisemeRawData`
+- `ESaveFacialAnimationOption__None`
 
 ### ESaveFileType
 
-- `ESaveFileType_Project` = `ESaveFileType_Project`
-- `ESaveFileType_Character` = `ESaveFileType_Character`
-- `ESaveFileType_Upper` = `ESaveFileType_Upper`
-- `ESaveFileType_Lower` = `ESaveFileType_Lower`
-- `ESaveFileType_Gloves` = `ESaveFileType_Gloves`
-- `ESaveFileType_Shoes` = `ESaveFileType_Shoes`
-- `ESaveFileType_Accessory` = `ESaveFileType_Accessory`
-- `ESaveFileType_Motion` = `ESaveFileType_Motion`
-- `ESaveFileType_Prop` = `ESaveFileType_Prop`
-- `ESaveFileType_Talk` = `ESaveFileType_Talk`
-- `ESaveFileType_MotionPlus` = `ESaveFileType_MotionPlus`
-- `ESaveFileType_AvatarPart` = `ESaveFileType_AvatarPart`
-- `ESaveFileType_AvatarPresetAll` = `ESaveFileType_AvatarPresetAll`
-- `ESaveFileType_FaceHairElement` = `ESaveFileType_FaceHairElement`
-- `ESaveFileType_AvatarPresetFacialProfile` = `ESaveFileType_AvatarPresetFacialProfile`
-- `ESaveFileType_EyelashElement` = `ESaveFileType_EyelashElement`
+- `ESaveFileType_Accessory`
+- `ESaveFileType_AvatarPart`
+- `ESaveFileType_AvatarPresetAll`
+- `ESaveFileType_AvatarPresetFacialProfile`
+- `ESaveFileType_Character`
+- `ESaveFileType_EyelashElement`
+- `ESaveFileType_FaceHairElement`
+- `ESaveFileType_Gloves`
+- `ESaveFileType_Lower`
+- `ESaveFileType_Motion`
+- `ESaveFileType_MotionPlus`
+- `ESaveFileType_Project`
+- `ESaveFileType_Prop`
+- `ESaveFileType_Shoes`
+- `ESaveFileType_Talk`
+- `ESaveFileType_Upper`
 
 ### ESaveMotionClipOption
 
-- `ESaveMotionClipOption__None` = `ESaveMotionClipOption__None`
-- `ESaveMotionClipOption_WithLayerKey` = `ESaveMotionClipOption_WithLayerKey`
-- `ESaveMotionClipOption_FkMotionOnly` = `ESaveMotionClipOption_FkMotionOnly`
-- `ESaveMotionClipOption_AllBone` = `ESaveMotionClipOption_AllBone`
-- `ESaveMotionClipOption_ExcludeTransformData` = `ESaveMotionClipOption_ExcludeTransformData`
+- `ESaveMotionClipOption_AllBone`
+- `ESaveMotionClipOption_ExcludeTransformData`
+- `ESaveMotionClipOption_FkMotionOnly`
+- `ESaveMotionClipOption_WithLayerKey`
+- `ESaveMotionClipOption__None`
 
 ### ESaveMotionPlusOption
 
-- `ESaveMotionPlusOption__None` = `ESaveMotionPlusOption__None`
-- `ESaveMotionPlusOption_Avatar_Motion` = `ESaveMotionPlusOption_Avatar_Motion`
-- `ESaveMotionPlusOption_Avatar_Spring` = `ESaveMotionPlusOption_Avatar_Spring`
-- `ESaveMotionPlusOption_Avatar_Visible` = `ESaveMotionPlusOption_Avatar_Visible`
-- `ESaveMotionPlusOption_Avatar_Sound` = `ESaveMotionPlusOption_Avatar_Sound`
-- `ESaveMotionPlusOption_Avatar_Talk` = `ESaveMotionPlusOption_Avatar_Talk`
-- `ESaveMotionPlusOption_Avatar_Morph` = `ESaveMotionPlusOption_Avatar_Morph`
-- `ESaveMotionPlusOption_Avatar_Material` = `ESaveMotionPlusOption_Avatar_Material`
-- `ESaveMotionPlusOption_AllAvatar` = `ESaveMotionPlusOption_AllAvatar`
+- `ESaveMotionPlusOption_AllAvatar`
+- `ESaveMotionPlusOption_Avatar_Material`
+- `ESaveMotionPlusOption_Avatar_Morph`
+- `ESaveMotionPlusOption_Avatar_Motion`
+- `ESaveMotionPlusOption_Avatar_Sound`
+- `ESaveMotionPlusOption_Avatar_Spring`
+- `ESaveMotionPlusOption_Avatar_Talk`
+- `ESaveMotionPlusOption_Avatar_Visible`
+- `ESaveMotionPlusOption__None`
 
 ### ESetCategory
 
-- `ESetCategory_Body` = `ESetCategory_Body`
-- `ESetCategory_Head` = `ESetCategory_Head`
-- `ESetCategory_Eyes` = `ESetCategory_Eyes`
-- `ESetCategory_Teeth` = `ESetCategory_Teeth`
-- `ESetCategory_Eyelash` = `ESetCategory_Eyelash`
-- `ESetCategory_UpperEyelash` = `ESetCategory_UpperEyelash`
-- `ESetCategory_LowerEyelash` = `ESetCategory_LowerEyelash`
-- `ESetCategory_Nail` = `ESetCategory_Nail`
+- `ESetCategory_Body`
+- `ESetCategory_Eyelash`
+- `ESetCategory_Eyes`
+- `ESetCategory_Head`
+- `ESetCategory_LowerEyelash`
+- `ESetCategory_Nail`
+- `ESetCategory_Teeth`
+- `ESetCategory_UpperEyelash`
 
 ### ETagType
 
-- `ETagType_Developer` = `ETagType_Developer`
-- `ETagType_User` = `ETagType_User`
+- `ETagType_Developer`
+- `ETagType_User`
 
 ### ETangentType
 
-- `ETangentType_Beizier` = `ETangentType_Beizier`
-- `ETangentType_Linear` = `ETangentType_Linear`
-- `ETangentType_Step` = `ETangentType_Step`
-- `ETangentType_EaseIn` = `ETangentType_EaseIn`
-- `ETangentType_EaseOut` = `ETangentType_EaseOut`
-- `ETangentType_EaseInOut` = `ETangentType_EaseInOut`
-- `ETangentType_EaseOutIn` = `ETangentType_EaseOutIn`
-- `ETangentType_Fast` = `ETangentType_Fast`
-- `ETangentType_Slow` = `ETangentType_Slow`
-- `ETangentType_Auto` = `ETangentType_Auto`
-- `ETangentType_Smooth` = `ETangentType_Smooth`
+- `ETangentType_Auto`
+- `ETangentType_Beizier`
+- `ETangentType_EaseIn`
+- `ETangentType_EaseInOut`
+- `ETangentType_EaseOut`
+- `ETangentType_EaseOutIn`
+- `ETangentType_Fast`
+- `ETangentType_Linear`
+- `ETangentType_Slow`
+- `ETangentType_Smooth`
+- `ETangentType_Step`
 
 ### ETemplateRootFolder
 
-- `ETemplateRootFolder_Project` = `ETemplateRootFolder_Project`
-- `ETemplateRootFolder_Character` = `ETemplateRootFolder_Character`
-- `ETemplateRootFolder_AvatarControl` = `ETemplateRootFolder_AvatarControl`
-- `ETemplateRootFolder_FacialProfile` = `ETemplateRootFolder_FacialProfile`
-- `ETemplateRootFolder_Teeth` = `ETemplateRootFolder_Teeth`
-- `ETemplateRootFolder_Eye` = `ETemplateRootFolder_Eye`
-- `ETemplateRootFolder_Face` = `ETemplateRootFolder_Face`
-- `ETemplateRootFolder_RLHead` = `ETemplateRootFolder_RLHead`
-- `ETemplateRootFolder_Oral` = `ETemplateRootFolder_Oral`
-- `ETemplateRootFolder_Upper` = `ETemplateRootFolder_Upper`
-- `ETemplateRootFolder_Lower` = `ETemplateRootFolder_Lower`
-- `ETemplateRootFolder_FullBodyMorphSkin` = `ETemplateRootFolder_FullBodyMorphSkin`
-- `ETemplateRootFolder_HeadMorphSkin` = `ETemplateRootFolder_HeadMorphSkin`
-- `ETemplateRootFolder_FullBodyMorph` = `ETemplateRootFolder_FullBodyMorph`
-- `ETemplateRootFolder_BodyMorph` = `ETemplateRootFolder_BodyMorph`
-- `ETemplateRootFolder_HeadMorph` = `ETemplateRootFolder_HeadMorph`
-- `ETemplateRootFolder_AvatarPresetEyelash` = `ETemplateRootFolder_AvatarPresetEyelash`
-- `ETemplateRootFolder_Nail` = `ETemplateRootFolder_Nail`
-- `ETemplateRootFolder_MixerPreset_Leg` = `ETemplateRootFolder_MixerPreset_Leg`
-- `ETemplateRootFolder_MixerPreset_Arm` = `ETemplateRootFolder_MixerPreset_Arm`
-- `ETemplateRootFolder_MixerPreset_BodyAdjust` = `ETemplateRootFolder_MixerPreset_BodyAdjust`
-- `ETemplateRootFolder_MixerPreset_HeadAdjust` = `ETemplateRootFolder_MixerPreset_HeadAdjust`
-- `ETemplateRootFolder_MixerPreset_Chin` = `ETemplateRootFolder_MixerPreset_Chin`
-- `ETemplateRootFolder_MixerPreset_Brow` = `ETemplateRootFolder_MixerPreset_Brow`
-- `ETemplateRootFolder_MixerPreset_Ear` = `ETemplateRootFolder_MixerPreset_Ear`
-- `ETemplateRootFolder_MixerPreset_Mouth` = `ETemplateRootFolder_MixerPreset_Mouth`
-- `ETemplateRootFolder_MixerPreset_Nose` = `ETemplateRootFolder_MixerPreset_Nose`
-- `ETemplateRootFolder_MixerPreset_Eye` = `ETemplateRootFolder_MixerPreset_Eye`
-- `ETemplateRootFolder_MixerPreset_Body` = `ETemplateRootFolder_MixerPreset_Body`
-- `ETemplateRootFolder_MixerPreset_Head` = `ETemplateRootFolder_MixerPreset_Head`
-- `ETemplateRootFolder_MixerPreset_FullCharacter` = `ETemplateRootFolder_MixerPreset_FullCharacter`
-- `ETemplateRootFolder_MixerPreset_Torso` = `ETemplateRootFolder_MixerPreset_Torso`
-- `ETemplateRootFolder_MixerPresetSet` = `ETemplateRootFolder_MixerPresetSet`
-- `ETemplateRootFolder_MixerPresetPackage` = `ETemplateRootFolder_MixerPresetPackage`
-- `ETemplateRootFolder_Overall` = `ETemplateRootFolder_Overall`
-- `ETemplateRootFolder_Skin_Head` = `ETemplateRootFolder_Skin_Head`
-- `ETemplateRootFolder_FullSkin` = `ETemplateRootFolder_FullSkin`
-- `ETemplateRootFolder_SkinBase` = `ETemplateRootFolder_SkinBase`
-- `ETemplateRootFolder_NormalEffects` = `ETemplateRootFolder_NormalEffects`
-- `ETemplateRootFolder_SkinDetails` = `ETemplateRootFolder_SkinDetails`
-- `ETemplateRootFolder_Blemish` = `ETemplateRootFolder_Blemish`
-- `ETemplateRootFolder_Acquired` = `ETemplateRootFolder_Acquired`
-- `ETemplateRootFolder_BodyHair` = `ETemplateRootFolder_BodyHair`
-- `ETemplateRootFolder_Nails` = `ETemplateRootFolder_Nails`
-- `ETemplateRootFolder_SkinGenTools` = `ETemplateRootFolder_SkinGenTools`
-- `ETemplateRootFolder_WrinkleMasks` = `ETemplateRootFolder_WrinkleMasks`
-- `ETemplateRootFolder_FullMakeup` = `ETemplateRootFolder_FullMakeup`
-- `ETemplateRootFolder_FoundationMakeup` = `ETemplateRootFolder_FoundationMakeup`
-- `ETemplateRootFolder_EyeMakeup` = `ETemplateRootFolder_EyeMakeup`
-- `ETemplateRootFolder_MakeupEyelash` = `ETemplateRootFolder_MakeupEyelash`
-- `ETemplateRootFolder_LipMakeup` = `ETemplateRootFolder_LipMakeup`
-- `ETemplateRootFolder_Eyebrow` = `ETemplateRootFolder_Eyebrow`
-- `ETemplateRootFolder_Miscellaneous` = `ETemplateRootFolder_Miscellaneous`
-- `ETemplateRootFolder_MakeupSkinGenTools` = `ETemplateRootFolder_MakeupSkinGenTools`
-- `ETemplateRootFolder_Style` = `ETemplateRootFolder_Style`
-- `ETemplateRootFolder_Group` = `ETemplateRootFolder_Group`
-- `ETemplateRootFolder_Element` = `ETemplateRootFolder_Element`
-- `ETemplateRootFolder_Underwear` = `ETemplateRootFolder_Underwear`
-- `ETemplateRootFolder_Shirts` = `ETemplateRootFolder_Shirts`
-- `ETemplateRootFolder_Pants` = `ETemplateRootFolder_Pants`
-- `ETemplateRootFolder_Skirts` = `ETemplateRootFolder_Skirts`
-- `ETemplateRootFolder_Coats` = `ETemplateRootFolder_Coats`
-- `ETemplateRootFolder_FullBody` = `ETemplateRootFolder_FullBody`
-- `ETemplateRootFolder_ClothOthers` = `ETemplateRootFolder_ClothOthers`
-- `ETemplateRootFolder_Gloves` = `ETemplateRootFolder_Gloves`
-- `ETemplateRootFolder_Shoes` = `ETemplateRootFolder_Shoes`
-- `ETemplateRootFolder_Head` = `ETemplateRootFolder_Head`
-- `ETemplateRootFolder_Torso` = `ETemplateRootFolder_Torso`
-- `ETemplateRootFolder_Arm` = `ETemplateRootFolder_Arm`
-- `ETemplateRootFolder_Leg` = `ETemplateRootFolder_Leg`
-- `ETemplateRootFolder_AccessoryOthers` = `ETemplateRootFolder_AccessoryOthers`
-- `ETemplateRootFolder_MotionPlus` = `ETemplateRootFolder_MotionPlus`
-- `ETemplateRootFolder_Motion` = `ETemplateRootFolder_Motion`
-- `ETemplateRootFolder_Expression` = `ETemplateRootFolder_Expression`
-- `ETemplateRootFolder_Gesture` = `ETemplateRootFolder_Gesture`
-- `ETemplateRootFolder_Pose` = `ETemplateRootFolder_Pose`
-- `ETemplateRootFolder_MotionDirector` = `ETemplateRootFolder_MotionDirector`
-- `ETemplateRootFolder_Persona` = `ETemplateRootFolder_Persona`
-- `ETemplateRootFolder_iAnimation` = `ETemplateRootFolder_iAnimation`
-- `ETemplateRootFolder_LightRoom` = `ETemplateRootFolder_LightRoom`
-- `ETemplateRootFolder_Atmosphere` = `ETemplateRootFolder_Atmosphere`
-- `ETemplateRootFolder_Camera` = `ETemplateRootFolder_Camera`
-- `ETemplateRootFolder_Light` = `ETemplateRootFolder_Light`
-- `ETemplateRootFolder_PostEffect` = `ETemplateRootFolder_PostEffect`
-- `ETemplateRootFolder_ImageLayer` = `ETemplateRootFolder_ImageLayer`
-- `ETemplateRootFolder_Scene3D` = `ETemplateRootFolder_Scene3D`
-- `ETemplateRootFolder_Material` = `ETemplateRootFolder_Material`
-- `ETemplateRootFolder_MaterialPlus` = `ETemplateRootFolder_MaterialPlus`
-- `ETemplateRootFolder_Background2D` = `ETemplateRootFolder_Background2D`
-- `ETemplateRootFolder_Texture` = `ETemplateRootFolder_Texture`
-- `ETemplateRootFolder_Diffuse` = `ETemplateRootFolder_Diffuse`
-- `ETemplateRootFolder_Opacity` = `ETemplateRootFolder_Opacity`
-- `ETemplateRootFolder_Bump` = `ETemplateRootFolder_Bump`
-- `ETemplateRootFolder_Glow` = `ETemplateRootFolder_Glow`
-- `ETemplateRootFolder_Reflection` = `ETemplateRootFolder_Reflection`
-- `ETemplateRootFolder_Specular` = `ETemplateRootFolder_Specular`
-- `ETemplateRootFolder_Blend` = `ETemplateRootFolder_Blend`
-- `ETemplateRootFolder_Displacement` = `ETemplateRootFolder_Displacement`
-- `ETemplateRootFolder_IBL` = `ETemplateRootFolder_IBL`
-- `ETemplateRootFolder_WeightMap` = `ETemplateRootFolder_WeightMap`
-- `ETemplateRootFolder_Metallic` = `ETemplateRootFolder_Metallic`
-- `ETemplateRootFolder_Roughness` = `ETemplateRootFolder_Roughness`
-- `ETemplateRootFolder_AO` = `ETemplateRootFolder_AO`
-- `ETemplateRootFolder_LensFlare` = `ETemplateRootFolder_LensFlare`
-- `ETemplateRootFolder_IES` = `ETemplateRootFolder_IES`
-- `ETemplateRootFolder_IMDL` = `ETemplateRootFolder_IMDL`
-- `ETemplateRootFolder_Tree` = `ETemplateRootFolder_Tree`
-- `ETemplateRootFolder_Grass` = `ETemplateRootFolder_Grass`
-- `ETemplateRootFolder_Particle` = `ETemplateRootFolder_Particle`
-- `ETemplateRootFolder_Terrain` = `ETemplateRootFolder_Terrain`
-- `ETemplateRootFolder_Water` = `ETemplateRootFolder_Water`
-- `ETemplateRootFolder_Sky` = `ETemplateRootFolder_Sky`
-- `ETemplateRootFolder_MotionPath` = `ETemplateRootFolder_MotionPath`
-- `ETemplateRootFolder_Props` = `ETemplateRootFolder_Props`
-- `ETemplateRootFolder_Building` = `ETemplateRootFolder_Building`
-- `ETemplateRootFolder_Sound` = `ETemplateRootFolder_Sound`
-- `ETemplateRootFolder_Video` = `ETemplateRootFolder_Video`
-- `ETemplateRootFolder_Digital_Human_Shader_Resource` = `ETemplateRootFolder_Digital_Human_Shader_Resource`
-- `ETemplateRootFolder_SSS_Shader_Resource` = `ETemplateRootFolder_SSS_Shader_Resource`
-- `ETemplateRootFolder_Spring` = `ETemplateRootFolder_Spring`
-- `ETemplateRootFolder_LuaScript` = `ETemplateRootFolder_LuaScript`
-- `ETemplateRootFolder_Fashion_Gen_Resource` = `ETemplateRootFolder_Fashion_Gen_Resource`
-- `ETemplateRootFolder_MotionPuppet` = `ETemplateRootFolder_MotionPuppet`
-- `ETemplateRootFolder_FacePuppet` = `ETemplateRootFolder_FacePuppet`
-- `ETemplateRootFolder_SubstancePreset` = `ETemplateRootFolder_SubstancePreset`
-- `ETemplateRootFolder_ContentPatch` = `ETemplateRootFolder_ContentPatch`
-- `ETemplateRootFolder_SpringProfile` = `ETemplateRootFolder_SpringProfile`
-- `ETemplateRootFolder_Dictionary` = `ETemplateRootFolder_Dictionary`
-- `ETemplateRootFolder_Quantity` = `ETemplateRootFolder_Quantity`
-- `ETemplateRootFolder_Invalid` = `ETemplateRootFolder_Invalid`
+- `ETemplateRootFolder_AO`
+- `ETemplateRootFolder_AccessoryOthers`
+- `ETemplateRootFolder_Acquired`
+- `ETemplateRootFolder_Arm`
+- `ETemplateRootFolder_Atmosphere`
+- `ETemplateRootFolder_AvatarControl`
+- `ETemplateRootFolder_AvatarPresetEyelash`
+- `ETemplateRootFolder_Background2D`
+- `ETemplateRootFolder_Blemish`
+- `ETemplateRootFolder_Blend`
+- `ETemplateRootFolder_BodyHair`
+- `ETemplateRootFolder_BodyMorph`
+- `ETemplateRootFolder_Building`
+- `ETemplateRootFolder_Bump`
+- `ETemplateRootFolder_Camera`
+- `ETemplateRootFolder_Character`
+- `ETemplateRootFolder_ClothOthers`
+- `ETemplateRootFolder_Coats`
+- `ETemplateRootFolder_ContentPatch`
+- `ETemplateRootFolder_Dictionary`
+- `ETemplateRootFolder_Diffuse`
+- `ETemplateRootFolder_Digital_Human_Shader_Resource`
+- `ETemplateRootFolder_Displacement`
+- `ETemplateRootFolder_Element`
+- `ETemplateRootFolder_Expression`
+- `ETemplateRootFolder_Eye`
+- `ETemplateRootFolder_EyeMakeup`
+- `ETemplateRootFolder_Eyebrow`
+- `ETemplateRootFolder_Face`
+- `ETemplateRootFolder_FacePuppet`
+- `ETemplateRootFolder_FacialProfile`
+- `ETemplateRootFolder_Fashion_Gen_Resource`
+- `ETemplateRootFolder_FoundationMakeup`
+- `ETemplateRootFolder_FullBody`
+- `ETemplateRootFolder_FullBodyMorph`
+- `ETemplateRootFolder_FullBodyMorphSkin`
+- `ETemplateRootFolder_FullMakeup`
+- `ETemplateRootFolder_FullSkin`
+- `ETemplateRootFolder_Gesture`
+- `ETemplateRootFolder_Gloves`
+- `ETemplateRootFolder_Glow`
+- `ETemplateRootFolder_Grass`
+- `ETemplateRootFolder_Group`
+- `ETemplateRootFolder_Head`
+- `ETemplateRootFolder_HeadMorph`
+- `ETemplateRootFolder_HeadMorphSkin`
+- `ETemplateRootFolder_IBL`
+- `ETemplateRootFolder_IES`
+- `ETemplateRootFolder_IMDL`
+- `ETemplateRootFolder_ImageLayer`
+- `ETemplateRootFolder_Invalid`
+- `ETemplateRootFolder_Leg`
+- `ETemplateRootFolder_LensFlare`
+- `ETemplateRootFolder_Light`
+- `ETemplateRootFolder_LightRoom`
+- `ETemplateRootFolder_LipMakeup`
+- `ETemplateRootFolder_Lower`
+- `ETemplateRootFolder_LuaScript`
+- `ETemplateRootFolder_MakeupEyelash`
+- `ETemplateRootFolder_MakeupSkinGenTools`
+- `ETemplateRootFolder_Material`
+- `ETemplateRootFolder_MaterialPlus`
+- `ETemplateRootFolder_Metallic`
+- `ETemplateRootFolder_Miscellaneous`
+- `ETemplateRootFolder_MixerPresetPackage`
+- `ETemplateRootFolder_MixerPresetSet`
+- `ETemplateRootFolder_MixerPreset_Arm`
+- `ETemplateRootFolder_MixerPreset_Body`
+- `ETemplateRootFolder_MixerPreset_BodyAdjust`
+- `ETemplateRootFolder_MixerPreset_Brow`
+- `ETemplateRootFolder_MixerPreset_Chin`
+- `ETemplateRootFolder_MixerPreset_Ear`
+- `ETemplateRootFolder_MixerPreset_Eye`
+- `ETemplateRootFolder_MixerPreset_FullCharacter`
+- `ETemplateRootFolder_MixerPreset_Head`
+- `ETemplateRootFolder_MixerPreset_HeadAdjust`
+- `ETemplateRootFolder_MixerPreset_Leg`
+- `ETemplateRootFolder_MixerPreset_Mouth`
+- `ETemplateRootFolder_MixerPreset_Nose`
+- `ETemplateRootFolder_MixerPreset_Torso`
+- `ETemplateRootFolder_Motion`
+- `ETemplateRootFolder_MotionDirector`
+- `ETemplateRootFolder_MotionPath`
+- `ETemplateRootFolder_MotionPlus`
+- `ETemplateRootFolder_MotionPuppet`
+- `ETemplateRootFolder_Nail`
+- `ETemplateRootFolder_Nails`
+- `ETemplateRootFolder_NormalEffects`
+- `ETemplateRootFolder_Opacity`
+- `ETemplateRootFolder_Oral`
+- `ETemplateRootFolder_Overall`
+- `ETemplateRootFolder_Pants`
+- `ETemplateRootFolder_Particle`
+- `ETemplateRootFolder_Persona`
+- `ETemplateRootFolder_Pose`
+- `ETemplateRootFolder_PostEffect`
+- `ETemplateRootFolder_Project`
+- `ETemplateRootFolder_Props`
+- `ETemplateRootFolder_Quantity`
+- `ETemplateRootFolder_RLHead`
+- `ETemplateRootFolder_Reflection`
+- `ETemplateRootFolder_Roughness`
+- `ETemplateRootFolder_SSS_Shader_Resource`
+- `ETemplateRootFolder_Scene3D`
+- `ETemplateRootFolder_Shirts`
+- `ETemplateRootFolder_Shoes`
+- `ETemplateRootFolder_SkinBase`
+- `ETemplateRootFolder_SkinDetails`
+- `ETemplateRootFolder_SkinGenTools`
+- `ETemplateRootFolder_Skin_Head`
+- `ETemplateRootFolder_Skirts`
+- `ETemplateRootFolder_Sky`
+- `ETemplateRootFolder_Sound`
+- `ETemplateRootFolder_Specular`
+- `ETemplateRootFolder_Spring`
+- `ETemplateRootFolder_SpringProfile`
+- `ETemplateRootFolder_Style`
+- `ETemplateRootFolder_SubstancePreset`
+- `ETemplateRootFolder_Teeth`
+- `ETemplateRootFolder_Terrain`
+- `ETemplateRootFolder_Texture`
+- `ETemplateRootFolder_Torso`
+- `ETemplateRootFolder_Tree`
+- `ETemplateRootFolder_Underwear`
+- `ETemplateRootFolder_Upper`
+- `ETemplateRootFolder_Video`
+- `ETemplateRootFolder_Water`
+- `ETemplateRootFolder_WeightMap`
+- `ETemplateRootFolder_WrinkleMasks`
+- `ETemplateRootFolder_iAnimation`
 
 ### ETimecodeSource
 
-- `ETimecodeSource_AP` = `ETimecodeSource_AP`
-- `ETimecodeSource_MotionLive` = `ETimecodeSource_MotionLive`
+- `ETimecodeSource_AP`
+- `ETimecodeSource_MotionLive`
+
+### ETitlebarOption
+
+- `ETitlebarOption_Custom1`
+- `ETitlebarOption_FullScreen`
+- `ETitlebarOption__None`
 
 ### ETransitionType
 
-- `ETransitionType_Invalid` = `ETransitionType_Invalid`
-- `ETransitionType__None` = `ETransitionType__None`
-- `ETransitionType_Linear` = `ETransitionType_Linear`
-- `ETransitionType_Step` = `ETransitionType_Step`
-- `ETransitionType_Ease_Out` = `ETransitionType_Ease_Out`
-- `ETransitionType_Ease_In` = `ETransitionType_Ease_In`
-- `ETransitionType_Ease_Out_In` = `ETransitionType_Ease_Out_In`
-- `ETransitionType_Ease_In_Out` = `ETransitionType_Ease_In_Out`
-- `ETransitionType_Ease_In_Sine` = `ETransitionType_Ease_In_Sine`
-- `ETransitionType_Ease_Out_Sine` = `ETransitionType_Ease_Out_Sine`
-- `ETransitionType_Ease_In_Out_Sine` = `ETransitionType_Ease_In_Out_Sine`
-- `ETransitionType_Ease_In_Quad` = `ETransitionType_Ease_In_Quad`
-- `ETransitionType_Ease_Out_Quad` = `ETransitionType_Ease_Out_Quad`
-- `ETransitionType_Ease_In_Out_Quad` = `ETransitionType_Ease_In_Out_Quad`
-- `ETransitionType_Ease_In_Cubic` = `ETransitionType_Ease_In_Cubic`
-- `ETransitionType_Ease_Out_Cubic` = `ETransitionType_Ease_Out_Cubic`
-- `ETransitionType_Ease_In_Out_Cubic` = `ETransitionType_Ease_In_Out_Cubic`
-- `ETransitionType_Ease_In_Quart` = `ETransitionType_Ease_In_Quart`
-- `ETransitionType_Ease_Out_Quart` = `ETransitionType_Ease_Out_Quart`
-- `ETransitionType_Ease_In_Out_Quart` = `ETransitionType_Ease_In_Out_Quart`
-- `ETransitionType_Ease_In_Quint` = `ETransitionType_Ease_In_Quint`
-- `ETransitionType_Ease_Out_Quint` = `ETransitionType_Ease_Out_Quint`
-- `ETransitionType_Ease_In_Out_Quint` = `ETransitionType_Ease_In_Out_Quint`
-- `ETransitionType_Ease_In_Expo` = `ETransitionType_Ease_In_Expo`
-- `ETransitionType_Ease_Out_Expo` = `ETransitionType_Ease_Out_Expo`
-- `ETransitionType_Ease_In_Out_Expo` = `ETransitionType_Ease_In_Out_Expo`
-- `ETransitionType_Ease_In_Circ` = `ETransitionType_Ease_In_Circ`
-- `ETransitionType_Ease_Out_Circ` = `ETransitionType_Ease_Out_Circ`
-- `ETransitionType_Ease_In_Out_Circ` = `ETransitionType_Ease_In_Out_Circ`
-- `ETransitionType_Ease_In_Back` = `ETransitionType_Ease_In_Back`
-- `ETransitionType_Ease_Out_Back` = `ETransitionType_Ease_Out_Back`
-- `ETransitionType_Ease_In_Out_Back` = `ETransitionType_Ease_In_Out_Back`
-- `ETransitionType_Ease_In_Elastic` = `ETransitionType_Ease_In_Elastic`
-- `ETransitionType_Ease_Out_Elastic` = `ETransitionType_Ease_Out_Elastic`
-- `ETransitionType_Ease_In_Out_Elastic` = `ETransitionType_Ease_In_Out_Elastic`
-- `ETransitionType_Ease_In_Bounce` = `ETransitionType_Ease_In_Bounce`
-- `ETransitionType_Ease_Out_Bounce` = `ETransitionType_Ease_Out_Bounce`
-- `ETransitionType_Ease_In_Out_Bounce` = `ETransitionType_Ease_In_Out_Bounce`
-- `ETransitionType_Last` = `ETransitionType_Last`
-- `ETransitionType_Count` = `ETransitionType_Count`
+- `ETransitionType_Count`
+- `ETransitionType_Ease_In`
+- `ETransitionType_Ease_In_Back`
+- `ETransitionType_Ease_In_Bounce`
+- `ETransitionType_Ease_In_Circ`
+- `ETransitionType_Ease_In_Cubic`
+- `ETransitionType_Ease_In_Elastic`
+- `ETransitionType_Ease_In_Expo`
+- `ETransitionType_Ease_In_Out`
+- `ETransitionType_Ease_In_Out_Back`
+- `ETransitionType_Ease_In_Out_Bounce`
+- `ETransitionType_Ease_In_Out_Circ`
+- `ETransitionType_Ease_In_Out_Cubic`
+- `ETransitionType_Ease_In_Out_Elastic`
+- `ETransitionType_Ease_In_Out_Expo`
+- `ETransitionType_Ease_In_Out_Quad`
+- `ETransitionType_Ease_In_Out_Quart`
+- `ETransitionType_Ease_In_Out_Quint`
+- `ETransitionType_Ease_In_Out_Sine`
+- `ETransitionType_Ease_In_Quad`
+- `ETransitionType_Ease_In_Quart`
+- `ETransitionType_Ease_In_Quint`
+- `ETransitionType_Ease_In_Sine`
+- `ETransitionType_Ease_Out`
+- `ETransitionType_Ease_Out_Back`
+- `ETransitionType_Ease_Out_Bounce`
+- `ETransitionType_Ease_Out_Circ`
+- `ETransitionType_Ease_Out_Cubic`
+- `ETransitionType_Ease_Out_Elastic`
+- `ETransitionType_Ease_Out_Expo`
+- `ETransitionType_Ease_Out_In`
+- `ETransitionType_Ease_Out_Quad`
+- `ETransitionType_Ease_Out_Quart`
+- `ETransitionType_Ease_Out_Quint`
+- `ETransitionType_Ease_Out_Sine`
+- `ETransitionType_Invalid`
+- `ETransitionType_Last`
+- `ETransitionType_Linear`
+- `ETransitionType_Step`
+- `ETransitionType__None`
 
 ### EUnrealBoneStructure
 
-- `EUnrealBoneStructure__None` = `EUnrealBoneStructure__None`
-- `EUnrealBoneStructure_UE4_BoneStructure` = `EUnrealBoneStructure_UE4_BoneStructure`
-- `EUnrealBoneStructure_UE5_BoneStructure` = `EUnrealBoneStructure_UE5_BoneStructure`
+- `EUnrealBoneStructure_UE4_BoneStructure`
+- `EUnrealBoneStructure_UE5_BoneStructure`
+- `EUnrealBoneStructure__None`
 
 ### EVisemeID
 
-- `EVisemeID_NONE` = `EVisemeID_NONE`
-- `EVisemeID_EE` = `EVisemeID_EE`
-- `EVisemeID_ER` = `EVisemeID_ER`
-- `EVisemeID_IH` = `EVisemeID_IH`
-- `EVisemeID_AH` = `EVisemeID_AH`
-- `EVisemeID_OH` = `EVisemeID_OH`
-- `EVisemeID_W_OO` = `EVisemeID_W_OO`
-- `EVisemeID_S_Z` = `EVisemeID_S_Z`
-- `EVisemeID_CH_J` = `EVisemeID_CH_J`
-- `EVisemeID_F_V` = `EVisemeID_F_V`
-- `EVisemeID_TH` = `EVisemeID_TH`
-- `EVisemeID_T_L_D_N` = `EVisemeID_T_L_D_N`
-- `EVisemeID_B_M_P` = `EVisemeID_B_M_P`
-- `EVisemeID_K_G_H_NG` = `EVisemeID_K_G_H_NG`
-- `EVisemeID_AE` = `EVisemeID_AE`
-- `EVisemeID_R` = `EVisemeID_R`
+- `EVisemeID_AE`
+- `EVisemeID_AH`
+- `EVisemeID_B_M_P`
+- `EVisemeID_CH_J`
+- `EVisemeID_EE`
+- `EVisemeID_ER`
+- `EVisemeID_F_V`
+- `EVisemeID_IH`
+- `EVisemeID_K_G_H_NG`
+- `EVisemeID_NONE`
+- `EVisemeID_OH`
+- `EVisemeID_R`
+- `EVisemeID_S_Z`
+- `EVisemeID_TH`
+- `EVisemeID_T_L_D_N`
+- `EVisemeID_W_OO`
 
 ### EWrinkleFacePart
 
-- `EWrinkleFacePart_Blink` = `EWrinkleFacePart_Blink`
-- `EWrinkleFacePart_BrowDrop` = `EWrinkleFacePart_BrowDrop`
-- `EWrinkleFacePart_BrowRaise` = `EWrinkleFacePart_BrowRaise`
-- `EWrinkleFacePart_Cheek` = `EWrinkleFacePart_Cheek`
-- `EWrinkleFacePart_Chin` = `EWrinkleFacePart_Chin`
-- `EWrinkleFacePart_Jaw` = `EWrinkleFacePart_Jaw`
-- `EWrinkleFacePart_MouthStretch` = `EWrinkleFacePart_MouthStretch`
-- `EWrinkleFacePart_Neck` = `EWrinkleFacePart_Neck`
-- `EWrinkleFacePart_Nose` = `EWrinkleFacePart_Nose`
-- `EWrinkleFacePart_PurseLips` = `EWrinkleFacePart_PurseLips`
-- `EWrinkleFacePart_Smile` = `EWrinkleFacePart_Smile`
-- `EWrinkleFacePart_Squint` = `EWrinkleFacePart_Squint`
-- `EWrinkleFacePart_Sneer` = `EWrinkleFacePart_Sneer`
+- `EWrinkleFacePart_Blink`
+- `EWrinkleFacePart_BrowDrop`
+- `EWrinkleFacePart_BrowRaise`
+- `EWrinkleFacePart_Cheek`
+- `EWrinkleFacePart_Chin`
+- `EWrinkleFacePart_Jaw`
+- `EWrinkleFacePart_MouthStretch`
+- `EWrinkleFacePart_Neck`
+- `EWrinkleFacePart_Nose`
+- `EWrinkleFacePart_PurseLips`
+- `EWrinkleFacePart_Smile`
+- `EWrinkleFacePart_Sneer`
+- `EWrinkleFacePart_Squint`
 
 ### EWrinkleLayerType
 
-- `EWrinkleLayerType_AoCrease` = `EWrinkleLayerType_AoCrease`
-- `EWrinkleLayerType_Redness` = `EWrinkleLayerType_Redness`
-- `EWrinkleLayerType_NormalStrength` = `EWrinkleLayerType_NormalStrength`
+- `EWrinkleLayerType_AoCrease`
+- `EWrinkleLayerType_NormalStrength`
+- `EWrinkleLayerType_Redness`
 
 ### EWrinkleTextureChannel
 
-- `EWrinkleTextureChannel_Diffuse1` = `EWrinkleTextureChannel_Diffuse1`
-- `EWrinkleTextureChannel_Diffuse2` = `EWrinkleTextureChannel_Diffuse2`
-- `EWrinkleTextureChannel_Diffuse3` = `EWrinkleTextureChannel_Diffuse3`
-- `EWrinkleTextureChannel_Normal1` = `EWrinkleTextureChannel_Normal1`
-- `EWrinkleTextureChannel_Normal2` = `EWrinkleTextureChannel_Normal2`
-- `EWrinkleTextureChannel_Normal3` = `EWrinkleTextureChannel_Normal3`
-- `EWrinkleTextureChannel_Roughness1` = `EWrinkleTextureChannel_Roughness1`
-- `EWrinkleTextureChannel_Roughness2` = `EWrinkleTextureChannel_Roughness2`
-- `EWrinkleTextureChannel_Roughness3` = `EWrinkleTextureChannel_Roughness3`
-- `EWrinkleTextureChannel_AoCrease1` = `EWrinkleTextureChannel_AoCrease1`
-- `EWrinkleTextureChannel_AoCrease2` = `EWrinkleTextureChannel_AoCrease2`
-- `EWrinkleTextureChannel_AoCrease3` = `EWrinkleTextureChannel_AoCrease3`
-
----
-
-## Constants (Non-Enum)
-
-- `SHARED_PTR_DISOWN` = `SHARED_PTR_DISOWN`
-- `InvalidRole` = `InvalidRole`
-- `AcceptRole` = `AcceptRole`
-- `RejectRole` = `RejectRole`
-- `DestructiveRole` = `DestructiveRole`
-- `ActionRole` = `ActionRole`
-- `HelpRole` = `HelpRole`
-- `YesRole` = `YesRole`
-- `NoRole` = `NoRole`
-- `ResetRole` = `ResetRole`
-- `ApplyRole` = `ApplyRole`
-- `NRoles` = `NRoles`
-- `IMAGE` = `IMAGE`
-- `VIDEO` = `VIDEO`
-- `IMAGE_SEQUENCE` = `IMAGE_SEQUENCE`
-- `AUDIO` = `AUDIO`
-- `cvar` = `cvar`
-- `Order_XYZ` = `Order_XYZ`
-- `Order_ZYX` = `Order_ZYX`
-- `Order_XZY` = `Order_XZY`
-- `Order_YZX` = `Order_YZX`
-- `Order_YXZ` = `Order_YXZ`
-- `Order_ZXY` = `Order_ZXY`
-- `MATRIX4_T_X` = `MATRIX4_T_X`
-- `MATRIX4_T_Y` = `MATRIX4_T_Y`
-- `MATRIX4_T_Z` = `MATRIX4_T_Z`
-- `CUSTOM_ARRAY_DEFAULT_SIZE` = `CUSTOM_ARRAY_DEFAULT_SIZE`
-- `CUSTOM_ARRAY_PATCH_SIZE` = `CUSTOM_ARRAY_PATCH_SIZE`
-- `VT_Invalid` = `VT_Invalid`
-- `VT_Integer` = `VT_Integer`
-- `VT_Float` = `VT_Float`
-- `VT_UTF8String` = `VT_UTF8String`
-- `VT_Character` = `VT_Character`
-- `VT_Boolean` = `VT_Boolean`
-- `VT_Handle` = `VT_Handle`
-- `VT_Map` = `VT_Map`
-- `VT_Double` = `VT_Double`
-- `VT_WString` = `VT_WString`
-- `VT_Integer64` = `VT_Integer64`
-- `RL_MAX_PATH` = `RL_MAX_PATH`
-- `CTRLKEY_LAYER` = `CTRLKEY_LAYER`
-- `CTRLKEY_TRANSFORM` = `CTRLKEY_TRANSFORM`
-- `CTRLKEY_PATHPOSITION` = `CTRLKEY_PATHPOSITION`
-- `CTRLKEY_PATHOFFSET` = `CTRLKEY_PATHOFFSET`
-- `CTRLKEY_LOOKATWEIGHT_HEAD` = `CTRLKEY_LOOKATWEIGHT_HEAD`
-- `CTRLKEY_LOOKATWEIGHT_BODY` = `CTRLKEY_LOOKATWEIGHT_BODY`
-- `CTRLKEY_LOOKATOFFSET` = `CTRLKEY_LOOKATOFFSET`
-- `GOZ_SPLIT_INI` = `GOZ_SPLIT_INI`
-- `EExportFbxOptions2__None` = `EExportFbxOptions2__None`
-- `EExportFbxOptions2_XUp` = `EExportFbxOptions2_XUp`
-- `EExportFbxOptions2_YUp` = `EExportFbxOptions2_YUp`
-- `EExportFbxOptions2_UnrealEngine4BoneAxis` = `EExportFbxOptions2_UnrealEngine4BoneAxis`
-- `EExportFbxOptions2_SourceUpAxisSameAsTarget` = `EExportFbxOptions2_SourceUpAxisSameAsTarget`
-- `EExportFbxOptions2_RenameDuplicateBoneName` = `EExportFbxOptions2_RenameDuplicateBoneName`
-- `EExportFbxOptions2_RenameDuplicateMaterialName` = `EExportFbxOptions2_RenameDuplicateMaterialName`
-- `EExportFbxOptions2_RenameDuplicateMorphName` = `EExportFbxOptions2_RenameDuplicateMorphName`
-- `EExportFbxOptions2_RenameTransparencyWithPostFix` = `EExportFbxOptions2_RenameTransparencyWithPostFix`
-- `EExportFbxOptions2_RenameBoneRootToGameType` = `EExportFbxOptions2_RenameBoneRootToGameType`
-- `EExportFbxOptions2_RenameBoneToLowerCase` = `EExportFbxOptions2_RenameBoneToLowerCase`
-- `EExportFbxOptions2_RenameBoneOnStd` = `EExportFbxOptions2_RenameBoneOnStd`
-- `EExportFbxOptions2_IsNotRenamePivot` = `EExportFbxOptions2_IsNotRenamePivot`
-- `EExportFbxOptions2_RenameGameBodyMesh` = `EExportFbxOptions2_RenameGameBodyMesh`
-- `EExportFbxOptions2_RenameMorphInvalidCharacter` = `EExportFbxOptions2_RenameMorphInvalidCharacter`
-- `EExportFbxOptions2_ResetBoneScale` = `EExportFbxOptions2_ResetBoneScale`
-- `EExportFbxOptions2_ResetSkinPose` = `EExportFbxOptions2_ResetSkinPose`
-- `EExportFbxOptions2_ResetSelfillumination` = `EExportFbxOptions2_ResetSelfillumination`
-- `EExportFbxOptions2_AsciiFormat` = `EExportFbxOptions2_AsciiFormat`
-- `EExportFbxOptions2_PrefixAndPostfix` = `EExportFbxOptions2_PrefixAndPostfix`
-- `EExportFbxOptions2_IsNotCloneObject` = `EExportFbxOptions2_IsNotCloneObject`
-- `EExportFbxOptions2_BoneNubAttribute` = `EExportFbxOptions2_BoneNubAttribute`
-- `EExportFbxOptions2_ExtraWordForUnityAndUnreal` = `EExportFbxOptions2_ExtraWordForUnityAndUnreal`
-- `EExportFbxOptions2_BakeMouthOpenMotionToMesh` = `EExportFbxOptions2_BakeMouthOpenMotionToMesh`
-- `EExportFbxOptions2_AvoidTextureIntoIndexedMode` = `EExportFbxOptions2_AvoidTextureIntoIndexedMode`
-- `EExportFbxOptions2_UnrealIkBone` = `EExportFbxOptions2_UnrealIkBone`
-- `EExportFbxOptions2_UnityPreset` = `EExportFbxOptions2_UnityPreset`
-- `EExportFbxOptions2_UnrealPreset` = `EExportFbxOptions2_UnrealPreset`
-- `EExportFbxOptions2_InstaLodPreset` = `EExportFbxOptions2_InstaLodPreset`
-- `EExportFbxOptions3__None` = `EExportFbxOptions3__None`
-- `EExportFbxOptions3_ExportJson` = `EExportFbxOptions3_ExportJson`
-- `EExportFbxOptions3_RestoreStandardSeriesBoneAxis` = `EExportFbxOptions3_RestoreStandardSeriesBoneAxis`
-- `EExportFbxOptions3_TraditionalUv` = `EExportFbxOptions3_TraditionalUv`
-- `EExportFbxOptions3_ExportVertexColor` = `EExportFbxOptions3_ExportVertexColor`
-- `EExport3DFileOption__None` = `EExport3DFileOption__None`
-- `EExport3DFileOption_AxisYUp` = `EExport3DFileOption_AxisYUp`
-- `EExport3DFileOption_GenerateMeshGroupIni` = `EExport3DFileOption_GenerateMeshGroupIni`
-- `EExport3DFileOption_GenerateDrmProtectedFile` = `EExport3DFileOption_GenerateDrmProtectedFile`
-- `EExport3DFileOption_BodyPart` = `EExport3DFileOption_BodyPart`
-- `EExport3DFileOption_EyePart` = `EExport3DFileOption_EyePart`
-- `EExport3DFileOption_TeethPart` = `EExport3DFileOption_TeethPart`
-- `EExport3DFileOption_AllClothes` = `EExport3DFileOption_AllClothes`
-- `EExport3DFileOption_ResetToBindPose` = `EExport3DFileOption_ResetToBindPose`
-- `EExport3DFileOption_ExportMaterial` = `EExport3DFileOption_ExportMaterial`
-- `EExport3DFileOption_AbortExportIfMaterialNamesDuplicate` = `EExport3DFileOption_AbortExportIfMaterialNamesDuplicate`
-- `EExport3DFileOption_RemoveHiddenMesh` = `EExport3DFileOption_RemoveHiddenMesh`
-- `EExport3DFileOption_ExportFacialAnimation` = `EExport3DFileOption_ExportFacialAnimation`
-- `EExport3DFileOption_TextureMapsAreShaderGenerated` = `EExport3DFileOption_TextureMapsAreShaderGenerated`
-- `EExport3DFileOption_BakeSubdivision` = `EExport3DFileOption_BakeSubdivision`
-- `EExport3DFileOption_ExportExtraMaterial` = `EExport3DFileOption_ExportExtraMaterial`
-- `EExport3DFileOption_FullBodyPart` = `EExport3DFileOption_FullBodyPart`
-- `kPostEffect` = `cvar.kPostEffect`
-- `ReachKeyType_Target` = `ReachKeyType_Target`
-- `ReachKeyType_Lock` = `ReachKeyType_Lock`
-- `ReachKeyType_Release` = `ReachKeyType_Release`
-- `REMeshType_Wall` = `REMeshType_Wall`
-- `REMeshType_Ground` = `REMeshType_Ground`
-- `REMeshType_Pillar` = `REMeshType_Pillar`
-- `REShape_Square` = `REShape_Square`
-- `REShape_Hypotenuse` = `REShape_Hypotenuse`
-- `REAxis_NONE` = `REAxis_NONE`
-- `REAxis_X` = `REAxis_X`
-- `REAxis_Y` = `REAxis_Y`
-- `REAxis_Z` = `REAxis_Z`
-- `REAxis_NEGATIVE_X` = `REAxis_NEGATIVE_X`
-- `REAxis_NEGATIVE_Y` = `REAxis_NEGATIVE_Y`
-- `REAxis_NEGATIVE_Z` = `REAxis_NEGATIVE_Z`
-- `REAxis_XY` = `REAxis_XY`
-- `REAxis_YZ` = `REAxis_YZ`
-- `REAxis_XZ` = `REAxis_XZ`
-- `REAxis_XYZ` = `REAxis_XYZ`
-- `REAxis_Quantity` = `REAxis_Quantity`
-- `REFloorType_FirstFloor` = `REFloorType_FirstFloor`
-- `REFloorType_MiddleFloor` = `REFloorType_MiddleFloor`
-- `REFloorType_TopFloor` = `REFloorType_TopFloor`
-- `REPosition_Up` = `REPosition_Up`
-- `REPosition_Left` = `REPosition_Left`
-- `REPosition_Down` = `REPosition_Down`
-- `REPosition_Right` = `REPosition_Right`
-- `REPosition_SlashUp` = `REPosition_SlashUp`
-- `REPosition_SlashDown` = `REPosition_SlashDown`
-- `REPosition_BackslashUp` = `REPosition_BackslashUp`
-- `REPosition_BackslashDown` = `REPosition_BackslashDown`
-- `REPosition_TopLeftPillar` = `REPosition_TopLeftPillar`
-- `REPosition_TopRightPillar` = `REPosition_TopRightPillar`
-- `REPosition_BottomLeftPillar` = `REPosition_BottomLeftPillar`
-- `REPosition_BottomRightPillar` = `REPosition_BottomRightPillar`
-- `REPosition_Ground` = `REPosition_Ground`
-- `REPosition_TopLeftGround` = `REPosition_TopLeftGround`
-- `REPosition_TopRightGround` = `REPosition_TopRightGround`
-- `REPosition_BottomLeftGround` = `REPosition_BottomLeftGround`
-- `REPosition_BottomRightGround` = `REPosition_BottomRightGround`
-
----
+- `EWrinkleTextureChannel_AoCrease1`
+- `EWrinkleTextureChannel_AoCrease2`
+- `EWrinkleTextureChannel_AoCrease3`
+- `EWrinkleTextureChannel_Diffuse1`
+- `EWrinkleTextureChannel_Diffuse2`
+- `EWrinkleTextureChannel_Diffuse3`
+- `EWrinkleTextureChannel_Normal1`
+- `EWrinkleTextureChannel_Normal2`
+- `EWrinkleTextureChannel_Normal3`
+- `EWrinkleTextureChannel_Roughness1`
+- `EWrinkleTextureChannel_Roughness2`
+- `EWrinkleTextureChannel_Roughness3`
 
 ## Classes
 
-### Vector/Container Types
-
-All vector types share identical interfaces (iterator, append, pop, size, etc.).
-
-| Type | Description |
-|------|-------------|
-| `AccessoryVector` | Inherits from `object` |
-| `AvatarPartVector` | Inherits from `object` |
-| `AvatarVector` | Inherits from `object` |
-| `BaseVector` | Inherits from `object` |
-| `BoolVector` | Inherits from `object` |
-| `BuildingObjectVector` | Inherits from `object` |
-| `CameraVector` | Inherits from `object` |
-| `ClothVector` | Inherits from `object` |
-| `EMaterialTextureChannelVector` | Inherits from `object` |
-| `ElementInfoVector` | Inherits from `object` |
-| `ElementObjectVector` | Inherits from `object` |
-| `FloatVector` | Inherits from `object` |
-| `FloorObjectVector` | Inherits from `object` |
-| `HairVector` | Inherits from `object` |
-| `Int64Vector` | Inherits from `object` |
-| `IntVector` | Inherits from `object` |
-| `MDPropVector` | Inherits from `object` |
-| `MaterialInfoVector` | Inherits from `object` |
-| `Matrix4fVector` | Inherits from `object` |
-| `MeshVector` | Inherits from `object` |
-| `NodeVector` | Inherits from `object` |
-| `ObjectVector` | Inherits from `object` |
-| `PropVector` | Inherits from `object` |
-| `RAttributePtrVector` | Inherits from `object` |
-| `RExportGoZMeshOptionVector` | Inherits from `object` |
-| `RHIKEffectorVector` | Inherits from `object` |
-| `RInsertBoneInfoVector` | Inherits from `object` |
-| `RMessageBoxButtonVector` | Inherits from `object` |
-| `RReachKeyVector` | Inherits from `object` |
-| `RVisemeKeyVector` | Inherits from `object` |
-| `RWordDataVector` | Inherits from `object` |
-| `SizetVector` | Inherits from `object` |
-| `StdMaterialVector` | Inherits from `object` |
-| `TimeVector` | Inherits from `object` |
-| `UnitObjectVector` | Inherits from `object` |
-| `Vector3fVector` | Inherits from `object` |
-| `VectorOfFloatVector` | Inherits from `object` |
-| `VectorOfWStringVector` | Inherits from `object` |
-| `WStringVector` | Inherits from `object` |
-| `WallInfoVector` | Inherits from `object` |
-| `WallObjectVector` | Inherits from `object` |
-
-**Common Vector Methods** (shared by all vector types above):
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__getslice__(self, i, j)`
-- `__setslice__(self, *args)`
-- `__delslice__(self, i, j)`
-- `__delitem__(self, *args)`
-- `__getitem__(self, *args)`
-- `__setitem__(self, *args)`
-- `pop(self)`
-- `append(self, x)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `pop_back(self)`
-- `erase(self, *args)`
-- `__init__(self, *args)`
-- `push_back(self, x)`
-- `front(self)`
-- `back(self)`
-- `assign(self, n, x)`
-- `resize(self, *args)`
-- `insert(self, *args)`
-- `reserve(self, n)`
-- `capacity(self)`
-
-### Core API Classes
-
-#### FloatPair
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__len__(self)`
-- `__repr__(self)`
-- `__getitem__(self, index)`
-- `__setitem__(self, index, val)`
-
-#### ImportExpressionOptions
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__getslice__(self, i, j)`
-- `__setslice__(self, *args)`
-- `__delslice__(self, i, j)`
-- `__delitem__(self, *args)`
-- `__getitem__(self, *args)`
-- `__setitem__(self, *args)`
-- `pop(self)`
-- `append(self, x)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `pop_back(self)`
-- `erase(self, *args)`
-- `__init__(self, *args)`
-- `push_back(self, x)`
-- `front(self)`
-- `back(self)`
-- `assign(self, n, x)`
-- `resize(self, *args)`
-- `insert(self, *args)`
-- `reserve(self, n)`
-- `capacity(self)`
-
-#### MaterialSettings
-
-**Methods:**
-
-- `__init__(self)`
-
-#### PixelStreamCaptureFrame
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RApplication
-
-**Methods:**
-
-- `GetProductName()`
-- `GetProductEdition()`
-- `GetProductVersion()`
-- `GetProductMajorVersion()`
-- `GetProductMinorVersion()`
-- `GetApiVersion()`
-- `GetApiMajorVersion()`
-- `GetApiMinorVersion()`
-- `GetProgramPath()`
-- `GetDefaultProjectPath()`
-- `GetCurrentProjectPath()`
-- `GetTemplateDataPath()`
-- `GetCustomDataPath()`
-- `GetDefaultContentFolder(eFolderType)`
-- `GetContentFoldersInFolder(strFolder)`
-- `GetContentFilesInFolder(strFolder)`
-- `GetCustomContentFolder(eFolderType)`
-- `GetContentId(strFilePath)`
-- `__init__(self)`
-
-#### RAttribute
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `SetName(self, strName)`
-- `GetName(self)`
-- `SetType(self, eType)`
-- `GetType(self)`
-- `SetFlag(self, eFlag)`
-- `GetFlag(self)`
-
-#### RAudio
-
-**Methods:**
-
-- `CreateAudioObject()`
-- `LoadAudioToObject(*args)`
-- `__init__(self)`
-
-#### RAudioRecorder
-
-**Methods:**
-
-- `__init__(self)`
-- `SetInputDevice(self, strInputAudioDeviceName)`
-- `SetTimeLimit(self, nMillisecond)`
-- `GetTimeLimit(self)`
-- `Start(self)`
-- `Stop(self)`
-- `GetAudio(self)`
-- `GetAvailableDevices(self)`
-- `GetInputDevice(self)`
-- `RegisterCallback(self, pCallback)`
-- `UnregisterCallback(self)`
-
-#### RAudioRecorderCallback
-
-**Methods:**
-
-- `__init__(self)`
-- `OnTimeLimitReached(self)`
-
-#### RBeginCommandOption
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RBodySetting
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `SetActivePart(self, eActivePart)`
-- `GetActivePart(self)`
-- `SetMirrorState(self, bIsMirror)`
-- `GetMirrorState(self)`
-- `SetFixLowerState(self, bIsFixLower)`
-- `GetFixLowerState(self)`
-- `SetLockFootRotationState(self, bIsLockFootRotation)`
-- `GetLockFootRotationState(self)`
-- `SetFootBottomToAnkle(self, fFootBottomToAnkle)`
-- `GetFootBottomToAnkle(self)`
-- `SetMotionApplyMode(self, eMotionApplyMode)`
-- `GetMotionApplyMode(self)`
-- `SetReferenceAvatar(self, spAvatar)`
-- `GetReferenceAvatar(self)`
-- `SetHipPositionLockedAxes(self, eAxes)`
-- `GetHipPositionLockedAxes(self)`
-- `SetCoordinateOffset(self, fRotation, vTranslation)`
-- `GetCoordinateOffset(self, fRotation, vTranslation)`
-- `SetMotionMatchSource(self, bMatchSource)`
-- `GetMotionMatchSource(self)`
-
-#### RCallback
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RCameraDofData
-
-**Methods:**
-
-- `SetEnable(self, bEnable)`
-- `GetEnable(self)`
-- `SetFocus(self, fFocusData)`
-- `GetFocus(self)`
-- `SetRange(self, fRangeData)`
-- `GetRange(self)`
-- `SetNearTransitionRegion(self, fNearTransitionRegion)`
-- `GetNearTransitionRegion(self)`
-- `SetFarTransitionRegion(self, fFarTransitionRegion)`
-- `GetFarTransitionRegion(self)`
-- `SetNearBlurScale(self, fNearBlurScale)`
-- `GetNearBlurScale(self)`
-- `SetFarBlurScale(self, fFarBlurScale)`
-- `GetFarBlurScale(self)`
-- `SetMinBlendDistance(self, fMinBlendDistance)`
-- `GetMinBlendDistance(self)`
-- `SetCenterColorWeight(self, fCenterColorWeight)`
-- `GetCenterColorWeight(self)`
-- `SetEdgeDecayPower(self, fEdgeDecayPower)`
-- `GetEdgeDecayPower(self)`
-- `__init__(self)`
-
-#### RColor
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `R(self, *args)`
-- `G(self, *args)`
-- `B(self, *args)`
-- `A(self, *args)`
-- `Red(self)`
-- `Green(self)`
-- `Blue(self)`
-- `Alpha(self)`
-- `From(self, r, g, b, a)`
-- `FromARGB(self, arg2)`
-- `FromCOLORREF(self, arg2)`
-- `ToARGB(self)`
-- `ToCOLORREF(self)`
-- `ToGrayScale(self)`
-- `Normalize(self)`
-- `Saturate(self)`
-- `GammaCorrect(self, fGamma)`
-- `ToHSL(self, fHue, fSaturate, fLevel)`
-- `FromHSL(self, fHue, fSaturate, fLevel)`
-- `AdjustHSBC(self, fHue, fSaturate, fBrightness, fContrast, bInvert)`
-- `AdjustRGBA(self, fRed, fGreen, fBlue, fAlpha, bInvert)`
-- `__iadd__(self, arg2)`
-- `__isub__(self, arg2)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `__pos__(self)`
-- `__neg__(self)`
-- `__add__(self, arg2)`
-- `__sub__(self, arg2)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__eq__(self, arg2)`
-- `__ne__(self, arg2)`
-- `__lt__(self, arg2)`
-
-#### RControl
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `MaxControlTime(self)`
-- `HasKeys(self)`
-- `GetKeyCount(self)`
-- `GetKeyIndex(self, kTick, nIdx)`
-- `MoveKey(self, kTick, kOffsetTick)`
-- `MoveAllKey(self, kTick)`
-- `RemoveKey(self, kTick)`
-- `RemoveKeys(self, kStartTime, kEndTime, bExcludeBound)`
-- `GetKeyTimeAt(self, uIndex, kTick)`
-- `RemoveKeyAt(self, nIndex)`
-- `AddKey(self, pKey)`
-- `ClearKeys(self)`
-- `Clone(self)`
-- `LoadDataBlockData(self, rkStream, pkLink, pProgress)`
-- `GetDataBlock(self)`
-- `GetKeyTransitionType(self, *args)`
-- `GetKeyTransitionStrength(self, *args)`
-- `SetKeyTransition(self, kTick, eType, fStrength)`
-
-#### RCustomValue
-
-**Methods:**
-
-- `__eq__(self, kValue)`
-- `AssignTo(self, kTargetValue)`
-- `__init__(self, *args)`
-- `SetValue(self, *args)`
-- `GetType(self)`
-- `GetValue(self, *args)`
-- `ToInteger(self)`
-- `ToInt64(self)`
-- `ToFloat(self)`
-- `ToDouble(self)`
-- `ToString(self)`
-- `ToWString(self)`
-- `ToChar(self)`
-- `ToBoolean(self)`
-- `ToHandle(self)`
-- `ToMap(self)`
-- `Clear(self)`
-
-#### RCustomValueArray
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `AssignTo(self, kTargetArray)`
-- `SetCapacity(self, uSize)`
-- `Resize(self, uSize)`
-- `Add(self, *args)`
-- `Clear(self, uCapacity=32)`
-- `RemoveAt(self, uIndex)`
-- `GetSize(self)`
-- `__getitem__(self, *args)`
-
-#### RCustomValueMap
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `GetSize(self)`
-- `GetKey(self, uIndex)`
-- `GetValue(self, uIndex)`
-
-#### RDataBlock
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetControl(self, *args)`
-- `Clone(self)`
-- `GetData(self, *args)`
-- `GetBlockData(self, strName)`
-- `SetData(self, *args)`
-- `AddAttribute(self, spAttribute)`
-- `RemoveAttribute(self, spAttribute)`
-- `GetAttributes(self)`
-- `LoadFromFile(self, strPath)`
-- `SaveToFile(self, strPath)`
-- `Create(kAttributes)`
-
-#### RDepthParam
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RDeviceSetting
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `SetCoordinateSystem(self, eCoordinateSystem)`
-- `GetCoordinateSystem(self)`
-- `SetMocapCoordinate(self, eUpAxis, eFrontAxis, eCoordinateSystem)`
-- `GetMocapCoordinateUpAxis(self)`
-- `GetMocapCoordinateFrontAxis(self)`
-- `GetMocapCoordinateSystem(self)`
-- `SetCoordinateOffset(self, fRotation, vTranslation)`
-- `GetCoordinateOffset(self, fRotation, vTranslation)`
-- `GetAxisXYZ(self, eAxis)`
-- `GetPositionSetting(self)`
-- `GetRotationSetting(self)`
-- `SetInitialHipRotation(self, kInitialHipRotation)`
-- `GetInitialHipRotation(self)`
-
-#### RDialogCallback
-
-**Inherits from:** `RCallback`
-
-**Methods:**
-
-- `__init__(self)`
-- `OnDialogHide(self)`
-- `OnDialogShow(self)`
-- `OnDialogClose(self)`
-- `__disown__(self)`
-
-#### REdgeDetectionCannyParam
-
-**Methods:**
-
-- `__init__(self)`
-
-#### REventCallback
-
-**Inherits from:** `RCallback`
-
-**Methods:**
-
-- `__init__(self)`
-- `OnTimerUpdated(self, fTime)`
-- `OnSceneUpdated(self, fTime)`
-- `OnCurrentTimeChanged(self, fTime)`
-- `OnBeforeLoadFile(self, nFileType)`
-- `OnBeforeLoadFileWithPath(self, nFileType, strFilePath)`
-- `OnFileLoaded(self, nFileType)`
-- `OnFileLoadedWithPath(self, nFileType, strFilePath)`
-- `OnAfterFileLoaded(self, nFileType)`
-- `OnAfterFileLoadedWithPath(self, nFileType, strFilePath)`
-- `OnProjectDataChanged(self, nProjectDataType)`
-- `OnBeforeSaveFile(self, nFileType, pProjectName)`
-- `OnFileSaved(self, nFileType, pProjectName)`
-- `OnObjectSelectionChanged(self)`
-- `OnObjectDataChanged(self)`
-- `OnObjectAdded(self)`
-- `OnObjectDeleted(self)`
-- `OnDialogModeChanged(self, nDialogMode)`
-- `OnUndoRedoDone(self)`
-- `OnPlayed(self)`
-- `OnStopped(self)`
-- `OnObjectDataChangedWithType(self, nObjectChangeDataType)`
-- `OnHierarchyChanged(self)`
-- `OnAPInitialized(self)`
-- `OnSmartGalleryInitialized(self, bSuccess)`
-- `OnOmniLiveChanged(self, bOn)`
-- `OnImageAsyncLoadStart(self)`
-- `OnImageAsyncLoadAllDone(self)`
-- `OnCommandReceived(self, strCommand)`
-- `OnLuaEvent(self, kParam)`
-- `OnQuickMagicWebSocketNotified(self, strMessageData)`
-- `OnServiceWebSocketNotified(self, nServiceType, strMessageData)`
-- `OnMemberLoginStatusChanged(self, bLogin)`
-- `OnRefreshDAPoints(self, nPoints)`
-- `OnAPLayoutChanged(self)`
-- `OnAPLayoutRestored(self)`
-- `__disown__(self)`
-
-#### REventHandler
-
-**Methods:**
-
-- `SetListener(pListener)`
-- `RegisterCallback(pCallback)`
-- `UnregisterCallback(uId)`
-- `UnregisterCallbacks(kIds)`
-- `__init__(self)`
-
-#### RExportAudioParameter
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RExportCommonParameter
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RExportFbxSetting
-
-**Methods:**
-
-- `__init__(self)`
-- `EnableExportMotion(self, bEnable)`
-- `IsExportMotionEnabled(self)`
-- `SetExportMotionFps(self, kFps)`
-- `GetExportMotionFps(self)`
-- `SetExportMotionRange(self, kRange)`
-- `GetExportMotionRange(self)`
-- `SetOption(self, eOptions)`
-- `GetOption(self)`
-- `SetOption2(self, eOptions)`
-- `GetOption2(self)`
-- `SetOption3(self, eOptions)`
-- `GetOption3(self)`
-- `SetTextureSize(self, eSize)`
-- `GetTextureSize(self)`
-- `SetTextureFormat(self, eFormat)`
-- `GetTextureFormat(self)`
-- `SetIncludeMotionPath(self, strPath)`
-- `GetIncludeMotionPath(self)`
-- `EnableBakeDiffuseSpecularFromShader(self, bEnable)`
-- `IsBakeDiffuseSpecularFromShaderEnabled(self)`
-- `EnableBakeDiffuseFromSkinColor(self, bEnable)`
-- `IsBakeDiffuseFromSkinColorEnabled(self)`
-- `EnableBasicBindPose(self, bEnable)`
-- `IsBasicBindPoseEnabled(self)`
-- `EnableBakeSubdivision(self, bEnable)`
-- `IsBakeSubdivisionEnabled(self)`
-- `SetEmbedTimecode(self, bEmbed)`
-- `IsEmbedTimecode(self)`
-- `SetExportLevel(self, nExportLevel)`
-- `GetExportLevel(self)`
-- `SetUnrealBoneStructure(self, eUnrealBoneStructure)`
-- `GetUnrealBoneStructure(self)`
-
-#### RExportGlbSetting
-
-**Inherits from:** `RExportFbxSetting`
-
-**Methods:**
-
-- `__init__(self)`
-- `SetMeshMotionMode(self, eMeshMotionMode)`
-- `IsMotionOnly(self)`
-
-#### RExportGoZMeshOption
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RExportImageParameter
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RExportImageSequenceParameter
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RExportOutputRangeParameter
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RExportVideoParameter
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RFacialSetting
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `SetBlend(self, bBlend)`
-- `GetBlend(self)`
-- `SetMode(self, eMode)`
-- `GetMode(self)`
-- `SetReplacePart(self, bHead, bLeftEye, bRightEye, kMorph, kCustom, kBone)`
-- `GetReplacePart(self, bHead, bLeftEye, bRightEye, kMorph, kCustom, kBone)`
-
-#### RFileIO
-
-**Methods:**
-
-- `LoadFile(*args)`
-- `LoadFbxFile(*args)`
-- `LoadClotheFromFbx(pAvatar, strFilePath, kFailedMeshList)`
-- `LoadObject(strFilePath, bRecordStep=True)`
-- `LoadAlembicFile(spObject, strFilePath, eUpAxis)`
-- `ExportFbxFile(*args)`
-- `IsCompatibleWithExportOption(spObject, kSetting)`
-- `CheckExportFbxHasLicense(spObject)`
-- `PreLoadMotion(strFilePath, spObject, kMotionLength)`
-- `LoadMotion(strFilePath, kTime, spObject)`
-- `SaveThumbnailToFile(strRLFile, strSaveTo)`
-- `ExportObjFile(*args)`
-- `LoadSubstancePainterTextures(spObject, strFolderPath)`
-- `SaveProject(strSavePath)`
-- `SaveFile(spObject, kSaveSetting, strSavePath)`
-- `ExportGoZFile(kObjects, strFolderPath, kSetting)`
-- `ExportMultiPoseGoZFile(kObjects, kFolderPaths, kSettings)`
-- `GetTagsFromFileHeader(strFilePath, kTagList, eType)`
-- `ExportBvhFile(spObject, strFilePath)`
-- `ExportBvhFile2(*args)`
-- `ConvertFbxFileToRLMotion(*args)`
-- `__init__(self)`
-
-#### RFlattenWrinkleImageMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### RFloatControl
-
-**Inherits from:** `RControl`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetValue(self, kTick, fValue, fDefaultValue=0.0)`
-- `SetValue(self, *args)`
-- `SetValueAt(self, uIndex, fValue)`
-- `OptimizeKeys(self, kBeginTime, kEndTime, kFps, fError=0.5)`
-- `ReserveKeyCapacity(self, uSize)`
-- `RemoveKeys(self, kTicks)`
-- `SyncAdapterToControl(self)`
-
-#### RFloatKey
-
-**Inherits from:** `RKey`
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `Clone(self)`
-- `SetValue(self, fValue)`
-- `GetValue(self)`
-
-#### RFps
-
-**Methods:**
-
-- `__eq__(self, kFps)`
-- `__ne__(self, kFps)`
-- `__gt__(self, kFps)`
-- `__ge__(self, kFps)`
-- `__lt__(self, kFps)`
-- `__le__(self, kFps)`
-- `TickPerFrame(self)`
-- `GetFrameIndex(self, kTime)`
-- `UpFrameIndex(self, kTime)`
-- `RoundFrameIndex(self, kTime)`
-- `IndexedFrameTime(self, nFrameIndex)`
-- `BaseOneIndexedFrameTime(self, nFrameIndex)`
-- `GetFrameTime(self, kTime)`
-- `GetNextFrameTime(self, kTime)`
-- `GetPreviousFrameTime(self, kTime)`
-- `IsSameFrame(self, kTime1, kTime2)`
-- `FrameTimeFromSecond(self, fSecond)`
-- `SecondFromFrameTime(self, kTime)`
-- `EqualFrameTime(self, kA, kB)`
-- `LessFrameTime(self, kA, kB)`
-- `LessEqualFrameTime(self, kA, kB)`
-- `ToTimecodeFormattedString(self, kTime)`
-- `FromTimecodeFormattedString(self, strTimecode)`
-- `ToInt(self)`
-- `ToFloat(self)`
-- `ToDouble(self)`
-- `ToLong(self)`
-- `ToUInt32(self)`
-- `ToInt64(self)`
-- `__init__(self, tFps)`
-
-#### RGlobal
-
-**Methods:**
-
-- `GetProjectLength()`
-- `SetProjectLength(kLength)`
-- `GetFps()`
-- `GetPath(ePath, strPath)`
-- `BeginAction(strAction, bBlockRecordUndo=False)`
-- `EndAction()`
-- `Undo()`
-- `Redo()`
-- `Play(kStart, kEnd)`
-- `Pause()`
-- `Stop()`
-- `IsPlaying()`
-- `GetTime()`
-- `SetTime(kTime, bSendEvent=True)`
-- `GetStartTime()`
-- `GetEndTime()`
-- `SetStartTime(kTime)`
-- `SetEndTime(kTime)`
-- `GetMocapManager()`
-- `TrialVersionRemainingDays(strBinPath, uProductID, strProductFold, strRegRoot)`
-- `DoSNVerification(nProductID, strRegistry, strProductName, strSNFailTitle, strSNFailMsg, strSNExceedTitle, strSNExceedMsg)`
-- `DoBatchSNVerification(strJson)`
-- `DoPluginTrialFollowUp(strProductNamePath, nPID)`
-- `IsTrialContentMode()`
-- `IsTrialVersion()`
-- `RemoveAllAnimations(spObject)`
-- `RenderVideo(*args)`
-- `RenderAudio(*args)`
-- `RenderVideoNormal(*args)`
-- `RenderVideoDepth(*args)`
-- `RenderVideoCanny(*args)`
-- `RenderVideoOpenPoseKeyPoint(*args)`
-- `RenderImageSequence(*args)`
-- `RenderImageSequenceNormal(*args)`
-- `RenderImageSequenceDepth(*args)`
-- `RenderImageSequenceCanny(*args)`
-- `RenderImageSequenceOpenPoseKeyPoint(*args)`
-- `RenderImage(strOutputFileName)`
-- `SetRenderExportType(kParams)`
-- `GetRenderExportType()`
-- `GetRenderExportImageParameter()`
-- `GetRenderExportImageSequenceParameter()`
-- `GetRenderExportVideoParameter()`
-- `SetRenderExportParameter(*args)`
-- `GetRenderExportAudioParameter()`
-- `GetScreenSize(nWidth, nHeight)`
-- `TrialVersionRemainingTimes(strBinPath, uProductID, strProductFold, strRegRoot, uTimeNo)`
-- `TrialVersionIncreaseTimes(strBinPath, uProductID, strProductFold, strRegRoot, nCount=1)`
-- `ObjectModified(spObject, eType)`
-- `ObjectDataChanged2(spObject, eType)`
-- `GetPreviewStartTime()`
-- `GetPreviewEndTime()`
-- `SetPreviewStartTime(kTime)`
-- `SetPreviewEndTime(kTime)`
-- `SetMotionSettingOptions(eOptions)`
-- `GetMotionSettingOptions()`
-- `GetVisualSettingComponent()`
-- `RenderPreview(*args)`
-- `RenderPreviewNormal(*args)`
-- `RenderPreviewDepth(*args)`
-- `RenderPreviewCanny(*args)`
-- `RenderPreviewOpenPoseKeyPoint(*args)`
-- `ForceViewportUpdate()`
-- `GetMotionDirector()`
-- `GetOmniConnectorManager()`
-- `GetDialogMode()`
-- `SetDialogMode(eMode)`
-- `GetSilentMode()`
-- `SetSilentMode(bSilent)`
-- `SetViewSize(nWidth, nHeight)`
-- `GetViewSize(nWidth, nHeight)`
-- `EnablePixelStream(bEnable)`
-- `CapturePixelStream()`
-- `GetDefaultContentFileAbsolutePath(eContent, bCustom)`
-- `SetTimecodeSource(eSource)`
-- `SetTimecodeSourceData(eSource, strFormattedTime)`
-- `GetTimecodeTime()`
-- `SetViewportInfoMotionLiveDevice(*args)`
-- `CheckTimecodePluginFeatureAllowed()`
-- `CheckTimecodePluginTrialValid()`
-- `CheckTimecodePluginFullOrTiralInstalled()`
-- `IsPhysicsSimulationLoop()`
-- `SetPhysicsSimulationLoop(bLoop)`
-- `ShowMemberLoginDialog()`
-- `AddInfoTips(pObjPtr, strImageSource, strFunctionName, strDescription, strVideoURLLinkcountId, strButtonText, strLearnMoreURL)`
-- `SendLogToServer(*args)`
-- `__init__(self)`
-
-#### RHandSetting
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `Clone(self)`
-- `SetActivePart(self, eActivePart)`
-- `GetActivePart(self)`
-- `SetRightHandJoin(self, eHandJoin)`
-- `GetRightHandJoin(self)`
-- `SetLeftHandJoin(self, eHandJoin)`
-- `GetLeftHandJoin(self)`
-- `SetHandJoinType(self, eJoinType)`
-- `GetHandJoinType(self)`
-- `SetRightHandDataSource(self, eDataSource)`
-- `GetRightHandDataSource(self)`
-- `SetLeftHandDataSource(self, eDataSource)`
-- `GetLeftHandDataSource(self)`
-
-#### RHeadshot
-
-**Methods:**
-
-- `CreateHeadFromPhoto(strPhotoPath, eMode, kOption)`
-- `ImportHeadFromObj(*args)`
-- `__init__(self)`
-
-#### RHeadshotOption
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RIAccessory
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `TransferSkinWeight(self, strTemplateType)`
-- `GetPhysicsComponent(self)`
-- `ConvertToHair(self, eHairType)`
-- `ConvertToFaceHair(self, eFaceHairType)`
-- `GetMaterialComponent(self)`
-
-#### RIAudioObject
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `HasData(self)`
-- `Save(self, strPath)`
-- `Load(self, strPath)`
-
-#### RIAvatar
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetVisible(self, kTime, bVisible)`
-- `GetSkeletonComponent(self)`
-- `GetVisemeComponent(self)`
-- `GetAvatarShapingComponent(self)`
-- `GetMorphComponent(self)`
-- `GetMaterialComponent(self)`
-- `GetPhysicsComponent(self)`
-- `GetHikEffectorComponent(self)`
-- `GetFaceComponent(self)`
-- `GetFacialProfileComponent(self)`
-- `GetGeneration(self)`
-- `GetAvatarType(self)`
-- `GetAccessories(self, bAll=True)`
-- `GetClothes(self)`
-- `GetHairs(self)`
-- `IsVisible(self, kTime)`
-- `LoadAccessoryWithTransferSkinWeight(self, kFilePath, kTemplateType)`
-- `GetAvatarParts(self, *args)`
-- `ConvertTo(self, *args)`
-- `GetFloorContactValue(self, eType)`
-- `SetFloorContactValue(self, eType, fValue)`
-- `AutoAdjustFootHeight(self)`
-- `SaveHikProfile(self, strPath)`
-- `DoCharacterization(self, strPath, bApplyTpose, bApplyBoneMapping, bSendUpdateEvent)`
-- `ReplaceMesh(self, strMeshName, strObjFilePath, bSplitObjects=False, bAutoRig=False)`
-- `GetSubdivMeshLevel(self)`
-- `GetMaxSubdivMeshLevel(self)`
-- `SwitchSubdivMeshLevel(self, nLevel)`
-- `GetMorpherConstraintsEnabled(self)`
-- `HasMorpherConstraintsSet(self)`
-- `UpdateWrinkle(self)`
-
-#### RIAvatarPart
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetAvatarPartType(self)`
-- `ConvertToHair(self, eHairType)`
-- `ConvertToFaceHair(self, eFaceHairType)`
-- `GetFaceHairType(self)`
-
-#### RIAvatarShapingComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `CreateSlider(self, kMorphSliderInputData, strOutputFilePath)`
-- `GetShapingMorphIDs(self, strCatergory)`
-- `GetShapingMorphDisplayNames(self, strCatergory)`
-- `SetShapingMorphDisplayName(self, strId, strName)`
-- `GetShapingMorphCatergoryNames(self)`
-- `GetShapingMorphMinMax(self, strID)`
-- `GetShapingMorphWeight(self, strID)`
-- `SetShapingMorphWeight(self, strID, fWeight)`
-
-#### RIBase
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `IsValid(self)`
-
-#### RIBodyDevice
-
-**Inherits from:** `RIDeviceBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `Initialize(self, kBoneList)`
-- `SetTPoseData(self, *args)`
-- `ProcessData(self, nDataIndex, kData, nDeviceTime=-1)`
-- `ProcessAllData(self, kDataIndexes, kData, kDeviceTimes)`
-- `IsTPoseReady(self, spAvatar)`
-- `GetDeviceSetting(self)`
-- `SetProcessDataIndex(self, spAvatar, nIndex)`
-- `GetProcessDataIndex(self, spAvatar)`
-- `SetBodySetting(self, *args)`
-- `GetBodySetting(self, spAvatar)`
-
-#### RIBuildingGeneratorObject
-
-**Methods:**
-
-- `GenerateBuilding(kSettings, kInfo)`
-- `IsBuildingRoot(spObject)`
-- `IsFloor(spObject)`
-- `IsUnit(spObject)`
-- `IsWall(spObject)`
-- `GetBuildingRoot(spObject)`
-- `GetFloorByChild(spObject)`
-- `GetUnitByChild(spObject)`
-- `__init__(self)`
-
-#### RIBuildingObject
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddBlankFloor(self, nNewFloor, nTemplate, nColumn, nRow, fWidth, fLength, strDummyPropFileName)`
-- `DeleteFloor(self, spFloorObject)`
-- `GetFloors(self, kFloors)`
-- `GetFloorNumber(self, spFloor)`
-- `DuplicateFloor(self, nNewFloor, spFloor)`
-- `UpdateFloorsPosition(self)`
-- `MoveFloor(self, spTargetPosition, spFloor, bMoveUpward)`
-- `GetAllWalls(self, kWalls)`
-- `Optimize(self)`
-
-#### RICamera
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetFocalLength(self, kTime, fFocalLength)`
-- `GetFocalLength(self, kTime)`
-- `GetFocalLengthKeyCount(self)`
-- `RemoveFocalLengthKey(self, kTime)`
-- `RemoveFocalLengthKeys(self)`
-- `AddDofKey(self, kKey, kDofData)`
-- `RemoveDofKey(self, kKey)`
-- `RemoveDofKeys(self)`
-- `GetDofKeyCount(self)`
-- `GetDOFData(self)`
-- `GetAngleOfView(self, kTime)`
-- `GetAperture(self, fWidth, fHeight)`
-- `GetFitRenderRegionType(self)`
-- `GetFitFovType(self)`
-- `GetNearClippingPlane(self)`
-- `SetNearClippingPlane(self, nNearPlane)`
-- `GetFarClippingPlane(self)`
-- `SetFarClippingPlane(self, nFarPlane)`
-- `GetNearClippingPlaneF(self)`
-- `SetNearClippingPlaneF(self, fNearPlane)`
-- `GetFarClippingPlaneF(self)`
-- `SetFarClippingPlaneF(self, fFarPlane)`
-- `IsLookAtMode(self, kTime)`
-
-#### RIClip
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetControl(self, strKey, spNode)`
-- `GetDataBlock(self, strKey, spBase)`
-- `GetEffectorDataBlock(self, strKey, spBase, spDataBlock, spActiveDataBlock)`
-- `GetType(self)`
-- `GetLength(self)`
-- `GetStartOffset(self)`
-- `SetLength(self, kLength)`
-- `GetLastKeyTime(self)`
-- `SceneTimeToClipTime(self, kSceneTick)`
-- `ClipTimeToSceneTime(self, kClipTick)`
-- `GetClipLength(self)`
-- `GetTransitionRange(self)`
-- `SetTransitionRange(self, kLength)`
-- `GetSpeed(self)`
-- `SetSpeed(self, fSpeed)`
-- `GetLoopCount(self)`
-- `GetTransitionData(self)`
-- `SetTransitionData(self, kData)`
-- `SetTransitionType(self, bFadeIn, eTransitionType, fTransitionStrength)`
-- `GetTransitionType(self, bFadeIn)`
-- `GetTransitionStrength(self, bFadeIn)`
-- `GetWeightLayerControlName(self)`
-- `SetWeightLayerControlName(self, strName)`
-- `GetRtsLayerControlName(self)`
-- `SetRtsLayerControlName(self, strName)`
-- `GetRtsClipControlName(self)`
-- `SetRtsClipControlName(self, strName)`
-- `AddTimecodeData(self, fFps, fMilliseconds)`
-
-#### RICloth
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `IsClothConformingEnable(self)`
-- `SetClothConformingEnable(self, bEnable)`
-- `GetClothConformValue(self, strConform)`
-- `SetClothConformValue(self, strConform, fValue)`
-- `CalculateCollision(self)`
-- `TransferSkinWeight(self, strTemplateType)`
-- `GetClotheType(self)`
-- `SetClotheType(self, eClotheType)`
-- `ConvertToAccessory(self, bCurrentShape)`
-- `GetMaterialComponent(self)`
-- `GetPhysicsComponent(self)`
-
-#### RIDeviceBase
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetDeviceID(self)`
-- `GetDeviceType(self)`
-- `AddAvatar(self, spAvatar)`
-- `AddAvatars(self, kAvatarList)`
-- `RemoveAvatar(self, spAvatar)`
-- `GetAvatarAt(self, nIndex)`
-- `GetAvatarCount(self)`
-- `SetEnable(self, spAvatar, bEnable)`
-- `IsEnable(self, spAvatar)`
-
-#### RIDialog
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetWindow(self)`
-- `GetTitle(self)`
-- `GetWindowTitle(self)`
-- `SetWindowTitle(self, strTitleName)`
-- `SetParent(self, pWidget)`
-- `Exec(self)`
-- `Show(self)`
-- `Hide(self)`
-- `Close(self)`
-- `IsVisible(self)`
-- `SetModal(self, bModal)`
-- `IsModal(self)`
-- `GetDialogType(self)`
-- `RegisterNativeEventCallback(self, pfCallback)`
-- `UnregisterNativeEventCallback(self, uId)`
-- `UnregisterNativeEventCallbacks(self, kIds)`
-- `RegisterEventCallback(self, pfCallback)`
-- `UnregisterEventCallback(self, uId)`
-- `UnregisterEventCallbacks(self, kIds)`
-- `UnregisterAllEventCallbacks(self)`
-
-#### RIDirectionalLight
-
-**Inherits from:** `RILight`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetCastShadow(self, bEnable)`
-- `IsCastShadow(self)`
-- `SetDarkenShadowStrength(self, kTime, fStrength)`
-- `GetDarkenShadowStrength(self)`
-- `SetTransmission(self, b)`
-- `GetTransmission(self)`
-
-#### RIDockWidget
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetWindow(self)`
-- `GetTitle(self)`
-- `GetWindowTitle(self)`
-- `SetWindowTitle(self, strTitleName)`
-- `SetWidget(self, pWidget)`
-- `SetParent(self, pWidget)`
-- `Show(self)`
-- `Hide(self)`
-- `Close(self)`
-- `IsVisible(self)`
-- `SetAllowedAreas(self, eArea)`
-- `SetFloating(self, bFloating)`
-- `SetFeatures(self, eFeatures)`
-- `Features(self)`
-- `IsAreaAllowed(self, eArea)`
-- `IsFloating(self)`
-- `RegisterNativeEventCallback(self, pfCallback)`
-- `UnregisterNativeEventCallback(self, uId)`
-- `UnregisterNativeEventCallbacks(self, kIds)`
-- `RegisterEventCallback(self, pfCallback)`
-- `UnregisterEventCallback(self, uId)`
-- `UnregisterEventCallbacks(self, kIds)`
-- `UnregisterAllEventCallbacks(self)`
-
-#### RIEffector
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetEffector(self)`
-
-#### RIElementObject
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-
-#### RIEventListener
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `Init(self)`
-- `RegisterCallback(self, pCallback)`
-- `UnregisterCallback(self, uId)`
-- `UnregisterCallbacks(self, kIds)`
-
-#### RIFaceComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddClip(self, kTime, strName, kLength)`
-- `GetStrength(self)`
-- `GetExpressionNames(self, strType, bMocapOrder=False)`
-- `GetExpressionStatuses(self, strType)`
-- `GetAutoBlinkNames(self)`
-- `GetAutoBlinkName(self)`
-- `SetAutoBlinkName(self, strName)`
-- `GetClipCount(self)`
-- `GetClip(self, uIndex)`
-- `GetClipByTime(self, kHitTime)`
-- `BreakClip(self, kTime)`
-- `DeleteClip(self, spClip)`
-- `GetExpressionGroups(self)`
-- `GetExpressionWeights(self, *args)`
-- `GetExpressionSetUid(self)`
-- `BeginKeyEditing(self)`
-- `AddExpressionKeys(self, kTime, kExpressions, kStrengths, kInterval)`
-- `EndKeyEditing(self)`
-- `GetExpressiveness(self, kTime)`
-- `AddExpressivenessKey(self, kTime, fWeight)`
-- `ImportExpression(self, kSettings)`
-- `GetExpressionBoneRotation(self, strBoneName, strExpression)`
-- `SetCurrentPoseMode(self)`
-- `IsCurrentPoseMode(self)`
-
-#### RIFacialDevice
-
-**Inherits from:** `RIDeviceBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `Initialize(self)`
-- `SetFacialSetting(self, *args)`
-- `GetFacialSetting(self, spAvatar)`
-- `ProcessData(self, *args)`
-
-#### RIFacialProfileComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SaveProfile(self, strPath)`
-- `LoadProfile(self, strPath)`
-- `ImportMorphs(self, strPath, bReplaceSameSlider, kImportExpressions, strImportCategory)`
-- `GetProfileType(self)`
-- `GetExpressionCategoryNames(self)`
-- `GetExpressionSliderNames(self, strCategoryName)`
-
-#### RIFloorObject
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `BuildFloor(self, *args)`
-- `ReBuildFloorWithKeepFacadeSetting(self, *args)`
-- `ClearFloor(self)`
-- `GetUnits(self)`
-
-#### RIHair
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetPhysicsComponent(self)`
-- `ConvertToHair(self, eHairType)`
-- `ConvertToFaceHair(self, eFaceHairType)`
-- `GetHairType(self)`
-- `GetMaterialComponent(self)`
-
-#### RIHandDevice
-
-**Inherits from:** `RIDeviceBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `Initialize(self, kBoneList)`
-- `SetTPoseData(self, spAvatar, kData)`
-- `ProcessData(self, nDataIndex, kData, nDeviceTime=-1)`
-- `IsTPoseReady(self, spAvatar)`
-- `GetDeviceSetting(self)`
-- `SetProcessDataIndex(self, spAvatar, nIndex)`
-- `GetProcessDataIndex(self, spAvatar)`
-- `SetHandSetting(self, *args)`
-- `GetHandSetting(self, spAvatar)`
-
-#### RIHikEffectorComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetActive(self, eEffector, eType, bActive)`
-- `GetActive(self, eEffector, eType)`
-- `SetLock(self, eEffector, eType, bLock)`
-- `GetLock(self, eEffector, eType)`
-- `SetPosition(self, *args)`
-- `Solve(self, eEffector, kMatrix)`
-- `SetBodyWeight(self, fWeight)`
-- `AddReachKey(self, eEffector, kKey)`
-- `RemoveReachKey(self, eEffector, kKey)`
-- `GetReachKeys(self, eEffector)`
-- `GetBone(self, strEffectorText)`
-- `SetReachOffsetKey(self, strEffectorText, kTime, mOffset)`
-
-#### RIImage
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `LoadFile(self, strPath)`
-- `SaveFile(self, strPath)`
-- `GetWidth(self)`
-- `GetHeight(self)`
-- `GetQImage(self)`
-- `SetImageData(self, pQImage)`
-- `CopyImage(self)`
-- `IsSameImage(self, spImage, fTolerance=0.001)`
-
-#### RILight
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetActive(self, kTime, bActive)`
-- `GetActive(self)`
-- `SetMultiplier(self, kTime, fMultiplier)`
-- `GetMultiplier(self)`
-- `SetColor(self, kTime, kColor)`
-- `GetColor(self)`
-
-#### RILightAvatar
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetGeneration(self)`
-- `GetAvatarType(self)`
-- `GetSkeletonComponent(self)`
-- `GetVisemeComponent(self)`
-- `GetMorphComponent(self)`
-- `GetFaceComponent(self)`
-- `IsVisible(self, kTime)`
-
-#### RILookAtComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddLookAtKey(self, *args)`
-- `GetLookAtOffsetDataBlock(self)`
-- `GetLookAtWeightDataBlock(self, bIsBody)`
-
-#### RIMDProp
-
-**Inherits from:** `RIProp`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `IsInitialOccupy(self)`
-- `IsStartOnEntryDummy(self)`
-- `IsActiveCrowdInteraction(self)`
-- `IsEnableFollowMode(self)`
-- `IsChangedFollowObject(self)`
-- `GetCrowdExitType(self)`
-- `GetInteractTimes(self)`
-- `GetDistance(self)`
-- `GetTagRatioMap(self)`
-- `GetTagRatio(self, strTagName)`
-
-#### RIMaterialComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddAmbientKey(self, kKey, strMeshName, strMaterialName, kColor)`
-- `AddDiffuseKey(self, kKey, strMeshName, strMaterialName, kColor)`
-- `AddGlossinessKey(self, kKey, strMeshName, strMaterialName, fWeight)`
-- `AddSpecularKey(self, *args)`
-- `AddSelfIlluminationKey(self, kKey, strMeshName, strMaterialName, fWeight)`
-- `AddOpacityKey(self, kKey, strMeshName, strMaterialName, fWeight)`
-- `AddTextureWeightKey(self, kKey, strMeshName, strMaterialName, eChannel, fWeight)`
-- `AddUvDataKey(self, kKey, strMeshName, strMaterialName, eChannel, kUvOffset, kUvTile, fUvRotate)`
-- `RemoveUvDataKey(self, kKey, strMeshName, strMaterialName, eChannel)`
-- `LoadVideoToTexture(self, kKey, strMeshName, strMaterialName, eChannel, strVideoPath)`
-- `LoadImageToTexture(self, strMeshName, strMaterialName, eChannel, strImagePath)`
-- `AddVideoVolumeKey(self, kKey, strMeshName, strMaterialName, eChannel, fVol, bMute)`
-- `GetMaterialNames(self, strMeshName)`
-- `GetAmbientColor(self, strMeshName, strMaterialName)`
-- `GetDiffuseColor(self, strMeshName, strMaterialName)`
-- `GetSpecularColor(self, strMeshName, strMaterialName)`
-- `GetGlossinessWeight(self, strMeshName, strMaterialName)`
-- `GetSpecularWeight(self, strMeshName, strMaterialName)`
-- `GetSelfIlluminationWeight(self, strMeshName, strMaterialName)`
-- `GetOpacity(self, strMeshName, strMaterialName)`
-- `GetTextureWeights(self, strMeshName, strMaterialName)`
-- `GetUvData(self, strMeshName, strMaterialName, eChannel, kUvOffset, kUvTile, fUvRotate)`
-- `GetVideoVolume(self, strMeshName, strMaterialName, eChannel)`
-- `GetAttributeValue(self, strMeshName, strMaterialName, strAttributeName)`
-- `SetAttributeValue(self, strMeshName, strMaterialName, strAttributeName, fValue)`
-- `IsTwoSidedMaterial(self, strMeshName, strMaterialName)`
-- `SetTwoSidedMaterial(self, strMeshName, strMaterialName, bEnable)`
-- `LoadMaterial(self, strMeshName, strMaterialName, strFilePath)`
-- `RemoveMaterialTexture(self, strMeshName, strMaterialName, eChannel)`
-- `GetShaderNames(self)`
-- `GetShader(self, strMeshName, strMaterialName)`
-- `SetShader(self, strMeshName, strMaterialName, strShader)`
-- `GetShaderParameterNames(self, strMeshName, strMaterialName)`
-- `GetShaderParameter(self, strMeshName, strMaterialName, strParameter)`
-- `SetShaderParameter(self, strMeshName, strMaterialName, strParameter, kValue)`
-- `GetShaderTextureNames(self, strMeshName, strMaterialName)`
-- `LoadShaderTexture(self, strMeshName, strMaterialName, strName, strTexturePath)`
-- `GetRefraction(self, strMeshName, strMaterialName)`
-- `IsRefractionEnable(self, strMeshName, strMaterialName)`
-- `SetRefractionEnable(self, strMeshName, strMaterialName, bEnable)`
-- `AddRefractionKey(self, kKey, strMeshName, strMaterialName, fWeight)`
-- `GetReflection(self, strMeshName, strMaterialName)`
-- `IsReflectionEnable(self, strMeshName, strMaterialName)`
-- `SetReflectionEnable(self, strMeshName, strMaterialName, bEnable)`
-- `AddReflectionKey(self, kKey, strMeshName, strMaterialName, fWeight)`
-- `MakeUnique(self, strMeshName, strMaterialName)`
-- `SetWrinkleRule(self, strMeshName, strMaterialName, strRelateName, uMaskValueIndex, uMaskTextureIndex, strMaskChannel, fWeight)`
-- `SetWrinkleActionToRule(self, strMeshName, strMaterialName, strActionName, strRuleName, strRuleRangeMin, strRuleRangeMax)`
-- `SetWrinkleTextureFilePath(self, strMeshName, strMaterialName, strDiffusePath, strNormalPath, strRoughnessPath, uWrinkleImageIndex)`
-- `SetWrinkleMaskFilePath(self, strMeshName, strMaterialName, strMaskPath, uMaskIndex)`
-- `AddWrinkleWeightKey(self, kKey, strMeshName, strMaterialName, uRuleIndex, nWeight)`
-- `SetImageColor(self, strMeshName, strMaterialName, eChannel, fSoftness, kHsbc, kCmy)`
-- `GetImageColor(self, strMeshName, strMaterialName, eChannel)`
-- `SetMaterialName(self, strMeshName, strOrgMatName, strNewMatName)`
-- `MergeMaterialUV(self, *args)`
-- `SetWrinkleFlattenTexture(self, eChannel, strImagePath)`
-- `SetWrinkleDetailParameters(self, eWrinkleFacePart, eWrinkleLayerType, fStrength)`
-- `SetWrinkleDetailStrength(self, eWrinkleFacePart, fStrength)`
-- `GetImage(self, strMeshName, strMaterialName, eChannel)`
-- `HasImage(self, strMeshName, strMaterialName, eChannel)`
-- `SetImage(self, spImage, strMeshName, strMaterialName, eChannel)`
-- `SetMaterialSettings(self, kOptions, strMeshName, strMaterialName)`
-- `CopyMaterial(self, strSrcMeshName, strSrcMaterialName, strDstMeshName, strDstMaterialName)`
-- `GetResourceMapImage(self, strMeshName, strMaterialName, strResourceMapName)`
-
-#### RIMesh
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetName(self)`
-- `GetID(self)`
-- `GetVerticesCount(self)`
-- `GetFacesCount(self)`
-- `GetVertex(self, nIndex, bWorld=False)`
-- `GetVertices(self, bWorld=False)`
-- `GetFace(self, nFaceIdx)`
-- `DeleteFaces(self, kFaceIndexs)`
-- `ConvertToAccessory(self, bCurrentShape=True)`
-- `ReplaceMesh(self, strPath, eOption, bReplaceUv, bSplitObjects=False)`
-- `GetStdMaterials(self)`
-
-#### RIMocapManager
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddBodyDevice(self, strDeviceID)`
-- `AddHandDevice(self, strDeviceID)`
-- `AddFacialDevice(self, strDeviceID)`
-- `GetDevice(self, strDeviceID)`
-- `IsDeviceExist(self, strDeviceID)`
-- `RemoveDevice(self, strDeviceID)`
-- `RemoveAllDevices(self)`
-- `Start(self, *args)`
-- `Stop(self)`
-- `IsRunning(self)`
-- `MocapState(self)`
-
-#### RIMorphComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddKey(self, strMeshName, strMorphName, kTime, fWeight, bSendEvent, bPauseAP)`
-- `RemoveAllKeys(self, strMeshName, strMorphName)`
-- `GetWeight(self, strMeshName, strMorphName, kTime, fWeight)`
-- `GetMorphNames(self, strMeshName)`
-
-#### RIMotionDirectorManager
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `Start(self)`
-- `Stop(self)`
-- `IsRunning(self)`
-- `IsReady(self)`
-- `BeginCommand(self, kTime, kObjects, kOption)`
-- `EndCommand(self, *args)`
-- `EmbedCommand(self, kTime, kAvatars)`
-- `RemoveTriggeredByAnimation(self, kTime, kMDProps, kAvatarsToRecord)`
-
-#### RINode
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetName(self)`
-- `GetID(self)`
-- `GetParent(self)`
-- `GetChildren(self, bWithSameCustomID=False)`
-- `LocalTransform(self)`
-- `BasisTransform(self)`
-- `WorldTransform(self)`
-- `WorldToLocal(self, kWorldMatrix)`
-- `LocalToWorld(self, kLocalMatrix)`
-- `SetDataBlock(self, strId, spDataBlock)`
-- `GetDataBlock(self, strId)`
-- `RemoveDataBlock(self, strId)`
-- `Update(self, *args)`
-
-#### RINodeTransformPair
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__len__(self)`
-- `__repr__(self)`
-- `__getitem__(self, index)`
-- `__setitem__(self, index, val)`
-
-#### RINodeTransformPairs
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__getslice__(self, i, j)`
-- `__setslice__(self, *args)`
-- `__delslice__(self, i, j)`
-- `__delitem__(self, *args)`
-- `__getitem__(self, *args)`
-- `__setitem__(self, *args)`
-- `pop(self)`
-- `append(self, x)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `pop_back(self)`
-- `erase(self, *args)`
-- `__init__(self, *args)`
-- `push_back(self, x)`
-- `front(self)`
-- `back(self)`
-- `assign(self, n, x)`
-- `resize(self, *args)`
-- `insert(self, *args)`
-- `reserve(self, n)`
-- `capacity(self)`
-
-#### RIObject
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetName(self)`
-- `GetID(self)`
-- `GetControl(self, strKey)`
-- `GetType(self)`
-- `GetMeshNames(self, bAll=True)`
-- `__eq__(self, kRhs)`
-- `LocalTransform(self)`
-- `WorldTransform(self)`
-- `SetParent(self, *args)`
-- `LinkTo(self, *args)`
-- `UnLink(self, kTime)`
-- `GetLinkedObject(self, kTime)`
-- `SetName(self, strName)`
-- `GetPivot(self, kPosition, kOrientation)`
-- `GetBounds(self, kMaxPoint, kCenterPoint, kMinPoint)`
-- `Clone(self)`
-- `IsSelected(self)`
-- `SetDataBlock(self, strId, spDataBlock)`
-- `GetDataBlock(self, strId)`
-- `RemoveDataBlock(self, strId)`
-- `RemoveLinkKey(self, kTime)`
-- `ReleasePath(self, kTime)`
-- `FollowPath(self, spPath, kAppTime)`
-- `AlignTo(self, spTargetObject, eAlignAxis, bAlignToPivot)`
-- `IsStatic(self)`
-- `SetStatic(self, bStatic)`
-- `GetMeshes(self, bAll=True)`
-- `DeleteMesh(self, spMesh)`
-- `Update(self, *args)`
-- `GetParent(self)`
-- `GetParentNode(self)`
-
-#### RIOmniConnectorManager
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `TurnOnLiveSync(self, kObjects)`
-- `TurnOffLiveSync(self)`
-- `TransferFile(self, kObjects, kObjectSyncStates)`
-- `SetTransferFileMotionSetting(self, kFps, nStartFrame, nEndFrame)`
-- `SetTransferFileSetting(self, nMaxImageSize, nTextureFormat, bDeleteHiddenMesh, bSubdivisionMesh, bPathTracedMaterial, bIbl, bSwitchCamera)`
-- `SetTransferMotionOnly(self, bMotionOnly)`
-- `SetObjectSyncState(self, object, bSyncing)`
-- `ObjectSyncStateListChanged(self, kObjects, kSyncStatuses)`
-- `SetActiveLiveAdd(self, bSyncing)`
-- `SetActive2WaySync(self, bActive)`
-
-#### RIParticle
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetEmit(self, kTime, bOn)`
-- `GetEmit(self)`
-
-#### RIPath
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-
-#### RIPhysicsComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetSoftPhysicsMeshNameList(self)`
-- `GetSoftPhysicsMaterialNameList(self, strMeshName)`
-- `IsActivatePhysicsEnable(self)`
-- `SetActivatePhysicsEnable(self, bActivate)`
-- `IsObjectGravityEnable(self, strMeshName, strMaterialName)`
-- `SetObjectGravityEnable(self, strMeshName, strMaterialName, bObjectGravity)`
-- `GetSoftPhysXProperty(self, strMeshName, strMaterialName, strPropertyName)`
-- `SetSoftPhysXProperty(self, strMeshName, strMaterialName, strPropertyName, fValue)`
-- `GetSoftPhysXCollisionValue(self, strMeshName, strMaterialName, strCollisionName)`
-- `GetSoftPhysXCollisionEnable(self, strMeshName, strMaterialName, strCollisionName)`
-- `SetSoftPhysXCollisionValue(self, strMeshName, strMaterialName, strCollisionName, fValue)`
-- `SetSoftPhysXCollisionEnable(self, strMeshName, strMaterialName, strCollisionName, bEnable)`
-- `SavePhysicsSoftColthWeightMap(self, strMeshName, strMaterialName, strFilePath)`
-- `SetPhysicsSoftColthWeightMap(self, *args)`
-- `GetPhysicsSoftColthWeightMap(self, strMeshName, strMaterialName)`
-
-#### RIPointLight
-
-**Inherits from:** `RILight`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetRange(self, kTime, fRange)`
-- `GetRange(self)`
-- `SetInverseSquare(self, b)`
-- `GetInverseSquare(self)`
-- `SetTubeShape(self, bTube)`
-- `IsTubeShape(self)`
-- `SetRectangleShape(self, bRectangle)`
-- `IsRectangleShape(self)`
-- `SetTubeLength(self, fLength)`
-- `GetTubeLength(self)`
-- `SetTubeRadius(self, radius)`
-- `GetTubeRadius(self)`
-- `SetTubeSoftRadius(self, softRadius)`
-- `GetTubeSoftRadius(self)`
-- `GetRectWidthHeight(self)`
-- `SetRectWidthHeight(self, vWidthHeight)`
-- `LoadRectTexture(self, strTexturePath)`
-- `SaveRectTexture(self, strTexturePath)`
-- `ClearRectTexture(self)`
-- `LoadIes(self, strIesFilePath)`
-- `SaveIes(self, strIesFilePath)`
-- `SetCastShadow(self, bEnable)`
-- `IsCastShadow(self)`
-
-#### RIPopcornFXObject
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetEmit(self, kTime, bOn)`
-- `SetLoop(self, bLoop)`
-- `SetLoopInterval(self, fEmissionInterval)`
-- `GetEmit(self)`
-- `GetLoopInterval(self)`
-- `IsLoop(self)`
-- `GetEmitKeyCount(self)`
-- `RemoveEmitKeys(self)`
-- `GetAttributeCount(self)`
-- `GetAttributeName(self, nIndex)`
-- `GetAttributeValue(self, nIndex)`
-- `GetSamplerList(self, eType)`
-- `GetMeshSamplerTarget(self, strSamplerName)`
-- `SetMeshSamplerTarget(self, strSamplerName, spObject)`
-- `ClearMeshSamplerTarget(self, strSamplerName)`
-- `AddAttributeKey(self, strName, kTime, kValue)`
-
-#### RIProp
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetVisible(self, kTime, bVisible)`
-- `GetSkeletonComponent(self)`
-- `GetMorphComponent(self)`
-- `GetMaterialComponent(self)`
-- `SetPivot(self, kPosition, kOrientation)`
-- `SetDummy(self, bIsDummy)`
-- `IsDummy(self)`
-- `IsVisible(self, kTime)`
-- `MakeSubProp(self, bShowProgress=False)`
-- `SetLinkOffsetKey(self, spTargetReachNode, spTargetBone, kTime)`
-- `ReplaceMesh(self, strMeshName, strObjFilePath)`
-
-#### RIReach
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetEffector(self)`
-- `GetReachOffsetControl(self, strKey, nClipIndex=-1)`
-- `IsSameReachOffset(self, pTarget, bCompareKeys)`
-- `CheckClipModeAndGetFirstClipIndex(self, bClipMode, uFirstClipIndex)`
-
-#### RISaveFileOptionBase
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RISkeletonComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetRootBone(self)`
-- `GetClipCount(self)`
-- `GetClip(self, uIndex)`
-- `GetSkinBones(self)`
-- `GetSelectedBones(self)`
-- `GetEffector(self, eEffector)`
-- `GetReach(self, eEffector)`
-- `GetLookAtComponent(self)`
-- `ConvertBoneAxisAndParent(self, kAxisMaps, kReParentMaps, kInsertBoneInfo, bIncludeDummyNode=True)`
-- `ConvertToOriginalBoneAxis(self, bIncludeDummyNode=True, bIncludeMeshNode=True)`
-- `AddClip(self, kTime)`
-- `SampleMotionClip(self, spClip, bOptimize=True)`
-- `FlattenMotionClip(self, spClip)`
-- `BreakClip(self, kTime)`
-- `MergeClips(self, spClip1, spClip2)`
-- `MirrorClip(self, spClip)`
-- `IsBoneAnimated(self, spBone)`
-- `GetAllAnimationBone(self)`
-- `ConvertToMotionBoneWorldTransforms(self)`
-- `ConvertFramesToMotionBoneWorldTransforms(self, _from, to)`
-- `BakeFkToIk(self, kTime, bAllClip)`
-- `GetClipByTime(self, kHitTime)`
-- `GetBoneTPosePosition(self, spBone)`
-- `SetBoneTPosePosition(self, spBone, kPos)`
-- `DeleteClip(self, spClip)`
-- `GetBoneQniqueNames(self)`
-
-#### RISky
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetVisible(self, kTime, bVisible)`
-- `GetMaterialComponent(self)`
-- `IsVisible(self, kTime)`
-
-#### RISpotLight
-
-**Inherits from:** `RILight`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetSpotLightBeam(self, kTime, fAngle, fFalloff, fAttenuation)`
-- `GetSpotLightBeam(self, fAngle, fFalloff, fAttenuation)`
-- `SetRange(self, kTime, fRange)`
-- `GetRange(self)`
-- `SetCastShadow(self, bEnable)`
-- `IsCastShadow(self)`
-- `SetDarkenShadowStrength(self, kTime, fStrength)`
-- `GetDarkenShadowStrength(self)`
-- `SetInverseSquare(self, b)`
-- `GetInverseSquare(self)`
-- `SetTransmission(self, b)`
-- `GetTransmission(self)`
-- `SetTubeShape(self, bTube)`
-- `IsTubeShape(self)`
-- `SetRectangleShape(self, bRectangle)`
-- `IsRectangleShape(self)`
-- `SetTubeLength(self, fLength)`
-- `GetTubeLength(self)`
-- `SetTubeRadius(self, radius)`
-- `GetTubeRadius(self)`
-- `SetTubeSoftRadius(self, softRadius)`
-- `GetTubeSoftRadius(self)`
-- `GetRectWidthHeight(self)`
-- `SetRectWidthHeight(self, vWidthHeight)`
-- `LoadRectTexture(self, strTexturePath)`
-- `SaveRectTexture(self, strTexturePath)`
-- `ClearRectTexture(self)`
-- `LoadIes(self, strIesFilePath)`
-- `SaveIes(self, strIesFilePath)`
-
-#### RIStdMaterial
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetName(self)`
-- `GetID(self)`
-- `GetImage(self, eChannel)`
-- `SetImage(self, strImage, eChannel)`
-- `AddAmbientKey(self, kKey, kColor)`
-- `AddDiffuseKey(self, kKey, kColor)`
-- `GetAmbientColor(self)`
-- `GetDiffuseColor(self)`
-- `SetUseSRGB(self, eChannel, bSet)`
-- `IsUseSRGB(self, eChannel)`
-
-#### RIUnitObject
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `RebuildWall(self, *args)`
-- `BuildWall(self, *args)`
-- `GetWall(self, ePos)`
-- `GetWalls(self)`
-- `RemoveWall(self, spWall)`
-- `GetActivatedPosition(self)`
-- `GetPositionOfWall(self, spWall)`
-- `SetWallActive(self, ePos, bActive)`
-
-#### RIVisemeComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `AddVisemeOptionClip(self, kSmoothOption, kStartTick, strClipName)`
-- `AddVisemeKey(self, kKey)`
-- `AddVisemesClip(self, kTick, strClipName, kClipLength)`
-- `ChangeTalkingStyle(self, pClip, strPresetName)`
-- `RemoveVisemesClip(self, kTick)`
-- `RemoveVisemesKey(self, kKey)`
-- `GetVisemeMorphWeights(self)`
-- `GetVisemeBones(self)`
-- `GetVisemeKeys(self)`
-- `GetVisemeKey(self, kTime, kKey)`
-- `TextToSpeech(self, *args)`
-- `TextToVisemeData(self, strContent, fVolume=100., fPitch=50., fSpeed=50.)`
-- `GetStrength(self)`
-- `LoadVocal(self, *args)`
-- `GetClipCount(self)`
-- `GetClip(self, uIndex)`
-- `GetClipByTime(self, kHitTime)`
-- `GetVisemeNames(self)`
-- `GetWords(self, nClipIndex=-1)`
-- `AddVisemesClipWithData(self, *args)`
-
-#### RIVisualSettingComponent
-
-**Inherits from:** `RIBase`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `SetIBLEnable(self, bEnable)`
-- `IsIBLEnable(self)`
-- `LoadIBLImage(self, strFilePath)`
-- `IsIBLSyncSkyImage(self)`
-- `SetIBLSyncSkyImage(self, bEnable)`
-- `IsIBLSyncSkyOrientation(self)`
-- `SetIBLSyncSkyOrientation(self, bEnable)`
-- `SaveIBLImage(self, strFilePath)`
-- `GetAmbientColor(self)`
-- `SetAmbientColor(self, kColor)`
-
-#### RIWallObject
-
-**Inherits from:** `RIObject`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `ReplaceMaterial(self, strMaterialFilePath)`
-- `BuildArchitectureElement(self, *args)`
-- `CopyElementsFromWall(self, spWall)`
-- `GetArchitectureElements(self)`
-
-#### RImage
-
-**Methods:**
-
-- `CreateImage()`
-- `SetGlobalPtr(pGlobalPtr)`
-- `__init__(self)`
-
-#### RImportExpressionSetting
-
-**Methods:**
-
-- `__init__(self)`
-- `SetExpressionSource(self, kMeshFilePath)`
-- `SetExpressionTarget(self, kMeshFilePath)`
-- `SetWrinkleExpressionPart(self, eWrinkleExpression)`
-- `GetExpressionSource(self)`
-- `GetExpressionTarget(self)`
-- `GetWrinkleExpressionPart(self)`
-
-#### RInsertBoneInfo
-
-**Methods:**
-
-- `__init__(self)`
-- `SetInfo(self, strParentName, strNewBoneName, strChildName)`
-- `GetParentBoneName(self)`
-- `GetNewBoneName(self)`
-- `GetChildBoneName(self)`
-- `__eq__(self, rhs)`
-
-#### RKey
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `Clone(self)`
-- `SetTime(self, kTick)`
-- `GetTime(self)`
-- `SetTransitionType(self, eTransitionType)`
-- `GetTransitionType(self)`
-- `SetTransitionStrength(self, fTransitionStrength)`
-- `GetTransitionStrength(self)`
-
-#### RMath
-
-**Methods:**
-
-- `ACos(fValue)`
-- `ASin(fValue)`
-- `ATan(fValue)`
-- `ATan2(fY, fX)`
-- `Cos(fValue)`
-- `Exp(fValue)`
-- `FAbs(fValue)`
-- `FMod(fX, fY)`
-- `InvSqrt(fValue)`
-- `Log(fValue)`
-- `Pow(fBase, fExponent)`
-- `Sin(fValue)`
-- `Sqr(fValue)`
-- `Sqrt(fValue)`
-- `Tan(fValue)`
-- `Sign(fValue)`
-- `CopySign(fValue)`
-- `UnitRandom(*args)`
-- `SymmetricRandom(*args)`
-- `IntervalRandom(*args)`
-- `FastSin0(fAngle)`
-- `FastSin1(fAngle)`
-- `FastCos0(fAngle)`
-- `FastCos1(fAngle)`
-- `FastTan0(fAngle)`
-- `FastTan1(fAngle)`
-- `FastInvSin(fValue)`
-- `FastInvCos(fValue)`
-- `FastInvTan0(fValue)`
-- `FastInvTan1(fValue)`
-- `FastInvSqrt_Walsh(tValue)`
-- `FastSqrt_Walsh(tValue)`
-- `FastSqrt_LogBase2(tValue)`
-- `LogGamma(fX)`
-- `Gamma(fX)`
-- `IncompleteGamma(fA, fX)`
-- `Erf(fX)`
-- `Erfc(fX)`
-- `ModBessel0(fX)`
-- `ModBessel1(fX)`
-- `Min(a, b)`
-- `Max(a, b)`
-- `Abs(a)`
-- `Clamp(tMax, tMin, tValue)`
-- `AlmostZero(*args)`
-- `Equal(*args)`
-- `RoundEpsilonZero(tValue)`
-- `RoundAlmostZero(tValue)`
-- `Round(tValue)`
-- `Bezier3(a, b, c, d, t)`
-- `__init__(self)`
-
-#### RMatrix3
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `MakeIdentity(self)`
-- `M(self, *args)`
-- `E(self, *args)`
-- `GetRow(self, nRow)`
-- `GetColumn(self, nCol)`
-- `__call__(self, *args)`
-- `__eq__(self, mM)`
-- `__ne__(self, mM)`
-- `__lt__(self, mM)`
-- `__gt__(self, mM)`
-- `__ge__(self, mM)`
-- `__le__(self, mM)`
-- `__add__(self, mM)`
-- `__sub__(self, mM)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__neg__(self)`
-- `__iadd__(self, mM)`
-- `__isub__(self, mM)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `Transpose(self)`
-- `TransposeTimes(self, mM)`
-- `TimesTranspose(self, mM)`
-- `Inverse(self)`
-- `Adjoint(self)`
-- `AdjointTranspose(self)`
-- `InverseTranspose(self)`
-- `DiagonalElements(self)`
-- `Determinant(self)`
-- `MaxColumn(self)`
-- `MaxRow(self)`
-- `OneNorm(self)`
-- `InfNorm(self)`
-- `FromAxisAngle(self, rkAxis, fAngle)`
-- `RotationX(self, fAngle)`
-- `RotationY(self, fAngle)`
-- `RotationZ(self, fAngle)`
-- `AccuScale(self, rkScale)`
-- `ToEulerAngle(self, *args)`
-- `FromEulerAngle(Oreder, rx, ry, rz)`
-- `FromSpereUnitVec(self, rkVec)`
-- `IsRightHandCoordinate(self)`
-
-#### RMatrix4
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `MakeIdentity(self)`
-- `M(self, *args)`
-- `E(self, *args)`
-- `GetRow(self, nR)`
-- `GetColumn(self, nC)`
-- `__call__(self, *args)`
-- `__eq__(self, mM)`
-- `__ne__(self, mM)`
-- `__lt__(self, mM)`
-- `__gt__(self, mM)`
-- `__ge__(self, mM)`
-- `__le__(self, mM)`
-- `__add__(self, mM)`
-- `__sub__(self, mM)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__neg__(self)`
-- `__iadd__(self, mM)`
-- `__isub__(self, mM)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `Transpose(self)`
-- `TransposeTimes(self, mM)`
-- `TimesTranspose(self, mM)`
-- `Inverse(self)`
-- `Adjoint(self)`
-- `AdjointTranspose(self)`
-- `InverseTranspose(self)`
-- `Determinant(self)`
-- `MaxColumn(self)`
-- `MaxRow(self)`
-- `OneNorm(self)`
-- `InfNorm(self)`
-- `FromRTS(self, kRotate, kTranslate, kScale)`
-- `GetSimpleRTS(self, rkRotate, rkTranslate, rkScale)`
-- `GetSimpleRotate(self, rkRotate)`
-- `SetTranslateZero(self)`
-- `RotationX(self, fAngle)`
-- `RotationY(self, fAngle)`
-- `RotationZ(self, fAngle)`
-- `RotateAxisAngle(self, rkAxis, fAngle)`
-- `FromEulerAngle(self, Oreder, rx, ry, rz)`
-- `SetSR(self, mSR)`
-- `SetTranslate(self, vTranslate)`
-- `GetSR(self)`
-- `GetTranslate(self)`
-- `AccuScale(self, rkScale)`
-- `AccuRotate(self, rkRotate)`
-- `AccuTranslate(self, rkTranslate)`
-- `AlmostSame(self, kM, fThreshold)`
-
-#### RMessageBoxButton
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RMorphSliderSetting
-
-**Methods:**
-
-- `__init__(self)`
-- `SetMorphName(self, strMorphName)`
-- `GetMorphName(self)`
-- `SetCategory(self, eSetCategory)`
-- `GetCategory(self)`
-- `SetSliderPath(self, strSetSliderPath)`
-- `GetSliderPath(self)`
-- `SetMorphValueRange(self, fMin, fMax)`
-- `GetMorphValueRange(self)`
-- `SetSourceBaseType(self, eSourceBaseType)`
-- `GetSourceBaseType(self)`
-- `SetSourceFilePath(self, strSourceMorphPath)`
-- `GetSourceFilePath(self)`
-- `SetTargetFilePath(self, strTargetMorphPath)`
-- `GetTargetFilePath(self)`
-- `SetTargetMorphChecksumFilePath(self, strTargetMorphChecksumFilePath)`
-- `GetTargetMorphChecksumFilePath(self)`
-- `SetAxisSettingForObj(self, eAxisSettingForObj)`
-- `GetAxisSettingForObj(self)`
-- `SetAdjustBonesToFitMorph(self, bAdjustBonesToFitMorph)`
-- `GetAdjustBonesToFitMorph(self)`
-- `SetThumbNailFilePath(self, strThumdNailFilePath)`
-- `GetThumbNailFilePath(self)`
-- `SetAutoApplyToCurrentCharacter(self, bAutoApplyToCurrentCharacter)`
-- `GetAutoApplyToCurrentCharacter(self)`
-
-#### ROpenPoseKeyPointParam
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RPositionSetting
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `SetCoordinateSpace(self, eCoordinateSpace)`
-- `GetCoordinateSpace(self)`
-- `SetUnit(self, eUnit)`
-- `GetUnit(self)`
-
-#### RPropertyFloatMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### RPyTimer
-
-**Methods:**
-
-- `__init__(self)`
-- `Start(self)`
-- `Stop(self)`
-- `IsRunning(self)`
-- `SetSingleShot(self, bSingleShot)`
-- `IsSingleShot(self)`
-- `SetInterval(self, nMSec)`
-- `GetInterval(self)`
-- `RegisterPyTimerCallback(self, pCallback)`
-- `UnregisterPyTimerCallback(self)`
-
-#### RPyTimerCallback
-
-**Inherits from:** `RCallback`
-
-**Methods:**
-
-- `__init__(self)`
-- `Timeout(self)`
-- `__disown__(self)`
-
-#### RQuaternion
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__call__(self, *args)`
-- `X(self, *args)`
-- `Y(self, *args)`
-- `Z(self, *args)`
-- `W(self, *args)`
-- `SetX(self, tX)`
-- `SetY(self, tY)`
-- `SetZ(self, tZ)`
-- `SetW(self, tW)`
-- `__eq__(self, qQ)`
-- `__ne__(self, qQ)`
-- `__lt__(self, qQ)`
-- `__le__(self, qQ)`
-- `__gt__(self, qQ)`
-- `__ge__(self, qQ)`
-- `AlmostEqual(self, qQ)`
-- `AlmostSame(self, qQ, tThreshold)`
-- `__add__(self, qQ)`
-- `__sub__(self, qQ)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__neg__(self)`
-- `__iadd__(self, qQ)`
-- `__isub__(self, qQ)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `FromRotationMatrix(self, rkRot)`
-- `ToRotationMatrix(self)`
-- `FromAxisAngle(self, rkAxis, fAngle)`
-- `FindQuatBetweenHelper(A, B, NormAB)`
-- `FindQuatBetweenInternal(An, Bn)`
-- `FindQuatBetweenNormals(NormalA, NormalB)`
-- `FindQuatBetweenVectors(VectorA, VectorB)`
-- `ToAxisAngle(self, rkAxis, rfAngle)`
-- `Dot(self, qQ)`
-- `Inverse(self)`
-- `Normalize(self)`
-- `Conjugate(self)`
-- `Rotate180(self)`
-- `Multiply(self, qQ)`
-- `MultiplyAssign(self, qQ)`
-- `MultiplyVector(self, vPoint)`
-
-#### RRangePair
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__len__(self)`
-- `__repr__(self)`
-- `__getitem__(self, index)`
-- `__setitem__(self, index, val)`
-
-#### RReachKey
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `Clone(self)`
-- `SetTime(self, kTime)`
-- `GetTime(self)`
-- `SetRotationActive(self, bRotateActive)`
-- `GetRotationActive(self)`
-- `SetForceReach(self, bPull)`
-- `GetForceReach(self)`
-- `SetTransitionRange(self, kForwardTransitionRange)`
-- `GetTransitionRange(self)`
-- `SetTargetObject(self, hTargetObject)`
-- `GetTargetObject(self)`
-- `SetKeyType(self, eKeyType)`
-- `GetKeyType(self)`
-
-#### RRgb
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `R(self, *args)`
-- `G(self, *args)`
-- `B(self, *args)`
-- `Red(self)`
-- `Green(self)`
-- `Blue(self)`
-- `From(self, r, g, b)`
-- `FromXRGB(self, arg2)`
-- `FromCOLORREF(self, arg2)`
-- `ToXRGB(self)`
-- `ToCOLORREF(self)`
-- `ToVector3f(self)`
-- `Normalize(self)`
-- `Saturate(self)`
-- `__iadd__(self, arg2)`
-- `__isub__(self, arg2)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `__pos__(self)`
-- `__neg__(self)`
-- `__add__(self, arg2)`
-- `__sub__(self, arg2)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__eq__(self, arg2)`
-- `__ne__(self, arg2)`
-- `__lt__(self, arg2)`
-
-#### RRotationSetting
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `SetCoordinateSpace(self, eCoordinateSpace)`
-- `GetCoordinateSpace(self)`
-- `SetType(self, eType)`
-- `GetType(self)`
-- `SetUnit(self, eUnit)`
-- `GetUnit(self)`
-- `SetEulerOrder(self, eOrder)`
-- `GetEulerOrder(self)`
-- `SetQuaternionOrder(self, eOrder)`
-- `GetQuaternionOrder(self)`
-
-#### RSBuildingSettings
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RSUsdExportOption
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RSaveFacialAnimationOption
-
-**Inherits from:** `RISaveFileOptionBase`
-
-**Methods:**
-
-- `SetFlag(self, eFlag)`
-- `GetFlag(self)`
-- `__init__(self)`
-
-#### RSaveFileSetting
-
-**Methods:**
-
-- `__init__(self)`
-- `SetSaveType(self, eType)`
-- `GetSaveType(self)`
-- `SetSaveRange(self, kStart, kEnd)`
-- `SetSaveFileOption(self, pSaveFileOption)`
-- `GetSaveRangeStart(self)`
-- `GetSaveRangeEnd(self)`
-- `GetSaveFileOption(self)`
-
-#### RSaveMotionPlusOption
-
-**Inherits from:** `RISaveFileOptionBase`
-
-**Methods:**
-
-- `SetMotionPlusOption(self, eDataOption)`
-- `GetMotionPlusOption(self)`
-- `SetMotionClipOption(self, eOption)`
-- `GetMotionClipOption(self)`
-- `SetSaveTimecode(self, bSaveTimecode)`
-- `GetSaveTimecode(self)`
-- `SetTimecodeStartTime(self, fTime)`
-- `GetTimecodeStartTime(self)`
-- `SetTimecodeFps(self, fFps)`
-- `GetTimecodeFps(self)`
-- `__init__(self)`
-
-#### RSaveRangePair
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__len__(self)`
-- `__repr__(self)`
-- `__getitem__(self, index)`
-- `__setitem__(self, index, val)`
-
-#### RScene
-
-**Methods:**
-
-- `GetSelectedObjects()`
-- `GetAvatars(*args)`
-- `GetProps()`
-- `GetMDProps()`
-- `GetBuildings()`
-- `GetCameras()`
-- `SelectObject(spObject)`
-- `SelectObjects(kObjects)`
-- `ClearSelectObjects()`
-- `RemoveObject(spObject)`
-- `FindObject(eType, strName)`
-- `FindObjects(*args)`
-- `FindChildObjects(spObject, eType, bAllLevel=True)`
-- `Show(spObject)`
-- `Hide(spObject)`
-- `GetCurrentCamera()`
-- `SetCurrentCamera(spCamera)`
-- `GetSwitchCameraFrameIndexs(kFps)`
-- `ClearSwitchCameraKeys()`
-- `AddSwitchCameraKey(kSetTime, spCamera)`
-- `GetRootNode()`
-- `CreateCollection(strNewCollectionName)`
-- `DeleteCollection(strCollectionName)`
-- `MoveToCollection(*args)`
-- `QueryObjectByID(strID)`
-- `__init__(self)`
-
-#### RStGenPackElementInfo
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RStGenPackFloorInfo
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RStGenPackMaterialInfo
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RStGenPackStyleInfo
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RStGenPackWallInfo
-
-**Methods:**
-
-- `__init__(self)`
-
-#### RStatus
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__eq__(self, *args)`
-- `__ne__(self, *args)`
-- `IsError(self)`
-- `Clear(self)`
-- `GetStatusCode(self)`
-- `__nonzero__(self)`
-
-#### RTcpCallback
-
-**Inherits from:** `RCallback`
-
-**Methods:**
-
-- `__init__(self)`
-- `OnStatusChanged(self, bIsConnected)`
-- `OnDataReceived(self)`
-- `OnFailMessageReceived(self, pErrorMsg)`
-- `__disown__(self)`
-
-#### RTcpClient
-
-**Methods:**
-
-- `__init__(self)`
-- `Connect(self, strIP, uPort)`
-- `Disconnect(self)`
-- `IsConnected(self)`
-- `GetDataSize(self, *args)`
-- `GetData(self, pBuffer)`
-- `GetDataAt(self, nIndex, pBuffer)`
-- `SendData(self, pBuffer, nDataSize)`
-- `SetMaximumDataCount(self, nCount)`
-- `GetMaximumDataCount(self)`
-- `GetDataCount(self)`
-- `RegisterCallback(self, pCallback)`
-- `UnregisterCallback(self)`
-
-#### RTick
-
-**Methods:**
-
-- `Tps()`
-- `Ms()`
-- `Hns()`
-- `FromSecond(*args)`
-- `FromMilliSecond(*args)`
-- `FromHns(*args)`
-- `ToSecond(*args)`
-- `ToMilliSecond(*args)`
-- `__init__(self)`
-
-#### RTime
-
-**Methods:**
-
-- `__init__(self)`
-- `__eq__(self, kTime)`
-- `__ne__(self, kTime)`
-- `__gt__(self, kTime)`
-- `__lt__(self, kTime)`
-- `__ge__(self, kTime)`
-- `__le__(self, kTime)`
-- `__neg__(self)`
-- `__add__(self, kTime)`
-- `__sub__(self, kTime)`
-- `__mod__(self, kTime)`
-- `__isub__(self, kTime)`
-- `__iadd__(self, kTime)`
-- `ToInt(self)`
-- `ToFloat(self)`
-- `ToDouble(self)`
-- `ToLong(self)`
-- `ToUInt32(self)`
-- `ToInt64(self)`
-- `FromValue(tTick)`
-- `__mul__(self, tTimes)`
-- `__imul__(self, tTimes)`
-- `__truediv__(self, *args)`
-- `__itruediv__(self, *args)`
-
-#### RTime2IntMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### RTransform
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `D(self, *args)`
-- `S(self, *args)`
-- `U(self, *args)`
-- `R(self, *args)`
-- `T(self, *args)`
-- `__eq__(self, kRts)`
-- `__ne__(self, kRts)`
-- `__iadd__(self, kRts)`
-- `__add__(self, kRts)`
-- `AlmostEqual(self, kRts)`
-- `AlmostSame(self, kRts, tThreshold)`
-- `Inverse(self)`
-- `From(self, mMatrix)`
-- `Scale(self)`
-- `Rotate(self)`
-- `GetSR(self)`
-- `Matrix(self)`
-- `IsIdentity(self)`
-
-#### RTransformControl
-
-**Inherits from:** `RControl`
-
-**Methods:**
-
-- `__init__(self, *args, **kwargs)`
-- `GetValue(self, kTick, kValue)`
-- `SetValue(self, kTick, kValue)`
-- `SetValueAt(self, uIndex, kValue)`
-- `GetTransformKey(self, kTick, pKey)`
-- `GetTransformKeyAt(self, uIndex, pKey)`
-- `GetRotationOrder(self, eOrder)`
-- `UpdateData(self)`
-
-#### RTransformKey
-
-**Inherits from:** `RKey`
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `Clone(self)`
-- `SetTransform(self, kTransform)`
-- `GetTransform(self)`
-
-#### RUdpCallback
-
-**Inherits from:** `RCallback`
-
-**Methods:**
-
-- `__init__(self)`
-- `OnStatusChanged(self, bIsConnected)`
-- `OnDataReceived(self)`
-- `OnFailMessageReceived(self, pErrorMsg)`
-- `__disown__(self)`
-
-#### RUdpClient
-
-**Methods:**
-
-- `__init__(self)`
-- `Connect(self, strIP, uPort)`
-- `Disconnect(self)`
-- `IsConnected(self)`
-- `GetDataSize(self, *args)`
-- `GetData(self, pBuffer)`
-- `GetDataAt(self, nIndex, pBuffer)`
-- `SendData(self, pBuffer, nDataSize, strIP, uPort)`
-- `SetMaximumDataCount(self, nCount)`
-- `GetMaximumDataCount(self)`
-- `GetDataCount(self)`
-- `JoinMulticastGroup(self, strIP)`
-- `RegisterCallback(self, pCallback)`
-- `UnregisterCallback(self)`
-
-#### RUi
-
-**Methods:**
-
-- `GetMainWindow()`
-- `AddMenu(*args)`
-- `FindMenu(*args)`
-- `RemoveMenu(pMenu)`
-- `FindToolBar(strToolBarName)`
-- `AddHotKey(strKeySequence)`
-- `RemoveHotKey(pAction)`
-- `GetResolutionType()`
-- `GetCSSType()`
-- `ShowMessageBox(*args)`
-- `OpenFileDialog(*args)`
-- `OpenFilesDialog(*args)`
-- `SaveFileDialog(*args)`
-- `CreateRDialog(*args)`
-- `CreateRDockWidget()`
-- `AddContextMenu(spObject, strText)`
-- `RemoveContextMenu(spObject, pMenu)`
-- `AddContextAction(spObject, strText)`
-- `RemoveContextAction(spObject, pAction)`
-- `LoadLuaUI(strFilePath)`
-- `CallLuaFunction(strFilePath, strFunction, kParam, kReturn)`
-- `ShowProgressDialog(bShow, bCancelable=False, bPauseRender=True)`
-- `SetProgressStatusString(strStatus)`
-- `PushProgress(fProgress)`
-- `PopProgress()`
-- `IsProgressCancel()`
-- `__init__(self)`
-
-#### RVariant
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `GetType(self)`
-- `ToUInt32(self, pSucess=None)`
-- `ToInt32(self, pSucess=None)`
-- `ToFloat(self, pSucess=None)`
-- `ToString(self, pSuccess=None)`
-- `ToBool(self, pSuccess=None)`
-
-#### RVector2
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `X(self, *args)`
-- `Y(self, *args)`
-- `SetX(self, tX)`
-- `SetY(self, tY)`
-- `__eq__(self, vV)`
-- `__ne__(self, vV)`
-- `__lt__(self, vV)`
-- `__gt__(self, vV)`
-- `__ge__(self, vV)`
-- `__le__(self, vV)`
-- `__add__(self, vV)`
-- `__sub__(self, vV)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__neg__(self)`
-- `__iadd__(self, vV)`
-- `__isub__(self, vV)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `Length(self)`
-- `SquaredLength(self)`
-- `Dot(self, vV)`
-- `Normalize(self)`
-- `Inverse(self)`
-- `Clear(self)`
-- `AddWithWeight(self, vSrc, fWeight)`
-- `AlmostZero(self)`
-- `__getitem__(self, i)`
-
-#### RVector3
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `X(self, *args)`
-- `Y(self, *args)`
-- `Z(self, *args)`
-- `GetPosition(self, *args)`
-- `SetXYZ(self, tX, tY, tZ)`
-- `XY(self)`
-- `SetX(self, tX)`
-- `SetY(self, tY)`
-- `SetZ(self, tZ)`
-- `Clear(self)`
-- `AddWithWeight(self, v, fWeight)`
-- `__eq__(self, vV)`
-- `__ne__(self, vV)`
-- `__lt__(self, vV)`
-- `__gt__(self, vV)`
-- `__ge__(self, vV)`
-- `__le__(self, vV)`
-- `AlmostEqual(self, vV)`
-- `__add__(self, vV)`
-- `__sub__(self, vV)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__neg__(self)`
-- `__iadd__(self, vV)`
-- `__isub__(self, vV)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `Length(self)`
-- `SquaredLength(self)`
-- `Dot(self, vV)`
-- `Normalize(self)`
-- `NormalizeConst(self)`
-- `Inverse(self)`
-- `Distance(self, vV)`
-- `SquaredDistance(self, vV)`
-- `Cross(self, vV)`
-- `Interpolate(self, vRatio, vV)`
-- `AlmostZero(self)`
-- `AlmostTheSame(self, vV)`
-- `AlmostSame(self, vV, fThreshold)`
-- `__getitem__(self, i)`
-
-#### RVector4
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `X(self, *args)`
-- `Y(self, *args)`
-- `Z(self, *args)`
-- `W(self, *args)`
-- `XY(self)`
-- `XYZ(self)`
-- `SetX(self, tX)`
-- `SetY(self, tY)`
-- `SetZ(self, tZ)`
-- `SetW(self, tW)`
-- `__eq__(self, vV)`
-- `__ne__(self, vV)`
-- `__lt__(self, vV)`
-- `__gt__(self, vV)`
-- `__ge__(self, vV)`
-- `__le__(self, vV)`
-- `__add__(self, vV)`
-- `__sub__(self, vV)`
-- `__mul__(self, *args)`
-- `__truediv__(self, *args)`
-- `__neg__(self)`
-- `__iadd__(self, vV)`
-- `__isub__(self, vV)`
-- `__imul__(self, *args)`
-- `__itruediv__(self, *args)`
-- `Length(self)`
-- `SquaredLength(self)`
-- `Dot(self, vV)`
-- `Normalize(self)`
-- `Inverse(self)`
-- `AlmostZero(self)`
-- `__getitem__(self, i)`
-
-#### RVideo
-
-**Methods:**
-
-- `LoadMediaToTarget(strObjName, strFilePath, eAction, fTargetHeight=200.0)`
-- `__init__(self)`
-
-#### RVisemeKey
-
-**Inherits from:** `RKey`
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `Clone(self)`
-- `SetID(self, eID)`
-- `GetID(self)`
-- `SetWeight(self, fValue)`
-- `GetWeight(self)`
-
-#### RVisemeSmoothOption
-
-**Methods:**
-
-- `SetStrengthEnable(self, bJawEnable, bLipsEnable, bTongueEnable)`
-- `SetStrengthValue(self, fJaw, fLips, fTongue)`
-- `SetSmoothEnable(self, bJawEnable, bLipsEnable, bTongueEnable)`
-- `SetSmoothValue(self, fJaw, fLips, fTongue)`
-- `GetStrengthEnableSetting(self)`
-- `GetSmoothEnableSetting(self)`
-- `GetStrengthValueSetting(self)`
-- `GetSmoothValueSetting(self)`
-- `__init__(self)`
-
-#### RWin32ApiKit
-
-**Methods:**
-
-- `FindWindowByTitleName(strTitleName)`
-- `GetForegroundWindow()`
-- `GetWindowName(pWnd)`
-- `GetWindowThreadProcessId(pWnd)`
-- `SendMessageToWindow(pWnd, strMsg)`
-- `IsWindowVisible(pWnd)`
-- `__init__(self)`
-
-#### RWinMessageCallback
-
-**Inherits from:** `RCallback`
-
-**Methods:**
-
-- `__init__(self)`
-- `OnWinMsgReceieved(self, strMsg)`
-- `__disown__(self)`
-
-#### RWordData
-
-**Methods:**
-
-- `__init__(self)`
-
-#### SwitchCameraFramePair
-
-**Methods:**
-
-- `__init__(self, *args)`
-- `__len__(self)`
-- `__repr__(self)`
-- `__getitem__(self, index)`
-- `__setitem__(self, index, val)`
-
-#### SwitchCameraFramePairs
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__getslice__(self, i, j)`
-- `__setslice__(self, *args)`
-- `__delslice__(self, i, j)`
-- `__delitem__(self, *args)`
-- `__getitem__(self, *args)`
-- `__setitem__(self, *args)`
-- `pop(self)`
-- `append(self, x)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `pop_back(self)`
-- `erase(self, *args)`
-- `__init__(self, *args)`
-- `push_back(self, x)`
-- `front(self)`
-- `back(self)`
-- `assign(self, n, x)`
-- `resize(self, *args)`
-- `insert(self, *args)`
-- `reserve(self, n)`
-- `capacity(self)`
-
-#### WBoneQniqueNameMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### WStr2FloatMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### WStr2Matrix4fMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### WStrMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### WStrTransformMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### WStrTransformVectorMap
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__iter__(self)`
-- `iterkeys(self)`
-- `itervalues(self)`
-- `iteritems(self)`
-- `__getitem__(self, key)`
-- `__delitem__(self, key)`
-- `has_key(self, key)`
-- `keys(self)`
-- `values(self)`
-- `items(self)`
-- `__contains__(self, key)`
-- `key_iterator(self)`
-- `value_iterator(self)`
-- `__setitem__(self, *args)`
-- `asdict(self)`
-- `__init__(self, *args)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `count(self, x)`
-- `erase(self, *args)`
-- `find(self, x)`
-- `lower_bound(self, x)`
-- `upper_bound(self, x)`
-
-#### WallPosition
-
-**Methods:**
-
-- `iterator(self)`
-- `__iter__(self)`
-- `__nonzero__(self)`
-- `__bool__(self)`
-- `__len__(self)`
-- `__getslice__(self, i, j)`
-- `__setslice__(self, *args)`
-- `__delslice__(self, i, j)`
-- `__delitem__(self, *args)`
-- `__getitem__(self, *args)`
-- `__setitem__(self, *args)`
-- `pop(self)`
-- `append(self, x)`
-- `empty(self)`
-- `size(self)`
-- `swap(self, v)`
-- `begin(self)`
-- `end(self)`
-- `rbegin(self)`
-- `rend(self)`
-- `clear(self)`
-- `get_allocator(self)`
-- `pop_back(self)`
-- `erase(self, *args)`
-- `__init__(self, *args)`
-- `push_back(self, x)`
-- `front(self)`
-- `back(self)`
-- `assign(self, n, x)`
-- `resize(self, *args)`
-- `insert(self, *args)`
-- `reserve(self, n)`
-- `capacity(self)`
-
----
-
-## Global Functions
+### AccessoryVector
+
+- `iterator(AccessoryVector self) -> SwigPyIterator`
+- `pop(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::value_type`
+- `append(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const & x)`
+- `empty(AccessoryVector self) -> bool`
+- `size(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::size_type`
+- `swap(AccessoryVector self, AccessoryVector v)`
+- `begin(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::iterator`
+- `end(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::iterator`
+- `rbegin(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::reverse_iterator`
+- `rend(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::reverse_iterator`
+- `clear(AccessoryVector self)`
+- `get_allocator(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::allocator_type`
+- `pop_back(AccessoryVector self)`
+- `erase(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIAccessory > >::iterator`
+- `erase(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::iterator first, std::vector< std::shared_ptr< RO::RIAccessory > >::iterator last) -> std::vector< std::shared_ptr< RO::RIAccessory > >::iterator`
+- `push_back(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const & x)`
+- `front(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const &`
+- `back(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const &`
+- `assign(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::size_type n, std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const & x)`
+- `resize(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::size_type new_size)`
+- `resize(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::size_type new_size, std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const & x)`
+- `insert(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::iterator pos, std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIAccessory > >::iterator`
+- `insert(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::iterator pos, std::vector< std::shared_ptr< RO::RIAccessory > >::size_type n, std::vector< std::shared_ptr< RO::RIAccessory > >::value_type const & x)`
+- `reserve(AccessoryVector self, std::vector< std::shared_ptr< RO::RIAccessory > >::size_type n)`
+- `capacity(AccessoryVector self) -> std::vector< std::shared_ptr< RO::RIAccessory > >::size_type`
+
+### AvatarPartVector
+
+- `iterator(AvatarPartVector self) -> SwigPyIterator`
+- `pop(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type`
+- `append(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const & x)`
+- `empty(AvatarPartVector self) -> bool`
+- `size(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type`
+- `swap(AvatarPartVector self, AvatarPartVector v)`
+- `begin(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator`
+- `end(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator`
+- `rbegin(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::reverse_iterator`
+- `rend(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::reverse_iterator`
+- `clear(AvatarPartVector self)`
+- `get_allocator(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::allocator_type`
+- `pop_back(AvatarPartVector self)`
+- `erase(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator`
+- `erase(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator first, std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator last) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator`
+- `push_back(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const & x)`
+- `front(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const &`
+- `back(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const &`
+- `assign(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type n, std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const & x)`
+- `resize(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type new_size)`
+- `resize(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type new_size, std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const & x)`
+- `insert(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator pos, std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator`
+- `insert(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::iterator pos, std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type n, std::vector< std::shared_ptr< RO::RIAvatarPart > >::value_type const & x)`
+- `reserve(AvatarPartVector self, std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type n)`
+- `capacity(AvatarPartVector self) -> std::vector< std::shared_ptr< RO::RIAvatarPart > >::size_type`
+
+### AvatarVector
+
+- `iterator(AvatarVector self) -> SwigPyIterator`
+- `pop(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::value_type`
+- `append(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const & x)`
+- `empty(AvatarVector self) -> bool`
+- `size(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::size_type`
+- `swap(AvatarVector self, AvatarVector v)`
+- `begin(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::iterator`
+- `end(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::iterator`
+- `rbegin(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::reverse_iterator`
+- `rend(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::reverse_iterator`
+- `clear(AvatarVector self)`
+- `get_allocator(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::allocator_type`
+- `pop_back(AvatarVector self)`
+- `erase(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIAvatar > >::iterator`
+- `erase(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::iterator first, std::vector< std::shared_ptr< RO::RIAvatar > >::iterator last) -> std::vector< std::shared_ptr< RO::RIAvatar > >::iterator`
+- `push_back(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const & x)`
+- `front(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const &`
+- `back(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const &`
+- `assign(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::size_type n, std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const & x)`
+- `resize(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::size_type new_size)`
+- `resize(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::size_type new_size, std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const & x)`
+- `insert(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::iterator pos, std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIAvatar > >::iterator`
+- `insert(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::iterator pos, std::vector< std::shared_ptr< RO::RIAvatar > >::size_type n, std::vector< std::shared_ptr< RO::RIAvatar > >::value_type const & x)`
+- `reserve(AvatarVector self, std::vector< std::shared_ptr< RO::RIAvatar > >::size_type n)`
+- `capacity(AvatarVector self) -> std::vector< std::shared_ptr< RO::RIAvatar > >::size_type`
+
+### BaseVector
+
+- `iterator(BaseVector self) -> SwigPyIterator`
+- `pop(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::value_type`
+- `append(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::value_type const & x)`
+- `empty(BaseVector self) -> bool`
+- `size(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::size_type`
+- `swap(BaseVector self, BaseVector v)`
+- `begin(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::iterator`
+- `end(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::iterator`
+- `rbegin(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::reverse_iterator`
+- `rend(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::reverse_iterator`
+- `clear(BaseVector self)`
+- `get_allocator(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::allocator_type`
+- `pop_back(BaseVector self)`
+- `erase(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIBase > >::iterator`
+- `erase(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::iterator first, std::vector< std::shared_ptr< RO::RIBase > >::iterator last) -> std::vector< std::shared_ptr< RO::RIBase > >::iterator`
+- `push_back(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::value_type const & x)`
+- `front(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::value_type const &`
+- `back(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::value_type const &`
+- `assign(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::size_type n, std::vector< std::shared_ptr< RO::RIBase > >::value_type const & x)`
+- `resize(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::size_type new_size)`
+- `resize(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::size_type new_size, std::vector< std::shared_ptr< RO::RIBase > >::value_type const & x)`
+- `insert(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::iterator pos, std::vector< std::shared_ptr< RO::RIBase > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIBase > >::iterator`
+- `insert(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::iterator pos, std::vector< std::shared_ptr< RO::RIBase > >::size_type n, std::vector< std::shared_ptr< RO::RIBase > >::value_type const & x)`
+- `reserve(BaseVector self, std::vector< std::shared_ptr< RO::RIBase > >::size_type n)`
+- `capacity(BaseVector self) -> std::vector< std::shared_ptr< RO::RIBase > >::size_type`
+
+### BoolVector
+
+- `iterator(BoolVector self) -> SwigPyIterator`
+- `pop(BoolVector self) -> std::vector< bool >::value_type`
+- `append(BoolVector self, std::vector< bool >::value_type x)`
+- `empty(BoolVector self) -> bool`
+- `size(BoolVector self) -> std::vector< bool >::size_type`
+- `swap(BoolVector self, BoolVector v)`
+- `begin(BoolVector self) -> std::vector< bool >::iterator`
+- `end(BoolVector self) -> std::vector< bool >::iterator`
+- `rbegin(BoolVector self) -> std::vector< bool >::reverse_iterator`
+- `rend(BoolVector self) -> std::vector< bool >::reverse_iterator`
+- `clear(BoolVector self)`
+- `get_allocator(BoolVector self) -> std::vector< bool >::allocator_type`
+- `pop_back(BoolVector self)`
+- `erase(BoolVector self, std::vector< bool >::iterator pos) -> std::vector< bool >::iterator`
+- `erase(BoolVector self, std::vector< bool >::iterator first, std::vector< bool >::iterator last) -> std::vector< bool >::iterator`
+- `push_back(BoolVector self, std::vector< bool >::value_type x)`
+- `front(BoolVector self) -> std::vector< bool >::value_type`
+- `back(BoolVector self) -> std::vector< bool >::value_type`
+- `assign(BoolVector self, std::vector< bool >::size_type n, std::vector< bool >::value_type x)`
+- `resize(BoolVector self, std::vector< bool >::size_type new_size)`
+- `resize(BoolVector self, std::vector< bool >::size_type new_size, std::vector< bool >::value_type x)`
+- `insert(BoolVector self, std::vector< bool >::iterator pos, std::vector< bool >::value_type x) -> std::vector< bool >::iterator`
+- `insert(BoolVector self, std::vector< bool >::iterator pos, std::vector< bool >::size_type n, std::vector< bool >::value_type x)`
+- `reserve(BoolVector self, std::vector< bool >::size_type n)`
+- `capacity(BoolVector self) -> std::vector< bool >::size_type`
+
+### BuildingObjectVector
+
+- `iterator(BuildingObjectVector self) -> SwigPyIterator`
+- `pop(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type`
+- `append(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const & x)`
+- `empty(BuildingObjectVector self) -> bool`
+- `size(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type`
+- `swap(BuildingObjectVector self, BuildingObjectVector v)`
+- `begin(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator`
+- `end(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator`
+- `rbegin(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::reverse_iterator`
+- `rend(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::reverse_iterator`
+- `clear(BuildingObjectVector self)`
+- `get_allocator(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::allocator_type`
+- `pop_back(BuildingObjectVector self)`
+- `erase(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator`
+- `erase(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator first, std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator last) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator`
+- `push_back(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const & x)`
+- `front(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const &`
+- `back(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const &`
+- `assign(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type n, std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const & x)`
+- `resize(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type new_size)`
+- `resize(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type new_size, std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const & x)`
+- `insert(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator`
+- `insert(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type n, std::vector< std::shared_ptr< RO::RIBuildingObject > >::value_type const & x)`
+- `reserve(BuildingObjectVector self, std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type n)`
+- `capacity(BuildingObjectVector self) -> std::vector< std::shared_ptr< RO::RIBuildingObject > >::size_type`
+
+### CameraVector
+
+- `iterator(CameraVector self) -> SwigPyIterator`
+- `pop(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::value_type`
+- `append(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::value_type const & x)`
+- `empty(CameraVector self) -> bool`
+- `size(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::size_type`
+- `swap(CameraVector self, CameraVector v)`
+- `begin(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::iterator`
+- `end(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::iterator`
+- `rbegin(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::reverse_iterator`
+- `rend(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::reverse_iterator`
+- `clear(CameraVector self)`
+- `get_allocator(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::allocator_type`
+- `pop_back(CameraVector self)`
+- `erase(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::iterator pos) -> std::vector< std::shared_ptr< RO::RICamera > >::iterator`
+- `erase(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::iterator first, std::vector< std::shared_ptr< RO::RICamera > >::iterator last) -> std::vector< std::shared_ptr< RO::RICamera > >::iterator`
+- `push_back(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::value_type const & x)`
+- `front(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::value_type const &`
+- `back(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::value_type const &`
+- `assign(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::size_type n, std::vector< std::shared_ptr< RO::RICamera > >::value_type const & x)`
+- `resize(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::size_type new_size)`
+- `resize(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::size_type new_size, std::vector< std::shared_ptr< RO::RICamera > >::value_type const & x)`
+- `insert(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::iterator pos, std::vector< std::shared_ptr< RO::RICamera > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RICamera > >::iterator`
+- `insert(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::iterator pos, std::vector< std::shared_ptr< RO::RICamera > >::size_type n, std::vector< std::shared_ptr< RO::RICamera > >::value_type const & x)`
+- `reserve(CameraVector self, std::vector< std::shared_ptr< RO::RICamera > >::size_type n)`
+- `capacity(CameraVector self) -> std::vector< std::shared_ptr< RO::RICamera > >::size_type`
+
+### ClothVector
+
+- `iterator(ClothVector self) -> SwigPyIterator`
+- `pop(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::value_type`
+- `append(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::value_type const & x)`
+- `empty(ClothVector self) -> bool`
+- `size(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::size_type`
+- `swap(ClothVector self, ClothVector v)`
+- `begin(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::iterator`
+- `end(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::iterator`
+- `rbegin(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::reverse_iterator`
+- `rend(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::reverse_iterator`
+- `clear(ClothVector self)`
+- `get_allocator(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::allocator_type`
+- `pop_back(ClothVector self)`
+- `erase(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::iterator pos) -> std::vector< std::shared_ptr< RO::RICloth > >::iterator`
+- `erase(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::iterator first, std::vector< std::shared_ptr< RO::RICloth > >::iterator last) -> std::vector< std::shared_ptr< RO::RICloth > >::iterator`
+- `push_back(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::value_type const & x)`
+- `front(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::value_type const &`
+- `back(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::value_type const &`
+- `assign(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::size_type n, std::vector< std::shared_ptr< RO::RICloth > >::value_type const & x)`
+- `resize(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::size_type new_size)`
+- `resize(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::size_type new_size, std::vector< std::shared_ptr< RO::RICloth > >::value_type const & x)`
+- `insert(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::iterator pos, std::vector< std::shared_ptr< RO::RICloth > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RICloth > >::iterator`
+- `insert(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::iterator pos, std::vector< std::shared_ptr< RO::RICloth > >::size_type n, std::vector< std::shared_ptr< RO::RICloth > >::value_type const & x)`
+- `reserve(ClothVector self, std::vector< std::shared_ptr< RO::RICloth > >::size_type n)`
+- `capacity(ClothVector self) -> std::vector< std::shared_ptr< RO::RICloth > >::size_type`
+
+### EMaterialTextureChannelVector
+
+- `iterator(EMaterialTextureChannelVector self) -> SwigPyIterator`
+- `pop(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::value_type`
+- `append(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::value_type const & x)`
+- `empty(EMaterialTextureChannelVector self) -> bool`
+- `size(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::size_type`
+- `swap(EMaterialTextureChannelVector self, EMaterialTextureChannelVector v)`
+- `begin(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::iterator`
+- `end(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::iterator`
+- `rbegin(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::reverse_iterator`
+- `rend(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::reverse_iterator`
+- `clear(EMaterialTextureChannelVector self)`
+- `get_allocator(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::allocator_type`
+- `pop_back(EMaterialTextureChannelVector self)`
+- `erase(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::iterator pos) -> std::vector< enum RO::EMaterialTextureChannel >::iterator`
+- `erase(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::iterator first, std::vector< enum RO::EMaterialTextureChannel >::iterator last) -> std::vector< enum RO::EMaterialTextureChannel >::iterator`
+- `push_back(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::value_type const & x)`
+- `front(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::value_type const &`
+- `back(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::value_type const &`
+- `assign(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::size_type n, std::vector< enum RO::EMaterialTextureChannel >::value_type const & x)`
+- `resize(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::size_type new_size)`
+- `resize(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::size_type new_size, std::vector< enum RO::EMaterialTextureChannel >::value_type const & x)`
+- `insert(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::iterator pos, std::vector< enum RO::EMaterialTextureChannel >::value_type const & x) -> std::vector< enum RO::EMaterialTextureChannel >::iterator`
+- `insert(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::iterator pos, std::vector< enum RO::EMaterialTextureChannel >::size_type n, std::vector< enum RO::EMaterialTextureChannel >::value_type const & x)`
+- `reserve(EMaterialTextureChannelVector self, std::vector< enum RO::EMaterialTextureChannel >::size_type n)`
+- `capacity(EMaterialTextureChannelVector self) -> std::vector< enum RO::EMaterialTextureChannel >::size_type`
+
+### ElementInfoVector
+
+- `iterator(ElementInfoVector self) -> SwigPyIterator`
+- `pop(ElementInfoVector self) -> RStGenPackElementInfo`
+- `append(ElementInfoVector self, RStGenPackElementInfo x)`
+- `empty(ElementInfoVector self) -> bool`
+- `size(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::size_type`
+- `swap(ElementInfoVector self, ElementInfoVector v)`
+- `begin(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::iterator`
+- `end(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::iterator`
+- `rbegin(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::reverse_iterator`
+- `rend(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::reverse_iterator`
+- `clear(ElementInfoVector self)`
+- `get_allocator(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::allocator_type`
+- `pop_back(ElementInfoVector self)`
+- `erase(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::iterator pos) -> std::vector< RO::RStGenPackElementInfo >::iterator`
+- `erase(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::iterator first, std::vector< RO::RStGenPackElementInfo >::iterator last) -> std::vector< RO::RStGenPackElementInfo >::iterator`
+- `push_back(ElementInfoVector self, RStGenPackElementInfo x)`
+- `front(ElementInfoVector self) -> RStGenPackElementInfo`
+- `back(ElementInfoVector self) -> RStGenPackElementInfo`
+- `assign(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::size_type n, RStGenPackElementInfo x)`
+- `resize(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::size_type new_size)`
+- `resize(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::size_type new_size, RStGenPackElementInfo x)`
+- `insert(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::iterator pos, RStGenPackElementInfo x) -> std::vector< RO::RStGenPackElementInfo >::iterator`
+- `insert(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::iterator pos, std::vector< RO::RStGenPackElementInfo >::size_type n, RStGenPackElementInfo x)`
+- `reserve(ElementInfoVector self, std::vector< RO::RStGenPackElementInfo >::size_type n)`
+- `capacity(ElementInfoVector self) -> std::vector< RO::RStGenPackElementInfo >::size_type`
+
+### ElementObjectVector
+
+- `iterator(ElementObjectVector self) -> SwigPyIterator`
+- `pop(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::value_type`
+- `append(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const & x)`
+- `empty(ElementObjectVector self) -> bool`
+- `size(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::size_type`
+- `swap(ElementObjectVector self, ElementObjectVector v)`
+- `begin(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::iterator`
+- `end(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::iterator`
+- `rbegin(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::reverse_iterator`
+- `rend(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::reverse_iterator`
+- `clear(ElementObjectVector self)`
+- `get_allocator(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::allocator_type`
+- `pop_back(ElementObjectVector self)`
+- `erase(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIElementObject > >::iterator`
+- `erase(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::iterator first, std::vector< std::shared_ptr< RO::RIElementObject > >::iterator last) -> std::vector< std::shared_ptr< RO::RIElementObject > >::iterator`
+- `push_back(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const & x)`
+- `front(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const &`
+- `back(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const &`
+- `assign(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::size_type n, std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const & x)`
+- `resize(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::size_type new_size)`
+- `resize(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::size_type new_size, std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const & x)`
+- `insert(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIElementObject > >::iterator`
+- `insert(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIElementObject > >::size_type n, std::vector< std::shared_ptr< RO::RIElementObject > >::value_type const & x)`
+- `reserve(ElementObjectVector self, std::vector< std::shared_ptr< RO::RIElementObject > >::size_type n)`
+- `capacity(ElementObjectVector self) -> std::vector< std::shared_ptr< RO::RIElementObject > >::size_type`
+
+### FloatPair
+
+
+### FloatVector
+
+- `iterator(FloatVector self) -> SwigPyIterator`
+- `pop(FloatVector self) -> std::vector< float >::value_type`
+- `append(FloatVector self, std::vector< float >::value_type const & x)`
+- `empty(FloatVector self) -> bool`
+- `size(FloatVector self) -> std::vector< float >::size_type`
+- `swap(FloatVector self, FloatVector v)`
+- `begin(FloatVector self) -> std::vector< float >::iterator`
+- `end(FloatVector self) -> std::vector< float >::iterator`
+- `rbegin(FloatVector self) -> std::vector< float >::reverse_iterator`
+- `rend(FloatVector self) -> std::vector< float >::reverse_iterator`
+- `clear(FloatVector self)`
+- `get_allocator(FloatVector self) -> std::vector< float >::allocator_type`
+- `pop_back(FloatVector self)`
+- `erase(FloatVector self, std::vector< float >::iterator pos) -> std::vector< float >::iterator`
+- `erase(FloatVector self, std::vector< float >::iterator first, std::vector< float >::iterator last) -> std::vector< float >::iterator`
+- `push_back(FloatVector self, std::vector< float >::value_type const & x)`
+- `front(FloatVector self) -> std::vector< float >::value_type const &`
+- `back(FloatVector self) -> std::vector< float >::value_type const &`
+- `assign(FloatVector self, std::vector< float >::size_type n, std::vector< float >::value_type const & x)`
+- `resize(FloatVector self, std::vector< float >::size_type new_size)`
+- `resize(FloatVector self, std::vector< float >::size_type new_size, std::vector< float >::value_type const & x)`
+- `insert(FloatVector self, std::vector< float >::iterator pos, std::vector< float >::value_type const & x) -> std::vector< float >::iterator`
+- `insert(FloatVector self, std::vector< float >::iterator pos, std::vector< float >::size_type n, std::vector< float >::value_type const & x)`
+- `reserve(FloatVector self, std::vector< float >::size_type n)`
+- `capacity(FloatVector self) -> std::vector< float >::size_type`
+
+### FloorObjectVector
+
+- `iterator(FloorObjectVector self) -> SwigPyIterator`
+- `pop(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type`
+- `append(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const & x)`
+- `empty(FloorObjectVector self) -> bool`
+- `size(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type`
+- `swap(FloorObjectVector self, FloorObjectVector v)`
+- `begin(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator`
+- `end(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator`
+- `rbegin(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::reverse_iterator`
+- `rend(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::reverse_iterator`
+- `clear(FloorObjectVector self)`
+- `get_allocator(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::allocator_type`
+- `pop_back(FloorObjectVector self)`
+- `erase(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator`
+- `erase(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator first, std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator last) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator`
+- `push_back(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const & x)`
+- `front(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const &`
+- `back(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const &`
+- `assign(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type n, std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const & x)`
+- `resize(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type new_size)`
+- `resize(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type new_size, std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const & x)`
+- `insert(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator`
+- `insert(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type n, std::vector< std::shared_ptr< RO::RIFloorObject > >::value_type const & x)`
+- `reserve(FloorObjectVector self, std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type n)`
+- `capacity(FloorObjectVector self) -> std::vector< std::shared_ptr< RO::RIFloorObject > >::size_type`
+
+### HairVector
+
+- `iterator(HairVector self) -> SwigPyIterator`
+- `pop(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::value_type`
+- `append(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::value_type const & x)`
+- `empty(HairVector self) -> bool`
+- `size(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::size_type`
+- `swap(HairVector self, HairVector v)`
+- `begin(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::iterator`
+- `end(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::iterator`
+- `rbegin(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::reverse_iterator`
+- `rend(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::reverse_iterator`
+- `clear(HairVector self)`
+- `get_allocator(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::allocator_type`
+- `pop_back(HairVector self)`
+- `erase(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIHair > >::iterator`
+- `erase(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::iterator first, std::vector< std::shared_ptr< RO::RIHair > >::iterator last) -> std::vector< std::shared_ptr< RO::RIHair > >::iterator`
+- `push_back(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::value_type const & x)`
+- `front(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::value_type const &`
+- `back(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::value_type const &`
+- `assign(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::size_type n, std::vector< std::shared_ptr< RO::RIHair > >::value_type const & x)`
+- `resize(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::size_type new_size)`
+- `resize(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::size_type new_size, std::vector< std::shared_ptr< RO::RIHair > >::value_type const & x)`
+- `insert(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::iterator pos, std::vector< std::shared_ptr< RO::RIHair > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIHair > >::iterator`
+- `insert(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::iterator pos, std::vector< std::shared_ptr< RO::RIHair > >::size_type n, std::vector< std::shared_ptr< RO::RIHair > >::value_type const & x)`
+- `reserve(HairVector self, std::vector< std::shared_ptr< RO::RIHair > >::size_type n)`
+- `capacity(HairVector self) -> std::vector< std::shared_ptr< RO::RIHair > >::size_type`
+
+### ImportExpressionOptions
+
+- `iterator(ImportExpressionOptions self) -> SwigPyIterator`
+- `pop(ImportExpressionOptions self) -> RImportExpressionSetting`
+- `append(ImportExpressionOptions self, RImportExpressionSetting x)`
+- `empty(ImportExpressionOptions self) -> bool`
+- `size(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::size_type`
+- `swap(ImportExpressionOptions self, ImportExpressionOptions v)`
+- `begin(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::iterator`
+- `end(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::iterator`
+- `rbegin(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::reverse_iterator`
+- `rend(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::reverse_iterator`
+- `clear(ImportExpressionOptions self)`
+- `get_allocator(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::allocator_type`
+- `pop_back(ImportExpressionOptions self)`
+- `erase(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::iterator pos) -> std::vector< RO::RImportExpressionSetting >::iterator`
+- `erase(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::iterator first, std::vector< RO::RImportExpressionSetting >::iterator last) -> std::vector< RO::RImportExpressionSetting >::iterator`
+- `push_back(ImportExpressionOptions self, RImportExpressionSetting x)`
+- `front(ImportExpressionOptions self) -> RImportExpressionSetting`
+- `back(ImportExpressionOptions self) -> RImportExpressionSetting`
+- `assign(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::size_type n, RImportExpressionSetting x)`
+- `resize(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::size_type new_size)`
+- `resize(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::size_type new_size, RImportExpressionSetting x)`
+- `insert(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::iterator pos, RImportExpressionSetting x) -> std::vector< RO::RImportExpressionSetting >::iterator`
+- `insert(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::iterator pos, std::vector< RO::RImportExpressionSetting >::size_type n, RImportExpressionSetting x)`
+- `reserve(ImportExpressionOptions self, std::vector< RO::RImportExpressionSetting >::size_type n)`
+- `capacity(ImportExpressionOptions self) -> std::vector< RO::RImportExpressionSetting >::size_type`
+
+### Int64Vector
+
+- `iterator(Int64Vector self) -> SwigPyIterator`
+- `pop(Int64Vector self) -> std::vector< long long >::value_type`
+- `append(Int64Vector self, std::vector< long long >::value_type const & x)`
+- `empty(Int64Vector self) -> bool`
+- `size(Int64Vector self) -> std::vector< long long >::size_type`
+- `swap(Int64Vector self, Int64Vector v)`
+- `begin(Int64Vector self) -> std::vector< long long >::iterator`
+- `end(Int64Vector self) -> std::vector< long long >::iterator`
+- `rbegin(Int64Vector self) -> std::vector< long long >::reverse_iterator`
+- `rend(Int64Vector self) -> std::vector< long long >::reverse_iterator`
+- `clear(Int64Vector self)`
+- `get_allocator(Int64Vector self) -> std::vector< long long >::allocator_type`
+- `pop_back(Int64Vector self)`
+- `erase(Int64Vector self, std::vector< long long >::iterator pos) -> std::vector< long long >::iterator`
+- `erase(Int64Vector self, std::vector< long long >::iterator first, std::vector< long long >::iterator last) -> std::vector< long long >::iterator`
+- `push_back(Int64Vector self, std::vector< long long >::value_type const & x)`
+- `front(Int64Vector self) -> std::vector< long long >::value_type const &`
+- `back(Int64Vector self) -> std::vector< long long >::value_type const &`
+- `assign(Int64Vector self, std::vector< long long >::size_type n, std::vector< long long >::value_type const & x)`
+- `resize(Int64Vector self, std::vector< long long >::size_type new_size)`
+- `resize(Int64Vector self, std::vector< long long >::size_type new_size, std::vector< long long >::value_type const & x)`
+- `insert(Int64Vector self, std::vector< long long >::iterator pos, std::vector< long long >::value_type const & x) -> std::vector< long long >::iterator`
+- `insert(Int64Vector self, std::vector< long long >::iterator pos, std::vector< long long >::size_type n, std::vector< long long >::value_type const & x)`
+- `reserve(Int64Vector self, std::vector< long long >::size_type n)`
+- `capacity(Int64Vector self) -> std::vector< long long >::size_type`
+
+### IntVector
+
+- `iterator(IntVector self) -> SwigPyIterator`
+- `pop(IntVector self) -> std::vector< int >::value_type`
+- `append(IntVector self, std::vector< int >::value_type const & x)`
+- `empty(IntVector self) -> bool`
+- `size(IntVector self) -> std::vector< int >::size_type`
+- `swap(IntVector self, IntVector v)`
+- `begin(IntVector self) -> std::vector< int >::iterator`
+- `end(IntVector self) -> std::vector< int >::iterator`
+- `rbegin(IntVector self) -> std::vector< int >::reverse_iterator`
+- `rend(IntVector self) -> std::vector< int >::reverse_iterator`
+- `clear(IntVector self)`
+- `get_allocator(IntVector self) -> std::vector< int >::allocator_type`
+- `pop_back(IntVector self)`
+- `erase(IntVector self, std::vector< int >::iterator pos) -> std::vector< int >::iterator`
+- `erase(IntVector self, std::vector< int >::iterator first, std::vector< int >::iterator last) -> std::vector< int >::iterator`
+- `push_back(IntVector self, std::vector< int >::value_type const & x)`
+- `front(IntVector self) -> std::vector< int >::value_type const &`
+- `back(IntVector self) -> std::vector< int >::value_type const &`
+- `assign(IntVector self, std::vector< int >::size_type n, std::vector< int >::value_type const & x)`
+- `resize(IntVector self, std::vector< int >::size_type new_size)`
+- `resize(IntVector self, std::vector< int >::size_type new_size, std::vector< int >::value_type const & x)`
+- `insert(IntVector self, std::vector< int >::iterator pos, std::vector< int >::value_type const & x) -> std::vector< int >::iterator`
+- `insert(IntVector self, std::vector< int >::iterator pos, std::vector< int >::size_type n, std::vector< int >::value_type const & x)`
+- `reserve(IntVector self, std::vector< int >::size_type n)`
+- `capacity(IntVector self) -> std::vector< int >::size_type`
+
+### MDPropVector
+
+- `iterator(MDPropVector self) -> SwigPyIterator`
+- `pop(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::value_type`
+- `append(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const & x)`
+- `empty(MDPropVector self) -> bool`
+- `size(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::size_type`
+- `swap(MDPropVector self, MDPropVector v)`
+- `begin(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::iterator`
+- `end(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::iterator`
+- `rbegin(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::reverse_iterator`
+- `rend(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::reverse_iterator`
+- `clear(MDPropVector self)`
+- `get_allocator(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::allocator_type`
+- `pop_back(MDPropVector self)`
+- `erase(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIMDProp > >::iterator`
+- `erase(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::iterator first, std::vector< std::shared_ptr< RO::RIMDProp > >::iterator last) -> std::vector< std::shared_ptr< RO::RIMDProp > >::iterator`
+- `push_back(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const & x)`
+- `front(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const &`
+- `back(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const &`
+- `assign(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::size_type n, std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const & x)`
+- `resize(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::size_type new_size)`
+- `resize(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::size_type new_size, std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const & x)`
+- `insert(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::iterator pos, std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIMDProp > >::iterator`
+- `insert(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::iterator pos, std::vector< std::shared_ptr< RO::RIMDProp > >::size_type n, std::vector< std::shared_ptr< RO::RIMDProp > >::value_type const & x)`
+- `reserve(MDPropVector self, std::vector< std::shared_ptr< RO::RIMDProp > >::size_type n)`
+- `capacity(MDPropVector self) -> std::vector< std::shared_ptr< RO::RIMDProp > >::size_type`
+
+### MaterialInfoVector
+
+- `iterator(MaterialInfoVector self) -> SwigPyIterator`
+- `pop(MaterialInfoVector self) -> RStGenPackMaterialInfo`
+- `append(MaterialInfoVector self, RStGenPackMaterialInfo x)`
+- `empty(MaterialInfoVector self) -> bool`
+- `size(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::size_type`
+- `swap(MaterialInfoVector self, MaterialInfoVector v)`
+- `begin(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::iterator`
+- `end(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::iterator`
+- `rbegin(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::reverse_iterator`
+- `rend(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::reverse_iterator`
+- `clear(MaterialInfoVector self)`
+- `get_allocator(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::allocator_type`
+- `pop_back(MaterialInfoVector self)`
+- `erase(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::iterator pos) -> std::vector< RO::RStGenPackMaterialInfo >::iterator`
+- `erase(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::iterator first, std::vector< RO::RStGenPackMaterialInfo >::iterator last) -> std::vector< RO::RStGenPackMaterialInfo >::iterator`
+- `push_back(MaterialInfoVector self, RStGenPackMaterialInfo x)`
+- `front(MaterialInfoVector self) -> RStGenPackMaterialInfo`
+- `back(MaterialInfoVector self) -> RStGenPackMaterialInfo`
+- `assign(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::size_type n, RStGenPackMaterialInfo x)`
+- `resize(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::size_type new_size)`
+- `resize(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::size_type new_size, RStGenPackMaterialInfo x)`
+- `insert(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::iterator pos, RStGenPackMaterialInfo x) -> std::vector< RO::RStGenPackMaterialInfo >::iterator`
+- `insert(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::iterator pos, std::vector< RO::RStGenPackMaterialInfo >::size_type n, RStGenPackMaterialInfo x)`
+- `reserve(MaterialInfoVector self, std::vector< RO::RStGenPackMaterialInfo >::size_type n)`
+- `capacity(MaterialInfoVector self) -> std::vector< RO::RStGenPackMaterialInfo >::size_type`
+
+### MaterialSettings
+
+
+### Matrix4fVector
+
+- `iterator(Matrix4fVector self) -> SwigPyIterator`
+- `pop(Matrix4fVector self) -> RMatrix4`
+- `append(Matrix4fVector self, RMatrix4 x)`
+- `empty(Matrix4fVector self) -> bool`
+- `size(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::size_type`
+- `swap(Matrix4fVector self, Matrix4fVector v)`
+- `begin(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::iterator`
+- `end(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::iterator`
+- `rbegin(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::reverse_iterator`
+- `rend(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::reverse_iterator`
+- `clear(Matrix4fVector self)`
+- `get_allocator(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::allocator_type`
+- `pop_back(Matrix4fVector self)`
+- `erase(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::iterator pos) -> std::vector< RL::CMatrix4< float > >::iterator`
+- `erase(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::iterator first, std::vector< RL::CMatrix4< float > >::iterator last) -> std::vector< RL::CMatrix4< float > >::iterator`
+- `push_back(Matrix4fVector self, RMatrix4 x)`
+- `front(Matrix4fVector self) -> RMatrix4`
+- `back(Matrix4fVector self) -> RMatrix4`
+- `assign(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::size_type n, RMatrix4 x)`
+- `resize(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::size_type new_size)`
+- `resize(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::size_type new_size, RMatrix4 x)`
+- `insert(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::iterator pos, RMatrix4 x) -> std::vector< RL::CMatrix4< float > >::iterator`
+- `insert(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::iterator pos, std::vector< RL::CMatrix4< float > >::size_type n, RMatrix4 x)`
+- `reserve(Matrix4fVector self, std::vector< RL::CMatrix4< float > >::size_type n)`
+- `capacity(Matrix4fVector self) -> std::vector< RL::CMatrix4< float > >::size_type`
+
+### MeshVector
+
+- `iterator(MeshVector self) -> SwigPyIterator`
+- `pop(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::value_type`
+- `append(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::value_type const & x)`
+- `empty(MeshVector self) -> bool`
+- `size(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::size_type`
+- `swap(MeshVector self, MeshVector v)`
+- `begin(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::iterator`
+- `end(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::iterator`
+- `rbegin(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::reverse_iterator`
+- `rend(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::reverse_iterator`
+- `clear(MeshVector self)`
+- `get_allocator(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::allocator_type`
+- `pop_back(MeshVector self)`
+- `erase(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIMesh > >::iterator`
+- `erase(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::iterator first, std::vector< std::shared_ptr< RO::RIMesh > >::iterator last) -> std::vector< std::shared_ptr< RO::RIMesh > >::iterator`
+- `push_back(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::value_type const & x)`
+- `front(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::value_type const &`
+- `back(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::value_type const &`
+- `assign(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::size_type n, std::vector< std::shared_ptr< RO::RIMesh > >::value_type const & x)`
+- `resize(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::size_type new_size)`
+- `resize(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::size_type new_size, std::vector< std::shared_ptr< RO::RIMesh > >::value_type const & x)`
+- `insert(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::iterator pos, std::vector< std::shared_ptr< RO::RIMesh > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIMesh > >::iterator`
+- `insert(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::iterator pos, std::vector< std::shared_ptr< RO::RIMesh > >::size_type n, std::vector< std::shared_ptr< RO::RIMesh > >::value_type const & x)`
+- `reserve(MeshVector self, std::vector< std::shared_ptr< RO::RIMesh > >::size_type n)`
+- `capacity(MeshVector self) -> std::vector< std::shared_ptr< RO::RIMesh > >::size_type`
+
+### NodeVector
+
+- `iterator(NodeVector self) -> SwigPyIterator`
+- `pop(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::value_type`
+- `append(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::value_type const & x)`
+- `empty(NodeVector self) -> bool`
+- `size(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::size_type`
+- `swap(NodeVector self, NodeVector v)`
+- `begin(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::iterator`
+- `end(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::iterator`
+- `rbegin(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::reverse_iterator`
+- `rend(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::reverse_iterator`
+- `clear(NodeVector self)`
+- `get_allocator(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::allocator_type`
+- `pop_back(NodeVector self)`
+- `erase(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::iterator pos) -> std::vector< std::shared_ptr< RO::RINode > >::iterator`
+- `erase(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::iterator first, std::vector< std::shared_ptr< RO::RINode > >::iterator last) -> std::vector< std::shared_ptr< RO::RINode > >::iterator`
+- `push_back(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::value_type const & x)`
+- `front(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::value_type const &`
+- `back(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::value_type const &`
+- `assign(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::size_type n, std::vector< std::shared_ptr< RO::RINode > >::value_type const & x)`
+- `resize(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::size_type new_size)`
+- `resize(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::size_type new_size, std::vector< std::shared_ptr< RO::RINode > >::value_type const & x)`
+- `insert(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::iterator pos, std::vector< std::shared_ptr< RO::RINode > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RINode > >::iterator`
+- `insert(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::iterator pos, std::vector< std::shared_ptr< RO::RINode > >::size_type n, std::vector< std::shared_ptr< RO::RINode > >::value_type const & x)`
+- `reserve(NodeVector self, std::vector< std::shared_ptr< RO::RINode > >::size_type n)`
+- `capacity(NodeVector self) -> std::vector< std::shared_ptr< RO::RINode > >::size_type`
+
+### ObjectVector
+
+- `iterator(ObjectVector self) -> SwigPyIterator`
+- `pop(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::value_type`
+- `append(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::value_type const & x)`
+- `empty(ObjectVector self) -> bool`
+- `size(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::size_type`
+- `swap(ObjectVector self, ObjectVector v)`
+- `begin(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::iterator`
+- `end(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::iterator`
+- `rbegin(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::reverse_iterator`
+- `rend(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::reverse_iterator`
+- `clear(ObjectVector self)`
+- `get_allocator(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::allocator_type`
+- `pop_back(ObjectVector self)`
+- `erase(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIObject > >::iterator`
+- `erase(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::iterator first, std::vector< std::shared_ptr< RO::RIObject > >::iterator last) -> std::vector< std::shared_ptr< RO::RIObject > >::iterator`
+- `push_back(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::value_type const & x)`
+- `front(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::value_type const &`
+- `back(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::value_type const &`
+- `assign(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::size_type n, std::vector< std::shared_ptr< RO::RIObject > >::value_type const & x)`
+- `resize(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::size_type new_size)`
+- `resize(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::size_type new_size, std::vector< std::shared_ptr< RO::RIObject > >::value_type const & x)`
+- `insert(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIObject > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIObject > >::iterator`
+- `insert(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIObject > >::size_type n, std::vector< std::shared_ptr< RO::RIObject > >::value_type const & x)`
+- `reserve(ObjectVector self, std::vector< std::shared_ptr< RO::RIObject > >::size_type n)`
+- `capacity(ObjectVector self) -> std::vector< std::shared_ptr< RO::RIObject > >::size_type`
+
+### PixelStreamCaptureFrame
+
+
+### PropVector
+
+- `iterator(PropVector self) -> SwigPyIterator`
+- `pop(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::value_type`
+- `append(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::value_type const & x)`
+- `empty(PropVector self) -> bool`
+- `size(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::size_type`
+- `swap(PropVector self, PropVector v)`
+- `begin(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::iterator`
+- `end(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::iterator`
+- `rbegin(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::reverse_iterator`
+- `rend(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::reverse_iterator`
+- `clear(PropVector self)`
+- `get_allocator(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::allocator_type`
+- `pop_back(PropVector self)`
+- `erase(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIProp > >::iterator`
+- `erase(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::iterator first, std::vector< std::shared_ptr< RO::RIProp > >::iterator last) -> std::vector< std::shared_ptr< RO::RIProp > >::iterator`
+- `push_back(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::value_type const & x)`
+- `front(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::value_type const &`
+- `back(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::value_type const &`
+- `assign(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::size_type n, std::vector< std::shared_ptr< RO::RIProp > >::value_type const & x)`
+- `resize(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::size_type new_size)`
+- `resize(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::size_type new_size, std::vector< std::shared_ptr< RO::RIProp > >::value_type const & x)`
+- `insert(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::iterator pos, std::vector< std::shared_ptr< RO::RIProp > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIProp > >::iterator`
+- `insert(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::iterator pos, std::vector< std::shared_ptr< RO::RIProp > >::size_type n, std::vector< std::shared_ptr< RO::RIProp > >::value_type const & x)`
+- `reserve(PropVector self, std::vector< std::shared_ptr< RO::RIProp > >::size_type n)`
+- `capacity(PropVector self) -> std::vector< std::shared_ptr< RO::RIProp > >::size_type`
 
 ### RApplication
 
-- `RApplication_GetProductName()`
-- `RApplication_GetProductEdition()`
-- `RApplication_GetProductVersion()`
-- `RApplication_GetProductMajorVersion()`
-- `RApplication_GetProductMinorVersion()`
-- `RApplication_GetApiVersion()`
-- `RApplication_GetApiMajorVersion()`
-- `RApplication_GetApiMinorVersion()`
-- `RApplication_GetProgramPath()`
-- `RApplication_GetDefaultProjectPath()`
-- `RApplication_GetCurrentProjectPath()`
-- `RApplication_GetTemplateDataPath()`
-- `RApplication_GetCustomDataPath()`
-- `RApplication_GetDefaultContentFolder(eFolderType)`
-- `RApplication_GetContentFoldersInFolder(strFolder)`
-- `RApplication_GetContentFilesInFolder(strFolder)`
-- `RApplication_GetCustomContentFolder(eFolderType)`
-- `RApplication_GetContentId(strFilePath)`
+- `GetProductName() -> std::wstring`
+- `GetProductEdition() -> std::wstring`
+- `GetProductVersion() -> IntVector`
+- `GetProductMajorVersion() -> int`
+- `GetProductMinorVersion() -> int`
+- `GetApiVersion() -> IntVector`
+- `GetApiMajorVersion() -> int`
+- `GetApiMinorVersion() -> int`
+- `GetProgramPath() -> std::wstring`
+- `GetDefaultProjectPath() -> std::wstring`
+- `GetCurrentProjectPath() -> std::wstring`
+- `GetTemplateDataPath() -> std::wstring`
+- `GetCustomDataPath() -> std::wstring`
+- `GetDefaultContentFolder(RO::ETemplateRootFolder eFolderType) -> std::wstring`
+- `GetContentFoldersInFolder(std::wstring const & strFolder) -> WStringVector`
+- `GetContentFilesInFolder(std::wstring const & strFolder) -> WStringVector`
+- `GetCustomContentFolder(RO::ETemplateRootFolder eFolderType) -> std::wstring`
+- `GetContentId(std::wstring const & strFilePath) -> std::wstring`
+- `SetSearchContext(RO::EContentManagerSearchMode eSearchMode, RO::EContentManagerSearchMainTab eMainTab=AIStudio, RO::EContentManagerSearchSubTab eSubTab=Item)`
+- `ExecuteSearchByText(std::wstring const & strSearchText)`
+- `ExecuteSearchByImage(std::wstring const & strImagePath)`
+- `WaitForSearchFinish(int nTimeoutMs=10000) -> bool`
+- `SetSearchPage(int nPage)`
+- `GetSearchPaginationInfo() -> RSearchPaginationInfo`
+- `GetSearchResultCount() -> int`
+- `GetSearchResultSnapshot() -> RSearchResultSnapshotVector`
+- `GetFilePathByContentID(std::wstring const & strContentID) -> std::wstring`
+
+### RAttribute
+
+- `SetName(RAttribute self, std::wstring const & strName)`
+- `GetName(RAttribute self) -> std::wstring`
+- `SetType(RAttribute self, RO::EAttributeType eType)`
+- `GetType(RAttribute self) -> RO::EAttributeType`
+- `SetFlag(RAttribute self, RO::EAttributeFlag eFlag)`
+- `GetFlag(RAttribute self) -> RO::EAttributeFlag`
+
+### RAttributePtrVector
+
+- `iterator(RAttributePtrVector self) -> SwigPyIterator`
+- `pop(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::value_type`
+- `append(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::value_type const & x)`
+- `empty(RAttributePtrVector self) -> bool`
+- `size(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::size_type`
+- `swap(RAttributePtrVector self, RAttributePtrVector v)`
+- `begin(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::iterator`
+- `end(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::iterator`
+- `rbegin(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::reverse_iterator`
+- `rend(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::reverse_iterator`
+- `clear(RAttributePtrVector self)`
+- `get_allocator(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::allocator_type`
+- `pop_back(RAttributePtrVector self)`
+- `erase(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::iterator pos) -> std::vector< std::shared_ptr< RO::RAttribute > >::iterator`
+- `erase(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::iterator first, std::vector< std::shared_ptr< RO::RAttribute > >::iterator last) -> std::vector< std::shared_ptr< RO::RAttribute > >::iterator`
+- `push_back(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::value_type const & x)`
+- `front(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::value_type const &`
+- `back(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::value_type const &`
+- `assign(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::size_type n, std::vector< std::shared_ptr< RO::RAttribute > >::value_type const & x)`
+- `resize(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::size_type new_size)`
+- `resize(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::size_type new_size, std::vector< std::shared_ptr< RO::RAttribute > >::value_type const & x)`
+- `insert(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::iterator pos, std::vector< std::shared_ptr< RO::RAttribute > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RAttribute > >::iterator`
+- `insert(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::iterator pos, std::vector< std::shared_ptr< RO::RAttribute > >::size_type n, std::vector< std::shared_ptr< RO::RAttribute > >::value_type const & x)`
+- `reserve(RAttributePtrVector self, std::vector< std::shared_ptr< RO::RAttribute > >::size_type n)`
+- `capacity(RAttributePtrVector self) -> std::vector< std::shared_ptr< RO::RAttribute > >::size_type`
 
 ### RAudio
 
-- `RAudio_CreateAudioObject()`
-- `RAudio_LoadAudioToObject(*args)`
+- `CreateAudioObject() -> RIAudioObject`
+- `LoadAudioToObject(RO::RIObjectPtr spObject, std::wstring const & strAudioPath, RTime kStartTick, int nLoopCount=1, RTime kFadeIn=ZERO, RTime kFadeOut=ZERO, RTime kCutLength=ZERO) -> float`
+- `LoadAudioToObject(RO::RIObjectPtr spObject, RIAudioObject pAudioObject, RTime kStartTick, int nLoopCount=1, RTime kFadeIn=ZERO, RTime kFadeOut=ZERO, RTime kCutLength=ZERO) -> float`
+
+### RAudioRecorder
+
+- `SetInputDevice(RAudioRecorder self, std::wstring const & strInputAudioDeviceName) -> RStatus`
+- `SetTimeLimit(RAudioRecorder self, int nMillisecond)`
+- `GetTimeLimit(RAudioRecorder self) -> int`
+- `Start(RAudioRecorder self) -> RStatus`
+- `Stop(RAudioRecorder self) -> RStatus`
+- `GetAudio(RAudioRecorder self) -> RIAudioObject`
+- `GetAvailableDevices(RAudioRecorder self) -> WStringVector`
+- `GetInputDevice(RAudioRecorder self) -> std::wstring`
+- `RegisterCallback(RAudioRecorder self, RAudioRecorderCallback pCallback)`
+- `UnregisterCallback(RAudioRecorder self)`
+
+### RAudioRecorderCallback
+
+- `OnTimeLimitReached(RAudioRecorderCallback self)`
+
+### RBeginCommandOption
+
+
+### RBodySetting
+
+- `SetActivePart(RBodySetting self, RO::EBodyActivePart eActivePart)`
+- `GetActivePart(RBodySetting self) -> RO::EBodyActivePart`
+- `SetMirrorState(RBodySetting self, bool bIsMirror)`
+- `GetMirrorState(RBodySetting self) -> bool`
+- `SetFixLowerState(RBodySetting self, bool bIsFixLower)`
+- `GetFixLowerState(RBodySetting self) -> bool`
+- `SetLockFootRotationState(RBodySetting self, bool bIsLockFootRotation)`
+- `GetLockFootRotationState(RBodySetting self) -> bool`
+- `SetFootBottomToAnkle(RBodySetting self, float fFootBottomToAnkle)`
+- `GetFootBottomToAnkle(RBodySetting self) -> float`
+- `SetMotionApplyMode(RBodySetting self, RO::EMotionApplyMode eMotionApplyMode)`
+- `GetMotionApplyMode(RBodySetting self) -> RO::EMotionApplyMode`
+- `SetReferenceAvatar(RBodySetting self, RO::RIAvatarPtr spAvatar)`
+- `GetReferenceAvatar(RBodySetting self) -> RO::RIAvatarPtr`
+- `SetHipPositionLockedAxes(RBodySetting self, RO::ECoordinateAxes eAxes)`
+- `GetHipPositionLockedAxes(RBodySetting self) -> RO::ECoordinateAxes`
+- `SetCoordinateOffset(RBodySetting self, float const fRotation, FloatVector vTranslation)`
+- `GetCoordinateOffset(RBodySetting self, float & fRotation, FloatVector vTranslation)`
+- `SetMotionMatchSource(RBodySetting self, bool bMatchSource)`
+- `GetMotionMatchSource(RBodySetting self) -> bool`
+
+### RCallback
+
+
+### RCameraDofData
+
+- `SetEnable(RCameraDofData self, bool bEnable)`
+- `GetEnable(RCameraDofData self) -> bool`
+- `SetFocus(RCameraDofData self, float fFocusData)`
+- `GetFocus(RCameraDofData self) -> float`
+- `SetRange(RCameraDofData self, float fRangeData)`
+- `GetRange(RCameraDofData self) -> float`
+- `SetNearTransitionRegion(RCameraDofData self, float fNearTransitionRegion)`
+- `GetNearTransitionRegion(RCameraDofData self) -> float`
+- `SetFarTransitionRegion(RCameraDofData self, float fFarTransitionRegion)`
+- `GetFarTransitionRegion(RCameraDofData self) -> float`
+- `SetNearBlurScale(RCameraDofData self, float fNearBlurScale)`
+- `GetNearBlurScale(RCameraDofData self) -> float`
+- `SetFarBlurScale(RCameraDofData self, float fFarBlurScale)`
+- `GetFarBlurScale(RCameraDofData self) -> float`
+- `SetMinBlendDistance(RCameraDofData self, float fMinBlendDistance)`
+- `GetMinBlendDistance(RCameraDofData self) -> float`
+- `SetCenterColorWeight(RCameraDofData self, float fCenterColorWeight)`
+- `GetCenterColorWeight(RCameraDofData self) -> float`
+- `SetEdgeDecayPower(RCameraDofData self, float fEdgeDecayPower)`
+- `GetEdgeDecayPower(RCameraDofData self) -> float`
+
+### RColor
+
+- `R(RColor self) -> float`
+- `R(RColor self) -> float &`
+- `G(RColor self) -> float`
+- `G(RColor self) -> float &`
+- `B(RColor self) -> float`
+- `B(RColor self) -> float &`
+- `A(RColor self) -> float`
+- `A(RColor self) -> float &`
+- `Red(RColor self) -> int`
+- `Green(RColor self) -> int`
+- `Blue(RColor self) -> int`
+- `Alpha(RColor self) -> int`
+- `From(RColor self, unsigned char r, unsigned char g, unsigned char b, unsigned char a) -> RColor`
+- `FromARGB(RColor self, unsigned long arg2) -> RColor`
+- `FromCOLORREF(RColor self, unsigned long arg2) -> RColor`
+- `ToARGB(RColor self) -> unsigned long`
+- `ToCOLORREF(RColor self) -> unsigned long`
+- `ToGrayScale(RColor self) -> float`
+- `Normalize(RColor self) -> RColor`
+- `Saturate(RColor self) -> RColor`
+- `GammaCorrect(RColor self, float const fGamma) -> RColor`
+- `ToHSL(RColor self, float & fHue, float & fSaturate, float & fLevel)`
+- `FromHSL(RColor self, float fHue, float fSaturate, float fLevel)`
+- `AdjustHSBC(RColor self, float fHue, float fSaturate, float fBrightness, float fContrast, bool bInvert)`
+- `AdjustRGBA(RColor self, float fRed, float fGreen, float fBlue, float fAlpha, bool bInvert)`
+
+### RControl
+
+- `MaxControlTime(RControl self) -> RTime`
+- `HasKeys(RControl self) -> bool`
+- `GetKeyCount(RControl self) -> size_t`
+- `GetKeyIndex(RControl self, RTime kTick, int & nIdx) -> RStatus`
+- `MoveKey(RControl self, RTime kTick, RTime kOffsetTick) -> RStatus`
+- `MoveAllKey(RControl self, RTime kTick) -> RStatus`
+- `RemoveKey(RControl self, RTime kTick) -> RStatus`
+- `RemoveKeys(RControl self, RTime kStartTime, RTime kEndTime, bool bExcludeBound) -> RStatus`
+- `GetKeyTimeAt(RControl self, uint32_t uIndex, RTime kTick) -> RStatus`
+- `RemoveKeyAt(RControl self, int nIndex) -> RStatus`
+- `AddKey(RControl self, RKey pKey) -> RStatus`
+- `ClearKeys(RControl self) -> RStatus`
+- `Clone(RControl self) -> std::shared_ptr< RO::RControl >`
+- `LoadDataBlockData(RControl self, RL::CIoStream & rkStream, RL::CMemberLink * pkLink, RL::CProgress * pProgress) -> RStatus`
+- `GetDataBlock(RControl self) -> RO::RDataBlockPtr`
+- `GetKeyTransitionType(RControl self, RTime kTick) -> RO::ETransitionType`
+- `GetKeyTransitionType(RControl self, uint32_t uIndex) -> RO::ETransitionType`
+- `GetKeyTransitionStrength(RControl self, RTime kTick) -> float`
+- `GetKeyTransitionStrength(RControl self, uint32_t uIndex) -> float`
+- `SetKeyTransition(RControl self, RTime kTick, RO::ETransitionType eType, float fStrength) -> RStatus`
+
+### RCustomValue
+
+- `AssignTo(RCustomValue self, RCustomValue kTargetValue)`
+- `SetValue(RCustomValue self, int32_t nValue)`
+- `SetValue(RCustomValue self, int64_t nValue)`
+- `SetValue(RCustomValue self, float fValue)`
+- `SetValue(RCustomValue self, double fValue)`
+- `SetValue(RCustomValue self, char const * szValue)`
+- `SetValue(RCustomValue self, wchar_t const * szValue)`
+- `SetValue(RCustomValue self, char cValue)`
+- `SetValue(RCustomValue self, bool bValue)`
+- `SetValue(RCustomValue self, void const * pValue)`
+- `SetValue(RCustomValue self, RCustomValue kKey, RCustomValue kValue)`
+- `GetType(RCustomValue self) -> EValueType`
+- `GetValue(RCustomValue self, int32_t & nValue) -> bool`
+- `GetValue(RCustomValue self, int64_t & nValue) -> bool`
+- `GetValue(RCustomValue self, float & fValue) -> bool`
+- `GetValue(RCustomValue self, double & fValue) -> bool`
+- `GetValue(RCustomValue self, char *& szValue) -> bool`
+- `GetValue(RCustomValue self, wchar_t *& szValue) -> bool`
+- `GetValue(RCustomValue self, char & cValue) -> bool`
+- `GetValue(RCustomValue self, bool & bValue) -> bool`
+- `GetValue(RCustomValue self, void *& pValue) -> bool`
+- `ToInteger(RCustomValue self) -> int32_t`
+- `ToInt64(RCustomValue self) -> int64_t`
+- `ToFloat(RCustomValue self) -> float`
+- `ToDouble(RCustomValue self) -> double`
+- `ToString(RCustomValue self) -> char const *`
+- `ToWString(RCustomValue self) -> wchar_t const *`
+- `ToChar(RCustomValue self) -> char`
+- `ToBoolean(RCustomValue self) -> bool`
+- `ToHandle(RCustomValue self) -> RL::CHandle *`
+- `ToMap(RCustomValue self) -> RCustomValueMap`
+- `Clear(RCustomValue self)`
+
+### RCustomValueArray
+
+- `AssignTo(RCustomValueArray self, RCustomValueArray kTargetArray)`
+- `SetCapacity(RCustomValueArray self, size_t uSize)`
+- `Resize(RCustomValueArray self, size_t uSize)`
+- `Add(RCustomValueArray self, RCustomValue kValue)`
+- `Add(RCustomValueArray self, int32_t nValue)`
+- `Add(RCustomValueArray self, float fValue)`
+- `Add(RCustomValueArray self, double fValue)`
+- `Add(RCustomValueArray self, char const * szValue)`
+- `Add(RCustomValueArray self, wchar_t const * szValue)`
+- `Add(RCustomValueArray self, char cValue)`
+- `Add(RCustomValueArray self, bool bValue)`
+- `Add(RCustomValueArray self, void * pValue)`
+- `Clear(RCustomValueArray self, size_t uCapacity=32)`
+- `RemoveAt(RCustomValueArray self, size_t uIndex)`
+- `GetSize(RCustomValueArray self) -> size_t`
+
+### RCustomValueMap
+
+- `GetSize(RCustomValueMap self) -> size_t`
+- `GetKey(RCustomValueMap self, size_t uIndex) -> RCustomValue`
+- `GetValue(RCustomValueMap self, size_t uIndex) -> RCustomValue`
 
 ### RDataBlock
 
-- `RDataBlock_Create(kAttributes)`
+- `GetControl(RDataBlock self, std::wstring const & strName) -> RO::RControlPtr`
+- `GetControl(RDataBlock self, wchar_t const * strName) -> RO::RControlPtr`
+- `Clone(RDataBlock self) -> std::shared_ptr< RO::RDataBlock >`
+- `GetData(RDataBlock self, std::wstring const & strName, RTime kTick, RStatus pReturnStatus=None) -> RVariant`
+- `GetData(RDataBlock self, wchar_t const *const szName, RTime kTick, RStatus pReturnStatus=None) -> RVariant`
+- `GetData(RDataBlock self, std::wstring const & strName) -> RVariant`
+- `GetBlockData(RDataBlock self, std::wstring const & strName) -> std::shared_ptr< RO::RDataBlock > const`
+- `SetData(RDataBlock self, std::wstring const & strName, RTime kTick, RVariant kData) -> RStatus`
+- `SetData(RDataBlock self, std::wstring const & strName, RVariant kData) -> RStatus`
+- `AddAttribute(RDataBlock self, RO::RAttributePtr spAttribute) -> RStatus`
+- `RemoveAttribute(RDataBlock self, RO::RAttributePtr spAttribute) -> RStatus`
+- `GetAttributes(RDataBlock self) -> RAttributePtrVector`
+- `LoadFromFile(RDataBlock self, std::wstring const & strPath) -> RStatus`
+- `SaveToFile(RDataBlock self, std::wstring const & strPath) -> RStatus`
+- `Create(RAttributePtrVector kAttributes) -> std::shared_ptr< RO::RDataBlock >`
+
+### RDepthParam
+
+
+### RDeviceSetting
+
+- `SetCoordinateSystem(RDeviceSetting self, RO::ECoordinateSystem eCoordinateSystem)`
+- `GetCoordinateSystem(RDeviceSetting self) -> RO::ECoordinateSystem`
+- `SetMocapCoordinate(RDeviceSetting self, RO::ECoordinateAxis eUpAxis, RO::ECoordinateAxis eFrontAxis, RO::ECoordinateSystem eCoordinateSystem) -> RStatus`
+- `GetMocapCoordinateUpAxis(RDeviceSetting self) -> RO::ECoordinateAxis`
+- `GetMocapCoordinateFrontAxis(RDeviceSetting self) -> RO::ECoordinateAxis`
+- `GetMocapCoordinateSystem(RDeviceSetting self) -> RO::ECoordinateSystem`
+- `SetCoordinateOffset(RDeviceSetting self, float const fRotation, FloatVector vTranslation)`
+- `GetCoordinateOffset(RDeviceSetting self, float & fRotation, FloatVector vTranslation)`
+- `GetAxisXYZ(RDeviceSetting self, RO::ECoordinateAxis eAxis) -> FloatVector`
+- `GetPositionSetting(RDeviceSetting self) -> RPositionSetting`
+- `GetRotationSetting(RDeviceSetting self) -> RRotationSetting`
+- `SetInitialHipRotation(RDeviceSetting self, RMatrix3 kInitialHipRotation)`
+- `GetInitialHipRotation(RDeviceSetting self) -> RMatrix3`
+
+### RDialogCallback
+
+**Inherits from:** `RCallback`
+
+- `OnDialogHide(RDialogCallback self)`
+- `OnDialogShow(RDialogCallback self)`
+- `OnDialogClose(RDialogCallback self) -> bool`
+
+### REdgeDetectionCannyParam
+
+
+### REventCallback
+
+**Inherits from:** `RCallback`
+
+- `OnTimerUpdated(REventCallback self, float fTime)`
+- `OnSceneUpdated(REventCallback self, float fTime)`
+- `OnCurrentTimeChanged(REventCallback self, float fTime)`
+- `OnBeforeLoadFile(REventCallback self, int nFileType)`
+- `OnBeforeLoadFileWithPath(REventCallback self, int nFileType, wchar_t const * strFilePath)`
+- `OnFileLoaded(REventCallback self, int nFileType)`
+- `OnFileLoadedWithPath(REventCallback self, int nFileType, wchar_t const * strFilePath)`
+- `OnFileLoadFail(REventCallback self, int nFileType)`
+- `OnAfterFileLoaded(REventCallback self, int nFileType)`
+- `OnAfterFileLoadedWithPath(REventCallback self, int nFileType, wchar_t const * strFilePath)`
+- `OnProjectDataChanged(REventCallback self, int nProjectDataType)`
+- `OnBeforeSaveFile(REventCallback self, int nFileType, wchar_t const * pProjectName)`
+- `OnFileSaved(REventCallback self, int nFileType, wchar_t const * pProjectName)`
+- `OnObjectSelectionChanged(REventCallback self)`
+- `OnObjectDataChanged(REventCallback self)`
+- `OnObjectAdded(REventCallback self)`
+- `OnObjectAboutToBeDeleted(REventCallback self)`
+- `OnObjectDeleted(REventCallback self)`
+- `OnDialogModeChanged(REventCallback self, int nDialogMode)`
+- `OnUndoRedoDone(REventCallback self)`
+- `OnPlayed(REventCallback self)`
+- `OnStopped(REventCallback self)`
+- `OnObjectDataChangedWithType(REventCallback self, int nObjectChangeDataType)`
+- `OnHierarchyChanged(REventCallback self)`
+- `OnAPInitialized(REventCallback self)`
+- `OnBeforeCloseAP(REventCallback self)`
+- `OnCurrentCameraChanged(REventCallback self, int nCameraState)`
+- `OnSmartGalleryInitialized(REventCallback self, bool bSuccess)`
+- `OnCurrentLibraryChanged(REventCallback self)`
+- `OnOmniLiveChanged(REventCallback self, bool bOn)`
+- `OnImageAsyncLoadStart(REventCallback self)`
+- `OnImageAsyncLoadAllDone(REventCallback self)`
+- `OnCommandReceived(REventCallback self, std::string const & strCommand)`
+- `OnLuaEvent(REventCallback self, RCustomValueArray kParam)`
+- `OnQuickMagicWebSocketNotified(REventCallback self, wchar_t const * strMessageData)`
+- `OnServiceWebSocketNotified(REventCallback self, int nServiceType, wchar_t const * strMessageData)`
+- `OnMemberLoginStatusChanged(REventCallback self, bool bLogin)`
+- `OnRefreshDAPoints(REventCallback self, int nAllPoints)`
+- `OnRefreshAccountPoints(REventCallback self, int nAllPoints, int nAvailablePoints, int nAIPoints, int nBonusPoint, int nDAPoints, int nAILevel)`
+- `OnUpdateDAPoints(REventCallback self)`
+- `OnAPLayoutChanged(REventCallback self)`
+- `OnAPLayoutRestored(REventCallback self)`
+- `OnInstallStarted(REventCallback self, wchar_t const * strContentId)`
+- `OnInstallProgress(REventCallback self, wchar_t const * strContentId, int nPercentage)`
+- `OnInstallFinished(REventCallback self, wchar_t const * strContentId)`
+- `OnInstallError(REventCallback self, wchar_t const * strContentId)`
+- `OnUninstallStarted(REventCallback self, wchar_t const * strContentId)`
+- `OnUninstallProgress(REventCallback self, wchar_t const * strContentId, int nPercentage)`
+- `OnUninstallFinished(REventCallback self, wchar_t const * strContentId)`
+- `OnContentBrowserSelected(REventCallback self, WStringVector kPaths)`
 
 ### REventHandler
 
-- `REventHandler_SetListener(pListener)`
-- `REventHandler_RegisterCallback(pCallback)`
-- `REventHandler_UnregisterCallback(uId)`
-- `REventHandler_UnregisterCallbacks(kIds)`
+- `SetListener(RIEventListener pListener)`
+- `RegisterCallback(REventCallback pCallback) -> size_t`
+- `UnregisterCallback(size_t uId) -> RStatus`
+- `UnregisterCallbacks(SizetVector kIds) -> RStatus`
+
+### RExportAudioParameter
+
+
+### RExportCommonParameter
+
+
+### RExportFbxSetting
+
+- `EnableExportMotion(RExportFbxSetting self, bool bEnable)`
+- `IsExportMotionEnabled(RExportFbxSetting self) -> bool`
+- `SetExportMotionFps(RExportFbxSetting self, RFps kFps)`
+- `GetExportMotionFps(RExportFbxSetting self) -> RFps`
+- `SetExportMotionRange(RExportFbxSetting self, RRangePair kRange)`
+- `GetExportMotionRange(RExportFbxSetting self) -> RRangePair`
+- `SetOption(RExportFbxSetting self, RO::EExportFbxOptions eOptions)`
+- `GetOption(RExportFbxSetting self) -> RO::EExportFbxOptions`
+- `SetOption2(RExportFbxSetting self, RO::EExportFbxOptions2 eOptions)`
+- `GetOption2(RExportFbxSetting self) -> RO::EExportFbxOptions2`
+- `SetOption3(RExportFbxSetting self, RO::EExportFbxOptions3 eOptions)`
+- `GetOption3(RExportFbxSetting self) -> RO::EExportFbxOptions3`
+- `SetTextureSize(RExportFbxSetting self, RO::EExportTextureSize eSize)`
+- `GetTextureSize(RExportFbxSetting self) -> RO::EExportTextureSize`
+- `SetTextureFormat(RExportFbxSetting self, RO::EExportTextureFormat eFormat)`
+- `GetTextureFormat(RExportFbxSetting self) -> RO::EExportTextureFormat`
+- `SetIncludeMotionPath(RExportFbxSetting self, std::wstring const & strPath)`
+- `GetIncludeMotionPath(RExportFbxSetting self) -> std::wstring`
+- `EnableBakeDiffuseSpecularFromShader(RExportFbxSetting self, bool bEnable)`
+- `IsBakeDiffuseSpecularFromShaderEnabled(RExportFbxSetting self) -> bool`
+- `EnableBakeDiffuseFromSkinColor(RExportFbxSetting self, bool bEnable)`
+- `IsBakeDiffuseFromSkinColorEnabled(RExportFbxSetting self) -> bool`
+- `EnableBasicBindPose(RExportFbxSetting self, bool bEnable)`
+- `IsBasicBindPoseEnabled(RExportFbxSetting self) -> bool`
+- `EnableBakeSubdivision(RExportFbxSetting self, bool bEnable)`
+- `IsBakeSubdivisionEnabled(RExportFbxSetting self) -> bool`
+- `SetEmbedTimecode(RExportFbxSetting self, bool bEmbed)`
+- `IsEmbedTimecode(RExportFbxSetting self) -> bool`
+- `SetExportLevel(RExportFbxSetting self, int32_t nExportLevel)`
+- `GetExportLevel(RExportFbxSetting self) -> int32_t`
+- `SetUnrealBoneStructure(RExportFbxSetting self, RO::EUnrealBoneStructure eUnrealBoneStructure)`
+- `GetUnrealBoneStructure(RExportFbxSetting self) -> RO::EUnrealBoneStructure`
+
+### RExportGlbSetting
+
+**Inherits from:** `RExportFbxSetting`
+
+- `SetMeshMotionMode(RExportGlbSetting self, RO::EExportMeshMotionMode eMeshMotionMode)`
+- `IsMotionOnly(RExportGlbSetting self) -> bool`
+
+### RExportGoZMeshOption
+
+
+### RExportGoZMeshOptionVector
+
+- `iterator(RExportGoZMeshOptionVector self) -> SwigPyIterator`
+- `pop(RExportGoZMeshOptionVector self) -> RExportGoZMeshOption`
+- `append(RExportGoZMeshOptionVector self, RExportGoZMeshOption x)`
+- `empty(RExportGoZMeshOptionVector self) -> bool`
+- `size(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::size_type`
+- `swap(RExportGoZMeshOptionVector self, RExportGoZMeshOptionVector v)`
+- `begin(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::iterator`
+- `end(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::iterator`
+- `rbegin(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::reverse_iterator`
+- `rend(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::reverse_iterator`
+- `clear(RExportGoZMeshOptionVector self)`
+- `get_allocator(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::allocator_type`
+- `pop_back(RExportGoZMeshOptionVector self)`
+- `erase(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::iterator pos) -> std::vector< RO::RExportGoZMeshOption >::iterator`
+- `erase(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::iterator first, std::vector< RO::RExportGoZMeshOption >::iterator last) -> std::vector< RO::RExportGoZMeshOption >::iterator`
+- `push_back(RExportGoZMeshOptionVector self, RExportGoZMeshOption x)`
+- `front(RExportGoZMeshOptionVector self) -> RExportGoZMeshOption`
+- `back(RExportGoZMeshOptionVector self) -> RExportGoZMeshOption`
+- `assign(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::size_type n, RExportGoZMeshOption x)`
+- `resize(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::size_type new_size)`
+- `resize(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::size_type new_size, RExportGoZMeshOption x)`
+- `insert(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::iterator pos, RExportGoZMeshOption x) -> std::vector< RO::RExportGoZMeshOption >::iterator`
+- `insert(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::iterator pos, std::vector< RO::RExportGoZMeshOption >::size_type n, RExportGoZMeshOption x)`
+- `reserve(RExportGoZMeshOptionVector self, std::vector< RO::RExportGoZMeshOption >::size_type n)`
+- `capacity(RExportGoZMeshOptionVector self) -> std::vector< RO::RExportGoZMeshOption >::size_type`
+
+### RExportImageParameter
+
+
+### RExportImageSequenceParameter
+
+
+### RExportOutputRangeParameter
+
+
+### RExportVideoParameter
+
+
+### RFacialSetting
+
+- `SetBlend(RFacialSetting self, bool bBlend)`
+- `GetBlend(RFacialSetting self) -> bool`
+- `SetMode(RFacialSetting self, RO::EFacialAnimationMode eMode)`
+- `GetMode(RFacialSetting self) -> RO::EFacialAnimationMode`
+- `SetReplacePart(RFacialSetting self, bool bHead, bool bLeftEye, bool bRightEye, BoolVector kMorph, BoolVector kCustom, BoolVector kBone)`
+- `GetReplacePart(RFacialSetting self, bool & bHead, bool & bLeftEye, bool & bRightEye, BoolVector kMorph, BoolVector kCustom, BoolVector kBone)`
 
 ### RFileIO
 
-- `RFileIO_LoadFile(*args)`
-- `RFileIO_LoadFbxFile(*args)`
-- `RFileIO_LoadClotheFromFbx(pAvatar, strFilePath, kFailedMeshList)`
-- `RFileIO_LoadObject(strFilePath, bRecordStep=True)`
-- `RFileIO_LoadAlembicFile(spObject, strFilePath, eUpAxis)`
-- `RFileIO_ExportFbxFile(*args)`
-- `RFileIO_IsCompatibleWithExportOption(spObject, kSetting)`
-- `RFileIO_CheckExportFbxHasLicense(spObject)`
-- `RFileIO_PreLoadMotion(strFilePath, spObject, kMotionLength)`
-- `RFileIO_LoadMotion(strFilePath, kTime, spObject)`
-- `RFileIO_SaveThumbnailToFile(strRLFile, strSaveTo)`
-- `RFileIO_ExportObjFile(*args)`
-- `RFileIO_LoadSubstancePainterTextures(spObject, strFolderPath)`
-- `RFileIO_SaveProject(strSavePath)`
-- `RFileIO_SaveFile(spObject, kSaveSetting, strSavePath)`
-- `RFileIO_ExportGoZFile(kObjects, strFolderPath, kSetting)`
-- `RFileIO_ExportMultiPoseGoZFile(kObjects, kFolderPaths, kSettings)`
-- `RFileIO_GetTagsFromFileHeader(strFilePath, kTagList, eType)`
-- `RFileIO_ExportBvhFile(spObject, strFilePath)`
-- `RFileIO_ExportBvhFile2(*args)`
-- `RFileIO_ConvertFbxFileToRLMotion(*args)`
+- `LoadFile(std::wstring const & strFilePath, bool bRecordStep=True, RO::RIObjectPtr spObject=0, RTime kTime=NEGATIVE_ONE, RO::ELoadFileOption eOption=_None) -> RStatus`
+- `LoadFbxFile(std::wstring const & strFilePath, RO::EImportFbxOption eFbxOption=_None, std::wstring const & strFbxKeyFilePath=L"", std::wstring const & strNudeTemplateFilePath=L"", bool bRecordStep=True) -> RStatus`
+- `LoadClotheFromFbx(RO::RIObjectPtr pAvatar, std::wstring const & strFilePath, WStringVector kFailedMeshList) -> RStatus`
+- `LoadObject(std::wstring const & strFilePath, bool bRecordStep=True) -> RO::RIObjectPtr`
+- `LoadAlembicFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RO::ECoordinateAxis eUpAxis) -> RStatus`
+- `ExportFbxFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RO::EExportFbxOptions eOptions, RO::EExportFbxOptions2 eOptions2, RO::EExportFbxOptions3 eOptions3, RO::EExportTextureSize eTextureSize=Original, RO::EExportTextureFormat eFormat=Default, std::wstring const & strIncludeMotionPath=L"") -> RStatus`
+- `ExportFbxFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RExportFbxSetting kSetting) -> RStatus`
+- `IsCompatibleWithExportOption(RO::RIObjectPtr spObject, RExportFbxSetting kSetting) -> bool`
+- `CheckExportFbxHasLicense(RO::RIObjectPtr spObject) -> bool`
+- `PreLoadMotion(std::wstring const & strFilePath, RO::RIObjectPtr spObject, RTime kMotionLength) -> RStatus`
+- `LoadMotion(std::wstring const & strFilePath, RTime kTime, RO::RIObjectPtr spObject) -> RStatus`
+- `SaveThumbnailToFile(std::wstring const & strRLFile, std::wstring const & strSaveTo) -> RStatus`
+- `ExportObjFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RO::EExport3DFileOption eOption, std::wstring const & strPoseFilePath=L"") -> RStatus`
+- `LoadSubstancePainterTextures(RO::RIObjectPtr spObject, std::wstring const & strFolderPath) -> RStatus`
+- `LoadProject(std::wstring const & strFilePath) -> RStatus`
+- `SaveProject(std::wstring const & strFilePath) -> RStatus`
+- `SaveFile(RO::RIObjectPtr spObject, RSaveFileSetting kSaveSetting, std::wstring const & strSavePath) -> RStatus`
+- `ExportUsdFile(std::wstring const & strFilePath, std::wstring const & strPrimeName, float const & fUsdMeterPerUnit, RO::EMaterialType eMaterialType, RO::EIncludeMotionType eIncludeMotionType, RO::EPostEffect ePostEffect, RSUsdExportOption sUsdExportOption) -> RStatus`
+- `ExportGoZFile(ObjectVector kObjects, std::wstring const & strFolderPath, RExportGoZMeshOption kSetting) -> RStatus`
+- `ExportMultiPoseGoZFile(ObjectVector kObjects, WStringVector kFolderPaths, RExportGoZMeshOptionVector kSettings) -> RStatus`
+- `GetTagsFromFileHeader(std::wstring const & strFilePath, WStringVector kTagList, RO::ETagType eType) -> RStatus`
+- `ExportBvhFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath) -> RStatus`
+- `ExportBvhFile2(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RTime kStartTime=ZERO, RTime kEndTime=ZERO, bool bSampleZ=True, bool bYUp=True, bool bShowProgress=True) -> RStatus`
+- `ConvertFbxFileToRLMotion(std::wstring const & strFilePath, std::wstring const & strSaveFolderPath, std::wstring const & strTPoseFilePath=L"", std::wstring const & strThumbnailPath=L"", float fThumbnailSec=0.) -> RStatus`
+- `OutputDefaultPresetJson(std::wstring const & strObjectFileName, std::wstring const & strBasePath) -> RStatus`
+- `LoadFacialProfile(std::wstring const & strFilePath, RO::RIObjectPtr spObject=0, bool bRecordStep=True, bool bKeepEyeBlinkJawOpen=False) -> RStatus`
+
+### RFlattenWrinkleImageMap
+
+- `iterator(RFlattenWrinkleImageMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::key_type const & key) -> bool`
+- `keys(RFlattenWrinkleImageMap self) -> PyObject *`
+- `values(RFlattenWrinkleImageMap self) -> PyObject *`
+- `items(RFlattenWrinkleImageMap self) -> PyObject *`
+- `key_iterator(RFlattenWrinkleImageMap self) -> SwigPyIterator`
+- `value_iterator(RFlattenWrinkleImageMap self) -> SwigPyIterator`
+- `asdict(RFlattenWrinkleImageMap self) -> PyObject *`
+- `empty(RFlattenWrinkleImageMap self) -> bool`
+- `size(RFlattenWrinkleImageMap self) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::size_type`
+- `swap(RFlattenWrinkleImageMap self, RFlattenWrinkleImageMap v)`
+- `begin(RFlattenWrinkleImageMap self) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator`
+- `end(RFlattenWrinkleImageMap self) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator`
+- `rbegin(RFlattenWrinkleImageMap self) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::reverse_iterator`
+- `rend(RFlattenWrinkleImageMap self) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::reverse_iterator`
+- `clear(RFlattenWrinkleImageMap self)`
+- `get_allocator(RFlattenWrinkleImageMap self) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::allocator_type`
+- `count(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::key_type const & x) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::size_type`
+- `erase(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::key_type const & x) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::size_type`
+- `erase(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator position)`
+- `erase(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator first, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator last)`
+- `find(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::key_type const & x) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator`
+- `lower_bound(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::key_type const & x) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator`
+- `upper_bound(RFlattenWrinkleImageMap self, std::map< enum RO::EWrinkleTextureChannel,std::wstring >::key_type const & x) -> std::map< enum RO::EWrinkleTextureChannel,std::wstring >::iterator`
+
+### RFloatControl
+
+**Inherits from:** `RControl`
+
+- `GetValue(RFloatControl self, RTime kTick, float & fValue, float fDefaultValue=0.0) -> RStatus`
+- `SetValue(RFloatControl self, RTime kTick, float fValue, RO::ETransitionType eType=_None) -> RStatus`
+- `SetValueAt(RFloatControl self, uint32_t uIndex, float fValue) -> RStatus`
+- `OptimizeKeys(RFloatControl self, RTime kBeginTime, RTime kEndTime, RFps kFps, float const fError=0.5) -> RStatus`
+- `ReserveKeyCapacity(RFloatControl self, size_t const uSize) -> RStatus`
+- `RemoveKeys(RFloatControl self, std::set< RLTime > const & kTicks) -> RStatus`
+- `SyncAdapterToControl(RFloatControl self) -> RStatus`
+
+### RFloatKey
+
+**Inherits from:** `RKey`
+
+- `Clone(RFloatKey self) -> RO::RKeyPtr`
+- `SetValue(RFloatKey self, float fValue)`
+- `GetValue(RFloatKey self) -> float`
+
+### RFps
+
+- `TickPerFrame(RFps self) -> int32_t`
+- `GetFrameIndex(RFps self, RTime kTime) -> int32_t`
+- `UpFrameIndex(RFps self, RTime kTime) -> int32_t`
+- `RoundFrameIndex(RFps self, RTime kTime) -> int32_t`
+- `IndexedFrameTime(RFps self, int32_t nFrameIndex) -> RTime`
+- `BaseOneIndexedFrameTime(RFps self, int32_t nFrameIndex) -> RTime`
+- `GetFrameTime(RFps self, RTime kTime) -> RTime`
+- `GetNextFrameTime(RFps self, RTime kTime) -> RTime`
+- `GetPreviousFrameTime(RFps self, RTime kTime) -> RTime`
+- `IsSameFrame(RFps self, RTime kTime1, RTime kTime2) -> bool`
+- `FrameTimeFromSecond(RFps self, float fSecond) -> RTime`
+- `SecondFromFrameTime(RFps self, RTime kTime) -> float`
+- `EqualFrameTime(RFps self, RTime kA, RTime kB) -> bool`
+- `LessFrameTime(RFps self, RTime kA, RTime kB) -> bool`
+- `LessEqualFrameTime(RFps self, RTime kA, RTime kB) -> bool`
+- `ToTimecodeFormattedString(RFps self, RTime kTime) -> std::wstring`
+- `FromTimecodeFormattedString(RFps self, std::wstring const & strTimecode) -> RTime`
+- `ToInt(RFps self) -> int`
+- `ToFloat(RFps self) -> float`
+- `ToDouble(RFps self) -> double`
+- `ToLong(RFps self) -> long`
+- `ToUInt32(RFps self) -> uint32_t`
+- `ToInt64(RFps self) -> int64_t`
 
 ### RGlobal
 
-- `RGlobal_GetProjectLength()`
-- `RGlobal_SetProjectLength(kLength)`
-- `RGlobal_GetFps()`
-- `RGlobal_GetPath(ePath, strPath)`
-- `RGlobal_BeginAction(strAction, bBlockRecordUndo=False)`
-- `RGlobal_EndAction()`
-- `RGlobal_Undo()`
-- `RGlobal_Redo()`
-- `RGlobal_Play(kStart, kEnd)`
-- `RGlobal_Pause()`
-- `RGlobal_Stop()`
-- `RGlobal_IsPlaying()`
-- `RGlobal_GetTime()`
-- `RGlobal_SetTime(kTime, bSendEvent=True)`
-- `RGlobal_GetStartTime()`
-- `RGlobal_GetEndTime()`
-- `RGlobal_SetStartTime(kTime)`
-- `RGlobal_SetEndTime(kTime)`
-- `RGlobal_GetMocapManager()`
-- `RGlobal_TrialVersionRemainingDays(strBinPath, uProductID, strProductFold, strRegRoot)`
-- `RGlobal_DoSNVerification(nProductID, strRegistry, strProductName, strSNFailTitle, strSNFailMsg, strSNExceedTitle, strSNExceedMsg)`
-- `RGlobal_DoBatchSNVerification(strJson)`
-- `RGlobal_DoPluginTrialFollowUp(strProductNamePath, nPID)`
-- `RGlobal_IsTrialContentMode()`
-- `RGlobal_IsTrialVersion()`
-- `RGlobal_RemoveAllAnimations(spObject)`
-- `RGlobal_RenderVideo(*args)`
-- `RGlobal_RenderAudio(*args)`
-- `RGlobal_RenderVideoNormal(*args)`
-- `RGlobal_RenderVideoDepth(*args)`
-- `RGlobal_RenderVideoCanny(*args)`
-- `RGlobal_RenderVideoOpenPoseKeyPoint(*args)`
-- `RGlobal_RenderImageSequence(*args)`
-- `RGlobal_RenderImageSequenceNormal(*args)`
-- `RGlobal_RenderImageSequenceDepth(*args)`
-- `RGlobal_RenderImageSequenceCanny(*args)`
-- `RGlobal_RenderImageSequenceOpenPoseKeyPoint(*args)`
-- `RGlobal_RenderImage(strOutputFileName)`
-- `RGlobal_SetRenderExportType(kParams)`
-- `RGlobal_GetRenderExportType()`
-- `RGlobal_GetRenderExportImageParameter()`
-- `RGlobal_GetRenderExportImageSequenceParameter()`
-- `RGlobal_GetRenderExportVideoParameter()`
-- `RGlobal_SetRenderExportParameter(*args)`
-- `RGlobal_GetRenderExportAudioParameter()`
-- `RGlobal_GetScreenSize(nWidth, nHeight)`
-- `RGlobal_TrialVersionRemainingTimes(strBinPath, uProductID, strProductFold, strRegRoot, uTimeNo)`
-- `RGlobal_TrialVersionIncreaseTimes(strBinPath, uProductID, strProductFold, strRegRoot, nCount=1)`
-- `RGlobal_ObjectModified(spObject, eType)`
-- `RGlobal_ObjectDataChanged2(spObject, eType)`
-- `RGlobal_GetPreviewStartTime()`
-- `RGlobal_GetPreviewEndTime()`
-- `RGlobal_SetPreviewStartTime(kTime)`
-- `RGlobal_SetPreviewEndTime(kTime)`
-- `RGlobal_SetMotionSettingOptions(eOptions)`
-- `RGlobal_GetMotionSettingOptions()`
-- `RGlobal_GetVisualSettingComponent()`
-- `RGlobal_RenderPreview(*args)`
-- `RGlobal_RenderPreviewNormal(*args)`
-- `RGlobal_RenderPreviewDepth(*args)`
-- `RGlobal_RenderPreviewCanny(*args)`
-- `RGlobal_RenderPreviewOpenPoseKeyPoint(*args)`
-- `RGlobal_ForceViewportUpdate()`
-- `RGlobal_GetMotionDirector()`
-- `RGlobal_GetOmniConnectorManager()`
-- `RGlobal_GetDialogMode()`
-- `RGlobal_SetDialogMode(eMode)`
-- `RGlobal_GetSilentMode()`
-- `RGlobal_SetSilentMode(bSilent)`
-- `RGlobal_SetViewSize(nWidth, nHeight)`
-- `RGlobal_GetViewSize(nWidth, nHeight)`
-- `RGlobal_EnablePixelStream(bEnable)`
-- `RGlobal_CapturePixelStream()`
-- `RGlobal_GetDefaultContentFileAbsolutePath(eContent, bCustom)`
-- `RGlobal_SetTimecodeSource(eSource)`
-- `RGlobal_SetTimecodeSourceData(eSource, strFormattedTime)`
-- `RGlobal_GetTimecodeTime()`
-- `RGlobal_SetViewportInfoMotionLiveDevice(*args)`
-- `RGlobal_CheckTimecodePluginFeatureAllowed()`
-- `RGlobal_CheckTimecodePluginTrialValid()`
-- `RGlobal_CheckTimecodePluginFullOrTiralInstalled()`
-- `RGlobal_IsPhysicsSimulationLoop()`
-- `RGlobal_SetPhysicsSimulationLoop(bLoop)`
-- `RGlobal_ShowMemberLoginDialog()`
-- `RGlobal_AddInfoTips(pObjPtr, strImageSource, strFunctionName, strDescription, strVideoURLLinkcountId, strButtonText, strLearnMoreURL)`
-- `RGlobal_SendLogToServer(*args)`
+- `GetProjectLength() -> RTime`
+- `SetProjectLength(RTime kLength) -> RStatus`
+- `GetFps() -> RFps`
+- `GetPath(RO::EPathType ePath, std::wstring & strPath) -> RStatus`
+- `BeginAction(std::wstring const & strAction, bool bBlockRecordUndo=False)`
+- `EndAction()`
+- `Undo()`
+- `Redo()`
+- `Play(RTime kStart, RTime kEnd)`
+- `Pause()`
+- `Stop()`
+- `IsPlaying() -> bool`
+- `GetTime() -> RTime`
+- `SetTime(RTime kTime, bool bSendEvent=True) -> RStatus`
+- `GetStartTime() -> RTime`
+- `GetEndTime() -> RTime`
+- `SetStartTime(RTime kTime) -> RStatus`
+- `SetEndTime(RTime kTime) -> RStatus`
+- `GetMocapManager() -> RO::RIMocapManagerPtr`
+- `TrialVersionRemainingDays(std::wstring const & strBinPath, unsigned int uProductID, std::wstring const & strProductFold, std::wstring const & strRegRoot) -> int`
+- `DoSNVerification(int nProductID, std::wstring const & strRegistry, std::wstring const & strProductName, std::wstring const & strSNFailTitle, std::wstring const & strSNFailMsg, std::wstring const & strSNExceedTitle, std::wstring const & strSNExceedMsg) -> bool`
+- `DoBatchSNVerification(std::wstring const & strJson) -> std::wstring`
+- `DoPluginTrialFollowUp(std::wstring const & strProductNamePath, unsigned int nPID)`
+- `IsTrialContentMode() -> bool`
+- `IsTrialVersion() -> bool`
+- `RemoveAllAnimations(RO::RIObjectPtr spObject) -> RStatus`
+- `GetObjectSubdivisionSetting(RO::RIObjectPtr spObject) -> RMeshSubdivisionSetting`
+- `SetObjectSubdivisionSetting(RO::RIObjectPtr spObject, RMeshSubdivisionSetting kSetting) -> RStatus`
+- `RenderVideo(std::wstring strFileName=L"") -> RStatus`
+- `RenderVideo(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RenderAudio(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RenderVideoNormal(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RenderVideoDepth(RTime kStartTime, RTime kEndTime, RDepthParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderVideoCanny(RTime kStartTime, RTime kEndTime, REdgeDetectionCannyParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderVideoOpenPoseKeyPoint(RTime kStartTime, RTime kEndTime, ROpenPoseKeyPointParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderImageSequence(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RenderImageSequenceNormal(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RenderImageSequenceDepth(RTime kStartTime, RTime kEndTime, RDepthParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderImageSequenceCanny(RTime kStartTime, RTime kEndTime, REdgeDetectionCannyParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderImageSequenceOpenPoseKeyPoint(RTime kStartTime, RTime kEndTime, ROpenPoseKeyPointParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderImage(std::wstring const & strOutputFileName) -> RStatus`
+- `SetRenderExportType(RO::RExportType kParams)`
+- `GetRenderExportType() -> RO::RExportType`
+- `GetRenderExportImageParameter() -> RExportImageParameter`
+- `GetRenderExportImageSequenceParameter() -> RExportImageSequenceParameter`
+- `GetRenderExportVideoParameter() -> RExportVideoParameter`
+- `SetRenderExportParameter(RExportImageParameter kParams)`
+- `SetRenderExportParameter(RExportImageSequenceParameter kParams)`
+- `SetRenderExportParameter(RExportVideoParameter kParams)`
+- `SetRenderExportParameter(RExportAudioParameter kParams)`
+- `GetRenderExportAudioParameter() -> RExportAudioParameter`
+- `GetScreenSize(int & nWidth, int & nHeight) -> RStatus`
+- `TrialVersionRemainingTimes(std::wstring const & strBinPath, unsigned int uProductID, std::wstring const & strProductFold, std::wstring const & strRegRoot, unsigned int uTimeNo) -> int`
+- `TrialVersionIncreaseTimes(std::wstring const & strBinPath, unsigned int uProductID, std::wstring const & strProductFold, std::wstring const & strRegRoot, unsigned int nCount=1) -> RStatus`
+- `ObjectModified(RO::RIObjectPtr spObject, RO::EObjectModifiedType eType)`
+- `ObjectDataChanged2(RO::RIObjectPtr spObject, RO::EObjectEventType eType)`
+- `GetPreviewStartTime() -> RTime`
+- `GetPreviewEndTime() -> RTime`
+- `SetPreviewStartTime(RTime kTime) -> RStatus`
+- `SetPreviewEndTime(RTime kTime) -> RStatus`
+- `SetMotionSettingOptions(RO::EMotionSettingOption eOptions) -> RStatus`
+- `GetMotionSettingOptions() -> RO::EMotionSettingOption`
+- `GetVisualSettingComponent() -> RO::RIVisualSettingComponentPtr`
+- `RenderPreview(std::wstring const & strFileName=L"") -> RStatus`
+- `RenderPreviewNormal(std::wstring strFileName=L"") -> RStatus`
+- `RenderPreviewDepth(RDepthParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderPreviewCanny(REdgeDetectionCannyParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RenderPreviewOpenPoseKeyPoint(ROpenPoseKeyPointParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `ForceViewportUpdate() -> RStatus`
+- `GetMotionDirector() -> RO::RIMotionDirectorManagerPtr`
+- `GetOmniConnectorManager() -> RO::RIOmniConnectorManagerPtr`
+- `GetDialogMode() -> RO::EModeType`
+- `SetDialogMode(RO::EModeType eMode)`
+- `GetSilentMode() -> bool`
+- `SetSilentMode(bool bSilent)`
+- `SetViewSize(unsigned int nWidth, unsigned int nHeight) -> RStatus`
+- `GetViewSize(int & nWidth, int & nHeight) -> RStatus`
+- `EnablePixelStream(bool bEnable)`
+- `CapturePixelStream() -> RO::PixelStreamCaptureFramePtr`
+- `GetDefaultContentFileAbsolutePath(RO::EContentRootFolder eContent, bool bCustom) -> std::wstring`
+- `SetTimecodeSource(RO::ETimecodeSource eSource)`
+- `SetTimecodeSourceData(RO::ETimecodeSource eSource, std::wstring const & strFormattedTime)`
+- `GetTimecodeTime() -> double`
+- `SetViewportInfoMotionLiveDevice(std::wstring const & strDevice=L"")`
+- `CheckTimecodePluginFeatureAllowed() -> bool`
+- `CheckTimecodePluginTrialValid() -> bool`
+- `CheckTimecodePluginFullOrTiralInstalled() -> bool`
+- `IsPhysicsSimulationLoop() -> bool`
+- `SetPhysicsSimulationLoop(bool bLoop)`
+- `ShowMemberLoginDialog()`
+- `AddInfoTips(uint64_t pObjPtr, std::wstring const & strImageSource, std::wstring const & strFunctionName, std::wstring const & strDescription, std::wstring const & strVideoURLLinkcountId, std::wstring const & strButtonText, std::wstring const & strLearnMoreURL)`
+- `SendLogToServer(std::string const & strApStep, std::wstring const & strLogDescription)`
+- `SendLogToServer(std::string const & strPluginName)`
+- `SetRealtimeRenderOptions(RRealtimeRenderOptions kParams)`
+- `GetRealtimeRenderOptions() -> RRealtimeRenderOptions`
+
+### RHIKEffectorVector
+
+- `iterator(RHIKEffectorVector self) -> SwigPyIterator`
+- `pop(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::value_type`
+- `append(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::value_type const & x)`
+- `empty(RHIKEffectorVector self) -> bool`
+- `size(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::size_type`
+- `swap(RHIKEffectorVector self, RHIKEffectorVector v)`
+- `begin(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::iterator`
+- `end(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::iterator`
+- `rbegin(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::reverse_iterator`
+- `rend(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::reverse_iterator`
+- `clear(RHIKEffectorVector self)`
+- `get_allocator(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::allocator_type`
+- `pop_back(RHIKEffectorVector self)`
+- `erase(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::iterator pos) -> std::vector< enum RO::EHikEffector >::iterator`
+- `erase(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::iterator first, std::vector< enum RO::EHikEffector >::iterator last) -> std::vector< enum RO::EHikEffector >::iterator`
+- `push_back(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::value_type const & x)`
+- `front(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::value_type const &`
+- `back(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::value_type const &`
+- `assign(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::size_type n, std::vector< enum RO::EHikEffector >::value_type const & x)`
+- `resize(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::size_type new_size)`
+- `resize(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::size_type new_size, std::vector< enum RO::EHikEffector >::value_type const & x)`
+- `insert(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::iterator pos, std::vector< enum RO::EHikEffector >::value_type const & x) -> std::vector< enum RO::EHikEffector >::iterator`
+- `insert(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::iterator pos, std::vector< enum RO::EHikEffector >::size_type n, std::vector< enum RO::EHikEffector >::value_type const & x)`
+- `reserve(RHIKEffectorVector self, std::vector< enum RO::EHikEffector >::size_type n)`
+- `capacity(RHIKEffectorVector self) -> std::vector< enum RO::EHikEffector >::size_type`
+
+### RHandSetting
+
+- `Clone(RHandSetting self) -> std::shared_ptr< RO::RHandSetting >`
+- `SetActivePart(RHandSetting self, RO::EBodyActivePart eActivePart)`
+- `GetActivePart(RHandSetting self) -> RO::EBodyActivePart`
+- `SetRightHandJoin(RHandSetting self, RO::EHandJoin eHandJoin)`
+- `GetRightHandJoin(RHandSetting self) -> RO::EHandJoin`
+- `SetLeftHandJoin(RHandSetting self, RO::EHandJoin eHandJoin)`
+- `GetLeftHandJoin(RHandSetting self) -> RO::EHandJoin`
+- `SetHandJoinType(RHandSetting self, RO::EHandJoinType eJoinType)`
+- `GetHandJoinType(RHandSetting self) -> RO::EHandJoinType`
+- `SetRightHandDataSource(RHandSetting self, RO::EHandDataSource eDataSource)`
+- `GetRightHandDataSource(RHandSetting self) -> RO::EHandDataSource`
+- `SetLeftHandDataSource(RHandSetting self, RO::EHandDataSource eDataSource)`
+- `GetLeftHandDataSource(RHandSetting self) -> RO::EHandDataSource`
 
 ### RHeadshot
 
-- `RHeadshot_CreateHeadFromPhoto(strPhotoPath, eMode, kOption)`
-- `RHeadshot_ImportHeadFromObj(*args)`
+- `CreateHeadFromPhoto(std::wstring const & strPhotoPath, RO::EHSMode eMode, RHeadshotOption kOption) -> RStatus`
+- `ImportHeadFromObj(std::wstring const & strObjPath, RO::EHSBodyType eBodyType, RO::EHSLevel eLevel, IntVector kPtMap={}, bool bNeutralNeck=True) -> RStatus`
+
+### RHeadshotOption
+
+
+### RIAccessory
+
+**Inherits from:** `RIObject`
+
+- `TransferSkinWeight(RIAccessory self, std::wstring const & strTemplateType) -> RStatus`
+- `GetPhysicsComponent(RIAccessory self) -> RO::RIPhysicsComponentPtr`
+- `ConvertToHair(RIAccessory self, RO::EHairType eHairType) -> RStatus`
+- `ConvertToFaceHair(RIAccessory self, RO::EFaceHairType eFaceHairType) -> RStatus`
+- `GetMaterialComponent(RIAccessory self) -> RO::RIMaterialComponentPtr`
+- `SetPivot(RIAccessory self, RVector3 kPosition, RVector3 kOrientation) -> RStatus`
+- `SetDummy(RIAccessory self, bool bIsDummy) -> RStatus`
+- `IsDummy(RIAccessory self) -> bool`
+- `SetVisible(RIAccessory self, RTime kTime, bool bVisible) -> RStatus`
+- `IsVisible(RIAccessory self, RTime kTime) -> bool`
+
+### RIAudioObject
+
+- `HasData(RIAudioObject self) -> bool`
+- `Save(RIAudioObject self, std::wstring const & strPath) -> RStatus`
+- `Load(RIAudioObject self, std::wstring const & strPath) -> RStatus`
+
+### RIAvatar
+
+**Inherits from:** `RIObject`
+
+- `SetVisible(RIAvatar self, RTime kTime, bool bVisible) -> RStatus`
+- `GetSkeletonComponent(RIAvatar self) -> RO::RISkeletonComponentPtr`
+- `GetVisemeComponent(RIAvatar self) -> RO::RIVisemeComponentPtr`
+- `GetAvatarShapingComponent(RIAvatar self) -> RO::RIAvatarShapingComponentPtr`
+- `GetMorphComponent(RIAvatar self) -> RO::RIMorphComponentPtr`
+- `GetMaterialComponent(RIAvatar self) -> RO::RIMaterialComponentPtr`
+- `GetPhysicsComponent(RIAvatar self) -> RO::RIPhysicsComponentPtr`
+- `GetHikEffectorComponent(RIAvatar self) -> RO::RIHikEffectorComponentPtr`
+- `GetFaceComponent(RIAvatar self) -> RO::RIFaceComponentPtr`
+- `GetFacialProfileComponent(RIAvatar self) -> RO::RIFacialProfileComponentPtr`
+- `GetGeneration(RIAvatar self) -> RO::EAvatarGeneration`
+- `GetAvatarType(RIAvatar self) -> RO::EAvatarType`
+- `GetAccessories(RIAvatar self, bool bAll=True) -> AccessoryVector`
+- `GetClothes(RIAvatar self) -> ClothVector`
+- `GetHairs(RIAvatar self) -> HairVector`
+- `IsVisible(RIAvatar self, RTime kTime) -> bool`
+- `LoadAccessoryWithTransferSkinWeight(RIAvatar self, std::wstring const & kFilePath, std::wstring const & kTemplateType) -> RStatus`
+- `GetAvatarParts(RIAvatar self, RO::EAvatarPartType eType=_None) -> AvatarPartVector`
+- `ConvertTo(RIAvatar self, RO::EConvertCharacterLevel eConvertCharacterLevel, bool bBakeExpression=True, bool bBakeTexture=True, RO::EReduceBonePose eReduceBonePose=Default) -> RStatus`
+- `GetFloorContactValue(RIAvatar self, RO::EFloorContactType eType) -> float`
+- `SetFloorContactValue(RIAvatar self, RO::EFloorContactType eType, float fValue) -> RStatus`
+- `AutoAdjustFootHeight(RIAvatar self) -> RStatus`
+- `SaveHikProfile(RIAvatar self, std::wstring const & strPath) -> RStatus`
+- `DoCharacterization(RIAvatar self, std::wstring const & strPath, bool bApplyTpose, bool bApplyBoneMapping, bool bSendUpdateEvent) -> RStatus`
+- `ReplaceMesh(RIAvatar self, std::wstring const & strMeshName, std::wstring const & strObjFilePath, bool const bSplitObjects=False, bool const bAutoRig=False) -> RStatus`
+- `GetSubdivMeshLevel(RIAvatar self) -> int`
+- `GetMaxSubdivMeshLevel(RIAvatar self) -> int`
+- `SwitchSubdivMeshLevel(RIAvatar self, int nLevel) -> RStatus`
+- `GetRenderSubdivMeshLevel(RIAvatar self) -> int`
+- `SetRenderSubdivMeshLevel(RIAvatar self, int nLevel) -> RStatus`
+- `GetMorpherConstraintsEnabled(RIAvatar self) -> bool`
+- `HasMorpherConstraintsSet(RIAvatar self) -> bool`
+- `UpdateWrinkle(RIAvatar self) -> RStatus`
+- `ChangeConstraintSet(RIAvatar self) -> RStatus`
+- `SetMorpherConstraintsEnabled(RIAvatar self, bool bEnabled) -> RStatus`
+
+### RIAvatarPart
+
+**Inherits from:** `RIObject`
+
+- `GetAvatarPartType(RIAvatarPart self) -> RO::EAvatarPartType`
+- `ConvertToHair(RIAvatarPart self, RO::EHairType eHairType) -> RStatus`
+- `ConvertToFaceHair(RIAvatarPart self, RO::EFaceHairType eFaceHairType) -> RStatus`
+- `GetFaceHairType(RIAvatarPart self) -> RO::EFaceHairType`
+
+### RIAvatarShapingComponent
+
+**Inherits from:** `RIBase`
+
+- `CreateSlider(RIAvatarShapingComponent self, RMorphSliderSetting kMorphSliderInputData, std::wstring & strOutputFilePath) -> RStatus`
+- `GetShapingMorphIDs(RIAvatarShapingComponent self, std::wstring const & strCatergory) -> WStringVector`
+- `GetShapingMorphDisplayNames(RIAvatarShapingComponent self, std::wstring const & strCatergory) -> WStringVector`
+- `SetShapingMorphDisplayName(RIAvatarShapingComponent self, std::wstring const & strId, std::wstring const & strName) -> RStatus`
+- `GetShapingMorphCatergoryNames(RIAvatarShapingComponent self) -> WStringVector`
+- `GetShapingMorphMinMax(RIAvatarShapingComponent self, std::wstring const & strID) -> FloatPair`
+- `GetShapingMorphWeight(RIAvatarShapingComponent self, std::wstring const & strID) -> float`
+- `SetShapingMorphWeight(RIAvatarShapingComponent self, std::wstring const & strID, float fWeight) -> RStatus`
+- `FixEyeElement(RIAvatarShapingComponent self) -> RStatus`
+
+### RIBase
+
+- `IsValid(RIBase self) -> bool`
+
+### RIBodyDevice
+
+**Inherits from:** `RIDeviceBase`
+
+- `Initialize(RIBodyDevice self, VectorOfWStringVector kBoneList) -> RStatus`
+- `SetTPoseData(RIBodyDevice self, RO::RIAvatarPtr spAvatar, FloatVector kData, RPropertyFloatMap kProperty={}) -> RStatus`
+- `ProcessData(RIBodyDevice self, int nDataIndex, FloatVector kData, int64_t const nDeviceTime=-1) -> RStatus`
+- `ProcessAllData(RIBodyDevice self, IntVector kDataIndexes, VectorOfFloatVector kData, Int64Vector kDeviceTimes) -> RStatus`
+- `IsTPoseReady(RIBodyDevice self, RO::RIAvatarPtr spAvatar) -> bool`
+- `GetDeviceSetting(RIBodyDevice self) -> RDeviceSetting`
+- `SetProcessDataIndex(RIBodyDevice self, RO::RIAvatarPtr spAvatar, int nIndex) -> RStatus`
+- `GetProcessDataIndex(RIBodyDevice self, RO::RIAvatarPtr spAvatar) -> int`
+- `SetBodySetting(RIBodyDevice self, RO::RIAvatarPtr spAvatar, RO::RBodySettingPtr spSetting) -> RStatus`
+- `SetBodySetting(RIBodyDevice self, AvatarVector kAvatarList, RO::RBodySettingPtr spSetting) -> RStatus`
+- `GetBodySetting(RIBodyDevice self, RO::RIAvatarPtr spAvatar) -> RO::RBodySettingPtr`
 
 ### RIBuildingGeneratorObject
 
-- `RIBuildingGeneratorObject_GenerateBuilding(kSettings, kInfo)`
-- `RIBuildingGeneratorObject_IsBuildingRoot(spObject)`
-- `RIBuildingGeneratorObject_IsFloor(spObject)`
-- `RIBuildingGeneratorObject_IsUnit(spObject)`
-- `RIBuildingGeneratorObject_IsWall(spObject)`
-- `RIBuildingGeneratorObject_GetBuildingRoot(spObject)`
-- `RIBuildingGeneratorObject_GetFloorByChild(spObject)`
-- `RIBuildingGeneratorObject_GetUnitByChild(spObject)`
+- `GenerateBuilding(RSBuildingSettings kSettings, RStGenPackStyleInfo kInfo) -> RO::RIBuildingObjectPtr`
+- `IsBuildingRoot(RO::RIObjectPtr spObject) -> bool`
+- `IsFloor(RO::RIObjectPtr spObject) -> bool`
+- `IsUnit(RO::RIObjectPtr spObject) -> bool`
+- `IsWall(RO::RIObjectPtr spObject) -> bool`
+- `GetBuildingRoot(RO::RIObjectPtr spObject) -> RO::RIBuildingObjectPtr`
+- `GetFloorByChild(RO::RIObjectPtr spObject) -> RO::RIFloorObjectPtr`
+- `GetUnitByChild(RO::RIObjectPtr spObject) -> RO::RIUnitObjectPtr`
+
+### RIBuildingObject
+
+**Inherits from:** `RIObject`
+
+- `AddBlankFloor(RIBuildingObject self, int const nNewFloor, int const nTemplate, int const nColumn, int const nRow, float const fWidth, float const fLength, std::wstring const & strDummyPropFileName) -> RO::RIFloorObjectPtr`
+- `DeleteFloor(RIBuildingObject self, RO::RIFloorObjectPtr spFloorObject) -> RStatus`
+- `GetFloors(RIBuildingObject self, FloorObjectVector kFloors) -> RStatus`
+- `GetFloorNumber(RIBuildingObject self, RO::RIFloorObjectPtr spFloor) -> int`
+- `DuplicateFloor(RIBuildingObject self, int const nNewFloor, RO::RIFloorObjectPtr spFloor) -> RStatus`
+- `UpdateFloorsPosition(RIBuildingObject self) -> RStatus`
+- `MoveFloor(RIBuildingObject self, RO::RIFloorObjectPtr spTargetPosition, RO::RIFloorObjectPtr spFloor, bool bMoveUpward) -> RStatus`
+- `GetAllWalls(RIBuildingObject self, WallObjectVector kWalls) -> RStatus`
+- `Optimize(RIBuildingObject self) -> RStatus`
+
+### RICamera
+
+**Inherits from:** `RIObject`
+
+- `SetFocalLength(RICamera self, RTime kTime, float fFocalLength) -> RStatus`
+- `GetFocalLength(RICamera self, RTime kTime) -> float`
+- `GetFocalLengthKeyCount(RICamera self) -> int`
+- `RemoveFocalLengthKey(RICamera self, RTime kTime) -> RStatus`
+- `RemoveFocalLengthKeys(RICamera self) -> RStatus`
+- `AddDofKey(RICamera self, RKey kKey, RCameraDofData kDofData) -> RStatus`
+- `RemoveDofKey(RICamera self, RKey kKey) -> RStatus`
+- `RemoveDofKeys(RICamera self) -> RStatus`
+- `GetDofKeyCount(RICamera self) -> int`
+- `GetDOFData(RICamera self) -> RCameraDofData`
+- `GetAngleOfView(RICamera self, RTime kTime) -> float`
+- `GetAperture(RICamera self, float & fWidth, float & fHeight) -> RStatus`
+- `GetFitRenderRegionType(RICamera self) -> RO::ECameraFitResolution`
+- `GetFitFovType(RICamera self) -> RO::ECameraFitResolution`
+- `GetNearClippingPlane(RICamera self) -> int`
+- `SetNearClippingPlane(RICamera self, int nNearPlane) -> RStatus`
+- `GetFarClippingPlane(RICamera self) -> int`
+- `SetFarClippingPlane(RICamera self, int nFarPlane) -> RStatus`
+- `GetNearClippingPlaneF(RICamera self) -> float`
+- `SetNearClippingPlaneF(RICamera self, float fNearPlane) -> RStatus`
+- `GetFarClippingPlaneF(RICamera self) -> float`
+- `SetFarClippingPlaneF(RICamera self, float fFarPlane) -> RStatus`
+- `IsLookAtMode(RICamera self, RTime kTime) -> bool`
+- `SetCameraLocation(RICamera self, RO::ECameraLocationType eType)`
+
+### RIClip
+
+**Inherits from:** `RIBase`
+
+- `GetControl(RIClip self, std::wstring const & strKey, RO::RIBasePtr spNode) -> RO::RControlPtr`
+- `GetDataBlock(RIClip self, std::wstring const & strKey, RO::RIBasePtr spBase) -> RO::RDataBlockPtr`
+- `GetEffectorDataBlock(RIClip self, std::wstring const & strKey, RO::RIBasePtr spBase, RO::RDataBlockPtr & spDataBlock, RO::RDataBlockPtr & spActiveDataBlock) -> RStatus`
+- `GetType(RIClip self) -> uint32_t`
+- `GetLength(RIClip self) -> RTime`
+- `GetStartOffset(RIClip self) -> RTime`
+- `SetLength(RIClip self, RTime kLength) -> RStatus`
+- `GetLastKeyTime(RIClip self) -> RTime`
+- `SceneTimeToClipTime(RIClip self, RTime kSceneTick) -> RTime`
+- `ClipTimeToSceneTime(RIClip self, RTime kClipTick) -> RTime`
+- `GetClipLength(RIClip self) -> RTime`
+- `GetTransitionRange(RIClip self) -> RTime`
+- `SetTransitionRange(RIClip self, RTime kLength) -> RStatus`
+- `GetSpeed(RIClip self) -> float`
+- `SetSpeed(RIClip self, float fSpeed) -> RStatus`
+- `GetLoopCount(RIClip self) -> float`
+- `GetTransitionData(RIClip self) -> TimeVector`
+- `SetTransitionData(RIClip self, TimeVector kData) -> RStatus`
+- `SetTransitionType(RIClip self, bool bFadeIn, RO::ETransitionType eTransitionType, float fTransitionStrength) -> RStatus`
+- `GetTransitionType(RIClip self, bool bFadeIn) -> RO::ETransitionType`
+- `GetTransitionStrength(RIClip self, bool bFadeIn) -> float`
+- `GetWeightLayerControlName(RIClip self) -> std::wstring`
+- `SetWeightLayerControlName(RIClip self, std::wstring const & strName) -> RStatus`
+- `GetRtsLayerControlName(RIClip self) -> std::wstring`
+- `SetRtsLayerControlName(RIClip self, std::wstring const & strName) -> RStatus`
+- `GetRtsClipControlName(RIClip self) -> std::wstring`
+- `SetRtsClipControlName(RIClip self, std::wstring const & strName) -> RStatus`
+- `AddTimecodeData(RIClip self, float const fFps, double const fMilliseconds) -> RStatus`
+
+### RICloth
+
+**Inherits from:** `RIObject`
+
+- `IsClothConformingEnable(RICloth self) -> bool`
+- `SetClothConformingEnable(RICloth self, bool bEnable) -> RStatus`
+- `GetClothConformValue(RICloth self, std::wstring const & strConform) -> float`
+- `SetClothConformValue(RICloth self, std::wstring const & strConform, float fValue) -> RStatus`
+- `CalculateCollision(RICloth self) -> RStatus`
+- `TransferSkinWeight(RICloth self, std::wstring const & strTemplateType) -> RStatus`
+- `GetClotheType(RICloth self) -> RO::EClotheType`
+- `SetClotheType(RICloth self, RO::EClotheType eClotheType) -> RStatus`
+- `ConvertToAccessory(RICloth self, bool bCurrentShape) -> RStatus`
+- `GetMaterialComponent(RICloth self) -> RO::RIMaterialComponentPtr`
+- `GetPhysicsComponent(RICloth self) -> RO::RIPhysicsComponentPtr`
+
+### RIDeviceBase
+
+- `GetDeviceID(RIDeviceBase self) -> std::wstring`
+- `GetDeviceType(RIDeviceBase self) -> RO::EDeviceType`
+- `AddAvatar(RIDeviceBase self, RO::RIAvatarPtr spAvatar) -> RStatus`
+- `AddAvatars(RIDeviceBase self, AvatarVector kAvatarList) -> RStatus`
+- `RemoveAvatar(RIDeviceBase self, RO::RIAvatarPtr spAvatar) -> RStatus`
+- `GetAvatarAt(RIDeviceBase self, int nIndex) -> RO::RIAvatarPtr`
+- `GetAvatarCount(RIDeviceBase self) -> int`
+- `SetEnable(RIDeviceBase self, RO::RIAvatarPtr spAvatar, bool bEnable)`
+- `IsEnable(RIDeviceBase self, RO::RIAvatarPtr spAvatar) -> bool`
+
+### RIDialog
+
+- `GetWindow(RIDialog self) -> QWidget *`
+- `GetTitle(RIDialog self) -> QWidget *`
+- `GetWindowTitle(RIDialog self) -> std::wstring`
+- `SetWindowTitle(RIDialog self, std::wstring const & strTitleName)`
+- `SetParent(RIDialog self, QWidget * pWidget)`
+- `Exec(RIDialog self) -> int`
+- `Show(RIDialog self)`
+- `Hide(RIDialog self)`
+- `Close(RIDialog self)`
+- `IsVisible(RIDialog self) -> bool`
+- `SetModal(RIDialog self, bool bModal)`
+- `IsModal(RIDialog self) -> bool`
+- `GetDialogType(RIDialog self) -> RO::EDialogType`
+- `RegisterNativeEventCallback(RIDialog self, RWinMessageCallback pfCallback) -> size_t`
+- `UnregisterNativeEventCallback(RIDialog self, size_t uId) -> RStatus`
+- `UnregisterNativeEventCallbacks(RIDialog self, SizetVector kIds) -> RStatus`
+- `RegisterEventCallback(RIDialog self, RDialogCallback pfCallback) -> size_t`
+- `UnregisterEventCallback(RIDialog self, size_t uId) -> RStatus`
+- `UnregisterEventCallbacks(RIDialog self, SizetVector kIds) -> RStatus`
+- `UnregisterAllEventCallbacks(RIDialog self) -> RStatus`
+
+### RIDirectionalLight
+
+**Inherits from:** `RILight`
+
+- `SetCastShadow(RIDirectionalLight self, bool bEnable) -> RStatus`
+- `IsCastShadow(RIDirectionalLight self) -> bool`
+- `SetDarkenShadowStrength(RIDirectionalLight self, RTime kTime, float fStrength) -> RStatus`
+- `GetDarkenShadowStrength(RIDirectionalLight self) -> float`
+- `SetTransmission(RIDirectionalLight self, bool b) -> RStatus`
+- `GetTransmission(RIDirectionalLight self) -> bool`
+
+### RIDockWidget
+
+- `GetWindow(RIDockWidget self) -> QWidget *`
+- `GetTitle(RIDockWidget self) -> QWidget *`
+- `GetWindowTitle(RIDockWidget self) -> std::wstring`
+- `SetWindowTitle(RIDockWidget self, std::wstring const & strTitleName)`
+- `SetWidget(RIDockWidget self, QWidget * pWidget)`
+- `SetParent(RIDockWidget self, QWidget * pWidget)`
+- `Show(RIDockWidget self)`
+- `Hide(RIDockWidget self)`
+- `Close(RIDockWidget self)`
+- `IsVisible(RIDockWidget self) -> bool`
+- `SetAllowedAreas(RIDockWidget self, RO::EDockWidgetAreas eArea)`
+- `SetFloating(RIDockWidget self, bool bFloating)`
+- `SetFeatures(RIDockWidget self, RO::EDockWidgetFeatures eFeatures)`
+- `Features(RIDockWidget self) -> RO::EDockWidgetFeatures`
+- `IsAreaAllowed(RIDockWidget self, RO::EDockWidgetAreas eArea) -> bool`
+- `IsFloating(RIDockWidget self) -> bool`
+- `RegisterNativeEventCallback(RIDockWidget self, RWinMessageCallback pfCallback) -> size_t`
+- `UnregisterNativeEventCallback(RIDockWidget self, size_t uId) -> RStatus`
+- `UnregisterNativeEventCallbacks(RIDockWidget self, SizetVector kIds) -> RStatus`
+- `RegisterEventCallback(RIDockWidget self, RDialogCallback pfCallback) -> size_t`
+- `UnregisterEventCallback(RIDockWidget self, size_t uId) -> RStatus`
+- `UnregisterEventCallbacks(RIDockWidget self, SizetVector kIds) -> RStatus`
+- `UnregisterAllEventCallbacks(RIDockWidget self) -> RStatus`
+
+### RIEffector
+
+**Inherits from:** `RIBase`
+
+- `GetEffector(RIEffector self) -> RO::EHikEffector`
+
+### RIElementObject
+
+**Inherits from:** `RIObject`
+
+
+### RIEventListener
+
+- `Init(RIEventListener self)`
+- `RegisterCallback(RIEventListener self, REventCallback pCallback) -> size_t`
+- `UnregisterCallback(RIEventListener self, size_t uId) -> RStatus`
+- `UnregisterCallbacks(RIEventListener self, SizetVector kIds) -> RStatus`
+
+### RIFaceComponent
+
+**Inherits from:** `RIBase`
+
+- `AddClip(RIFaceComponent self, RTime kTime, std::wstring const & strName, RTime kLength) -> RStatus`
+- `GetStrength(RIFaceComponent self) -> float`
+- `GetExpressionNames(RIFaceComponent self, std::wstring const & strType, bool bMocapOrder=False) -> WStringVector`
+- `GetExpressionStatuses(RIFaceComponent self, std::wstring const & strType) -> BoolVector`
+- `GetAutoBlinkNames(RIFaceComponent self) -> WStringVector`
+- `GetAutoBlinkName(RIFaceComponent self) -> std::wstring`
+- `SetAutoBlinkName(RIFaceComponent self, std::wstring const & strName) -> RStatus`
+- `GetClipCount(RIFaceComponent self) -> uint32_t`
+- `GetClip(RIFaceComponent self, uint32_t uIndex) -> RO::RIClipPtr`
+- `GetClipByTime(RIFaceComponent self, RTime kHitTime) -> RO::RIClipPtr`
+- `BreakClip(RIFaceComponent self, RTime kTime) -> RStatus`
+- `DeleteClip(RIFaceComponent self, RO::RIClipPtr spClip) -> RStatus`
+- `GetExpressionGroups(RIFaceComponent self) -> WStringVector`
+- `GetExpressionWeights(RIFaceComponent self, RTime kTime, WStringVector kExpression=std::vector< std::wstring >(), bool bLayer=False) -> FloatVector`
+- `GetExpressionSetUid(RIFaceComponent self) -> std::wstring`
+- `BeginKeyEditing(RIFaceComponent self)`
+- `AddExpressionKeys(RIFaceComponent self, RTime kTime, WStringVector kExpressions, FloatVector kStrengths, RTime kInterval) -> RStatus`
+- `EndKeyEditing(RIFaceComponent self)`
+- `GetExpressiveness(RIFaceComponent self, RTime kTime) -> float`
+- `AddExpressivenessKey(RIFaceComponent self, RTime kTime, float fWeight) -> RStatus`
+- `ImportExpression(RIFaceComponent self, ImportExpressionOptions kSettings) -> RStatus`
+- `GetExpressionBoneRotation(RIFaceComponent self, std::wstring const & strBoneName, std::wstring const & strExpression) -> RMatrix3`
+- `SetCurrentPoseMode(RIFaceComponent self) -> RStatus`
+- `IsCurrentPoseMode(RIFaceComponent self) -> bool`
+
+### RIFacialDevice
+
+**Inherits from:** `RIDeviceBase`
+
+- `Initialize(RIFacialDevice self) -> RStatus`
+- `SetFacialSetting(RIFacialDevice self, RO::RIAvatarPtr spAvatar, RO::RFacialSettingPtr spSetting) -> RStatus`
+- `SetFacialSetting(RIFacialDevice self, AvatarVector kAvatarList, RO::RFacialSettingPtr spSetting) -> RStatus`
+- `GetFacialSetting(RIFacialDevice self, RO::RIAvatarPtr spAvatar) -> RO::RFacialSettingPtr`
+- `ProcessData(RIFacialDevice self, RO::RIAvatarPtr spAvatar, FloatVector kHead, FloatVector kLeftEye, FloatVector kRightEye, FloatVector kMorph, FloatVector kCustom, FloatVector kBone, int64_t const nDeviceTime=-1, bool const bForceAddKey=False) -> RStatus`
+- `ProcessData(RIFacialDevice self, RO::RIAvatarPtr spAvatar, FloatVector kFacial, int64_t const nDeviceTime=-1, bool const bForceAddKey=False) -> RStatus`
+
+### RIFacialProfileComponent
+
+**Inherits from:** `RIBase`
+
+- `SaveProfile(RIFacialProfileComponent self, std::wstring const & strPath) -> RStatus`
+- `LoadProfile(RIFacialProfileComponent self, std::wstring const & strPath) -> RStatus`
+- `ImportMorphs(RIFacialProfileComponent self, std::wstring const & strPath, bool bReplaceSameSlider, WStringVector kImportExpressions, std::wstring const & strImportCategory) -> RStatus`
+- `GetProfileType(RIFacialProfileComponent self) -> RO::EFacialProfile`
+- `GetExpressionCategoryNames(RIFacialProfileComponent self) -> WStringVector`
+- `GetExpressionSliderNames(RIFacialProfileComponent self, std::wstring const & strCategoryName) -> WStringVector`
+
+### RIFloorObject
+
+**Inherits from:** `RIObject`
+
+- `BuildFloor(RIFloorObject self, RStGenPackFloorInfo kFloorInfo, std::wstring const & strCustomName=L"", std::wstring const & strModulePack=L"", std::wstring const & strStyle=L"", RO::REFloorType eType=FirstFloor) -> RStatus`
+- `ReBuildFloorWithKeepFacadeSetting(RIFloorObject self, RStGenPackFloorInfo kFloorInfo, std::wstring const & strModulePack=L"", std::wstring const & strStyle=L"", RO::REFloorType eType=FirstFloor) -> RStatus`
+- `ClearFloor(RIFloorObject self) -> RStatus`
+- `GetUnits(RIFloorObject self) -> UnitObjectVector`
+
+### RIHair
+
+**Inherits from:** `RIObject`
+
+- `GetPhysicsComponent(RIHair self) -> RO::RIPhysicsComponentPtr`
+- `ConvertToHair(RIHair self, RO::EHairType eHairType) -> RStatus`
+- `ConvertToFaceHair(RIHair self, RO::EFaceHairType eFaceHairType) -> RStatus`
+- `GetHairType(RIHair self) -> RO::EHairType`
+- `GetMaterialComponent(RIHair self) -> RO::RIMaterialComponentPtr`
+
+### RIHandDevice
+
+**Inherits from:** `RIDeviceBase`
+
+- `Initialize(RIHandDevice self, VectorOfWStringVector kBoneList) -> RStatus`
+- `SetTPoseData(RIHandDevice self, RO::RIAvatarPtr spAvatar, FloatVector kData) -> RStatus`
+- `ProcessData(RIHandDevice self, int nDataIndex, FloatVector kData, int64_t const nDeviceTime=-1) -> RStatus`
+- `IsTPoseReady(RIHandDevice self, RO::RIAvatarPtr spAvatar) -> bool`
+- `GetDeviceSetting(RIHandDevice self) -> RDeviceSetting`
+- `SetProcessDataIndex(RIHandDevice self, RO::RIAvatarPtr spAvatar, int nIndex) -> RStatus`
+- `GetProcessDataIndex(RIHandDevice self, RO::RIAvatarPtr spAvatar) -> int`
+- `SetHandSetting(RIHandDevice self, RO::RIAvatarPtr spAvatar, RO::RHandSettingPtr spSetting) -> RStatus`
+- `SetHandSetting(RIHandDevice self, AvatarVector kAvatarList, RO::RHandSettingPtr spSetting) -> RStatus`
+- `GetHandSetting(RIHandDevice self, RO::RIAvatarPtr spAvatar) -> RO::RHandSettingPtr`
+
+### RIHikEffectorComponent
+
+**Inherits from:** `RIBase`
+
+- `SetActive(RIHikEffectorComponent self, RO::EHikEffector eEffector, RO::EHikEffectorType eType, bool bActive) -> RStatus`
+- `GetActive(RIHikEffectorComponent self, RO::EHikEffector eEffector, RO::EHikEffectorType eType) -> bool`
+- `SetLock(RIHikEffectorComponent self, RO::EHikEffector eEffector, RO::EHikEffectorType eType, bool bLock) -> RStatus`
+- `GetLock(RIHikEffectorComponent self, RO::EHikEffector eEffector, RO::EHikEffectorType eType) -> bool`
+- `SetPosition(RIHikEffectorComponent self, RO::EHikEffector eEffector, RVector3 vPosition) -> RStatus`
+- `SetPosition(RIHikEffectorComponent self, RHIKEffectorVector kEffectorIds, Matrix4fVector kEffectorWorld, BoolVector kRotateActive, BoolVector kTranslateActive) -> RStatus`
+- `Solve(RIHikEffectorComponent self, RO::EHikEffector eEffector, RMatrix4 kMatrix) -> WStr2Matrix4fMap`
+- `SetBodyWeight(RIHikEffectorComponent self, float const fWeight) -> RStatus`
+- `AddReachKey(RIHikEffectorComponent self, RO::EHikEffector eEffector, RReachKey kKey) -> RStatus`
+- `RemoveReachKey(RIHikEffectorComponent self, RO::EHikEffector eEffector, RReachKey kKey) -> RStatus`
+- `GetReachKeys(RIHikEffectorComponent self, RO::EHikEffector eEffector) -> RReachKeyVector`
+- `GetBone(RIHikEffectorComponent self, RO::EHikEffector strEffectorText) -> RO::RINodePtr`
+- `SetReachOffsetKey(RIHikEffectorComponent self, RO::EHikEffector strEffectorText, RTime kTime, RMatrix4 mOffset) -> RStatus`
+
+### RIImage
+
+- `LoadFile(RIImage self, std::wstring const & strPath) -> RStatus`
+- `SaveFile(RIImage self, std::wstring const & strPath) -> RStatus`
+- `GetWidth(RIImage self) -> int`
+- `GetHeight(RIImage self) -> int`
+- `GetQImage(RIImage self) -> QImage *`
+- `SetImageData(RIImage self, QImage * pQImage) -> RStatus`
+- `CopyImage(RIImage self) -> std::shared_ptr< RO::RIImage >`
+- `IsSameImage(RIImage self, std::shared_ptr< RO::RIImage > const & spImage, float fTolerance=0.001) -> RStatus`
+
+### RILight
+
+**Inherits from:** `RIObject`
+
+- `SetActive(RILight self, RTime kTime, bool bActive) -> RStatus`
+- `GetActive(RILight self) -> bool`
+- `SetMultiplier(RILight self, RTime kTime, float fMultiplier) -> RStatus`
+- `GetMultiplier(RILight self) -> float`
+- `SetColor(RILight self, RTime kTime, RRgb kColor) -> RStatus`
+- `GetColor(RILight self) -> RRgb`
+
+### RILightAvatar
+
+**Inherits from:** `RIObject`
+
+- `GetGeneration(RILightAvatar self) -> RO::EAvatarGeneration`
+- `GetAvatarType(RILightAvatar self) -> RO::EAvatarType`
+- `GetSkeletonComponent(RILightAvatar self) -> RO::RISkeletonComponentPtr`
+- `GetVisemeComponent(RILightAvatar self) -> RO::RIVisemeComponentPtr`
+- `GetMorphComponent(RILightAvatar self) -> RO::RIMorphComponentPtr`
+- `GetFaceComponent(RILightAvatar self) -> RO::RIFaceComponentPtr`
+- `IsVisible(RILightAvatar self, RTime kTime) -> bool`
+
+### RILookAtComponent
+
+**Inherits from:** `RIBase`
+
+- `AddLookAtKey(RILookAtComponent self, RTime kTime, RO::RIObjectPtr spTargetObject) -> RStatus`
+- `AddLookAtKey(RILookAtComponent self, RTime kTime, RTime kTransition, RO::RINodePtr spTargetObject, float fHeadWeight, float fBodyWeight) -> RStatus`
+- `GetLookAtOffsetDataBlock(RILookAtComponent self) -> RO::RDataBlockPtr`
+- `GetLookAtWeightDataBlock(RILookAtComponent self, bool const bIsBody) -> RO::RDataBlockPtr`
+
+### RIMDProp
+
+**Inherits from:** `RIProp`
+
+- `IsInitialOccupy(RIMDProp self) -> bool`
+- `IsStartOnEntryDummy(RIMDProp self) -> bool`
+- `IsActiveCrowdInteraction(RIMDProp self) -> bool`
+- `IsEnableFollowMode(RIMDProp self) -> bool`
+- `IsChangedFollowObject(RIMDProp self) -> bool`
+- `GetCrowdExitType(RIMDProp self) -> RO::EMDpropCrowdExitType`
+- `GetInteractTimes(RIMDProp self) -> uint32_t`
+- `GetDistance(RIMDProp self) -> int`
+- `GetTagRatioMap(RIMDProp self) -> WStr2FloatMap`
+- `GetTagRatio(RIMDProp self, std::wstring const & strTagName) -> float`
+
+### RIMaterialComponent
+
+**Inherits from:** `RIBase`
+
+- `AddAmbientKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RRgb kColor) -> RStatus`
+- `AddDiffuseKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RRgb kColor) -> RStatus`
+- `AddGlossinessKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, float fWeight) -> RStatus`
+- `AddSpecularKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RRgb kColor) -> RStatus`
+- `AddSpecularKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, float fWeight) -> RStatus`
+- `AddSelfIlluminationKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, float fWeight) -> RStatus`
+- `AddOpacityKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, float fWeight) -> RStatus`
+- `AddTextureWeightKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, float fWeight) -> RStatus`
+- `AddUvDataKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, RVector2 kUvOffset, RVector2 kUvTile, float fUvRotate) -> RStatus`
+- `RemoveUvDataKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel) -> RStatus`
+- `LoadVideoToTexture(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, std::wstring const & strVideoPath) -> RStatus`
+- `LoadImageToTexture(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, std::wstring const & strImagePath) -> RStatus`
+- `AddVideoVolumeKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, float fVol, bool bMute) -> RStatus`
+- `GetMaterialNames(RIMaterialComponent self, std::wstring const & strMeshName) -> WStringVector`
+- `GetAmbientColor(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> RRgb`
+- `GetDiffuseColor(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> RRgb`
+- `GetSpecularColor(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> RRgb`
+- `GetGlossinessWeight(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> float`
+- `GetSpecularWeight(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> float`
+- `GetSelfIlluminationWeight(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> float`
+- `GetOpacity(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> float`
+- `GetTextureWeights(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> FloatVector`
+- `GetUvData(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, RVector2 kUvOffset, RVector2 kUvTile, float & fUvRotate) -> RStatus`
+- `GetVideoVolume(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel) -> float`
+- `GetAttributeValue(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strAttributeName) -> float`
+- `SetAttributeValue(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strAttributeName, float fValue) -> RStatus`
+- `IsTwoSidedMaterial(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> bool`
+- `SetTwoSidedMaterial(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, bool bEnable) -> RStatus`
+- `LoadMaterial(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strFilePath) -> RStatus`
+- `RemoveMaterialTexture(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel) -> RStatus`
+- `GetShaderNames(RIMaterialComponent self) -> WStringVector`
+- `GetShader(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> std::wstring`
+- `SetShader(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strShader) -> RStatus`
+- `GetShaderParameterNames(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> WStringVector`
+- `GetShaderParameter(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strParameter) -> FloatVector`
+- `SetShaderParameter(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strParameter, FloatVector kValue) -> RStatus`
+- `GetShaderTextureNames(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> WStringVector`
+- `LoadShaderTexture(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strName, std::wstring const & strTexturePath) -> RStatus`
+- `GetRefraction(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> float`
+- `IsRefractionEnable(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> bool`
+- `SetRefractionEnable(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, bool bEnable) -> RStatus`
+- `AddRefractionKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, float fWeight) -> RStatus`
+- `GetReflection(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> float`
+- `IsReflectionEnable(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> bool`
+- `SetReflectionEnable(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, bool bEnable) -> RStatus`
+- `AddReflectionKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, float fWeight) -> RStatus`
+- `MakeUnique(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> RStatus`
+- `SetWrinkleRule(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strRelateName, uint32_t uMaskValueIndex, uint32_t uMaskTextureIndex, std::wstring const & strMaskChannel, float fWeight) -> RStatus`
+- `SetWrinkleActionToRule(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strActionName, std::wstring const & strRuleName, std::wstring const & strRuleRangeMin, std::wstring const & strRuleRangeMax) -> RStatus`
+- `SetWrinkleTextureFilePath(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strDiffusePath, std::wstring const & strNormalPath, std::wstring const & strRoughnessPath, uint32_t uWrinkleImageIndex) -> RStatus`
+- `SetWrinkleMaskFilePath(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strMaskPath, uint32_t uMaskIndex) -> RStatus`
+- `AddWrinkleWeightKey(RIMaterialComponent self, RKey kKey, std::wstring const & strMeshName, std::wstring const & strMaterialName, uint32_t uRuleIndex, int nWeight) -> RStatus`
+- `SetImageColor(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel, float fSoftness, RVector4 kHsbc, RVector3 kCmy) -> RStatus`
+- `GetImageColor(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel eChannel) -> IntVector`
+- `SetMaterialName(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strOrgMatName, std::wstring const & strNewMatName) -> RStatus`
+- `MergeMaterialUV(RIMaterialComponent self, WStringVector kMeshNames, int nTextureSize=256, RO::EExportTextureFormat eFormat=Bmp, int nGutterSize=2) -> RStatus`
+- `SetWrinkleFlattenTexture(RIMaterialComponent self, RO::EWrinkleTextureChannel const eChannel, std::wstring const & strImagePath) -> RStatus`
+- `SetWrinkleDetailParameters(RIMaterialComponent self, RO::EWrinkleFacePart eWrinkleFacePart, RO::EWrinkleLayerType eWrinkleLayerType, float fStrength) -> RStatus`
+- `SetWrinkleDetailStrength(RIMaterialComponent self, RO::EWrinkleFacePart eWrinkleFacePart, float fStrength) -> RStatus`
+- `GetImage(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel const eChannel) -> RO::RIImagePtr`
+- `HasImage(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel const eChannel) -> bool`
+- `SetImage(RIMaterialComponent self, RO::RIImagePtr const & spImage, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::EMaterialTextureChannel const eChannel) -> RStatus`
+- `SetMaterialSettings(RIMaterialComponent self, MaterialSettings kOptions, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> RStatus`
+- `CopyMaterial(RIMaterialComponent self, std::wstring const & strSrcMeshName, std::wstring const & strSrcMaterialName, std::wstring const & strDstMeshName, std::wstring const & strDstMaterialName) -> RStatus`
+- `GetResourceMapImage(RIMaterialComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strResourceMapName) -> RO::RIImagePtr`
+
+### RIMesh
+
+**Inherits from:** `RIBase`
+
+- `GetName(RIMesh self) -> std::wstring`
+- `GetID(RIMesh self) -> uint64_t`
+- `GetVerticesCount(RIMesh self) -> int`
+- `GetFacesCount(RIMesh self) -> int`
+- `GetVertex(RIMesh self, int nIndex, bool bWorld=False) -> RVector3`
+- `GetVertices(RIMesh self, bool bWorld=False) -> Vector3fVector`
+- `SetWorldVertices(RIMesh self, Vector3fVector kWorldVertices) -> RStatus`
+- `GetFace(RIMesh self, int nFaceIdx) -> IntVector`
+- `DeleteFaces(RIMesh self, IntVector kFaceIndexs) -> RStatus`
+- `ConvertToAccessory(RIMesh self, bool bCurrentShape=True) -> RStatus`
+- `ReplaceMesh(RIMesh self, std::wstring const & strPath, RO::EReplaceMeshOption eOption, bool bReplaceUv, bool bSplitObjects=False) -> RStatus`
+- `GetStdMaterials(RIMesh self) -> StdMaterialVector`
+
+### RIMocapManager
+
+- `AddBodyDevice(RIMocapManager self, std::wstring const & strDeviceID) -> RO::RIBodyDevicePtr`
+- `AddHandDevice(RIMocapManager self, std::wstring const & strDeviceID) -> RO::RIHandDevicePtr`
+- `AddFacialDevice(RIMocapManager self, std::wstring const & strDeviceID) -> RO::RIFacialDevicePtr`
+- `GetDevice(RIMocapManager self, std::wstring const & strDeviceID) -> RO::RIDeviceBasePtr`
+- `IsDeviceExist(RIMocapManager self, std::wstring const & strDeviceID) -> bool`
+- `RemoveDevice(RIMocapManager self, std::wstring const & strDeviceID) -> RStatus`
+- `RemoveAllDevices(RIMocapManager self) -> RStatus`
+- `Start(RIMocapManager self, RO::EDeviceType eType, RO::EMocapState eState) -> RStatus`
+- `Start(RIMocapManager self, RO::EMocapState eState) -> RStatus`
+- `Stop(RIMocapManager self) -> RStatus`
+- `IsRunning(RIMocapManager self) -> bool`
+- `MocapState(RIMocapManager self) -> RO::EMocapState`
+
+### RIMorphComponent
+
+**Inherits from:** `RIBase`
+
+- `AddKey(RIMorphComponent self, std::wstring const & strMeshName, std::wstring const & strMorphName, RTime kTime, float fWeight, bool bSendEvent, bool bPauseAP) -> RStatus`
+- `RemoveAllKeys(RIMorphComponent self, std::wstring const & strMeshName, std::wstring const & strMorphName) -> RStatus`
+- `GetWeight(RIMorphComponent self, std::wstring const & strMeshName, std::wstring const & strMorphName, RTime kTime, float & fWeight) -> RStatus`
+- `GetMorphNames(RIMorphComponent self, std::wstring const & strMeshName) -> WStringVector`
+
+### RIMotionDirectorManager
+
+- `Start(RIMotionDirectorManager self) -> RStatus`
+- `Stop(RIMotionDirectorManager self) -> RStatus`
+- `IsRunning(RIMotionDirectorManager self) -> bool`
+- `IsReady(RIMotionDirectorManager self) -> bool`
+- `BeginCommand(RIMotionDirectorManager self, RTime kTime, ObjectVector kObjects, RBeginCommandOption kOption) -> RStatus`
+- `EndCommand(RIMotionDirectorManager self) -> RStatus`
+- `EndCommand(RIMotionDirectorManager self, RTime kTime) -> RStatus`
+- `EmbedCommand(RIMotionDirectorManager self, RTime kTime, ObjectVector kAvatars) -> RStatus`
+- `RemoveTriggeredByAnimation(RIMotionDirectorManager self, RTime kTime, ObjectVector kMDProps, ObjectVector kAvatarsToRecord, ObjectVector kMotionPlanningObjects) -> RStatus`
+
+### RINode
+
+**Inherits from:** `RIBase`
+
+- `GetName(RINode self) -> std::wstring`
+- `GetID(RINode self) -> uint64_t`
+- `GetParent(RINode self) -> std::shared_ptr< RO::RINode >`
+- `GetChildren(RINode self, bool bWithSameCustomID=False) -> NodeVector`
+- `LocalTransform(RINode self) -> RTransform`
+- `BasisTransform(RINode self) -> RTransform`
+- `WorldTransform(RINode self) -> RTransform`
+- `WorldToLocal(RINode self, RMatrix4 kWorldMatrix) -> RMatrix4`
+- `LocalToWorld(RINode self, RMatrix4 kLocalMatrix) -> RMatrix4`
+- `SetDataBlock(RINode self, std::wstring const & strId, std::shared_ptr< RO::RDataBlock > spDataBlock) -> RStatus`
+- `GetDataBlock(RINode self, std::wstring const & strId) -> std::shared_ptr< RO::RDataBlock >`
+- `RemoveDataBlock(RINode self, std::wstring const & strId) -> RStatus`
+- `Update(RINode self)`
+- `Update(RINode self, RTime kTime)`
+
+### RINodeTransformPair
+
+
+### RINodeTransformPairs
+
+- `iterator(RINodeTransformPairs self) -> SwigPyIterator`
+- `pop(RINodeTransformPairs self) -> RINodeTransformPair`
+- `append(RINodeTransformPairs self, RINodeTransformPair x)`
+- `empty(RINodeTransformPairs self) -> bool`
+- `size(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type`
+- `swap(RINodeTransformPairs self, RINodeTransformPairs v)`
+- `begin(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator`
+- `end(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator`
+- `rbegin(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::reverse_iterator`
+- `rend(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::reverse_iterator`
+- `clear(RINodeTransformPairs self)`
+- `get_allocator(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::allocator_type`
+- `pop_back(RINodeTransformPairs self)`
+- `erase(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator pos) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator`
+- `erase(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator first, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator last) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator`
+- `push_back(RINodeTransformPairs self, RINodeTransformPair x)`
+- `front(RINodeTransformPairs self) -> RINodeTransformPair`
+- `back(RINodeTransformPairs self) -> RINodeTransformPair`
+- `assign(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type n, RINodeTransformPair x)`
+- `resize(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type new_size)`
+- `resize(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type new_size, RINodeTransformPair x)`
+- `insert(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator pos, RINodeTransformPair x) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator`
+- `insert(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::iterator pos, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type n, RINodeTransformPair x)`
+- `reserve(RINodeTransformPairs self, std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type n)`
+- `capacity(RINodeTransformPairs self) -> std::vector< std::pair< std::shared_ptr< RO::RINode >,RL::CTransform< float > > >::size_type`
+
+### RIObject
+
+**Inherits from:** `RIBase`
+
+- `GetName(RIObject self) -> std::wstring`
+- `GetID(RIObject self) -> uint64_t`
+- `GetControl(RIObject self, std::wstring const & strKey) -> RO::RControlPtr`
+- `GetType(RIObject self) -> RO::EObjectType`
+- `GetMeshNames(RIObject self, bool bAll=True) -> WStringVector`
+- `LocalTransform(RIObject self) -> RTransform`
+- `WorldTransform(RIObject self) -> RTransform`
+- `SetParent(RIObject self, std::shared_ptr< RO::RIObject > spParent) -> RStatus`
+- `SetParent(RIObject self, std::shared_ptr< RO::RINode > spParent) -> RStatus`
+- `LinkTo(RIObject self, std::shared_ptr< RO::RIObject > spTargetObject, RO::ELinkObjectAlignType eAlignType, RTime kTime) -> RStatus`
+- `LinkTo(RIObject self, std::shared_ptr< RO::RINode > spTargetNode, RO::ELinkObjectAlignType eAlignType, RTime kTime) -> RStatus`
+- `UnLink(RIObject self, RTime kTime) -> RStatus`
+- `GetLinkedObject(RIObject self, RTime kTime) -> RO::RIBasePtr`
+- `SetName(RIObject self, std::wstring const & strName) -> RStatus`
+- `GetPivot(RIObject self, RVector3 kPosition, RVector3 kOrientation) -> RStatus`
+- `GetBounds(RIObject self, RVector3 kMaxPoint, RVector3 kCenterPoint, RVector3 kMinPoint) -> RStatus`
+- `Clone(RIObject self) -> RO::RIBasePtr`
+- `IsSelected(RIObject self) -> bool`
+- `SetDataBlock(RIObject self, std::wstring const & strId, std::shared_ptr< RO::RDataBlock > spDataBlock) -> RStatus`
+- `GetDataBlock(RIObject self, std::wstring const & strId) -> std::shared_ptr< RO::RDataBlock >`
+- `RemoveDataBlock(RIObject self, std::wstring const & strId) -> RStatus`
+- `RemoveLinkKey(RIObject self, RTime kTime) -> RStatus`
+- `ReleasePath(RIObject self, RTime kTime) -> RStatus`
+- `FollowPath(RIObject self, std::shared_ptr< RO::RIObject > spPath, RTime kAppTime) -> RStatus`
+- `AlignTo(RIObject self, std::shared_ptr< RO::RIObject > spTargetObject, RO::EAlignAxis eAlignAxis, bool bAlignToPivot) -> RStatus`
+- `IsStatic(RIObject self) -> bool`
+- `SetStatic(RIObject self, bool bStatic) -> RStatus`
+- `GetMeshes(RIObject self, bool bAll=True) -> MeshVector`
+- `DeleteMesh(RIObject self, RO::RIMeshPtr spMesh) -> RStatus`
+- `Update(RIObject self)`
+- `Update(RIObject self, RTime kTime)`
+- `GetParent(RIObject self) -> RO::RIBasePtr`
+- `GetParentNode(RIObject self) -> RO::RINodePtr`
+
+### RIOmniConnectorManager
+
+- `TurnOnLiveSync(RIOmniConnectorManager self, ObjectVector kObjects) -> RStatus`
+- `TurnOffLiveSync(RIOmniConnectorManager self) -> RStatus`
+- `TransferFile(RIOmniConnectorManager self, ObjectVector kObjects, BoolVector kObjectSyncStates) -> RStatus`
+- `SetTransferFileMotionSetting(RIOmniConnectorManager self, RFps kFps, int const & nStartFrame, int const & nEndFrame) -> RStatus`
+- `SetTransferFileSetting(RIOmniConnectorManager self, int nMaxImageSize, int nTextureFormat, bool bDeleteHiddenMesh, bool bSubdivisionMesh, bool bPathTracedMaterial, bool bIbl, bool bSwitchCamera) -> RStatus`
+- `SetTransferMotionOnly(RIOmniConnectorManager self, bool const & bMotionOnly) -> RStatus`
+- `SetObjectSyncState(RIOmniConnectorManager self, RO::RIObjectPtr const & object, bool const & bSyncing) -> RStatus`
+- `ObjectSyncStateListChanged(RIOmniConnectorManager self, ObjectVector kObjects, BoolVector kSyncStatuses) -> RStatus`
+- `SetActiveLiveAdd(RIOmniConnectorManager self, bool const & bSyncing) -> RStatus`
+- `SetActive2WaySync(RIOmniConnectorManager self, bool bActive) -> RStatus`
+
+### RIParticle
+
+**Inherits from:** `RIObject`
+
+- `SetEmit(RIParticle self, RTime kTime, bool bOn) -> RStatus`
+- `GetEmit(RIParticle self) -> bool`
+
+### RIPath
+
+**Inherits from:** `RIObject`
+
+
+### RIPhysicsComponent
+
+**Inherits from:** `RIBase`
+
+- `GetSoftPhysicsMeshNameList(RIPhysicsComponent self) -> WStringVector`
+- `GetSoftPhysicsMaterialNameList(RIPhysicsComponent self, std::wstring const & strMeshName) -> WStringVector`
+- `IsActivatePhysicsEnable(RIPhysicsComponent self) -> bool`
+- `SetActivatePhysicsEnable(RIPhysicsComponent self, bool bActivate) -> RStatus`
+- `IsObjectGravityEnable(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> bool`
+- `SetObjectGravityEnable(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, bool bObjectGravity) -> RStatus`
+- `GetSoftPhysXProperty(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strPropertyName) -> float`
+- `SetSoftPhysXProperty(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strPropertyName, float fValue) -> RStatus`
+- `GetSoftPhysXCollisionValue(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strCollisionName) -> float`
+- `GetSoftPhysXCollisionEnable(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strCollisionName) -> bool`
+- `SetSoftPhysXCollisionValue(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strCollisionName, float fValue) -> RStatus`
+- `SetSoftPhysXCollisionEnable(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strCollisionName, bool bEnable) -> RStatus`
+- `SavePhysicsSoftColthWeightMap(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strFilePath) -> RStatus`
+- `SetPhysicsSoftColthWeightMap(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, std::wstring const & strFilePath) -> RStatus`
+- `SetPhysicsSoftColthWeightMap(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName, RO::RIImagePtr const & kImage) -> RStatus`
+- `GetPhysicsSoftColthWeightMap(RIPhysicsComponent self, std::wstring const & strMeshName, std::wstring const & strMaterialName) -> RO::RIImagePtr`
+
+### RIPointLight
+
+**Inherits from:** `RILight`
+
+- `SetRange(RIPointLight self, RTime kTime, float fRange) -> RStatus`
+- `GetRange(RIPointLight self) -> float`
+- `SetInverseSquare(RIPointLight self, bool b) -> RStatus`
+- `GetInverseSquare(RIPointLight self) -> bool`
+- `SetTubeShape(RIPointLight self, bool bTube) -> RStatus`
+- `IsTubeShape(RIPointLight self) -> bool`
+- `SetRectangleShape(RIPointLight self, bool bRectangle) -> RStatus`
+- `IsRectangleShape(RIPointLight self) -> bool`
+- `SetTubeLength(RIPointLight self, float fLength) -> RStatus`
+- `GetTubeLength(RIPointLight self) -> float`
+- `SetTubeRadius(RIPointLight self, float radius) -> RStatus`
+- `GetTubeRadius(RIPointLight self) -> float`
+- `SetTubeSoftRadius(RIPointLight self, float softRadius) -> RStatus`
+- `GetTubeSoftRadius(RIPointLight self) -> float`
+- `GetRectWidthHeight(RIPointLight self) -> RVector2`
+- `SetRectWidthHeight(RIPointLight self, RVector2 vWidthHeight) -> RStatus`
+- `LoadRectTexture(RIPointLight self, std::wstring const & strTexturePath) -> RStatus`
+- `SaveRectTexture(RIPointLight self, std::wstring const & strTexturePath) -> RStatus`
+- `ClearRectTexture(RIPointLight self) -> RStatus`
+- `LoadIes(RIPointLight self, std::wstring const & strIesFilePath) -> RStatus`
+- `SaveIes(RIPointLight self, std::wstring const & strIesFilePath) -> RStatus`
+- `SetCastShadow(RIPointLight self, bool bEnable) -> RStatus`
+- `IsCastShadow(RIPointLight self) -> bool`
+
+### RIPopcornFXObject
+
+**Inherits from:** `RIObject`
+
+- `SetEmit(RIPopcornFXObject self, RTime kTime, bool bOn) -> RStatus`
+- `SetLoop(RIPopcornFXObject self, bool bLoop) -> RStatus`
+- `SetLoopInterval(RIPopcornFXObject self, float fEmissionInterval) -> RStatus`
+- `GetEmit(RIPopcornFXObject self) -> bool`
+- `GetLoopInterval(RIPopcornFXObject self) -> float`
+- `IsLoop(RIPopcornFXObject self) -> bool`
+- `GetEmitKeyCount(RIPopcornFXObject self) -> uint64_t`
+- `RemoveEmitKeys(RIPopcornFXObject self) -> RStatus`
+- `GetAttributeCount(RIPopcornFXObject self) -> int`
+- `GetAttributeName(RIPopcornFXObject self, uint32_t nIndex) -> std::wstring`
+- `GetAttributeValue(RIPopcornFXObject self, uint32_t nIndex) -> FloatVector`
+- `GetSamplerList(RIPopcornFXObject self, RO::EPopcornFxSamplerType eType) -> WStringVector`
+- `GetMeshSamplerTarget(RIPopcornFXObject self, std::wstring const & strSamplerName) -> RO::RIObjectPtr`
+- `SetMeshSamplerTarget(RIPopcornFXObject self, std::wstring const & strSamplerName, RO::RIObjectPtr spObject) -> RStatus`
+- `ClearMeshSamplerTarget(RIPopcornFXObject self, std::wstring const & strSamplerName) -> RStatus`
+- `AddAttributeKey(RIPopcornFXObject self, std::wstring const & strName, RTime kTime, FloatVector kValue) -> RStatus`
+
+### RIProp
+
+**Inherits from:** `RIObject`
+
+- `SetVisible(RIProp self, RTime kTime, bool bVisible) -> RStatus`
+- `GetSkeletonComponent(RIProp self) -> RO::RISkeletonComponentPtr`
+- `GetMorphComponent(RIProp self) -> RO::RIMorphComponentPtr`
+- `GetMaterialComponent(RIProp self) -> RO::RIMaterialComponentPtr`
+- `SetPivot(RIProp self, RVector3 kPosition, RVector3 kOrientation) -> RStatus`
+- `SetDummy(RIProp self, bool bIsDummy) -> RStatus`
+- `IsDummy(RIProp self) -> bool`
+- `IsVisible(RIProp self, RTime kTime) -> bool`
+- `MakeSubProp(RIProp self, bool bShowProgress=False) -> RStatus`
+- `SetLinkOffsetKey(RIProp self, std::shared_ptr< RO::RINode > spTargetReachNode, std::shared_ptr< RO::RINode > spTargetBone, RTime kTime) -> RStatus`
+- `ReplaceMesh(RIProp self, std::wstring const & strMeshName, std::wstring const & strObjFilePath) -> RStatus`
+
+### RIReach
+
+**Inherits from:** `RIBase`
+
+- `GetEffector(RIReach self) -> RO::EHikEffector`
+- `GetReachOffsetControl(RIReach self, std::wstring const & strKey, int const & nClipIndex=-1) -> RO::RControlPtr`
+- `IsSameReachOffset(RIReach self, RIReach pTarget, bool const bCompareKeys) -> bool`
+- `CheckClipModeAndGetFirstClipIndex(RIReach self, bool & bClipMode, size_t & uFirstClipIndex)`
+
+### RISaveFileOptionBase
+
+
+### RISkeletonComponent
+
+**Inherits from:** `RIBase`
+
+- `GetRootBone(RISkeletonComponent self) -> RO::RINodePtr`
+- `GetClipCount(RISkeletonComponent self) -> uint32_t`
+- `GetClip(RISkeletonComponent self, uint32_t uIndex) -> RO::RIClipPtr`
+- `GetSkinBones(RISkeletonComponent self) -> NodeVector`
+- `GetSelectedBones(RISkeletonComponent self) -> NodeVector`
+- `GetEffector(RISkeletonComponent self, RO::EHikEffector eEffector) -> RO::RIEffectorPtr`
+- `GetReach(RISkeletonComponent self, RO::EHikEffector eEffector) -> RO::RIReachPtr`
+- `GetLookAtComponent(RISkeletonComponent self) -> RO::RILookAtComponentPtr`
+- `ConvertBoneAxisAndParent(RISkeletonComponent self, WStr2Matrix4fMap kAxisMaps, WStrMap kReParentMaps, RInsertBoneInfoVector kInsertBoneInfo, bool bIncludeDummyNode=True) -> RINodeTransformPairs`
+- `ConvertToOriginalBoneAxis(RISkeletonComponent self, bool bIncludeDummyNode=True, bool const bIncludeMeshNode=True) -> RINodeTransformPairs`
+- `AddClip(RISkeletonComponent self, RTime kTime) -> RO::RIClipPtr`
+- `SampleMotionClip(RISkeletonComponent self, RO::RIClipPtr spClip, bool bOptimize=True) -> RStatus`
+- `FlattenMotionClip(RISkeletonComponent self, RO::RIClipPtr spClip) -> RStatus`
+- `BreakClip(RISkeletonComponent self, RTime kTime) -> RStatus`
+- `MergeClips(RISkeletonComponent self, RO::RIClipPtr spClip1, RO::RIClipPtr spClip2) -> RStatus`
+- `MirrorClip(RISkeletonComponent self, RO::RIClipPtr spClip) -> RStatus`
+- `IsBoneAnimated(RISkeletonComponent self, RO::RINodePtr spBone) -> bool`
+- `GetAllAnimationBone(RISkeletonComponent self) -> NodeVector`
+- `ConvertToMotionBoneWorldTransforms(RISkeletonComponent self) -> WStrTransformMap`
+- `ConvertFramesToMotionBoneWorldTransforms(RISkeletonComponent self, RTime _from, RTime to) -> WStrTransformVectorMap`
+- `BakeFkToIk(RISkeletonComponent self, RTime kTime, bool bAllClip) -> RStatus`
+- `GetClipByTime(RISkeletonComponent self, RTime kHitTime) -> RO::RIClipPtr`
+- `GetBoneTPosePosition(RISkeletonComponent self, RO::RINodePtr spBone) -> RVector3`
+- `SetBoneTPosePosition(RISkeletonComponent self, RO::RINodePtr spBone, RVector3 kPos) -> RStatus`
+- `DeleteClip(RISkeletonComponent self, RO::RIClipPtr & spClip) -> RStatus`
+- `GetBoneQniqueNames(RISkeletonComponent self) -> WBoneQniqueNameMap`
+
+### RISky
+
+**Inherits from:** `RIObject`
+
+- `SetVisible(RISky self, RTime kTime, bool bVisible) -> RStatus`
+- `GetMaterialComponent(RISky self) -> RO::RIMaterialComponentPtr`
+- `IsVisible(RISky self, RTime kTime) -> bool`
+
+### RISpotLight
+
+**Inherits from:** `RILight`
+
+- `SetSpotLightBeam(RISpotLight self, RTime kTime, float fAngle, float fFalloff, float fAttenuation) -> RStatus`
+- `GetSpotLightBeam(RISpotLight self, float & fAngle, float & fFalloff, float & fAttenuation) -> RStatus`
+- `SetRange(RISpotLight self, RTime kTime, float fRange) -> RStatus`
+- `GetRange(RISpotLight self) -> float`
+- `SetCastShadow(RISpotLight self, bool bEnable) -> RStatus`
+- `IsCastShadow(RISpotLight self) -> bool`
+- `SetDarkenShadowStrength(RISpotLight self, RTime kTime, float fStrength) -> RStatus`
+- `GetDarkenShadowStrength(RISpotLight self) -> float`
+- `SetInverseSquare(RISpotLight self, bool b) -> RStatus`
+- `GetInverseSquare(RISpotLight self) -> bool`
+- `SetTransmission(RISpotLight self, bool b) -> RStatus`
+- `GetTransmission(RISpotLight self) -> bool`
+- `SetTubeShape(RISpotLight self, bool bTube) -> RStatus`
+- `IsTubeShape(RISpotLight self) -> bool`
+- `SetRectangleShape(RISpotLight self, bool bRectangle) -> RStatus`
+- `IsRectangleShape(RISpotLight self) -> bool`
+- `SetTubeLength(RISpotLight self, float fLength) -> RStatus`
+- `GetTubeLength(RISpotLight self) -> float`
+- `SetTubeRadius(RISpotLight self, float radius) -> RStatus`
+- `GetTubeRadius(RISpotLight self) -> float`
+- `SetTubeSoftRadius(RISpotLight self, float softRadius) -> RStatus`
+- `GetTubeSoftRadius(RISpotLight self) -> float`
+- `GetRectWidthHeight(RISpotLight self) -> RVector2`
+- `SetRectWidthHeight(RISpotLight self, RVector2 vWidthHeight) -> RStatus`
+- `LoadRectTexture(RISpotLight self, std::wstring const & strTexturePath) -> RStatus`
+- `SaveRectTexture(RISpotLight self, std::wstring const & strTexturePath) -> RStatus`
+- `ClearRectTexture(RISpotLight self) -> RStatus`
+- `LoadIes(RISpotLight self, std::wstring const & strIesFilePath) -> RStatus`
+- `SaveIes(RISpotLight self, std::wstring const & strIesFilePath) -> RStatus`
+
+### RIStdMaterial
+
+**Inherits from:** `RIBase`
+
+- `GetName(RIStdMaterial self) -> std::wstring`
+- `GetID(RIStdMaterial self) -> uint64_t`
+- `GetImage(RIStdMaterial self, RO::EMaterialTextureChannel const eChannel) -> RO::RIImagePtr`
+- `SetImage(RIStdMaterial self, std::wstring const & strImage, RO::EMaterialTextureChannel const eChannel) -> RStatus`
+- `AddAmbientKey(RIStdMaterial self, RKey kKey, RRgb kColor) -> RStatus`
+- `AddDiffuseKey(RIStdMaterial self, RKey kKey, RRgb kColor) -> RStatus`
+- `GetAmbientColor(RIStdMaterial self) -> RRgb`
+- `GetDiffuseColor(RIStdMaterial self) -> RRgb`
+- `SetUseSRGB(RIStdMaterial self, RO::EMaterialTextureChannel const eChannel, bool bSet) -> RStatus`
+- `IsUseSRGB(RIStdMaterial self, RO::EMaterialTextureChannel const eChannel) -> bool`
+
+### RIUnitObject
+
+**Inherits from:** `RIObject`
+
+- `RebuildWall(RIUnitObject self, RO::RIWallObjectPtr spWall, std::wstring const & strMeshFilePath, float const fLength, float const fWidth, float const fHeight, std::wstring const & strFeature=L"") -> RStatus`
+- `BuildWall(RIUnitObject self, std::wstring const & strWallPath, RO::REPosition ePos, float const fLength, float const fWidth, float const fHeight, std::wstring const & strFeature=L"", bool bHypotenuseGround=False, std::wstring const & strMaterialPath=L"") -> RStatus`
+- `GetWall(RIUnitObject self, RO::REPosition ePos) -> RO::RIWallObjectPtr`
+- `GetWalls(RIUnitObject self) -> WallObjectVector`
+- `RemoveWall(RIUnitObject self, RO::RIWallObjectPtr spWall) -> RStatus`
+- `GetActivatedPosition(RIUnitObject self) -> WallPosition`
+- `GetPositionOfWall(RIUnitObject self, RO::RIWallObjectPtr spWall) -> RO::REPosition`
+- `SetWallActive(RIUnitObject self, RO::REPosition ePos, bool bActive) -> RStatus`
+
+### RIVisemeComponent
+
+**Inherits from:** `RIBase`
+
+- `AddVisemeOptionClip(RIVisemeComponent self, RVisemeSmoothOption kSmoothOption, RTime kStartTick, std::wstring const & strClipName) -> RStatus`
+- `AddVisemeKey(RIVisemeComponent self, RVisemeKey kKey) -> RStatus`
+- `AddVisemesClip(RIVisemeComponent self, RTime kTick, std::wstring const & strClipName, RTime kClipLength) -> RStatus`
+- `ChangeTalkingStyle(RIVisemeComponent self, RO::RIClipPtr pClip, std::wstring const & strPresetName) -> RStatus`
+- `RemoveVisemesClip(RIVisemeComponent self, RTime kTick) -> RStatus`
+- `RemoveVisemesKey(RIVisemeComponent self, RVisemeKey kKey) -> RStatus`
+- `GetVisemeMorphWeights(RIVisemeComponent self) -> FloatVector`
+- `GetVisemeBones(RIVisemeComponent self) -> NodeVector`
+- `GetVisemeKeys(RIVisemeComponent self) -> RVisemeKeyVector`
+- `GetVisemeKey(RIVisemeComponent self, RTime kTime, RVisemeKey kKey) -> RStatus`
+- `TextToSpeech(RIVisemeComponent self, std::wstring strContent, RO::ELanguage eLanguage=TW, float fVolume=100., float fPitch=50., float fSpeed=50.) -> RStatus`
+- `TextToVisemeData(RIVisemeComponent self, std::wstring strContent, float fVolume=100., float fPitch=50., float fSpeed=50.) -> RTime2IntMap`
+- `GetStrength(RIVisemeComponent self) -> float`
+- `LoadVocal(RIVisemeComponent self, RIAudioObject pAudio, RTime kStartTick, std::wstring const & strClipName) -> RStatus`
+- `LoadVocal(RIVisemeComponent self, RIAudioObject pAudio, std::wstring const & strText, RTime kStartTime, std::wstring const & strClipName) -> RStatus`
+- `GetClipCount(RIVisemeComponent self) -> uint32_t`
+- `GetClip(RIVisemeComponent self, uint32_t uIndex) -> RO::RIClipPtr`
+- `GetClipByTime(RIVisemeComponent self, RTime kHitTime) -> RO::RIClipPtr`
+- `GetVisemeNames(RIVisemeComponent self) -> WStringVector`
+- `GetWords(RIVisemeComponent self, int nClipIndex=-1) -> RWordDataVector`
+- `AddVisemesClipWithData(RIVisemeComponent self, RTime kTime, std::wstring const & strClipName, RIAudioObject pAudio, FloatVector kKeyTimes, IntVector kVisemeIds, IntVector kWeights) -> RStatus`
+- `AddVisemesClipWithData(RIVisemeComponent self, RTime kTime, std::wstring const & strClipName, RIAudioObject pAudio, RVisemeKeyVector kKeys, RWordDataVector kWords, std::wstring const & strText) -> RStatus`
+
+### RIVisualSettingComponent
+
+**Inherits from:** `RIBase`
+
+- `SetIBLEnable(RIVisualSettingComponent self, bool bEnable) -> RStatus`
+- `IsIBLEnable(RIVisualSettingComponent self) -> bool`
+- `LoadIBLImage(RIVisualSettingComponent self, std::wstring const & strFilePath) -> RStatus`
+- `IsIBLSyncSkyImage(RIVisualSettingComponent self) -> bool`
+- `SetIBLSyncSkyImage(RIVisualSettingComponent self, bool bEnable) -> RStatus`
+- `IsIBLSyncSkyOrientation(RIVisualSettingComponent self) -> bool`
+- `SetIBLSyncSkyOrientation(RIVisualSettingComponent self, bool bEnable) -> RStatus`
+- `SaveIBLImage(RIVisualSettingComponent self, std::wstring const strFilePath) -> RStatus`
+- `GetAmbientColor(RIVisualSettingComponent self) -> RRgb`
+- `SetAmbientColor(RIVisualSettingComponent self, RRgb kColor) -> RStatus`
+
+### RIWallObject
+
+**Inherits from:** `RIObject`
+
+- `ReplaceMaterial(RIWallObject self, std::wstring const & strMaterialFilePath) -> RStatus`
+- `BuildArchitectureElement(RIWallObject self, std::wstring const & strFilePath, std::wstring const & strFeature=L"", RVector3 vRot=RL::CVector3f::ZERO, RVector3 vTrans=RL::CVector3f::ZERO, RVector3 vScale=RL::CVector3f::UNIT_XYZ) -> RStatus`
+- `CopyElementsFromWall(RIWallObject self, std::shared_ptr< RO::RIWallObject > spWall) -> RStatus`
+- `GetArchitectureElements(RIWallObject self) -> ObjectVector`
 
 ### RImage
 
-- `RImage_CreateImage()`
-- `RImage_SetGlobalPtr(pGlobalPtr)`
+- `CreateImage() -> RO::RIImagePtr`
+- `SetGlobalPtr(RL::CIGlobal * pGlobalPtr)`
+
+### RImportExpressionSetting
+
+- `SetExpressionSource(RImportExpressionSetting self, std::wstring const & kMeshFilePath)`
+- `SetExpressionTarget(RImportExpressionSetting self, std::wstring const & kMeshFilePath)`
+- `SetWrinkleExpressionPart(RImportExpressionSetting self, RO::EWrinkleFacePart const eWrinkleExpression)`
+- `GetExpressionSource(RImportExpressionSetting self) -> std::wstring`
+- `GetExpressionTarget(RImportExpressionSetting self) -> std::wstring`
+- `GetWrinkleExpressionPart(RImportExpressionSetting self) -> RO::EWrinkleFacePart`
+
+### RInsertBoneInfo
+
+- `SetInfo(RInsertBoneInfo self, std::wstring const & strParentName, std::wstring const & strNewBoneName, std::wstring const & strChildName)`
+- `GetParentBoneName(RInsertBoneInfo self) -> std::wstring const &`
+- `GetNewBoneName(RInsertBoneInfo self) -> std::wstring const &`
+- `GetChildBoneName(RInsertBoneInfo self) -> std::wstring const &`
+
+### RInsertBoneInfoVector
+
+- `iterator(RInsertBoneInfoVector self) -> SwigPyIterator`
+- `pop(RInsertBoneInfoVector self) -> RInsertBoneInfo`
+- `append(RInsertBoneInfoVector self, RInsertBoneInfo x)`
+- `empty(RInsertBoneInfoVector self) -> bool`
+- `size(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::size_type`
+- `swap(RInsertBoneInfoVector self, RInsertBoneInfoVector v)`
+- `begin(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::iterator`
+- `end(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::iterator`
+- `rbegin(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::reverse_iterator`
+- `rend(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::reverse_iterator`
+- `clear(RInsertBoneInfoVector self)`
+- `get_allocator(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::allocator_type`
+- `pop_back(RInsertBoneInfoVector self)`
+- `erase(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::iterator pos) -> std::vector< RO::RInsertBoneInfo >::iterator`
+- `erase(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::iterator first, std::vector< RO::RInsertBoneInfo >::iterator last) -> std::vector< RO::RInsertBoneInfo >::iterator`
+- `push_back(RInsertBoneInfoVector self, RInsertBoneInfo x)`
+- `front(RInsertBoneInfoVector self) -> RInsertBoneInfo`
+- `back(RInsertBoneInfoVector self) -> RInsertBoneInfo`
+- `assign(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::size_type n, RInsertBoneInfo x)`
+- `resize(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::size_type new_size)`
+- `resize(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::size_type new_size, RInsertBoneInfo x)`
+- `insert(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::iterator pos, RInsertBoneInfo x) -> std::vector< RO::RInsertBoneInfo >::iterator`
+- `insert(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::iterator pos, std::vector< RO::RInsertBoneInfo >::size_type n, RInsertBoneInfo x)`
+- `reserve(RInsertBoneInfoVector self, std::vector< RO::RInsertBoneInfo >::size_type n)`
+- `capacity(RInsertBoneInfoVector self) -> std::vector< RO::RInsertBoneInfo >::size_type`
+
+### RKey
+
+- `Clone(RKey self) -> std::shared_ptr< RO::RKey >`
+- `SetTime(RKey self, RTime kTick)`
+- `GetTime(RKey self) -> RTime`
+- `SetTransitionType(RKey self, RO::ETransitionType eTransitionType)`
+- `GetTransitionType(RKey self) -> RO::ETransitionType`
+- `SetTransitionStrength(RKey self, float fTransitionStrength)`
+- `GetTransitionStrength(RKey self) -> float`
 
 ### RMath
 
-- `RMath_ACos(fValue)`
-- `RMath_ASin(fValue)`
-- `RMath_ATan(fValue)`
-- `RMath_ATan2(fY, fX)`
-- `RMath_Cos(fValue)`
-- `RMath_Exp(fValue)`
-- `RMath_FAbs(fValue)`
-- `RMath_FMod(fX, fY)`
-- `RMath_InvSqrt(fValue)`
-- `RMath_Log(fValue)`
-- `RMath_Pow(fBase, fExponent)`
-- `RMath_Sin(fValue)`
-- `RMath_Sqr(fValue)`
-- `RMath_Sqrt(fValue)`
-- `RMath_Tan(fValue)`
-- `RMath_Sign(fValue)`
-- `RMath_CopySign(fValue)`
-- `RMath_UnitRandom(*args)`
-- `RMath_SymmetricRandom(*args)`
-- `RMath_IntervalRandom(*args)`
-- `RMath_FastSin0(fAngle)`
-- `RMath_FastSin1(fAngle)`
-- `RMath_FastCos0(fAngle)`
-- `RMath_FastCos1(fAngle)`
-- `RMath_FastTan0(fAngle)`
-- `RMath_FastTan1(fAngle)`
-- `RMath_FastInvSin(fValue)`
-- `RMath_FastInvCos(fValue)`
-- `RMath_FastInvTan0(fValue)`
-- `RMath_FastInvTan1(fValue)`
-- `RMath_FastInvSqrt_Walsh(tValue)`
-- `RMath_FastSqrt_Walsh(tValue)`
-- `RMath_FastSqrt_LogBase2(tValue)`
-- `RMath_LogGamma(fX)`
-- `RMath_Gamma(fX)`
-- `RMath_IncompleteGamma(fA, fX)`
-- `RMath_Erf(fX)`
-- `RMath_Erfc(fX)`
-- `RMath_ModBessel0(fX)`
-- `RMath_ModBessel1(fX)`
-- `RMath_Min(a, b)`
-- `RMath_Max(a, b)`
-- `RMath_Abs(a)`
-- `RMath_Clamp(tMax, tMin, tValue)`
-- `RMath_AlmostZero(*args)`
-- `RMath_Equal(*args)`
-- `RMath_RoundEpsilonZero(tValue)`
-- `RMath_RoundAlmostZero(tValue)`
-- `RMath_Round(tValue)`
-- `RMath_Bezier3(a, b, c, d, t)`
+- `ACos(float fValue) -> float const`
+- `ASin(float fValue) -> float const`
+- `ATan(float fValue) -> float const`
+- `ATan2(float fY, float fX) -> float const`
+- `Cos(float fValue) -> float const`
+- `Exp(float fValue) -> float const`
+- `FAbs(float fValue) -> float const`
+- `FMod(float fX, float fY) -> float const`
+- `InvSqrt(float fValue) -> float const`
+- `Log(float fValue) -> float const`
+- `Pow(float fBase, float fExponent) -> float const`
+- `Sin(float fValue) -> float const`
+- `Sqr(float fValue) -> float const`
+- `Sqrt(float fValue) -> float const`
+- `Tan(float fValue) -> float const`
+- `Sign(float fValue) -> float const`
+- `CopySign(float fValue) -> float const`
+- `UnitRandom(float fSeed=(float) 0.0) -> float const`
+- `SymmetricRandom(float fSeed=(float) 0.0) -> float const`
+- `IntervalRandom(float fMin, float fMax, float fSeed=(float) 0.0) -> float const`
+- `FastSin0(float fAngle) -> float const`
+- `FastSin1(float fAngle) -> float const`
+- `FastCos0(float fAngle) -> float const`
+- `FastCos1(float fAngle) -> float const`
+- `FastTan0(float fAngle) -> float const`
+- `FastTan1(float fAngle) -> float const`
+- `FastInvSin(float fValue) -> float const`
+- `FastInvCos(float fValue) -> float const`
+- `FastInvTan0(float fValue) -> float const`
+- `FastInvTan1(float fValue) -> float const`
+- `FastInvSqrt_Walsh(float tValue) -> float const`
+- `FastSqrt_Walsh(float tValue) -> float const`
+- `FastSqrt_LogBase2(float tValue) -> float const`
+- `LogGamma(float fX) -> float const`
+- `Gamma(float fX) -> float const`
+- `IncompleteGamma(float fA, float fX) -> float const`
+- `Erf(float fX) -> float const`
+- `Erfc(float fX) -> float const`
+- `ModBessel0(float fX) -> float const`
+- `ModBessel1(float fX) -> float const`
+- `Min(float const & a, float const & b) -> float const`
+- `Max(float const & a, float const & b) -> float const`
+- `Abs(float const & a) -> float const`
+- `Clamp(float const & tMax, float const & tMin, float const & tValue) -> float const`
+- `AlmostZero(float const & tValue, float const & tEpsilon=RL::CMath< float >::CONST_ALMOST_ZERO) -> bool const`
+- `Equal(float const & tValue1, float const & tValue2, float const & tEpsilon=RL::CMath< float >::CONST_ALMOST_ZERO) -> bool const`
+- `RoundEpsilonZero(float const & tValue) -> float const`
+- `RoundAlmostZero(float const & tValue) -> float const`
+- `Round(float const & tValue) -> float const`
+- `Bezier3(float const a, float const b, float const c, float const d, float const t) -> float const`
 
 ### RMatrix3
 
-- `RMatrix3_FromEulerAngle(Oreder, rx, ry, rz)`
+- `MakeIdentity(RMatrix3 self) -> RMatrix3`
+- `M(RMatrix3 self, int nRow, int nCol) -> float const`
+- `M(RMatrix3 self, int nRow, int nCol) -> float &`
+- `E(RMatrix3 self, int nEle) -> float const`
+- `E(RMatrix3 self, int nEle) -> float &`
+- `GetRow(RMatrix3 self, int nRow) -> RVector3`
+- `GetColumn(RMatrix3 self, int nCol) -> RVector3`
+- `Transpose(RMatrix3 self) -> RMatrix3`
+- `TransposeTimes(RMatrix3 self, RMatrix3 mM) -> RMatrix3`
+- `TimesTranspose(RMatrix3 self, RMatrix3 mM) -> RMatrix3`
+- `Inverse(RMatrix3 self) -> RMatrix3`
+- `Adjoint(RMatrix3 self) -> RMatrix3`
+- `AdjointTranspose(RMatrix3 self) -> RMatrix3`
+- `InverseTranspose(RMatrix3 self) -> RMatrix3`
+- `DiagonalElements(RMatrix3 self) -> RVector3`
+- `Determinant(RMatrix3 self) -> float`
+- `MaxColumn(RMatrix3 self) -> long`
+- `MaxRow(RMatrix3 self) -> long`
+- `OneNorm(RMatrix3 self) -> float`
+- `InfNorm(RMatrix3 self) -> float`
+- `FromAxisAngle(RMatrix3 self, RVector3 rkAxis, float fAngle) -> RMatrix3`
+- `RotationX(RMatrix3 self, float fAngle) -> RMatrix3`
+- `RotationY(RMatrix3 self, float fAngle) -> RMatrix3`
+- `RotationZ(RMatrix3 self, float fAngle) -> RMatrix3`
+- `AccuScale(RMatrix3 self, RVector3 rkScale) -> RMatrix3`
+- `ToEulerAngle(RMatrix3 self, Rotation_Order Oreder, float & rx, float & ry, float & rz)`
+- `ToEulerAngle(RMatrix3 self, Rotation_Order Oreder) -> RVector3`
+- `FromEulerAngle(Rotation_Order Oreder, float const & rx, float const & ry, float const & rz) -> RMatrix3`
+- `FromSpereUnitVec(RMatrix3 self, RVector3 rkVec) -> RMatrix3`
+- `IsRightHandCoordinate(RMatrix3 self) -> bool`
+
+### RMatrix4
+
+- `MakeIdentity(RMatrix4 self) -> RMatrix4`
+- `M(RMatrix4 self, int nRow, int nCol) -> float const`
+- `M(RMatrix4 self, int nRow, int nCol) -> float &`
+- `E(RMatrix4 self, int nEle) -> float const`
+- `E(RMatrix4 self, int nEle) -> float &`
+- `GetRow(RMatrix4 self, int nR) -> RVector4`
+- `GetColumn(RMatrix4 self, int nC) -> RVector4`
+- `Transpose(RMatrix4 self) -> RMatrix4`
+- `TransposeTimes(RMatrix4 self, RMatrix4 mM) -> RMatrix4`
+- `TimesTranspose(RMatrix4 self, RMatrix4 mM) -> RMatrix4`
+- `Inverse(RMatrix4 self) -> RMatrix4`
+- `Adjoint(RMatrix4 self) -> RMatrix4`
+- `AdjointTranspose(RMatrix4 self) -> RMatrix4`
+- `InverseTranspose(RMatrix4 self) -> RMatrix4`
+- `Determinant(RMatrix4 self) -> float`
+- `MaxColumn(RMatrix4 self) -> long`
+- `MaxRow(RMatrix4 self) -> long`
+- `OneNorm(RMatrix4 self) -> float`
+- `InfNorm(RMatrix4 self) -> float`
+- `FromRTS(RMatrix4 self, RMatrix3 kRotate, RVector3 kTranslate, RVector3 kScale) -> RMatrix4`
+- `GetSimpleRTS(RMatrix4 self, RMatrix3 rkRotate, RVector3 rkTranslate, RVector3 rkScale)`
+- `GetSimpleRotate(RMatrix4 self, RMatrix3 rkRotate)`
+- `SetTranslateZero(RMatrix4 self) -> RMatrix4`
+- `RotationX(RMatrix4 self, float fAngle) -> RMatrix4`
+- `RotationY(RMatrix4 self, float fAngle) -> RMatrix4`
+- `RotationZ(RMatrix4 self, float fAngle) -> RMatrix4`
+- `RotateAxisAngle(RMatrix4 self, RVector3 rkAxis, float fAngle) -> RMatrix4`
+- `FromEulerAngle(RMatrix4 self, Rotation_Order Oreder, float const & rx, float const & ry, float const & rz) -> RMatrix4`
+- `SetSR(RMatrix4 self, RMatrix3 mSR) -> RMatrix4`
+- `SetTranslate(RMatrix4 self, RVector3 vTranslate) -> RMatrix4`
+- `GetSR(RMatrix4 self) -> RMatrix3`
+- `GetTranslate(RMatrix4 self) -> RVector3`
+- `AccuScale(RMatrix4 self, RVector3 rkScale) -> RMatrix4`
+- `AccuRotate(RMatrix4 self, RMatrix3 rkRotate) -> RMatrix4`
+- `AccuTranslate(RMatrix4 self, RVector3 rkTranslate) -> RMatrix4`
+- `AlmostSame(RMatrix4 self, RMatrix4 kM, float fThreshold) -> bool`
+
+### RMeshSubdivisionSetting
+
+
+### RMessageBoxButton
+
+
+### RMessageBoxButtonVector
+
+- `iterator(RMessageBoxButtonVector self) -> SwigPyIterator`
+- `pop(RMessageBoxButtonVector self) -> RMessageBoxButton`
+- `append(RMessageBoxButtonVector self, RMessageBoxButton x)`
+- `empty(RMessageBoxButtonVector self) -> bool`
+- `size(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::size_type`
+- `swap(RMessageBoxButtonVector self, RMessageBoxButtonVector v)`
+- `begin(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::iterator`
+- `end(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::iterator`
+- `rbegin(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::reverse_iterator`
+- `rend(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::reverse_iterator`
+- `clear(RMessageBoxButtonVector self)`
+- `get_allocator(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::allocator_type`
+- `pop_back(RMessageBoxButtonVector self)`
+- `erase(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::iterator pos) -> std::vector< RO::RMessageBoxButton >::iterator`
+- `erase(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::iterator first, std::vector< RO::RMessageBoxButton >::iterator last) -> std::vector< RO::RMessageBoxButton >::iterator`
+- `push_back(RMessageBoxButtonVector self, RMessageBoxButton x)`
+- `front(RMessageBoxButtonVector self) -> RMessageBoxButton`
+- `back(RMessageBoxButtonVector self) -> RMessageBoxButton`
+- `assign(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::size_type n, RMessageBoxButton x)`
+- `resize(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::size_type new_size)`
+- `resize(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::size_type new_size, RMessageBoxButton x)`
+- `insert(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::iterator pos, RMessageBoxButton x) -> std::vector< RO::RMessageBoxButton >::iterator`
+- `insert(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::iterator pos, std::vector< RO::RMessageBoxButton >::size_type n, RMessageBoxButton x)`
+- `reserve(RMessageBoxButtonVector self, std::vector< RO::RMessageBoxButton >::size_type n)`
+- `capacity(RMessageBoxButtonVector self) -> std::vector< RO::RMessageBoxButton >::size_type`
+
+### RMorphSliderSetting
+
+- `SetMorphName(RMorphSliderSetting self, std::wstring strMorphName)`
+- `GetMorphName(RMorphSliderSetting self) -> std::wstring`
+- `SetCategory(RMorphSliderSetting self, RO::ESetCategory eSetCategory)`
+- `GetCategory(RMorphSliderSetting self) -> RO::ESetCategory`
+- `SetSliderPath(RMorphSliderSetting self, std::wstring strSetSliderPath)`
+- `GetSliderPath(RMorphSliderSetting self) -> std::wstring`
+- `SetMorphValueRange(RMorphSliderSetting self, float fMin, float fMax)`
+- `GetMorphValueRange(RMorphSliderSetting self) -> FloatVector`
+- `SetSourceBaseType(RMorphSliderSetting self, RO::EChooseBase eSourceBaseType)`
+- `GetSourceBaseType(RMorphSliderSetting self) -> RO::EChooseBase`
+- `SetSourceFilePath(RMorphSliderSetting self, std::wstring strSourceMorphPath)`
+- `GetSourceFilePath(RMorphSliderSetting self) -> std::wstring`
+- `SetTargetFilePath(RMorphSliderSetting self, std::wstring strTargetMorphPath)`
+- `GetTargetFilePath(RMorphSliderSetting self) -> std::wstring`
+- `SetTargetMorphChecksumFilePath(RMorphSliderSetting self, std::wstring strTargetMorphChecksumFilePath)`
+- `GetTargetMorphChecksumFilePath(RMorphSliderSetting self) -> std::wstring`
+- `SetAxisSettingForObj(RMorphSliderSetting self, RO::EAxisSetting eAxisSettingForObj)`
+- `GetAxisSettingForObj(RMorphSliderSetting self) -> RO::EAxisSetting`
+- `SetAdjustBonesToFitMorph(RMorphSliderSetting self, bool bAdjustBonesToFitMorph)`
+- `GetAdjustBonesToFitMorph(RMorphSliderSetting self) -> bool`
+- `SetThumbNailFilePath(RMorphSliderSetting self, std::wstring strThumdNailFilePath)`
+- `GetThumbNailFilePath(RMorphSliderSetting self) -> std::wstring`
+- `SetAutoApplyToCurrentCharacter(RMorphSliderSetting self, bool bAutoApplyToCurrentCharacter)`
+- `GetAutoApplyToCurrentCharacter(RMorphSliderSetting self) -> bool`
+
+### ROpenPoseKeyPointParam
+
+
+### RPositionSetting
+
+- `SetCoordinateSpace(RPositionSetting self, RO::ECoordinateSpace eCoordinateSpace)`
+- `GetCoordinateSpace(RPositionSetting self) -> RO::ECoordinateSpace`
+- `SetUnit(RPositionSetting self, RO::EPositionUnit eUnit)`
+- `GetUnit(RPositionSetting self) -> RO::EPositionUnit`
+
+### RPropertyFloatMap
+
+- `iterator(RPropertyFloatMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::key_type const & key) -> bool`
+- `keys(RPropertyFloatMap self) -> PyObject *`
+- `values(RPropertyFloatMap self) -> PyObject *`
+- `items(RPropertyFloatMap self) -> PyObject *`
+- `key_iterator(RPropertyFloatMap self) -> SwigPyIterator`
+- `value_iterator(RPropertyFloatMap self) -> SwigPyIterator`
+- `asdict(RPropertyFloatMap self) -> PyObject *`
+- `empty(RPropertyFloatMap self) -> bool`
+- `size(RPropertyFloatMap self) -> std::map< enum RO::EPropertyType,float >::size_type`
+- `swap(RPropertyFloatMap self, RPropertyFloatMap v)`
+- `begin(RPropertyFloatMap self) -> std::map< enum RO::EPropertyType,float >::iterator`
+- `end(RPropertyFloatMap self) -> std::map< enum RO::EPropertyType,float >::iterator`
+- `rbegin(RPropertyFloatMap self) -> std::map< enum RO::EPropertyType,float >::reverse_iterator`
+- `rend(RPropertyFloatMap self) -> std::map< enum RO::EPropertyType,float >::reverse_iterator`
+- `clear(RPropertyFloatMap self)`
+- `get_allocator(RPropertyFloatMap self) -> std::map< enum RO::EPropertyType,float >::allocator_type`
+- `count(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::key_type const & x) -> std::map< enum RO::EPropertyType,float >::size_type`
+- `erase(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::key_type const & x) -> std::map< enum RO::EPropertyType,float >::size_type`
+- `erase(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::iterator position)`
+- `erase(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::iterator first, std::map< enum RO::EPropertyType,float >::iterator last)`
+- `find(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::key_type const & x) -> std::map< enum RO::EPropertyType,float >::iterator`
+- `lower_bound(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::key_type const & x) -> std::map< enum RO::EPropertyType,float >::iterator`
+- `upper_bound(RPropertyFloatMap self, std::map< enum RO::EPropertyType,float >::key_type const & x) -> std::map< enum RO::EPropertyType,float >::iterator`
+
+### RPyTimer
+
+- `Start(RPyTimer self)`
+- `Stop(RPyTimer self)`
+- `IsRunning(RPyTimer self) -> bool`
+- `SetSingleShot(RPyTimer self, bool bSingleShot)`
+- `IsSingleShot(RPyTimer self) -> bool`
+- `SetInterval(RPyTimer self, int nMSec)`
+- `GetInterval(RPyTimer self) -> int`
+- `RegisterPyTimerCallback(RPyTimer self, RPyTimerCallback pCallback)`
+- `UnregisterPyTimerCallback(RPyTimer self)`
+
+### RPyTimerCallback
+
+**Inherits from:** `RCallback`
+
+- `Timeout(RPyTimerCallback self)`
 
 ### RQuaternion
 
-- `RQuaternion_FindQuatBetweenHelper(A, B, NormAB)`
-- `RQuaternion_FindQuatBetweenInternal(An, Bn)`
-- `RQuaternion_FindQuatBetweenNormals(NormalA, NormalB)`
-- `RQuaternion_FindQuatBetweenVectors(VectorA, VectorB)`
+- `X(RQuaternion self) -> float const`
+- `X(RQuaternion self) -> float &`
+- `Y(RQuaternion self) -> float const`
+- `Y(RQuaternion self) -> float &`
+- `Z(RQuaternion self) -> float const`
+- `Z(RQuaternion self) -> float &`
+- `W(RQuaternion self) -> float const`
+- `W(RQuaternion self) -> float &`
+- `SetX(RQuaternion self, float const & tX)`
+- `SetY(RQuaternion self, float const & tY)`
+- `SetZ(RQuaternion self, float const & tZ)`
+- `SetW(RQuaternion self, float const & tW)`
+- `AlmostEqual(RQuaternion self, RQuaternion qQ) -> bool`
+- `AlmostSame(RQuaternion self, RQuaternion qQ, float tThreshold) -> bool`
+- `FromRotationMatrix(RQuaternion self, RMatrix3 rkRot) -> RQuaternion`
+- `ToRotationMatrix(RQuaternion self) -> RMatrix3`
+- `FromAxisAngle(RQuaternion self, RVector3 rkAxis, float fAngle) -> RQuaternion`
+- `FindQuatBetweenHelper(RVector3 A, RVector3 B, float NormAB) -> RQuaternion`
+- `FindQuatBetweenInternal(RVector3 An, RVector3 Bn) -> RVector4`
+- `FindQuatBetweenNormals(RVector3 NormalA, RVector3 NormalB) -> RQuaternion`
+- `FindQuatBetweenVectors(RVector3 VectorA, RVector3 VectorB) -> RQuaternion`
+- `ToAxisAngle(RQuaternion self, RVector3 rkAxis, float & rfAngle)`
+- `Dot(RQuaternion self, RQuaternion qQ) -> float const`
+- `Inverse(RQuaternion self) -> RQuaternion`
+- `Normalize(RQuaternion self) -> RQuaternion`
+- `Conjugate(RQuaternion self) -> RQuaternion`
+- `Rotate180(RQuaternion self) -> RQuaternion`
+- `Multiply(RQuaternion self, RQuaternion qQ) -> RQuaternion`
+- `MultiplyAssign(RQuaternion self, RQuaternion qQ) -> RQuaternion`
+- `MultiplyVector(RQuaternion self, RVector3 vPoint) -> RVector3`
+
+### RRangePair
+
+
+### RReachKey
+
+- `Clone(RReachKey self) -> std::shared_ptr< RO::RReachKey >`
+- `SetTime(RReachKey self, RTime kTime)`
+- `GetTime(RReachKey self) -> RTime`
+- `SetRotationActive(RReachKey self, bool bRotateActive)`
+- `GetRotationActive(RReachKey self) -> bool`
+- `SetForceReach(RReachKey self, bool bPull)`
+- `GetForceReach(RReachKey self) -> bool`
+- `SetTransitionRange(RReachKey self, RTime kForwardTransitionRange)`
+- `GetTransitionRange(RReachKey self) -> RTime`
+- `SetTargetObject(RReachKey self, RO::RIObjectPtr hTargetObject)`
+- `GetTargetObject(RReachKey self) -> RO::RIObjectPtr`
+- `SetKeyType(RReachKey self, RO::ReachKeyType eKeyType)`
+- `GetKeyType(RReachKey self) -> RO::ReachKeyType`
+
+### RReachKeyVector
+
+- `iterator(RReachKeyVector self) -> SwigPyIterator`
+- `pop(RReachKeyVector self) -> RReachKey`
+- `append(RReachKeyVector self, RReachKey x)`
+- `empty(RReachKeyVector self) -> bool`
+- `size(RReachKeyVector self) -> std::vector< RO::RReachKey >::size_type`
+- `swap(RReachKeyVector self, RReachKeyVector v)`
+- `begin(RReachKeyVector self) -> std::vector< RO::RReachKey >::iterator`
+- `end(RReachKeyVector self) -> std::vector< RO::RReachKey >::iterator`
+- `rbegin(RReachKeyVector self) -> std::vector< RO::RReachKey >::reverse_iterator`
+- `rend(RReachKeyVector self) -> std::vector< RO::RReachKey >::reverse_iterator`
+- `clear(RReachKeyVector self)`
+- `get_allocator(RReachKeyVector self) -> std::vector< RO::RReachKey >::allocator_type`
+- `pop_back(RReachKeyVector self)`
+- `erase(RReachKeyVector self, std::vector< RO::RReachKey >::iterator pos) -> std::vector< RO::RReachKey >::iterator`
+- `erase(RReachKeyVector self, std::vector< RO::RReachKey >::iterator first, std::vector< RO::RReachKey >::iterator last) -> std::vector< RO::RReachKey >::iterator`
+- `push_back(RReachKeyVector self, RReachKey x)`
+- `front(RReachKeyVector self) -> RReachKey`
+- `back(RReachKeyVector self) -> RReachKey`
+- `assign(RReachKeyVector self, std::vector< RO::RReachKey >::size_type n, RReachKey x)`
+- `resize(RReachKeyVector self, std::vector< RO::RReachKey >::size_type new_size)`
+- `resize(RReachKeyVector self, std::vector< RO::RReachKey >::size_type new_size, RReachKey x)`
+- `insert(RReachKeyVector self, std::vector< RO::RReachKey >::iterator pos, RReachKey x) -> std::vector< RO::RReachKey >::iterator`
+- `insert(RReachKeyVector self, std::vector< RO::RReachKey >::iterator pos, std::vector< RO::RReachKey >::size_type n, RReachKey x)`
+- `reserve(RReachKeyVector self, std::vector< RO::RReachKey >::size_type n)`
+- `capacity(RReachKeyVector self) -> std::vector< RO::RReachKey >::size_type`
+
+### RRealtimeRenderOptions
+
+
+### RRgb
+
+- `R(RRgb self) -> float`
+- `R(RRgb self) -> float &`
+- `G(RRgb self) -> float`
+- `G(RRgb self) -> float &`
+- `B(RRgb self) -> float`
+- `B(RRgb self) -> float &`
+- `Red(RRgb self) -> int`
+- `Green(RRgb self) -> int`
+- `Blue(RRgb self) -> int`
+- `From(RRgb self, unsigned char r, unsigned char g, unsigned char b) -> RRgb`
+- `FromXRGB(RRgb self, unsigned long arg2) -> RRgb`
+- `FromCOLORREF(RRgb self, unsigned long arg2) -> RRgb`
+- `ToXRGB(RRgb self) -> unsigned long`
+- `ToCOLORREF(RRgb self) -> unsigned long`
+- `ToVector3f(RRgb self) -> RVector3`
+- `Normalize(RRgb self) -> RRgb`
+- `Saturate(RRgb self) -> RRgb`
+
+### RRotationSetting
+
+- `SetCoordinateSpace(RRotationSetting self, RO::ECoordinateSpace eCoordinateSpace)`
+- `GetCoordinateSpace(RRotationSetting self) -> RO::ECoordinateSpace`
+- `SetType(RRotationSetting self, RO::ERotationType eType)`
+- `GetType(RRotationSetting self) -> RO::ERotationType`
+- `SetUnit(RRotationSetting self, RO::ERotationUnit eUnit)`
+- `GetUnit(RRotationSetting self) -> RO::ERotationUnit`
+- `SetEulerOrder(RRotationSetting self, RO::EEulerOrder eOrder)`
+- `GetEulerOrder(RRotationSetting self) -> RO::EEulerOrder`
+- `SetQuaternionOrder(RRotationSetting self, RO::EQuaternionOrder eOrder)`
+- `GetQuaternionOrder(RRotationSetting self) -> RO::EQuaternionOrder`
+
+### RSBuildingSettings
+
+
+### RSUsdExportOption
+
+
+### RSaveFacialAnimationOption
+
+**Inherits from:** `RISaveFileOptionBase`
+
+- `SetFlag(RSaveFacialAnimationOption self, RO::ESaveFacialAnimationOption eFlag)`
+- `GetFlag(RSaveFacialAnimationOption self) -> RO::ESaveFacialAnimationOption`
+
+### RSaveFileSetting
+
+- `SetSaveType(RSaveFileSetting self, RO::ESaveFileType eType)`
+- `GetSaveType(RSaveFileSetting self) -> RO::ESaveFileType`
+- `SetSaveRange(RSaveFileSetting self, RTime kStart, RTime kEnd)`
+- `SetSaveFileOption(RSaveFileSetting self, RISaveFileOptionBase pSaveFileOption)`
+- `GetSaveRangeStart(RSaveFileSetting self) -> RTime`
+- `GetSaveRangeEnd(RSaveFileSetting self) -> RTime`
+- `GetSaveFileOption(RSaveFileSetting self) -> RISaveFileOptionBase`
+
+### RSaveMotionPlusOption
+
+**Inherits from:** `RISaveFileOptionBase`
+
+- `SetMotionPlusOption(RSaveMotionPlusOption self, RO::ESaveMotionPlusOption eDataOption)`
+- `GetMotionPlusOption(RSaveMotionPlusOption self) -> RO::ESaveMotionPlusOption`
+- `SetMotionClipOption(RSaveMotionPlusOption self, RO::ESaveMotionClipOption eOption)`
+- `GetMotionClipOption(RSaveMotionPlusOption self) -> RO::ESaveMotionClipOption`
+- `SetSaveTimecode(RSaveMotionPlusOption self, bool bSaveTimecode)`
+- `GetSaveTimecode(RSaveMotionPlusOption self) -> bool`
+- `SetTimecodeStartTime(RSaveMotionPlusOption self, double fTime)`
+- `GetTimecodeStartTime(RSaveMotionPlusOption self) -> double`
+- `SetTimecodeFps(RSaveMotionPlusOption self, float fFps)`
+- `GetTimecodeFps(RSaveMotionPlusOption self) -> float`
+
+### RSaveRangePair
+
 
 ### RScene
 
-- `RScene_GetSelectedObjects()`
-- `RScene_GetAvatars(*args)`
-- `RScene_GetProps()`
-- `RScene_GetMDProps()`
-- `RScene_GetBuildings()`
-- `RScene_GetCameras()`
-- `RScene_SelectObject(spObject)`
-- `RScene_SelectObjects(kObjects)`
-- `RScene_ClearSelectObjects()`
-- `RScene_RemoveObject(spObject)`
-- `RScene_FindObject(eType, strName)`
-- `RScene_FindObjects(*args)`
-- `RScene_FindChildObjects(spObject, eType, bAllLevel=True)`
-- `RScene_Show(spObject)`
-- `RScene_Hide(spObject)`
-- `RScene_GetCurrentCamera()`
-- `RScene_SetCurrentCamera(spCamera)`
-- `RScene_GetSwitchCameraFrameIndexs(kFps)`
-- `RScene_ClearSwitchCameraKeys()`
-- `RScene_AddSwitchCameraKey(kSetTime, spCamera)`
-- `RScene_GetRootNode()`
-- `RScene_CreateCollection(strNewCollectionName)`
-- `RScene_DeleteCollection(strCollectionName)`
-- `RScene_MoveToCollection(*args)`
-- `RScene_QueryObjectByID(strID)`
+- `GetSelectedObjects() -> ObjectVector`
+- `GetAvatars(RO::EAvatarType eAvatarType=All) -> ObjectVector`
+- `GetProps() -> PropVector`
+- `GetMDProps() -> MDPropVector`
+- `GetBuildings() -> BuildingObjectVector`
+- `GetCameras() -> CameraVector`
+- `SelectObject(RO::RIObjectPtr spObject) -> RStatus`
+- `SelectObjects(ObjectVector kObjects) -> RStatus`
+- `ClearSelectObjects() -> RStatus`
+- `RemoveObject(RO::RIObjectPtr spObject) -> RStatus`
+- `FindObject(RO::EObjectType eType, std::wstring const & strName) -> RO::RIObjectPtr`
+- `FindObjects(RO::EObjectType eType) -> ObjectVector`
+- `FindObjects(RO::EObjectType eType, std::wstring const & strName) -> ObjectVector`
+- `FindChildObjects(RO::RIObjectPtr spObject, RO::EObjectType eType, bool bAllLevel=True) -> ObjectVector`
+- `Show(RO::RIObjectPtr spObject)`
+- `Hide(RO::RIObjectPtr spObject)`
+- `GetCurrentCamera() -> RO::RICameraPtr`
+- `SetCurrentCamera(RO::RICameraPtr spCamera) -> RStatus`
+- `GetSwitchCameraFrameIndexs(RFps kFps) -> SwitchCameraFramePairs`
+- `ClearSwitchCameraKeys() -> RStatus`
+- `AddSwitchCameraKey(RTime kSetTime, RO::RICameraPtr spCamera) -> RStatus`
+- `GetRootNode() -> RO::RINodePtr`
+- `CreateCollection(std::wstring const & strNewCollectionName) -> RStatus`
+- `DeleteCollection(std::wstring const & strCollectionName) -> RStatus`
+- `MoveToCollection(ObjectVector kObjects, std::wstring const & strCollectionName) -> RStatus`
+- `MoveToCollection(RO::RIObjectPtr const & kObjects, std::wstring const & strCollectionName) -> RStatus`
+- `QueryObjectByID(std::string const & strID) -> RO::RIObjectPtr`
+
+### RSearchPaginationInfo
+
+
+### RSearchResultSnapshot
+
+
+### RSearchResultSnapshotVector
+
+- `iterator(RSearchResultSnapshotVector self) -> SwigPyIterator`
+- `pop(RSearchResultSnapshotVector self) -> RSearchResultSnapshot`
+- `append(RSearchResultSnapshotVector self, RSearchResultSnapshot x)`
+- `empty(RSearchResultSnapshotVector self) -> bool`
+- `size(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::size_type`
+- `swap(RSearchResultSnapshotVector self, RSearchResultSnapshotVector v)`
+- `begin(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::iterator`
+- `end(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::iterator`
+- `rbegin(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::reverse_iterator`
+- `rend(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::reverse_iterator`
+- `clear(RSearchResultSnapshotVector self)`
+- `get_allocator(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::allocator_type`
+- `pop_back(RSearchResultSnapshotVector self)`
+- `erase(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::iterator pos) -> std::vector< RO::RSearchResultSnapshot >::iterator`
+- `erase(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::iterator first, std::vector< RO::RSearchResultSnapshot >::iterator last) -> std::vector< RO::RSearchResultSnapshot >::iterator`
+- `push_back(RSearchResultSnapshotVector self, RSearchResultSnapshot x)`
+- `front(RSearchResultSnapshotVector self) -> RSearchResultSnapshot`
+- `back(RSearchResultSnapshotVector self) -> RSearchResultSnapshot`
+- `assign(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::size_type n, RSearchResultSnapshot x)`
+- `resize(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::size_type new_size)`
+- `resize(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::size_type new_size, RSearchResultSnapshot x)`
+- `insert(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::iterator pos, RSearchResultSnapshot x) -> std::vector< RO::RSearchResultSnapshot >::iterator`
+- `insert(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::iterator pos, std::vector< RO::RSearchResultSnapshot >::size_type n, RSearchResultSnapshot x)`
+- `reserve(RSearchResultSnapshotVector self, std::vector< RO::RSearchResultSnapshot >::size_type n)`
+- `capacity(RSearchResultSnapshotVector self) -> std::vector< RO::RSearchResultSnapshot >::size_type`
+
+### RStGenPackElementInfo
+
+
+### RStGenPackFloorInfo
+
+
+### RStGenPackMaterialInfo
+
+
+### RStGenPackStyleInfo
+
+
+### RStGenPackWallInfo
+
 
 ### RStatus
 
-- `RStatus_eq_cs(eCode, kStatus)`
-- `RStatus_ne_cs(eCode, kStatus)`
+- `IsError(RStatus self) -> bool`
+- `Clear(RStatus self)`
+- `GetStatusCode(RStatus self) -> RO::RStatus::RStatusCode`
+
+### RTcpCallback
+
+**Inherits from:** `RCallback`
+
+- `OnStatusChanged(RTcpCallback self, bool bIsConnected)`
+- `OnDataReceived(RTcpCallback self)`
+- `OnFailMessageReceived(RTcpCallback self, wchar_t const * pErrorMsg)`
+
+### RTcpClient
+
+- `Connect(RTcpClient self, std::wstring const & strIP, unsigned int const & uPort) -> RStatus`
+- `Disconnect(RTcpClient self) -> RStatus`
+- `IsConnected(RTcpClient self) -> bool`
+- `GetDataSize(RTcpClient self) -> int`
+- `GetDataSize(RTcpClient self, int nIndex) -> int`
+- `GetData(RTcpClient self, char * pBuffer)`
+- `GetDataAt(RTcpClient self, int nIndex, char * pBuffer)`
+- `SendData(RTcpClient self, char * pBuffer, int nDataSize) -> bool`
+- `SetMaximumDataCount(RTcpClient self, int nCount)`
+- `GetMaximumDataCount(RTcpClient self) -> int`
+- `GetDataCount(RTcpClient self) -> int`
+- `RegisterCallback(RTcpClient self, RTcpCallback pCallback)`
+- `UnregisterCallback(RTcpClient self)`
 
 ### RTick
 
-- `RTick_Tps()`
-- `RTick_Ms()`
-- `RTick_Hns()`
-- `RTick_FromSecond(*args)`
-- `RTick_FromMilliSecond(*args)`
-- `RTick_FromHns(*args)`
-- `RTick_ToSecond(*args)`
-- `RTick_ToMilliSecond(*args)`
+- `Tps() -> int32_t`
+- `Ms() -> int32_t`
+- `Hns() -> int64_t`
+- `FromSecond(int const & tSecond) -> RTime`
+- `FromSecond(float const & tSecond) -> RTime`
+- `FromMilliSecond(int const & tMs) -> RTime`
+- `FromMilliSecond(float const & tMs) -> RTime`
+- `FromHns(int const & tMs) -> RTime`
+- `FromHns(float const & tMs) -> RTime`
+- `ToSecond(int const & kTick) -> float const`
+- `ToSecond(float const & kTick) -> float const`
+- `ToMilliSecond(int const & kTick) -> float const`
+- `ToMilliSecond(float const & kTick) -> float const`
 
 ### RTime
 
-- `RTime_FromValue(tTick)`
+- `ToInt(RTime self) -> int`
+- `ToFloat(RTime self) -> float`
+- `ToDouble(RTime self) -> double`
+- `ToLong(RTime self) -> long`
+- `ToUInt32(RTime self) -> uint32_t`
+- `ToInt64(RTime self) -> int64_t`
+- `FromValue(int tTick) -> RTime`
+
+### RTime2IntMap
+
+- `iterator(RTime2IntMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(RTime2IntMap self, RTime key) -> bool`
+- `keys(RTime2IntMap self) -> PyObject *`
+- `values(RTime2IntMap self) -> PyObject *`
+- `items(RTime2IntMap self) -> PyObject *`
+- `key_iterator(RTime2IntMap self) -> SwigPyIterator`
+- `value_iterator(RTime2IntMap self) -> SwigPyIterator`
+- `asdict(RTime2IntMap self) -> PyObject *`
+- `empty(RTime2IntMap self) -> bool`
+- `size(RTime2IntMap self) -> std::map< RLTime,int >::size_type`
+- `swap(RTime2IntMap self, RTime2IntMap v)`
+- `begin(RTime2IntMap self) -> std::map< RLTime,int >::iterator`
+- `end(RTime2IntMap self) -> std::map< RLTime,int >::iterator`
+- `rbegin(RTime2IntMap self) -> std::map< RLTime,int >::reverse_iterator`
+- `rend(RTime2IntMap self) -> std::map< RLTime,int >::reverse_iterator`
+- `clear(RTime2IntMap self)`
+- `get_allocator(RTime2IntMap self) -> std::map< RLTime,int >::allocator_type`
+- `count(RTime2IntMap self, RTime x) -> std::map< RLTime,int >::size_type`
+- `erase(RTime2IntMap self, RTime x) -> std::map< RLTime,int >::size_type`
+- `erase(RTime2IntMap self, std::map< RLTime,int >::iterator position)`
+- `erase(RTime2IntMap self, std::map< RLTime,int >::iterator first, std::map< RLTime,int >::iterator last)`
+- `find(RTime2IntMap self, RTime x) -> std::map< RLTime,int >::iterator`
+- `lower_bound(RTime2IntMap self, RTime x) -> std::map< RLTime,int >::iterator`
+- `upper_bound(RTime2IntMap self, RTime x) -> std::map< RLTime,int >::iterator`
+
+### RTransform
+
+- `D(RTransform self) -> float`
+- `D(RTransform self) -> float const &`
+- `S(RTransform self) -> RVector3`
+- `S(RTransform self) -> RVector3`
+- `U(RTransform self) -> RQuaternion`
+- `U(RTransform self) -> RQuaternion`
+- `R(RTransform self) -> RQuaternion`
+- `R(RTransform self) -> RQuaternion`
+- `T(RTransform self) -> RVector3`
+- `T(RTransform self) -> RVector3`
+- `AlmostEqual(RTransform self, RTransform kRts) -> bool`
+- `AlmostSame(RTransform self, RTransform kRts, float tThreshold) -> bool`
+- `Inverse(RTransform self) -> RTransform`
+- `From(RTransform self, RMatrix4 mMatrix) -> RTransform`
+- `Scale(RTransform self) -> RMatrix3`
+- `Rotate(RTransform self) -> RMatrix3`
+- `GetSR(RTransform self) -> RMatrix3`
+- `Matrix(RTransform self) -> RMatrix4`
+- `IsIdentity(RTransform self) -> bool const`
+
+### RTransformControl
+
+**Inherits from:** `RControl`
+
+- `GetValue(RTransformControl self, RTime kTick, RTransform kValue) -> RStatus`
+- `SetValue(RTransformControl self, RTime kTick, RTransform kValue) -> RStatus`
+- `SetValueAt(RTransformControl self, uint32_t uIndex, RTransform kValue) -> RStatus`
+- `GetTransformKey(RTransformControl self, RTime kTick, RTransformKey pKey) -> RStatus`
+- `GetTransformKeyAt(RTransformControl self, uint32_t uIndex, RTransformKey pKey) -> RStatus`
+- `GetRotationOrder(RTransformControl self, Rotation_Order & eOrder) -> RStatus`
+- `UpdateData(RTransformControl self) -> RStatus`
+
+### RTransformKey
+
+**Inherits from:** `RKey`
+
+- `Clone(RTransformKey self) -> std::shared_ptr< RO::RKey >`
+- `SetTransform(RTransformKey self, RTransform kTransform)`
+- `GetTransform(RTransformKey self) -> RTransform`
+
+### RUdpCallback
+
+**Inherits from:** `RCallback`
+
+- `OnStatusChanged(RUdpCallback self, bool bIsConnected)`
+- `OnDataReceived(RUdpCallback self)`
+- `OnFailMessageReceived(RUdpCallback self, wchar_t const * pErrorMsg)`
+
+### RUdpClient
+
+- `Connect(RUdpClient self, std::wstring const & strIP, unsigned int const & uPort) -> RStatus`
+- `Disconnect(RUdpClient self) -> RStatus`
+- `IsConnected(RUdpClient self) -> bool`
+- `GetDataSize(RUdpClient self) -> int`
+- `GetDataSize(RUdpClient self, int nIndex) -> int`
+- `GetData(RUdpClient self, char * pBuffer)`
+- `GetDataAt(RUdpClient self, int nIndex, char * pBuffer)`
+- `SendData(RUdpClient self, char * pBuffer, int nDataSize, std::wstring const & strIP, unsigned int const & uPort) -> bool`
+- `SetMaximumDataCount(RUdpClient self, int nCount)`
+- `GetMaximumDataCount(RUdpClient self) -> int`
+- `GetDataCount(RUdpClient self) -> int`
+- `JoinMulticastGroup(RUdpClient self, std::wstring const & strIP)`
+- `RegisterCallback(RUdpClient self, RUdpCallback pCallback)`
+- `UnregisterCallback(RUdpClient self)`
 
 ### RUi
 
-- `RUi_GetMainWindow()`
-- `RUi_AddMenu(*args)`
-- `RUi_FindMenu(*args)`
-- `RUi_RemoveMenu(pMenu)`
-- `RUi_FindToolBar(strToolBarName)`
-- `RUi_AddHotKey(strKeySequence)`
-- `RUi_RemoveHotKey(pAction)`
-- `RUi_GetResolutionType()`
-- `RUi_GetCSSType()`
-- `RUi_ShowMessageBox(*args)`
-- `RUi_OpenFileDialog(*args)`
-- `RUi_OpenFilesDialog(*args)`
-- `RUi_SaveFileDialog(*args)`
-- `RUi_CreateRDialog(*args)`
-- `RUi_CreateRDockWidget()`
-- `RUi_AddContextMenu(spObject, strText)`
-- `RUi_RemoveContextMenu(spObject, pMenu)`
-- `RUi_AddContextAction(spObject, strText)`
-- `RUi_RemoveContextAction(spObject, pAction)`
-- `RUi_LoadLuaUI(strFilePath)`
-- `RUi_CallLuaFunction(strFilePath, strFunction, kParam, kReturn)`
-- `RUi_ShowProgressDialog(bShow, bCancelable=False, bPauseRender=True)`
-- `RUi_SetProgressStatusString(strStatus)`
-- `RUi_PushProgress(fProgress)`
-- `RUi_PopProgress()`
-- `RUi_IsProgressCancel()`
+- `GetMainWindow() -> QWidget *`
+- `AddMenu(std::wstring const & strMenuName, RO::EMenu eParent=Plugins) -> QMenu`
+- `FindMenu(std::wstring const & strMenuName, RO::EMenu eParent=Plugins) -> QMenu`
+- `RemoveMenu(QMenu * pMenu) -> RStatus`
+- `FindToolBar(std::wstring const & strToolBarName) -> QToolBar *`
+- `AddHotKey(std::wstring const & strKeySequence) -> QAction *`
+- `RemoveHotKey(QAction * pAction) -> RStatus`
+- `GetResolutionType() -> RO::EResolutionType`
+- `GetCSSType() -> RO::ECSSType`
+- `ShowMessageBox(std::wstring const & strTitle, std::wstring const & strMsg, RO::EMsgButton eBtn, bool bChecked=False, std::wstring const & strCheckBoxMsg=L"") -> int`
+- `ShowMessageBox(std::wstring const & strTitle, std::wstring const & strMsg, RMessageBoxButtonVector kBtns) -> int`
+- `OpenFileDialog(std::wstring const & strFilter, std::wstring const & strStartingDirectory=L"") -> std::wstring`
+- `OpenFilesDialog(std::wstring const & strFilter, std::wstring const & strStartingDirectory=L"") -> WStringVector`
+- `SaveFileDialog(std::wstring const & strFilter, std::wstring const & strStartingDirectory=L"") -> std::wstring`
+- `CreateRDialog(RO::EDialogType eDialogType=Normal) -> RIDialog`
+- `CreateRDockWidget() -> RIDockWidget`
+- `CreateRDockWidget(RO::ETitlebarOption eOption) -> RIDockWidget`
+- `AddContextMenu(RO::RIObjectPtr spObject, std::wstring const & strText) -> QMenu *`
+- `RemoveContextMenu(RO::RIObjectPtr spObject, QMenu * pMenu) -> RStatus`
+- `AddContextAction(RO::RIObjectPtr spObject, std::wstring const & strText) -> QAction *`
+- `RemoveContextAction(RO::RIObjectPtr spObject, QAction * pAction) -> RStatus`
+- `LoadLuaUI(std::wstring const & strFilePath) -> RStatus`
+- `CallLuaFunction(std::wstring const & strFilePath, std::wstring const & strFunction, RCustomValueArray kParam, RCustomValueArray kReturn) -> RStatus`
+- `ShowProgressDialog(bool bShow, bool bCancelable=False, bool bPauseRender=True) -> bool`
+- `SetProgressStatusString(std::wstring const & strStatus) -> RStatus`
+- `PushProgress(float fProgress) -> RStatus`
+- `PopProgress() -> RStatus`
+- `IsProgressCancel() -> bool`
+
+### RVariant
+
+- `GetType(RVariant self) -> RO::RVariant::Type`
+- `ToUInt32(RVariant self, bool * pSucess=None) -> uint32_t`
+- `ToInt32(RVariant self, bool * pSucess=None) -> int32_t`
+- `ToFloat(RVariant self, bool * pSucess=None) -> float`
+- `ToString(RVariant self, bool * pSuccess=None) -> std::wstring`
+- `ToBool(RVariant self, bool * pSuccess=None) -> bool`
+
+### RVector2
+
+- `X(RVector2 self) -> float const`
+- `X(RVector2 self) -> float &`
+- `Y(RVector2 self) -> float const`
+- `Y(RVector2 self) -> float &`
+- `SetX(RVector2 self, float const & tX)`
+- `SetY(RVector2 self, float const & tY)`
+- `Length(RVector2 self) -> float const`
+- `SquaredLength(RVector2 self) -> float const`
+- `Dot(RVector2 self, RVector2 vV) -> float const`
+- `Normalize(RVector2 self) -> float const`
+- `Inverse(RVector2 self) -> RVector2`
+- `Clear(RVector2 self)`
+- `AddWithWeight(RVector2 self, RVector2 vSrc, float fWeight)`
+- `AlmostZero(RVector2 self) -> bool`
+- `AlmostSame(RVector2 self, RVector2 vV, float fThreshold) -> bool`
+
+### RVector3
+
+- `X(RVector3 self) -> float const`
+- `X(RVector3 self) -> float &`
+- `Y(RVector3 self) -> float const`
+- `Y(RVector3 self) -> float &`
+- `Z(RVector3 self) -> float const`
+- `Z(RVector3 self) -> float &`
+- `GetPosition(RVector3 self) -> float const`
+- `GetPosition(RVector3 self) -> float *`
+- `SetXYZ(RVector3 self, float const & tX, float const & tY, float const & tZ)`
+- `XY(RVector3 self) -> RVector2`
+- `SetX(RVector3 self, float const & tX)`
+- `SetY(RVector3 self, float const & tY)`
+- `SetZ(RVector3 self, float const & tZ)`
+- `Clear(RVector3 self)`
+- `AddWithWeight(RVector3 self, RVector3 v, float fWeight)`
+- `AlmostEqual(RVector3 self, RVector3 vV) -> bool`
+- `Length(RVector3 self) -> float const`
+- `SquaredLength(RVector3 self) -> float const`
+- `Dot(RVector3 self, RVector3 vV) -> float const`
+- `Normalize(RVector3 self) -> float const`
+- `NormalizeConst(RVector3 self) -> RVector3`
+- `Inverse(RVector3 self) -> RVector3`
+- `Distance(RVector3 self, RVector3 vV) -> float const`
+- `SquaredDistance(RVector3 self, RVector3 vV) -> float const`
+- `Cross(RVector3 self, RVector3 vV) -> RVector3`
+- `Interpolate(RVector3 self, float const vRatio, RVector3 vV) -> RVector3`
+- `AlmostZero(RVector3 self) -> bool`
+- `AlmostTheSame(RVector3 self, RVector3 vV) -> bool`
+- `AlmostSame(RVector3 self, RVector3 vV, float fThreshold) -> bool`
+
+### RVector4
+
+- `X(RVector4 self) -> float const`
+- `X(RVector4 self) -> float &`
+- `Y(RVector4 self) -> float const`
+- `Y(RVector4 self) -> float &`
+- `Z(RVector4 self) -> float const`
+- `Z(RVector4 self) -> float &`
+- `W(RVector4 self) -> float const`
+- `W(RVector4 self) -> float &`
+- `XY(RVector4 self) -> RVector2`
+- `XYZ(RVector4 self) -> RVector3`
+- `SetX(RVector4 self, float const & tX)`
+- `SetY(RVector4 self, float const & tY)`
+- `SetZ(RVector4 self, float const & tZ)`
+- `SetW(RVector4 self, float const & tW)`
+- `Length(RVector4 self) -> float const`
+- `SquaredLength(RVector4 self) -> float const`
+- `Dot(RVector4 self, RVector4 vV) -> float const`
+- `Normalize(RVector4 self) -> float const`
+- `Inverse(RVector4 self) -> RVector4`
+- `AlmostZero(RVector4 self) -> bool`
+- `AlmostSame(RVector4 self, RVector4 vV, float fThreshold) -> bool`
 
 ### RVideo
 
-- `RVideo_LoadMediaToTarget(strObjName, strFilePath, eAction, fTargetHeight=200.0)`
+- `LoadMediaToTarget(std::wstring const & strObjName, std::wstring const & strFilePath, RO::EAPILoadMediaAction eAction, float fTargetHeight=200.0) -> RStatus`
+
+### RVisemeKey
+
+**Inherits from:** `RKey`
+
+- `Clone(RVisemeKey self) -> RO::RKeyPtr`
+- `SetID(RVisemeKey self, RO::EVisemeID eID)`
+- `GetID(RVisemeKey self) -> RO::EVisemeID`
+- `SetWeight(RVisemeKey self, float fValue)`
+- `GetWeight(RVisemeKey self) -> float`
+
+### RVisemeKeyVector
+
+- `iterator(RVisemeKeyVector self) -> SwigPyIterator`
+- `pop(RVisemeKeyVector self) -> RVisemeKey`
+- `append(RVisemeKeyVector self, RVisemeKey x)`
+- `empty(RVisemeKeyVector self) -> bool`
+- `size(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::size_type`
+- `swap(RVisemeKeyVector self, RVisemeKeyVector v)`
+- `begin(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::iterator`
+- `end(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::iterator`
+- `rbegin(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::reverse_iterator`
+- `rend(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::reverse_iterator`
+- `clear(RVisemeKeyVector self)`
+- `get_allocator(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::allocator_type`
+- `pop_back(RVisemeKeyVector self)`
+- `erase(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::iterator pos) -> std::vector< RO::RVisemeKey >::iterator`
+- `erase(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::iterator first, std::vector< RO::RVisemeKey >::iterator last) -> std::vector< RO::RVisemeKey >::iterator`
+- `push_back(RVisemeKeyVector self, RVisemeKey x)`
+- `front(RVisemeKeyVector self) -> RVisemeKey`
+- `back(RVisemeKeyVector self) -> RVisemeKey`
+- `assign(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::size_type n, RVisemeKey x)`
+- `resize(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::size_type new_size)`
+- `resize(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::size_type new_size, RVisemeKey x)`
+- `insert(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::iterator pos, RVisemeKey x) -> std::vector< RO::RVisemeKey >::iterator`
+- `insert(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::iterator pos, std::vector< RO::RVisemeKey >::size_type n, RVisemeKey x)`
+- `reserve(RVisemeKeyVector self, std::vector< RO::RVisemeKey >::size_type n)`
+- `capacity(RVisemeKeyVector self) -> std::vector< RO::RVisemeKey >::size_type`
+
+### RVisemeSmoothOption
+
+- `SetStrengthEnable(RVisemeSmoothOption self, bool bJawEnable, bool bLipsEnable, bool bTongueEnable)`
+- `SetStrengthValue(RVisemeSmoothOption self, float fJaw, float fLips, float fTongue)`
+- `SetSmoothEnable(RVisemeSmoothOption self, bool bJawEnable, bool bLipsEnable, bool bTongueEnable)`
+- `SetSmoothValue(RVisemeSmoothOption self, float fJaw, float fLips, float fTongue)`
+- `GetStrengthEnableSetting(RVisemeSmoothOption self) -> BoolVector`
+- `GetSmoothEnableSetting(RVisemeSmoothOption self) -> BoolVector`
+- `GetStrengthValueSetting(RVisemeSmoothOption self) -> FloatVector`
+- `GetSmoothValueSetting(RVisemeSmoothOption self) -> FloatVector`
 
 ### RWin32ApiKit
 
-- `RWin32ApiKit_FindWindowByTitleName(strTitleName)`
-- `RWin32ApiKit_GetForegroundWindow()`
-- `RWin32ApiKit_GetWindowName(pWnd)`
-- `RWin32ApiKit_GetWindowThreadProcessId(pWnd)`
-- `RWin32ApiKit_SendMessageToWindow(pWnd, strMsg)`
-- `RWin32ApiKit_IsWindowVisible(pWnd)`
+- `FindWindowByTitleName(std::wstring const & strTitleName) -> RL::CHandle *`
+- `GetForegroundWindow() -> RL::CHandle *`
+- `GetWindowName(RL::CHandle * pWnd) -> std::wstring`
+- `GetWindowThreadProcessId(RL::CHandle * pWnd) -> unsigned long`
+- `SendMessageToWindow(RL::CHandle * pWnd, std::string const & strMsg) -> bool`
+- `IsWindowVisible(RL::CHandle * pWnd) -> bool`
 
-### Other Functions
+### RWinMessageCallback
 
-- `FastInvSqrt_Walsh_Imp(*args)`
-- `FastSqrt_LogBase2_Imp(*args)`
-- `CanDoSmoothCameraInterpolate(kT0, kT1)`
-- `SmoothCameraTransformInterpolate(kT0, kT1, fRatio, kRts, vCameraUp, vCameraDir)`
-- `__mul__(*args)`
-- `__eq__(*args)`
-- `__ne__(*args)`
-- `__lt__(*args)`
-- `Saturate(*args)`
-- `abs(kTime)`
-- `GetFrameIndex(kTime, kFps)`
-- `GetFrameTime(kTime, kFps)`
-- `IndexedFrameTime(nFrameIndex, kFps)`
-- `__or__(*args)`
-- `__and__(*args)`
-- `__xor__(*args)`
-- `BitCheck(*args)`
-- `BitRemove(*args)`
-- `BitInverse(*args)`
+**Inherits from:** `RCallback`
+
+- `OnWinMsgReceieved(RWinMessageCallback self, wchar_t const * strMsg)`
+
+### RWordData
+
+
+### RWordDataVector
+
+- `iterator(RWordDataVector self) -> SwigPyIterator`
+- `pop(RWordDataVector self) -> RWordData`
+- `append(RWordDataVector self, RWordData x)`
+- `empty(RWordDataVector self) -> bool`
+- `size(RWordDataVector self) -> std::vector< RO::RWordData >::size_type`
+- `swap(RWordDataVector self, RWordDataVector v)`
+- `begin(RWordDataVector self) -> std::vector< RO::RWordData >::iterator`
+- `end(RWordDataVector self) -> std::vector< RO::RWordData >::iterator`
+- `rbegin(RWordDataVector self) -> std::vector< RO::RWordData >::reverse_iterator`
+- `rend(RWordDataVector self) -> std::vector< RO::RWordData >::reverse_iterator`
+- `clear(RWordDataVector self)`
+- `get_allocator(RWordDataVector self) -> std::vector< RO::RWordData >::allocator_type`
+- `pop_back(RWordDataVector self)`
+- `erase(RWordDataVector self, std::vector< RO::RWordData >::iterator pos) -> std::vector< RO::RWordData >::iterator`
+- `erase(RWordDataVector self, std::vector< RO::RWordData >::iterator first, std::vector< RO::RWordData >::iterator last) -> std::vector< RO::RWordData >::iterator`
+- `push_back(RWordDataVector self, RWordData x)`
+- `front(RWordDataVector self) -> RWordData`
+- `back(RWordDataVector self) -> RWordData`
+- `assign(RWordDataVector self, std::vector< RO::RWordData >::size_type n, RWordData x)`
+- `resize(RWordDataVector self, std::vector< RO::RWordData >::size_type new_size)`
+- `resize(RWordDataVector self, std::vector< RO::RWordData >::size_type new_size, RWordData x)`
+- `insert(RWordDataVector self, std::vector< RO::RWordData >::iterator pos, RWordData x) -> std::vector< RO::RWordData >::iterator`
+- `insert(RWordDataVector self, std::vector< RO::RWordData >::iterator pos, std::vector< RO::RWordData >::size_type n, RWordData x)`
+- `reserve(RWordDataVector self, std::vector< RO::RWordData >::size_type n)`
+- `capacity(RWordDataVector self) -> std::vector< RO::RWordData >::size_type`
+
+### SizetVector
+
+- `iterator(SizetVector self) -> SwigPyIterator`
+- `pop(SizetVector self) -> std::vector< size_t >::value_type`
+- `append(SizetVector self, std::vector< size_t >::value_type const & x)`
+- `empty(SizetVector self) -> bool`
+- `size(SizetVector self) -> std::vector< size_t >::size_type`
+- `swap(SizetVector self, SizetVector v)`
+- `begin(SizetVector self) -> std::vector< size_t >::iterator`
+- `end(SizetVector self) -> std::vector< size_t >::iterator`
+- `rbegin(SizetVector self) -> std::vector< size_t >::reverse_iterator`
+- `rend(SizetVector self) -> std::vector< size_t >::reverse_iterator`
+- `clear(SizetVector self)`
+- `get_allocator(SizetVector self) -> std::vector< size_t >::allocator_type`
+- `pop_back(SizetVector self)`
+- `erase(SizetVector self, std::vector< size_t >::iterator pos) -> std::vector< size_t >::iterator`
+- `erase(SizetVector self, std::vector< size_t >::iterator first, std::vector< size_t >::iterator last) -> std::vector< size_t >::iterator`
+- `push_back(SizetVector self, std::vector< size_t >::value_type const & x)`
+- `front(SizetVector self) -> std::vector< size_t >::value_type const &`
+- `back(SizetVector self) -> std::vector< size_t >::value_type const &`
+- `assign(SizetVector self, std::vector< size_t >::size_type n, std::vector< size_t >::value_type const & x)`
+- `resize(SizetVector self, std::vector< size_t >::size_type new_size)`
+- `resize(SizetVector self, std::vector< size_t >::size_type new_size, std::vector< size_t >::value_type const & x)`
+- `insert(SizetVector self, std::vector< size_t >::iterator pos, std::vector< size_t >::value_type const & x) -> std::vector< size_t >::iterator`
+- `insert(SizetVector self, std::vector< size_t >::iterator pos, std::vector< size_t >::size_type n, std::vector< size_t >::value_type const & x)`
+- `reserve(SizetVector self, std::vector< size_t >::size_type n)`
+- `capacity(SizetVector self) -> std::vector< size_t >::size_type`
+
+### StdMaterialVector
+
+- `iterator(StdMaterialVector self) -> SwigPyIterator`
+- `pop(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type`
+- `append(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const & x)`
+- `empty(StdMaterialVector self) -> bool`
+- `size(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type`
+- `swap(StdMaterialVector self, StdMaterialVector v)`
+- `begin(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator`
+- `end(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator`
+- `rbegin(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::reverse_iterator`
+- `rend(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::reverse_iterator`
+- `clear(StdMaterialVector self)`
+- `get_allocator(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::allocator_type`
+- `pop_back(StdMaterialVector self)`
+- `erase(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator`
+- `erase(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator first, std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator last) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator`
+- `push_back(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const & x)`
+- `front(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const &`
+- `back(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const &`
+- `assign(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type n, std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const & x)`
+- `resize(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type new_size)`
+- `resize(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type new_size, std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const & x)`
+- `insert(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator pos, std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator`
+- `insert(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::iterator pos, std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type n, std::vector< std::shared_ptr< RO::RIStdMaterial > >::value_type const & x)`
+- `reserve(StdMaterialVector self, std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type n)`
+- `capacity(StdMaterialVector self) -> std::vector< std::shared_ptr< RO::RIStdMaterial > >::size_type`
+
+### SwitchCameraFramePair
+
+
+### SwitchCameraFramePairs
+
+- `iterator(SwitchCameraFramePairs self) -> SwigPyIterator`
+- `pop(SwitchCameraFramePairs self) -> SwitchCameraFramePair`
+- `append(SwitchCameraFramePairs self, SwitchCameraFramePair x)`
+- `empty(SwitchCameraFramePairs self) -> bool`
+- `size(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type`
+- `swap(SwitchCameraFramePairs self, SwitchCameraFramePairs v)`
+- `begin(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator`
+- `end(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator`
+- `rbegin(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::reverse_iterator`
+- `rend(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::reverse_iterator`
+- `clear(SwitchCameraFramePairs self)`
+- `get_allocator(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::allocator_type`
+- `pop_back(SwitchCameraFramePairs self)`
+- `erase(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator pos) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator`
+- `erase(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator first, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator last) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator`
+- `push_back(SwitchCameraFramePairs self, SwitchCameraFramePair x)`
+- `front(SwitchCameraFramePairs self) -> SwitchCameraFramePair`
+- `back(SwitchCameraFramePairs self) -> SwitchCameraFramePair`
+- `assign(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type n, SwitchCameraFramePair x)`
+- `resize(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type new_size)`
+- `resize(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type new_size, SwitchCameraFramePair x)`
+- `insert(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator pos, SwitchCameraFramePair x) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator`
+- `insert(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::iterator pos, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type n, SwitchCameraFramePair x)`
+- `reserve(SwitchCameraFramePairs self, std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type n)`
+- `capacity(SwitchCameraFramePairs self) -> std::vector< std::pair< std::shared_ptr< RO::RIObject >,int > >::size_type`
+
+### TimeVector
+
+- `iterator(TimeVector self) -> SwigPyIterator`
+- `pop(TimeVector self) -> RTime`
+- `append(TimeVector self, RTime x)`
+- `empty(TimeVector self) -> bool`
+- `size(TimeVector self) -> std::vector< RLTime >::size_type`
+- `swap(TimeVector self, TimeVector v)`
+- `begin(TimeVector self) -> std::vector< RLTime >::iterator`
+- `end(TimeVector self) -> std::vector< RLTime >::iterator`
+- `rbegin(TimeVector self) -> std::vector< RLTime >::reverse_iterator`
+- `rend(TimeVector self) -> std::vector< RLTime >::reverse_iterator`
+- `clear(TimeVector self)`
+- `get_allocator(TimeVector self) -> std::vector< RLTime >::allocator_type`
+- `pop_back(TimeVector self)`
+- `erase(TimeVector self, std::vector< RLTime >::iterator pos) -> std::vector< RLTime >::iterator`
+- `erase(TimeVector self, std::vector< RLTime >::iterator first, std::vector< RLTime >::iterator last) -> std::vector< RLTime >::iterator`
+- `push_back(TimeVector self, RTime x)`
+- `front(TimeVector self) -> RTime`
+- `back(TimeVector self) -> RTime`
+- `assign(TimeVector self, std::vector< RLTime >::size_type n, RTime x)`
+- `resize(TimeVector self, std::vector< RLTime >::size_type new_size)`
+- `resize(TimeVector self, std::vector< RLTime >::size_type new_size, RTime x)`
+- `insert(TimeVector self, std::vector< RLTime >::iterator pos, RTime x) -> std::vector< RLTime >::iterator`
+- `insert(TimeVector self, std::vector< RLTime >::iterator pos, std::vector< RLTime >::size_type n, RTime x)`
+- `reserve(TimeVector self, std::vector< RLTime >::size_type n)`
+- `capacity(TimeVector self) -> std::vector< RLTime >::size_type`
+
+### UnitObjectVector
+
+- `iterator(UnitObjectVector self) -> SwigPyIterator`
+- `pop(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type`
+- `append(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const & x)`
+- `empty(UnitObjectVector self) -> bool`
+- `size(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type`
+- `swap(UnitObjectVector self, UnitObjectVector v)`
+- `begin(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator`
+- `end(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator`
+- `rbegin(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::reverse_iterator`
+- `rend(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::reverse_iterator`
+- `clear(UnitObjectVector self)`
+- `get_allocator(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::allocator_type`
+- `pop_back(UnitObjectVector self)`
+- `erase(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator`
+- `erase(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator first, std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator last) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator`
+- `push_back(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const & x)`
+- `front(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const &`
+- `back(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const &`
+- `assign(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type n, std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const & x)`
+- `resize(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type new_size)`
+- `resize(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type new_size, std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const & x)`
+- `insert(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator`
+- `insert(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type n, std::vector< std::shared_ptr< RO::RIUnitObject > >::value_type const & x)`
+- `reserve(UnitObjectVector self, std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type n)`
+- `capacity(UnitObjectVector self) -> std::vector< std::shared_ptr< RO::RIUnitObject > >::size_type`
+
+### Vector3fVector
+
+- `iterator(Vector3fVector self) -> SwigPyIterator`
+- `pop(Vector3fVector self) -> RVector3`
+- `append(Vector3fVector self, RVector3 x)`
+- `empty(Vector3fVector self) -> bool`
+- `size(Vector3fVector self) -> std::vector< RL::CVector3< float > >::size_type`
+- `swap(Vector3fVector self, Vector3fVector v)`
+- `begin(Vector3fVector self) -> std::vector< RL::CVector3< float > >::iterator`
+- `end(Vector3fVector self) -> std::vector< RL::CVector3< float > >::iterator`
+- `rbegin(Vector3fVector self) -> std::vector< RL::CVector3< float > >::reverse_iterator`
+- `rend(Vector3fVector self) -> std::vector< RL::CVector3< float > >::reverse_iterator`
+- `clear(Vector3fVector self)`
+- `get_allocator(Vector3fVector self) -> std::vector< RL::CVector3< float > >::allocator_type`
+- `pop_back(Vector3fVector self)`
+- `erase(Vector3fVector self, std::vector< RL::CVector3< float > >::iterator pos) -> std::vector< RL::CVector3< float > >::iterator`
+- `erase(Vector3fVector self, std::vector< RL::CVector3< float > >::iterator first, std::vector< RL::CVector3< float > >::iterator last) -> std::vector< RL::CVector3< float > >::iterator`
+- `push_back(Vector3fVector self, RVector3 x)`
+- `front(Vector3fVector self) -> RVector3`
+- `back(Vector3fVector self) -> RVector3`
+- `assign(Vector3fVector self, std::vector< RL::CVector3< float > >::size_type n, RVector3 x)`
+- `resize(Vector3fVector self, std::vector< RL::CVector3< float > >::size_type new_size)`
+- `resize(Vector3fVector self, std::vector< RL::CVector3< float > >::size_type new_size, RVector3 x)`
+- `insert(Vector3fVector self, std::vector< RL::CVector3< float > >::iterator pos, RVector3 x) -> std::vector< RL::CVector3< float > >::iterator`
+- `insert(Vector3fVector self, std::vector< RL::CVector3< float > >::iterator pos, std::vector< RL::CVector3< float > >::size_type n, RVector3 x)`
+- `reserve(Vector3fVector self, std::vector< RL::CVector3< float > >::size_type n)`
+- `capacity(Vector3fVector self) -> std::vector< RL::CVector3< float > >::size_type`
+
+### VectorOfFloatVector
+
+- `iterator(VectorOfFloatVector self) -> SwigPyIterator`
+- `pop(VectorOfFloatVector self) -> FloatVector`
+- `append(VectorOfFloatVector self, FloatVector x)`
+- `empty(VectorOfFloatVector self) -> bool`
+- `size(VectorOfFloatVector self) -> std::vector< std::vector< float > >::size_type`
+- `swap(VectorOfFloatVector self, VectorOfFloatVector v)`
+- `begin(VectorOfFloatVector self) -> std::vector< std::vector< float > >::iterator`
+- `end(VectorOfFloatVector self) -> std::vector< std::vector< float > >::iterator`
+- `rbegin(VectorOfFloatVector self) -> std::vector< std::vector< float > >::reverse_iterator`
+- `rend(VectorOfFloatVector self) -> std::vector< std::vector< float > >::reverse_iterator`
+- `clear(VectorOfFloatVector self)`
+- `get_allocator(VectorOfFloatVector self) -> std::vector< std::vector< float > >::allocator_type`
+- `pop_back(VectorOfFloatVector self)`
+- `erase(VectorOfFloatVector self, std::vector< std::vector< float > >::iterator pos) -> std::vector< std::vector< float > >::iterator`
+- `erase(VectorOfFloatVector self, std::vector< std::vector< float > >::iterator first, std::vector< std::vector< float > >::iterator last) -> std::vector< std::vector< float > >::iterator`
+- `push_back(VectorOfFloatVector self, FloatVector x)`
+- `front(VectorOfFloatVector self) -> FloatVector`
+- `back(VectorOfFloatVector self) -> FloatVector`
+- `assign(VectorOfFloatVector self, std::vector< std::vector< float > >::size_type n, FloatVector x)`
+- `resize(VectorOfFloatVector self, std::vector< std::vector< float > >::size_type new_size)`
+- `resize(VectorOfFloatVector self, std::vector< std::vector< float > >::size_type new_size, FloatVector x)`
+- `insert(VectorOfFloatVector self, std::vector< std::vector< float > >::iterator pos, FloatVector x) -> std::vector< std::vector< float > >::iterator`
+- `insert(VectorOfFloatVector self, std::vector< std::vector< float > >::iterator pos, std::vector< std::vector< float > >::size_type n, FloatVector x)`
+- `reserve(VectorOfFloatVector self, std::vector< std::vector< float > >::size_type n)`
+- `capacity(VectorOfFloatVector self) -> std::vector< std::vector< float > >::size_type`
+
+### VectorOfWStringVector
+
+- `iterator(VectorOfWStringVector self) -> SwigPyIterator`
+- `pop(VectorOfWStringVector self) -> WStringVector`
+- `append(VectorOfWStringVector self, WStringVector x)`
+- `empty(VectorOfWStringVector self) -> bool`
+- `size(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::size_type`
+- `swap(VectorOfWStringVector self, VectorOfWStringVector v)`
+- `begin(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::iterator`
+- `end(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::iterator`
+- `rbegin(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::reverse_iterator`
+- `rend(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::reverse_iterator`
+- `clear(VectorOfWStringVector self)`
+- `get_allocator(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::allocator_type`
+- `pop_back(VectorOfWStringVector self)`
+- `erase(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::iterator pos) -> std::vector< std::vector< std::wstring > >::iterator`
+- `erase(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::iterator first, std::vector< std::vector< std::wstring > >::iterator last) -> std::vector< std::vector< std::wstring > >::iterator`
+- `push_back(VectorOfWStringVector self, WStringVector x)`
+- `front(VectorOfWStringVector self) -> WStringVector`
+- `back(VectorOfWStringVector self) -> WStringVector`
+- `assign(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::size_type n, WStringVector x)`
+- `resize(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::size_type new_size)`
+- `resize(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::size_type new_size, WStringVector x)`
+- `insert(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::iterator pos, WStringVector x) -> std::vector< std::vector< std::wstring > >::iterator`
+- `insert(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::iterator pos, std::vector< std::vector< std::wstring > >::size_type n, WStringVector x)`
+- `reserve(VectorOfWStringVector self, std::vector< std::vector< std::wstring > >::size_type n)`
+- `capacity(VectorOfWStringVector self) -> std::vector< std::vector< std::wstring > >::size_type`
+
+### WBoneQniqueNameMap
+
+- `iterator(WBoneQniqueNameMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::key_type const & key) -> bool`
+- `keys(WBoneQniqueNameMap self) -> PyObject *`
+- `values(WBoneQniqueNameMap self) -> PyObject *`
+- `items(WBoneQniqueNameMap self) -> PyObject *`
+- `key_iterator(WBoneQniqueNameMap self) -> SwigPyIterator`
+- `value_iterator(WBoneQniqueNameMap self) -> SwigPyIterator`
+- `asdict(WBoneQniqueNameMap self) -> PyObject *`
+- `empty(WBoneQniqueNameMap self) -> bool`
+- `size(WBoneQniqueNameMap self) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::size_type`
+- `swap(WBoneQniqueNameMap self, WBoneQniqueNameMap v)`
+- `begin(WBoneQniqueNameMap self) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator`
+- `end(WBoneQniqueNameMap self) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator`
+- `rbegin(WBoneQniqueNameMap self) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::reverse_iterator`
+- `rend(WBoneQniqueNameMap self) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::reverse_iterator`
+- `clear(WBoneQniqueNameMap self)`
+- `get_allocator(WBoneQniqueNameMap self) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::allocator_type`
+- `count(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::key_type const & x) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::size_type`
+- `erase(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::key_type const & x) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::size_type`
+- `erase(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator position)`
+- `erase(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator first, std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator last)`
+- `find(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::key_type const & x) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator`
+- `lower_bound(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::key_type const & x) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator`
+- `upper_bound(WBoneQniqueNameMap self, std::map< std::shared_ptr< RO::RINode >,std::wstring >::key_type const & x) -> std::map< std::shared_ptr< RO::RINode >,std::wstring >::iterator`
+
+### WStr2FloatMap
+
+- `iterator(WStr2FloatMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(WStr2FloatMap self, std::map< std::wstring,float >::key_type const & key) -> bool`
+- `keys(WStr2FloatMap self) -> PyObject *`
+- `values(WStr2FloatMap self) -> PyObject *`
+- `items(WStr2FloatMap self) -> PyObject *`
+- `key_iterator(WStr2FloatMap self) -> SwigPyIterator`
+- `value_iterator(WStr2FloatMap self) -> SwigPyIterator`
+- `asdict(WStr2FloatMap self) -> PyObject *`
+- `empty(WStr2FloatMap self) -> bool`
+- `size(WStr2FloatMap self) -> std::map< std::wstring,float >::size_type`
+- `swap(WStr2FloatMap self, WStr2FloatMap v)`
+- `begin(WStr2FloatMap self) -> std::map< std::wstring,float >::iterator`
+- `end(WStr2FloatMap self) -> std::map< std::wstring,float >::iterator`
+- `rbegin(WStr2FloatMap self) -> std::map< std::wstring,float >::reverse_iterator`
+- `rend(WStr2FloatMap self) -> std::map< std::wstring,float >::reverse_iterator`
+- `clear(WStr2FloatMap self)`
+- `get_allocator(WStr2FloatMap self) -> std::map< std::wstring,float >::allocator_type`
+- `count(WStr2FloatMap self, std::map< std::wstring,float >::key_type const & x) -> std::map< std::wstring,float >::size_type`
+- `erase(WStr2FloatMap self, std::map< std::wstring,float >::key_type const & x) -> std::map< std::wstring,float >::size_type`
+- `erase(WStr2FloatMap self, std::map< std::wstring,float >::iterator position)`
+- `erase(WStr2FloatMap self, std::map< std::wstring,float >::iterator first, std::map< std::wstring,float >::iterator last)`
+- `find(WStr2FloatMap self, std::map< std::wstring,float >::key_type const & x) -> std::map< std::wstring,float >::iterator`
+- `lower_bound(WStr2FloatMap self, std::map< std::wstring,float >::key_type const & x) -> std::map< std::wstring,float >::iterator`
+- `upper_bound(WStr2FloatMap self, std::map< std::wstring,float >::key_type const & x) -> std::map< std::wstring,float >::iterator`
+
+### WStr2Matrix4fMap
+
+- `iterator(WStr2Matrix4fMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::key_type const & key) -> bool`
+- `keys(WStr2Matrix4fMap self) -> PyObject *`
+- `values(WStr2Matrix4fMap self) -> PyObject *`
+- `items(WStr2Matrix4fMap self) -> PyObject *`
+- `key_iterator(WStr2Matrix4fMap self) -> SwigPyIterator`
+- `value_iterator(WStr2Matrix4fMap self) -> SwigPyIterator`
+- `asdict(WStr2Matrix4fMap self) -> PyObject *`
+- `empty(WStr2Matrix4fMap self) -> bool`
+- `size(WStr2Matrix4fMap self) -> std::map< std::wstring,RL::CMatrix4< float > >::size_type`
+- `swap(WStr2Matrix4fMap self, WStr2Matrix4fMap v)`
+- `begin(WStr2Matrix4fMap self) -> std::map< std::wstring,RL::CMatrix4< float > >::iterator`
+- `end(WStr2Matrix4fMap self) -> std::map< std::wstring,RL::CMatrix4< float > >::iterator`
+- `rbegin(WStr2Matrix4fMap self) -> std::map< std::wstring,RL::CMatrix4< float > >::reverse_iterator`
+- `rend(WStr2Matrix4fMap self) -> std::map< std::wstring,RL::CMatrix4< float > >::reverse_iterator`
+- `clear(WStr2Matrix4fMap self)`
+- `get_allocator(WStr2Matrix4fMap self) -> std::map< std::wstring,RL::CMatrix4< float > >::allocator_type`
+- `count(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::key_type const & x) -> std::map< std::wstring,RL::CMatrix4< float > >::size_type`
+- `erase(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::key_type const & x) -> std::map< std::wstring,RL::CMatrix4< float > >::size_type`
+- `erase(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::iterator position)`
+- `erase(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::iterator first, std::map< std::wstring,RL::CMatrix4< float > >::iterator last)`
+- `find(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::key_type const & x) -> std::map< std::wstring,RL::CMatrix4< float > >::iterator`
+- `lower_bound(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::key_type const & x) -> std::map< std::wstring,RL::CMatrix4< float > >::iterator`
+- `upper_bound(WStr2Matrix4fMap self, std::map< std::wstring,RL::CMatrix4< float > >::key_type const & x) -> std::map< std::wstring,RL::CMatrix4< float > >::iterator`
+
+### WStrMap
+
+- `iterator(WStrMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(WStrMap self, std::map< std::wstring,std::wstring >::key_type const & key) -> bool`
+- `keys(WStrMap self) -> PyObject *`
+- `values(WStrMap self) -> PyObject *`
+- `items(WStrMap self) -> PyObject *`
+- `key_iterator(WStrMap self) -> SwigPyIterator`
+- `value_iterator(WStrMap self) -> SwigPyIterator`
+- `asdict(WStrMap self) -> PyObject *`
+- `empty(WStrMap self) -> bool`
+- `size(WStrMap self) -> std::map< std::wstring,std::wstring >::size_type`
+- `swap(WStrMap self, WStrMap v)`
+- `begin(WStrMap self) -> std::map< std::wstring,std::wstring >::iterator`
+- `end(WStrMap self) -> std::map< std::wstring,std::wstring >::iterator`
+- `rbegin(WStrMap self) -> std::map< std::wstring,std::wstring >::reverse_iterator`
+- `rend(WStrMap self) -> std::map< std::wstring,std::wstring >::reverse_iterator`
+- `clear(WStrMap self)`
+- `get_allocator(WStrMap self) -> std::map< std::wstring,std::wstring >::allocator_type`
+- `count(WStrMap self, std::map< std::wstring,std::wstring >::key_type const & x) -> std::map< std::wstring,std::wstring >::size_type`
+- `erase(WStrMap self, std::map< std::wstring,std::wstring >::key_type const & x) -> std::map< std::wstring,std::wstring >::size_type`
+- `erase(WStrMap self, std::map< std::wstring,std::wstring >::iterator position)`
+- `erase(WStrMap self, std::map< std::wstring,std::wstring >::iterator first, std::map< std::wstring,std::wstring >::iterator last)`
+- `find(WStrMap self, std::map< std::wstring,std::wstring >::key_type const & x) -> std::map< std::wstring,std::wstring >::iterator`
+- `lower_bound(WStrMap self, std::map< std::wstring,std::wstring >::key_type const & x) -> std::map< std::wstring,std::wstring >::iterator`
+- `upper_bound(WStrMap self, std::map< std::wstring,std::wstring >::key_type const & x) -> std::map< std::wstring,std::wstring >::iterator`
+
+### WStrTransformMap
+
+- `iterator(WStrTransformMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::key_type const & key) -> bool`
+- `keys(WStrTransformMap self) -> PyObject *`
+- `values(WStrTransformMap self) -> PyObject *`
+- `items(WStrTransformMap self) -> PyObject *`
+- `key_iterator(WStrTransformMap self) -> SwigPyIterator`
+- `value_iterator(WStrTransformMap self) -> SwigPyIterator`
+- `asdict(WStrTransformMap self) -> PyObject *`
+- `empty(WStrTransformMap self) -> bool`
+- `size(WStrTransformMap self) -> std::map< std::wstring,RL::CTransform< float > >::size_type`
+- `swap(WStrTransformMap self, WStrTransformMap v)`
+- `begin(WStrTransformMap self) -> std::map< std::wstring,RL::CTransform< float > >::iterator`
+- `end(WStrTransformMap self) -> std::map< std::wstring,RL::CTransform< float > >::iterator`
+- `rbegin(WStrTransformMap self) -> std::map< std::wstring,RL::CTransform< float > >::reverse_iterator`
+- `rend(WStrTransformMap self) -> std::map< std::wstring,RL::CTransform< float > >::reverse_iterator`
+- `clear(WStrTransformMap self)`
+- `get_allocator(WStrTransformMap self) -> std::map< std::wstring,RL::CTransform< float > >::allocator_type`
+- `count(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::key_type const & x) -> std::map< std::wstring,RL::CTransform< float > >::size_type`
+- `erase(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::key_type const & x) -> std::map< std::wstring,RL::CTransform< float > >::size_type`
+- `erase(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::iterator position)`
+- `erase(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::iterator first, std::map< std::wstring,RL::CTransform< float > >::iterator last)`
+- `find(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::key_type const & x) -> std::map< std::wstring,RL::CTransform< float > >::iterator`
+- `lower_bound(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::key_type const & x) -> std::map< std::wstring,RL::CTransform< float > >::iterator`
+- `upper_bound(WStrTransformMap self, std::map< std::wstring,RL::CTransform< float > >::key_type const & x) -> std::map< std::wstring,RL::CTransform< float > >::iterator`
+
+### WStrTransformVectorMap
+
+- `iterator(WStrTransformVectorMap self) -> SwigPyIterator`
+- `iterkeys`
+- `itervalues`
+- `iteritems`
+- `has_key(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::key_type const & key) -> bool`
+- `keys(WStrTransformVectorMap self) -> PyObject *`
+- `values(WStrTransformVectorMap self) -> PyObject *`
+- `items(WStrTransformVectorMap self) -> PyObject *`
+- `key_iterator(WStrTransformVectorMap self) -> SwigPyIterator`
+- `value_iterator(WStrTransformVectorMap self) -> SwigPyIterator`
+- `asdict(WStrTransformVectorMap self) -> PyObject *`
+- `empty(WStrTransformVectorMap self) -> bool`
+- `size(WStrTransformVectorMap self) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::size_type`
+- `swap(WStrTransformVectorMap self, WStrTransformVectorMap v)`
+- `begin(WStrTransformVectorMap self) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator`
+- `end(WStrTransformVectorMap self) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator`
+- `rbegin(WStrTransformVectorMap self) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::reverse_iterator`
+- `rend(WStrTransformVectorMap self) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::reverse_iterator`
+- `clear(WStrTransformVectorMap self)`
+- `get_allocator(WStrTransformVectorMap self) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::allocator_type`
+- `count(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::key_type const & x) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::size_type`
+- `erase(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::key_type const & x) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::size_type`
+- `erase(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator position)`
+- `erase(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator first, std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator last)`
+- `find(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::key_type const & x) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator`
+- `lower_bound(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::key_type const & x) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator`
+- `upper_bound(WStrTransformVectorMap self, std::map< std::wstring,std::vector< RL::CTransform< float > > >::key_type const & x) -> std::map< std::wstring,std::vector< RL::CTransform< float > > >::iterator`
+
+### WStringVector
+
+- `iterator(WStringVector self) -> SwigPyIterator`
+- `pop(WStringVector self) -> std::vector< std::wstring >::value_type`
+- `append(WStringVector self, std::vector< std::wstring >::value_type const & x)`
+- `empty(WStringVector self) -> bool`
+- `size(WStringVector self) -> std::vector< std::wstring >::size_type`
+- `swap(WStringVector self, WStringVector v)`
+- `begin(WStringVector self) -> std::vector< std::wstring >::iterator`
+- `end(WStringVector self) -> std::vector< std::wstring >::iterator`
+- `rbegin(WStringVector self) -> std::vector< std::wstring >::reverse_iterator`
+- `rend(WStringVector self) -> std::vector< std::wstring >::reverse_iterator`
+- `clear(WStringVector self)`
+- `get_allocator(WStringVector self) -> std::vector< std::wstring >::allocator_type`
+- `pop_back(WStringVector self)`
+- `erase(WStringVector self, std::vector< std::wstring >::iterator pos) -> std::vector< std::wstring >::iterator`
+- `erase(WStringVector self, std::vector< std::wstring >::iterator first, std::vector< std::wstring >::iterator last) -> std::vector< std::wstring >::iterator`
+- `push_back(WStringVector self, std::vector< std::wstring >::value_type const & x)`
+- `front(WStringVector self) -> std::vector< std::wstring >::value_type const &`
+- `back(WStringVector self) -> std::vector< std::wstring >::value_type const &`
+- `assign(WStringVector self, std::vector< std::wstring >::size_type n, std::vector< std::wstring >::value_type const & x)`
+- `resize(WStringVector self, std::vector< std::wstring >::size_type new_size)`
+- `resize(WStringVector self, std::vector< std::wstring >::size_type new_size, std::vector< std::wstring >::value_type const & x)`
+- `insert(WStringVector self, std::vector< std::wstring >::iterator pos, std::vector< std::wstring >::value_type const & x) -> std::vector< std::wstring >::iterator`
+- `insert(WStringVector self, std::vector< std::wstring >::iterator pos, std::vector< std::wstring >::size_type n, std::vector< std::wstring >::value_type const & x)`
+- `reserve(WStringVector self, std::vector< std::wstring >::size_type n)`
+- `capacity(WStringVector self) -> std::vector< std::wstring >::size_type`
+
+### WallInfoVector
+
+- `iterator(WallInfoVector self) -> SwigPyIterator`
+- `pop(WallInfoVector self) -> RStGenPackWallInfo`
+- `append(WallInfoVector self, RStGenPackWallInfo x)`
+- `empty(WallInfoVector self) -> bool`
+- `size(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::size_type`
+- `swap(WallInfoVector self, WallInfoVector v)`
+- `begin(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::iterator`
+- `end(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::iterator`
+- `rbegin(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::reverse_iterator`
+- `rend(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::reverse_iterator`
+- `clear(WallInfoVector self)`
+- `get_allocator(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::allocator_type`
+- `pop_back(WallInfoVector self)`
+- `erase(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::iterator pos) -> std::vector< RO::RStGenPackWallInfo >::iterator`
+- `erase(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::iterator first, std::vector< RO::RStGenPackWallInfo >::iterator last) -> std::vector< RO::RStGenPackWallInfo >::iterator`
+- `push_back(WallInfoVector self, RStGenPackWallInfo x)`
+- `front(WallInfoVector self) -> RStGenPackWallInfo`
+- `back(WallInfoVector self) -> RStGenPackWallInfo`
+- `assign(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::size_type n, RStGenPackWallInfo x)`
+- `resize(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::size_type new_size)`
+- `resize(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::size_type new_size, RStGenPackWallInfo x)`
+- `insert(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::iterator pos, RStGenPackWallInfo x) -> std::vector< RO::RStGenPackWallInfo >::iterator`
+- `insert(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::iterator pos, std::vector< RO::RStGenPackWallInfo >::size_type n, RStGenPackWallInfo x)`
+- `reserve(WallInfoVector self, std::vector< RO::RStGenPackWallInfo >::size_type n)`
+- `capacity(WallInfoVector self) -> std::vector< RO::RStGenPackWallInfo >::size_type`
+
+### WallObjectVector
+
+- `iterator(WallObjectVector self) -> SwigPyIterator`
+- `pop(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::value_type`
+- `append(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const & x)`
+- `empty(WallObjectVector self) -> bool`
+- `size(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::size_type`
+- `swap(WallObjectVector self, WallObjectVector v)`
+- `begin(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::iterator`
+- `end(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::iterator`
+- `rbegin(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::reverse_iterator`
+- `rend(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::reverse_iterator`
+- `clear(WallObjectVector self)`
+- `get_allocator(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::allocator_type`
+- `pop_back(WallObjectVector self)`
+- `erase(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::iterator pos) -> std::vector< std::shared_ptr< RO::RIWallObject > >::iterator`
+- `erase(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::iterator first, std::vector< std::shared_ptr< RO::RIWallObject > >::iterator last) -> std::vector< std::shared_ptr< RO::RIWallObject > >::iterator`
+- `push_back(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const & x)`
+- `front(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const &`
+- `back(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const &`
+- `assign(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::size_type n, std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const & x)`
+- `resize(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::size_type new_size)`
+- `resize(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::size_type new_size, std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const & x)`
+- `insert(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const & x) -> std::vector< std::shared_ptr< RO::RIWallObject > >::iterator`
+- `insert(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::iterator pos, std::vector< std::shared_ptr< RO::RIWallObject > >::size_type n, std::vector< std::shared_ptr< RO::RIWallObject > >::value_type const & x)`
+- `reserve(WallObjectVector self, std::vector< std::shared_ptr< RO::RIWallObject > >::size_type n)`
+- `capacity(WallObjectVector self) -> std::vector< std::shared_ptr< RO::RIWallObject > >::size_type`
+
+### WallPosition
+
+- `iterator(WallPosition self) -> SwigPyIterator`
+- `pop(WallPosition self) -> std::vector< enum RO::REPosition >::value_type`
+- `append(WallPosition self, std::vector< enum RO::REPosition >::value_type const & x)`
+- `empty(WallPosition self) -> bool`
+- `size(WallPosition self) -> std::vector< enum RO::REPosition >::size_type`
+- `swap(WallPosition self, WallPosition v)`
+- `begin(WallPosition self) -> std::vector< enum RO::REPosition >::iterator`
+- `end(WallPosition self) -> std::vector< enum RO::REPosition >::iterator`
+- `rbegin(WallPosition self) -> std::vector< enum RO::REPosition >::reverse_iterator`
+- `rend(WallPosition self) -> std::vector< enum RO::REPosition >::reverse_iterator`
+- `clear(WallPosition self)`
+- `get_allocator(WallPosition self) -> std::vector< enum RO::REPosition >::allocator_type`
+- `pop_back(WallPosition self)`
+- `erase(WallPosition self, std::vector< enum RO::REPosition >::iterator pos) -> std::vector< enum RO::REPosition >::iterator`
+- `erase(WallPosition self, std::vector< enum RO::REPosition >::iterator first, std::vector< enum RO::REPosition >::iterator last) -> std::vector< enum RO::REPosition >::iterator`
+- `push_back(WallPosition self, std::vector< enum RO::REPosition >::value_type const & x)`
+- `front(WallPosition self) -> std::vector< enum RO::REPosition >::value_type const &`
+- `back(WallPosition self) -> std::vector< enum RO::REPosition >::value_type const &`
+- `assign(WallPosition self, std::vector< enum RO::REPosition >::size_type n, std::vector< enum RO::REPosition >::value_type const & x)`
+- `resize(WallPosition self, std::vector< enum RO::REPosition >::size_type new_size)`
+- `resize(WallPosition self, std::vector< enum RO::REPosition >::size_type new_size, std::vector< enum RO::REPosition >::value_type const & x)`
+- `insert(WallPosition self, std::vector< enum RO::REPosition >::iterator pos, std::vector< enum RO::REPosition >::value_type const & x) -> std::vector< enum RO::REPosition >::iterator`
+- `insert(WallPosition self, std::vector< enum RO::REPosition >::iterator pos, std::vector< enum RO::REPosition >::size_type n, std::vector< enum RO::REPosition >::value_type const & x)`
+- `reserve(WallPosition self, std::vector< enum RO::REPosition >::size_type n)`
+- `capacity(WallPosition self) -> std::vector< enum RO::REPosition >::size_type`
+
+## Module functions
+
+- `BitCheck(RO::EAttributeType e1, RO::EAttributeType e2) -> bool`
+- `BitCheck(RO::EAttributeFlag e1, RO::EAttributeFlag e2) -> bool`
+- `BitCheck(RO::EControlType e1, RO::EControlType e2) -> bool`
+- `BitCheck(RO::EAnimContent e1, RO::EAnimContent e2) -> bool`
+- `BitCheck(RO::EObjectType e1, RO::EObjectType e2) -> bool`
+- `BitCheck(RO::EAlignAxis e1, RO::EAlignAxis e2) -> bool`
+- `BitCheck(RO::EExportFbxOptions e1, RO::EExportFbxOptions e2) -> bool`
+- `BitCheck(RO::EExportFbxOptions2 e1, RO::EExportFbxOptions2 e2) -> bool`
+- `BitCheck(RO::EExportFbxOptions3 e1, RO::EExportFbxOptions3 e2) -> bool`
+- `BitCheck(RO::ELoadFileOption e1, RO::ELoadFileOption e2) -> bool`
+- `BitCheck(RO::EExportTextureSize e1, RO::EExportTextureSize e2) -> bool`
+- `BitCheck(RO::EExportTextureFormat e1, RO::EExportTextureFormat e2) -> bool`
+- `BitCheck(RO::EExport3DFileOption e1, RO::EExport3DFileOption e2) -> bool`
+- `BitCheck(RO::EImportFbxOption e1, RO::EImportFbxOption e2) -> bool`
+- `BitCheck(RO::EUnrealBoneStructure e1, RO::EUnrealBoneStructure e2) -> bool`
+- `BitCheck(RO::ESaveFacialAnimationOption e1, RO::ESaveFacialAnimationOption e2) -> bool`
+- `BitCheck(RO::ESaveMotionPlusOption e1, RO::ESaveMotionPlusOption e2) -> bool`
+- `BitCheck(RO::ESaveMotionClipOption e1, RO::ESaveMotionClipOption e2) -> bool`
+- `BitCheck(RO::EDeviceType e1, RO::EDeviceType e2) -> bool`
+- `BitCheck(RO::EBodyActivePart e1, RO::EBodyActivePart e2) -> bool`
+- `BitCheck(RO::ECoordinateAxes e1, RO::ECoordinateAxes e2) -> bool`
+- `BitCheck(RO::EDockWidgetAreas e1, RO::EDockWidgetAreas e2) -> bool`
+- `BitInverse(RO::EAttributeType eSource) -> RO::EAttributeType`
+- `BitInverse(RO::EAttributeFlag eSource) -> RO::EAttributeFlag`
+- `BitInverse(RO::EControlType eSource) -> RO::EControlType`
+- `BitInverse(RO::EAnimContent eSource) -> RO::EAnimContent`
+- `BitInverse(RO::EObjectType eSource) -> RO::EObjectType`
+- `BitInverse(RO::EAlignAxis eSource) -> RO::EAlignAxis`
+- `BitInverse(RO::EExportFbxOptions eSource) -> RO::EExportFbxOptions`
+- `BitInverse(RO::EExportFbxOptions2 eSource) -> RO::EExportFbxOptions2`
+- `BitInverse(RO::EExportFbxOptions3 eSource) -> RO::EExportFbxOptions3`
+- `BitInverse(RO::ELoadFileOption eSource) -> RO::ELoadFileOption`
+- `BitInverse(RO::EExportTextureSize eSource) -> RO::EExportTextureSize`
+- `BitInverse(RO::EExportTextureFormat eSource) -> RO::EExportTextureFormat`
+- `BitInverse(RO::EExport3DFileOption eSource) -> RO::EExport3DFileOption`
+- `BitInverse(RO::EImportFbxOption eSource) -> RO::EImportFbxOption`
+- `BitInverse(RO::EUnrealBoneStructure eSource) -> RO::EUnrealBoneStructure`
+- `BitInverse(RO::ESaveFacialAnimationOption eSource) -> RO::ESaveFacialAnimationOption`
+- `BitInverse(RO::ESaveMotionPlusOption eSource) -> RO::ESaveMotionPlusOption`
+- `BitInverse(RO::ESaveMotionClipOption eSource) -> RO::ESaveMotionClipOption`
+- `BitInverse(RO::EDeviceType eSource) -> RO::EDeviceType`
+- `BitInverse(RO::EBodyActivePart eSource) -> RO::EBodyActivePart`
+- `BitInverse(RO::ECoordinateAxes eSource) -> RO::ECoordinateAxes`
+- `BitInverse(RO::EDockWidgetAreas eSource) -> RO::EDockWidgetAreas`
+- `BitRemove(RO::EAttributeType eSource, RO::EAttributeType eRemove) -> RO::EAttributeType`
+- `BitRemove(RO::EAttributeFlag eSource, RO::EAttributeFlag eRemove) -> RO::EAttributeFlag`
+- `BitRemove(RO::EControlType eSource, RO::EControlType eRemove) -> RO::EControlType`
+- `BitRemove(RO::EAnimContent eSource, RO::EAnimContent eRemove) -> RO::EAnimContent`
+- `BitRemove(RO::EObjectType eSource, RO::EObjectType eRemove) -> RO::EObjectType`
+- `BitRemove(RO::EAlignAxis eSource, RO::EAlignAxis eRemove) -> RO::EAlignAxis`
+- `BitRemove(RO::EExportFbxOptions eSource, RO::EExportFbxOptions eRemove) -> RO::EExportFbxOptions`
+- `BitRemove(RO::EExportFbxOptions2 eSource, RO::EExportFbxOptions2 eRemove) -> RO::EExportFbxOptions2`
+- `BitRemove(RO::EExportFbxOptions3 eSource, RO::EExportFbxOptions3 eRemove) -> RO::EExportFbxOptions3`
+- `BitRemove(RO::ELoadFileOption eSource, RO::ELoadFileOption eRemove) -> RO::ELoadFileOption`
+- `BitRemove(RO::EExportTextureSize eSource, RO::EExportTextureSize eRemove) -> RO::EExportTextureSize`
+- `BitRemove(RO::EExportTextureFormat eSource, RO::EExportTextureFormat eRemove) -> RO::EExportTextureFormat`
+- `BitRemove(RO::EExport3DFileOption eSource, RO::EExport3DFileOption eRemove) -> RO::EExport3DFileOption`
+- `BitRemove(RO::EImportFbxOption eSource, RO::EImportFbxOption eRemove) -> RO::EImportFbxOption`
+- `BitRemove(RO::EUnrealBoneStructure eSource, RO::EUnrealBoneStructure eRemove) -> RO::EUnrealBoneStructure`
+- `BitRemove(RO::ESaveFacialAnimationOption eSource, RO::ESaveFacialAnimationOption eRemove) -> RO::ESaveFacialAnimationOption`
+- `BitRemove(RO::ESaveMotionPlusOption eSource, RO::ESaveMotionPlusOption eRemove) -> RO::ESaveMotionPlusOption`
+- `BitRemove(RO::ESaveMotionClipOption eSource, RO::ESaveMotionClipOption eRemove) -> RO::ESaveMotionClipOption`
+- `BitRemove(RO::EDeviceType eSource, RO::EDeviceType eRemove) -> RO::EDeviceType`
+- `BitRemove(RO::EBodyActivePart eSource, RO::EBodyActivePart eRemove) -> RO::EBodyActivePart`
+- `BitRemove(RO::ECoordinateAxes eSource, RO::ECoordinateAxes eRemove) -> RO::ECoordinateAxes`
+- `BitRemove(RO::EDockWidgetAreas eSource, RO::EDockWidgetAreas eRemove) -> RO::EDockWidgetAreas`
+- `CanDoSmoothCameraInterpolate(RTransform kT0, RTransform kT1) -> bool`
+- `FastInvSqrt_Walsh_Imp(float const x) -> float`
+- `FastInvSqrt_Walsh_Imp(double const x) -> double`
+- `FastSqrt_LogBase2_Imp(float const x) -> float`
+- `FastSqrt_LogBase2_Imp(double const x) -> double`
+- `GetFrameIndex(RTime kTime, RFps kFps) -> int32_t`
+- `GetFrameTime(RTime kTime, RFps kFps) -> RTime`
+- `IndexedFrameTime(int32_t nFrameIndex, RFps kFps) -> RTime`
+- `RApplication_ExecuteSearchByImage(std::wstring const & strImagePath)`
+- `RApplication_ExecuteSearchByText(std::wstring const & strSearchText)`
+- `RApplication_GetApiMajorVersion() -> int`
+- `RApplication_GetApiMinorVersion() -> int`
+- `RApplication_GetApiVersion() -> IntVector`
+- `RApplication_GetContentFilesInFolder(std::wstring const & strFolder) -> WStringVector`
+- `RApplication_GetContentFoldersInFolder(std::wstring const & strFolder) -> WStringVector`
+- `RApplication_GetContentId(std::wstring const & strFilePath) -> std::wstring`
+- `RApplication_GetCurrentProjectPath() -> std::wstring`
+- `RApplication_GetCustomContentFolder(RO::ETemplateRootFolder eFolderType) -> std::wstring`
+- `RApplication_GetCustomDataPath() -> std::wstring`
+- `RApplication_GetDefaultContentFolder(RO::ETemplateRootFolder eFolderType) -> std::wstring`
+- `RApplication_GetDefaultProjectPath() -> std::wstring`
+- `RApplication_GetFilePathByContentID(std::wstring const & strContentID) -> std::wstring`
+- `RApplication_GetProductEdition() -> std::wstring`
+- `RApplication_GetProductMajorVersion() -> int`
+- `RApplication_GetProductMinorVersion() -> int`
+- `RApplication_GetProductName() -> std::wstring`
+- `RApplication_GetProductVersion() -> IntVector`
+- `RApplication_GetProgramPath() -> std::wstring`
+- `RApplication_GetSearchPaginationInfo() -> RSearchPaginationInfo`
+- `RApplication_GetSearchResultCount() -> int`
+- `RApplication_GetSearchResultSnapshot() -> RSearchResultSnapshotVector`
+- `RApplication_GetTemplateDataPath() -> std::wstring`
+- `RApplication_SetSearchContext(RO::EContentManagerSearchMode eSearchMode, RO::EContentManagerSearchMainTab eMainTab=AIStudio, RO::EContentManagerSearchSubTab eSubTab=Item)`
+- `RApplication_SetSearchPage(int nPage)`
+- `RApplication_WaitForSearchFinish(int nTimeoutMs=10000) -> bool`
+- `RAudio_CreateAudioObject() -> RIAudioObject`
+- `RAudio_LoadAudioToObject(RO::RIObjectPtr spObject, std::wstring const & strAudioPath, RTime kStartTick, int nLoopCount=1, RTime kFadeIn=ZERO, RTime kFadeOut=ZERO, RTime kCutLength=ZERO) -> float`
+- `RAudio_LoadAudioToObject(RO::RIObjectPtr spObject, RIAudioObject pAudioObject, RTime kStartTick, int nLoopCount=1, RTime kFadeIn=ZERO, RTime kFadeOut=ZERO, RTime kCutLength=ZERO) -> float`
+- `RDataBlock_Create(RAttributePtrVector kAttributes) -> std::shared_ptr< RO::RDataBlock >`
+- `REventHandler_RegisterCallback(REventCallback pCallback) -> size_t`
+- `REventHandler_SetListener(RIEventListener pListener)`
+- `REventHandler_UnregisterCallback(size_t uId) -> RStatus`
+- `REventHandler_UnregisterCallbacks(SizetVector kIds) -> RStatus`
+- `RFileIO_CheckExportFbxHasLicense(RO::RIObjectPtr spObject) -> bool`
+- `RFileIO_ConvertFbxFileToRLMotion(std::wstring const & strFilePath, std::wstring const & strSaveFolderPath, std::wstring const & strTPoseFilePath=L"", std::wstring const & strThumbnailPath=L"", float fThumbnailSec=0.) -> RStatus`
+- `RFileIO_ExportBvhFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath) -> RStatus`
+- `RFileIO_ExportBvhFile2(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RTime kStartTime=ZERO, RTime kEndTime=ZERO, bool bSampleZ=True, bool bYUp=True, bool bShowProgress=True) -> RStatus`
+- `RFileIO_ExportFbxFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RO::EExportFbxOptions eOptions, RO::EExportFbxOptions2 eOptions2, RO::EExportFbxOptions3 eOptions3, RO::EExportTextureSize eTextureSize=Original, RO::EExportTextureFormat eFormat=Default, std::wstring const & strIncludeMotionPath=L"") -> RStatus`
+- `RFileIO_ExportFbxFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RExportFbxSetting kSetting) -> RStatus`
+- `RFileIO_ExportGoZFile(ObjectVector kObjects, std::wstring const & strFolderPath, RExportGoZMeshOption kSetting) -> RStatus`
+- `RFileIO_ExportMultiPoseGoZFile(ObjectVector kObjects, WStringVector kFolderPaths, RExportGoZMeshOptionVector kSettings) -> RStatus`
+- `RFileIO_ExportObjFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RO::EExport3DFileOption eOption, std::wstring const & strPoseFilePath=L"") -> RStatus`
+- `RFileIO_ExportUsdFile(std::wstring const & strFilePath, std::wstring const & strPrimeName, float const & fUsdMeterPerUnit, RO::EMaterialType eMaterialType, RO::EIncludeMotionType eIncludeMotionType, RO::EPostEffect ePostEffect, RSUsdExportOption sUsdExportOption) -> RStatus`
+- `RFileIO_GetTagsFromFileHeader(std::wstring const & strFilePath, WStringVector kTagList, RO::ETagType eType) -> RStatus`
+- `RFileIO_IsCompatibleWithExportOption(RO::RIObjectPtr spObject, RExportFbxSetting kSetting) -> bool`
+- `RFileIO_LoadAlembicFile(RO::RIObjectPtr spObject, std::wstring const & strFilePath, RO::ECoordinateAxis eUpAxis) -> RStatus`
+- `RFileIO_LoadClotheFromFbx(RO::RIObjectPtr pAvatar, std::wstring const & strFilePath, WStringVector kFailedMeshList) -> RStatus`
+- `RFileIO_LoadFacialProfile(std::wstring const & strFilePath, RO::RIObjectPtr spObject=0, bool bRecordStep=True, bool bKeepEyeBlinkJawOpen=False) -> RStatus`
+- `RFileIO_LoadFbxFile(std::wstring const & strFilePath, RO::EImportFbxOption eFbxOption=_None, std::wstring const & strFbxKeyFilePath=L"", std::wstring const & strNudeTemplateFilePath=L"", bool bRecordStep=True) -> RStatus`
+- `RFileIO_LoadFile(std::wstring const & strFilePath, bool bRecordStep=True, RO::RIObjectPtr spObject=0, RTime kTime=NEGATIVE_ONE, RO::ELoadFileOption eOption=_None) -> RStatus`
+- `RFileIO_LoadMotion(std::wstring const & strFilePath, RTime kTime, RO::RIObjectPtr spObject) -> RStatus`
+- `RFileIO_LoadObject(std::wstring const & strFilePath, bool bRecordStep=True) -> RO::RIObjectPtr`
+- `RFileIO_LoadProject(std::wstring const & strFilePath) -> RStatus`
+- `RFileIO_LoadSubstancePainterTextures(RO::RIObjectPtr spObject, std::wstring const & strFolderPath) -> RStatus`
+- `RFileIO_OutputDefaultPresetJson(std::wstring const & strObjectFileName, std::wstring const & strBasePath) -> RStatus`
+- `RFileIO_PreLoadMotion(std::wstring const & strFilePath, RO::RIObjectPtr spObject, RTime kMotionLength) -> RStatus`
+- `RFileIO_SaveFile(RO::RIObjectPtr spObject, RSaveFileSetting kSaveSetting, std::wstring const & strSavePath) -> RStatus`
+- `RFileIO_SaveProject(std::wstring const & strFilePath) -> RStatus`
+- `RFileIO_SaveThumbnailToFile(std::wstring const & strRLFile, std::wstring const & strSaveTo) -> RStatus`
+- `RGlobal_AddInfoTips(uint64_t pObjPtr, std::wstring const & strImageSource, std::wstring const & strFunctionName, std::wstring const & strDescription, std::wstring const & strVideoURLLinkcountId, std::wstring const & strButtonText, std::wstring const & strLearnMoreURL)`
+- `RGlobal_BeginAction(std::wstring const & strAction, bool bBlockRecordUndo=False)`
+- `RGlobal_CapturePixelStream() -> RO::PixelStreamCaptureFramePtr`
+- `RGlobal_CheckTimecodePluginFeatureAllowed() -> bool`
+- `RGlobal_CheckTimecodePluginFullOrTiralInstalled() -> bool`
+- `RGlobal_CheckTimecodePluginTrialValid() -> bool`
+- `RGlobal_DoBatchSNVerification(std::wstring const & strJson) -> std::wstring`
+- `RGlobal_DoPluginTrialFollowUp(std::wstring const & strProductNamePath, unsigned int nPID)`
+- `RGlobal_DoSNVerification(int nProductID, std::wstring const & strRegistry, std::wstring const & strProductName, std::wstring const & strSNFailTitle, std::wstring const & strSNFailMsg, std::wstring const & strSNExceedTitle, std::wstring const & strSNExceedMsg) -> bool`
+- `RGlobal_EnablePixelStream(bool bEnable)`
+- `RGlobal_EndAction()`
+- `RGlobal_ForceViewportUpdate() -> RStatus`
+- `RGlobal_GetDefaultContentFileAbsolutePath(RO::EContentRootFolder eContent, bool bCustom) -> std::wstring`
+- `RGlobal_GetDialogMode() -> RO::EModeType`
+- `RGlobal_GetEndTime() -> RTime`
+- `RGlobal_GetFps() -> RFps`
+- `RGlobal_GetMocapManager() -> RO::RIMocapManagerPtr`
+- `RGlobal_GetMotionDirector() -> RO::RIMotionDirectorManagerPtr`
+- `RGlobal_GetMotionSettingOptions() -> RO::EMotionSettingOption`
+- `RGlobal_GetObjectSubdivisionSetting(RO::RIObjectPtr spObject) -> RMeshSubdivisionSetting`
+- `RGlobal_GetOmniConnectorManager() -> RO::RIOmniConnectorManagerPtr`
+- `RGlobal_GetPath(RO::EPathType ePath, std::wstring & strPath) -> RStatus`
+- `RGlobal_GetPreviewEndTime() -> RTime`
+- `RGlobal_GetPreviewStartTime() -> RTime`
+- `RGlobal_GetProjectLength() -> RTime`
+- `RGlobal_GetRealtimeRenderOptions() -> RRealtimeRenderOptions`
+- `RGlobal_GetRenderExportAudioParameter() -> RExportAudioParameter`
+- `RGlobal_GetRenderExportImageParameter() -> RExportImageParameter`
+- `RGlobal_GetRenderExportImageSequenceParameter() -> RExportImageSequenceParameter`
+- `RGlobal_GetRenderExportType() -> RO::RExportType`
+- `RGlobal_GetRenderExportVideoParameter() -> RExportVideoParameter`
+- `RGlobal_GetScreenSize(int & nWidth, int & nHeight) -> RStatus`
+- `RGlobal_GetSilentMode() -> bool`
+- `RGlobal_GetStartTime() -> RTime`
+- `RGlobal_GetTime() -> RTime`
+- `RGlobal_GetTimecodeTime() -> double`
+- `RGlobal_GetViewSize(int & nWidth, int & nHeight) -> RStatus`
+- `RGlobal_GetVisualSettingComponent() -> RO::RIVisualSettingComponentPtr`
+- `RGlobal_IsPhysicsSimulationLoop() -> bool`
+- `RGlobal_IsPlaying() -> bool`
+- `RGlobal_IsTrialContentMode() -> bool`
+- `RGlobal_IsTrialVersion() -> bool`
+- `RGlobal_ObjectDataChanged2(RO::RIObjectPtr spObject, RO::EObjectEventType eType)`
+- `RGlobal_ObjectModified(RO::RIObjectPtr spObject, RO::EObjectModifiedType eType)`
+- `RGlobal_Pause()`
+- `RGlobal_Play(RTime kStart, RTime kEnd)`
+- `RGlobal_Redo()`
+- `RGlobal_RemoveAllAnimations(RO::RIObjectPtr spObject) -> RStatus`
+- `RGlobal_RenderAudio(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderImage(std::wstring const & strOutputFileName) -> RStatus`
+- `RGlobal_RenderImageSequence(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderImageSequenceCanny(RTime kStartTime, RTime kEndTime, REdgeDetectionCannyParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderImageSequenceDepth(RTime kStartTime, RTime kEndTime, RDepthParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderImageSequenceNormal(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderImageSequenceOpenPoseKeyPoint(RTime kStartTime, RTime kEndTime, ROpenPoseKeyPointParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderPreview(std::wstring const & strFileName=L"") -> RStatus`
+- `RGlobal_RenderPreviewCanny(REdgeDetectionCannyParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderPreviewDepth(RDepthParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderPreviewNormal(std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderPreviewOpenPoseKeyPoint(ROpenPoseKeyPointParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderVideo(std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderVideo(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderVideoCanny(RTime kStartTime, RTime kEndTime, REdgeDetectionCannyParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderVideoDepth(RTime kStartTime, RTime kEndTime, RDepthParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderVideoNormal(RTime kStartTime, RTime kEndTime, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_RenderVideoOpenPoseKeyPoint(RTime kStartTime, RTime kEndTime, ROpenPoseKeyPointParam kParam, std::wstring strFileName=L"") -> RStatus`
+- `RGlobal_SendLogToServer(std::string const & strApStep, std::wstring const & strLogDescription)`
+- `RGlobal_SendLogToServer(std::string const & strPluginName)`
+- `RGlobal_SetDialogMode(RO::EModeType eMode)`
+- `RGlobal_SetEndTime(RTime kTime) -> RStatus`
+- `RGlobal_SetMotionSettingOptions(RO::EMotionSettingOption eOptions) -> RStatus`
+- `RGlobal_SetObjectSubdivisionSetting(RO::RIObjectPtr spObject, RMeshSubdivisionSetting kSetting) -> RStatus`
+- `RGlobal_SetPhysicsSimulationLoop(bool bLoop)`
+- `RGlobal_SetPreviewEndTime(RTime kTime) -> RStatus`
+- `RGlobal_SetPreviewStartTime(RTime kTime) -> RStatus`
+- `RGlobal_SetProjectLength(RTime kLength) -> RStatus`
+- `RGlobal_SetRealtimeRenderOptions(RRealtimeRenderOptions kParams)`
+- `RGlobal_SetRenderExportParameter(RExportImageParameter kParams)`
+- `RGlobal_SetRenderExportParameter(RExportImageSequenceParameter kParams)`
+- `RGlobal_SetRenderExportParameter(RExportVideoParameter kParams)`
+- `RGlobal_SetRenderExportParameter(RExportAudioParameter kParams)`
+- `RGlobal_SetRenderExportType(RO::RExportType kParams)`
+- `RGlobal_SetSilentMode(bool bSilent)`
+- `RGlobal_SetStartTime(RTime kTime) -> RStatus`
+- `RGlobal_SetTime(RTime kTime, bool bSendEvent=True) -> RStatus`
+- `RGlobal_SetTimecodeSource(RO::ETimecodeSource eSource)`
+- `RGlobal_SetTimecodeSourceData(RO::ETimecodeSource eSource, std::wstring const & strFormattedTime)`
+- `RGlobal_SetViewSize(unsigned int nWidth, unsigned int nHeight) -> RStatus`
+- `RGlobal_SetViewportInfoMotionLiveDevice(std::wstring const & strDevice=L"")`
+- `RGlobal_ShowMemberLoginDialog()`
+- `RGlobal_Stop()`
+- `RGlobal_TrialVersionIncreaseTimes(std::wstring const & strBinPath, unsigned int uProductID, std::wstring const & strProductFold, std::wstring const & strRegRoot, unsigned int nCount=1) -> RStatus`
+- `RGlobal_TrialVersionRemainingDays(std::wstring const & strBinPath, unsigned int uProductID, std::wstring const & strProductFold, std::wstring const & strRegRoot) -> int`
+- `RGlobal_TrialVersionRemainingTimes(std::wstring const & strBinPath, unsigned int uProductID, std::wstring const & strProductFold, std::wstring const & strRegRoot, unsigned int uTimeNo) -> int`
+- `RGlobal_Undo()`
+- `RHeadshot_CreateHeadFromPhoto(std::wstring const & strPhotoPath, RO::EHSMode eMode, RHeadshotOption kOption) -> RStatus`
+- `RHeadshot_ImportHeadFromObj(std::wstring const & strObjPath, RO::EHSBodyType eBodyType, RO::EHSLevel eLevel, IntVector kPtMap={}, bool bNeutralNeck=True) -> RStatus`
+- `RIBuildingGeneratorObject_GenerateBuilding(RSBuildingSettings kSettings, RStGenPackStyleInfo kInfo) -> RO::RIBuildingObjectPtr`
+- `RIBuildingGeneratorObject_GetBuildingRoot(RO::RIObjectPtr spObject) -> RO::RIBuildingObjectPtr`
+- `RIBuildingGeneratorObject_GetFloorByChild(RO::RIObjectPtr spObject) -> RO::RIFloorObjectPtr`
+- `RIBuildingGeneratorObject_GetUnitByChild(RO::RIObjectPtr spObject) -> RO::RIUnitObjectPtr`
+- `RIBuildingGeneratorObject_IsBuildingRoot(RO::RIObjectPtr spObject) -> bool`
+- `RIBuildingGeneratorObject_IsFloor(RO::RIObjectPtr spObject) -> bool`
+- `RIBuildingGeneratorObject_IsUnit(RO::RIObjectPtr spObject) -> bool`
+- `RIBuildingGeneratorObject_IsWall(RO::RIObjectPtr spObject) -> bool`
+- `RImage_CreateImage() -> RO::RIImagePtr`
+- `RImage_SetGlobalPtr(RL::CIGlobal * pGlobalPtr)`
+- `RMath_ACos(float fValue) -> float const`
+- `RMath_ASin(float fValue) -> float const`
+- `RMath_ATan(float fValue) -> float const`
+- `RMath_ATan2(float fY, float fX) -> float const`
+- `RMath_Abs(float const & a) -> float const`
+- `RMath_AlmostZero(float const & tValue, float const & tEpsilon=RL::CMath< float >::CONST_ALMOST_ZERO) -> bool const`
+- `RMath_Bezier3(float const a, float const b, float const c, float const d, float const t) -> float const`
+- `RMath_Clamp(float const & tMax, float const & tMin, float const & tValue) -> float const`
+- `RMath_CopySign(float fValue) -> float const`
+- `RMath_Cos(float fValue) -> float const`
+- `RMath_Equal(float const & tValue1, float const & tValue2, float const & tEpsilon=RL::CMath< float >::CONST_ALMOST_ZERO) -> bool const`
+- `RMath_Erf(float fX) -> float const`
+- `RMath_Erfc(float fX) -> float const`
+- `RMath_Exp(float fValue) -> float const`
+- `RMath_FAbs(float fValue) -> float const`
+- `RMath_FMod(float fX, float fY) -> float const`
+- `RMath_FastCos0(float fAngle) -> float const`
+- `RMath_FastCos1(float fAngle) -> float const`
+- `RMath_FastInvCos(float fValue) -> float const`
+- `RMath_FastInvSin(float fValue) -> float const`
+- `RMath_FastInvSqrt_Walsh(float tValue) -> float const`
+- `RMath_FastInvTan0(float fValue) -> float const`
+- `RMath_FastInvTan1(float fValue) -> float const`
+- `RMath_FastSin0(float fAngle) -> float const`
+- `RMath_FastSin1(float fAngle) -> float const`
+- `RMath_FastSqrt_LogBase2(float tValue) -> float const`
+- `RMath_FastSqrt_Walsh(float tValue) -> float const`
+- `RMath_FastTan0(float fAngle) -> float const`
+- `RMath_FastTan1(float fAngle) -> float const`
+- `RMath_Gamma(float fX) -> float const`
+- `RMath_IncompleteGamma(float fA, float fX) -> float const`
+- `RMath_IntervalRandom(float fMin, float fMax, float fSeed=(float) 0.0) -> float const`
+- `RMath_InvSqrt(float fValue) -> float const`
+- `RMath_Log(float fValue) -> float const`
+- `RMath_LogGamma(float fX) -> float const`
+- `RMath_Max(float const & a, float const & b) -> float const`
+- `RMath_Min(float const & a, float const & b) -> float const`
+- `RMath_ModBessel0(float fX) -> float const`
+- `RMath_ModBessel1(float fX) -> float const`
+- `RMath_Pow(float fBase, float fExponent) -> float const`
+- `RMath_Round(float const & tValue) -> float const`
+- `RMath_RoundAlmostZero(float const & tValue) -> float const`
+- `RMath_RoundEpsilonZero(float const & tValue) -> float const`
+- `RMath_Sign(float fValue) -> float const`
+- `RMath_Sin(float fValue) -> float const`
+- `RMath_Sqr(float fValue) -> float const`
+- `RMath_Sqrt(float fValue) -> float const`
+- `RMath_SymmetricRandom(float fSeed=(float) 0.0) -> float const`
+- `RMath_Tan(float fValue) -> float const`
+- `RMath_UnitRandom(float fSeed=(float) 0.0) -> float const`
+- `RMatrix3_FromEulerAngle(Rotation_Order Oreder, float const & rx, float const & ry, float const & rz) -> RMatrix3`
+- `RQuaternion_FindQuatBetweenHelper(RVector3 A, RVector3 B, float NormAB) -> RQuaternion`
+- `RQuaternion_FindQuatBetweenInternal(RVector3 An, RVector3 Bn) -> RVector4`
+- `RQuaternion_FindQuatBetweenNormals(RVector3 NormalA, RVector3 NormalB) -> RQuaternion`
+- `RQuaternion_FindQuatBetweenVectors(RVector3 VectorA, RVector3 VectorB) -> RQuaternion`
+- `RScene_AddSwitchCameraKey(RTime kSetTime, RO::RICameraPtr spCamera) -> RStatus`
+- `RScene_ClearSelectObjects() -> RStatus`
+- `RScene_ClearSwitchCameraKeys() -> RStatus`
+- `RScene_CreateCollection(std::wstring const & strNewCollectionName) -> RStatus`
+- `RScene_DeleteCollection(std::wstring const & strCollectionName) -> RStatus`
+- `RScene_FindChildObjects(RO::RIObjectPtr spObject, RO::EObjectType eType, bool bAllLevel=True) -> ObjectVector`
+- `RScene_FindObject(RO::EObjectType eType, std::wstring const & strName) -> RO::RIObjectPtr`
+- `RScene_FindObjects(RO::EObjectType eType) -> ObjectVector`
+- `RScene_FindObjects(RO::EObjectType eType, std::wstring const & strName) -> ObjectVector`
+- `RScene_GetAvatars(RO::EAvatarType eAvatarType=All) -> ObjectVector`
+- `RScene_GetBuildings() -> BuildingObjectVector`
+- `RScene_GetCameras() -> CameraVector`
+- `RScene_GetCurrentCamera() -> RO::RICameraPtr`
+- `RScene_GetMDProps() -> MDPropVector`
+- `RScene_GetProps() -> PropVector`
+- `RScene_GetRootNode() -> RO::RINodePtr`
+- `RScene_GetSelectedObjects() -> ObjectVector`
+- `RScene_GetSwitchCameraFrameIndexs(RFps kFps) -> SwitchCameraFramePairs`
+- `RScene_Hide(RO::RIObjectPtr spObject)`
+- `RScene_MoveToCollection(ObjectVector kObjects, std::wstring const & strCollectionName) -> RStatus`
+- `RScene_MoveToCollection(RO::RIObjectPtr const & kObjects, std::wstring const & strCollectionName) -> RStatus`
+- `RScene_QueryObjectByID(std::string const & strID) -> RO::RIObjectPtr`
+- `RScene_RemoveObject(RO::RIObjectPtr spObject) -> RStatus`
+- `RScene_SelectObject(RO::RIObjectPtr spObject) -> RStatus`
+- `RScene_SelectObjects(ObjectVector kObjects) -> RStatus`
+- `RScene_SetCurrentCamera(RO::RICameraPtr spCamera) -> RStatus`
+- `RScene_Show(RO::RIObjectPtr spObject)`
+- `RStatus_eq_cs(RO::RStatus::RStatusCode const eCode, RStatus kStatus) -> bool`
+- `RStatus_ne_cs(RO::RStatus::RStatusCode const eCode, RStatus kStatus) -> bool`
+- `RTick_FromHns(int const & tMs) -> RTime`
+- `RTick_FromHns(float const & tMs) -> RTime`
+- `RTick_FromMilliSecond(int const & tMs) -> RTime`
+- `RTick_FromMilliSecond(float const & tMs) -> RTime`
+- `RTick_FromSecond(int const & tSecond) -> RTime`
+- `RTick_FromSecond(float const & tSecond) -> RTime`
+- `RTick_Hns() -> int64_t`
+- `RTick_Ms() -> int32_t`
+- `RTick_ToMilliSecond(int const & kTick) -> float const`
+- `RTick_ToMilliSecond(float const & kTick) -> float const`
+- `RTick_ToSecond(int const & kTick) -> float const`
+- `RTick_ToSecond(float const & kTick) -> float const`
+- `RTick_Tps() -> int32_t`
+- `RTime_FromValue(int tTick) -> RTime`
+- `RUi_AddContextAction(RO::RIObjectPtr spObject, std::wstring const & strText) -> QAction *`
+- `RUi_AddContextMenu(RO::RIObjectPtr spObject, std::wstring const & strText) -> QMenu *`
+- `RUi_AddHotKey(std::wstring const & strKeySequence) -> QAction *`
+- `RUi_AddMenu(std::wstring const & strMenuName, RO::EMenu eParent=Plugins) -> QMenu`
+- `RUi_CallLuaFunction(std::wstring const & strFilePath, std::wstring const & strFunction, RCustomValueArray kParam, RCustomValueArray kReturn) -> RStatus`
+- `RUi_CreateRDialog(RO::EDialogType eDialogType=Normal) -> RIDialog`
+- `RUi_CreateRDockWidget() -> RIDockWidget`
+- `RUi_CreateRDockWidget(RO::ETitlebarOption eOption) -> RIDockWidget`
+- `RUi_FindMenu(std::wstring const & strMenuName, RO::EMenu eParent=Plugins) -> QMenu`
+- `RUi_FindToolBar(std::wstring const & strToolBarName) -> QToolBar *`
+- `RUi_GetCSSType() -> RO::ECSSType`
+- `RUi_GetMainWindow() -> QWidget *`
+- `RUi_GetResolutionType() -> RO::EResolutionType`
+- `RUi_IsProgressCancel() -> bool`
+- `RUi_LoadLuaUI(std::wstring const & strFilePath) -> RStatus`
+- `RUi_OpenFileDialog(std::wstring const & strFilter, std::wstring const & strStartingDirectory=L"") -> std::wstring`
+- `RUi_OpenFilesDialog(std::wstring const & strFilter, std::wstring const & strStartingDirectory=L"") -> WStringVector`
+- `RUi_PopProgress() -> RStatus`
+- `RUi_PushProgress(float fProgress) -> RStatus`
+- `RUi_RemoveContextAction(RO::RIObjectPtr spObject, QAction * pAction) -> RStatus`
+- `RUi_RemoveContextMenu(RO::RIObjectPtr spObject, QMenu * pMenu) -> RStatus`
+- `RUi_RemoveHotKey(QAction * pAction) -> RStatus`
+- `RUi_RemoveMenu(QMenu * pMenu) -> RStatus`
+- `RUi_SaveFileDialog(std::wstring const & strFilter, std::wstring const & strStartingDirectory=L"") -> std::wstring`
+- `RUi_SetProgressStatusString(std::wstring const & strStatus) -> RStatus`
+- `RUi_ShowMessageBox(std::wstring const & strTitle, std::wstring const & strMsg, RO::EMsgButton eBtn, bool bChecked=False, std::wstring const & strCheckBoxMsg=L"") -> int`
+- `RUi_ShowMessageBox(std::wstring const & strTitle, std::wstring const & strMsg, RMessageBoxButtonVector kBtns) -> int`
+- `RUi_ShowProgressDialog(bool bShow, bool bCancelable=False, bool bPauseRender=True) -> bool`
+- `RVideo_LoadMediaToTarget(std::wstring const & strObjName, std::wstring const & strFilePath, RO::EAPILoadMediaAction eAction, float fTargetHeight=200.0) -> RStatus`
+- `RWin32ApiKit_FindWindowByTitleName(std::wstring const & strTitleName) -> RL::CHandle *`
+- `RWin32ApiKit_GetForegroundWindow() -> RL::CHandle *`
+- `RWin32ApiKit_GetWindowName(RL::CHandle * pWnd) -> std::wstring`
+- `RWin32ApiKit_GetWindowThreadProcessId(RL::CHandle * pWnd) -> unsigned long`
+- `RWin32ApiKit_IsWindowVisible(RL::CHandle * pWnd) -> bool`
+- `RWin32ApiKit_SendMessageToWindow(RL::CHandle * pWnd, std::string const & strMsg) -> bool`
+- `Saturate(int nColor) -> int`
+- `Saturate(float fColor) -> float`
+- `Saturate(unsigned char btColor) -> unsigned char`
+- `SmoothCameraTransformInterpolate(RTransform kT0, RTransform kT1, float const fRatio, RTransform kRts, RVector3 vCameraUp, RVector3 vCameraDir)`
+- `abs(RTime kTime) -> RTime`

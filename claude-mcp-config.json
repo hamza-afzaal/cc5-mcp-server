@@ -1,10 +1,10 @@
 {
   "mcpServers": {
-    "cc5": {
+    "cc4": {
       "command": "node",
-      "args": ["C:/Users/macka/Projects/cc5-mcp-server/build/index.js"],
+      "args": ["<absolute path to repo>/build/index.js"],
       "env": {
-        "CC5_BRIDGE_URL": "http://127.0.0.1:5101"
+        "CC4_BRIDGE_URL": "http://127.0.0.1:5101"
       }
     }
   }

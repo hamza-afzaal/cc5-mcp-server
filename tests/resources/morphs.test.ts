@@ -58,18 +58,18 @@ describe("registerMorphResources – registration", () => {
     expect(server.resource).toHaveBeenCalledTimes(2);
   });
 
-  it("registers morph-catalog with cc5://morphs/catalog URI", () => {
+  it("registers morph-catalog with cc4://morphs/catalog URI", () => {
     const resources = server.getRegisteredResources();
     const catalog = resources.find((r) => r.name === "morph-catalog");
     expect(catalog).toBeDefined();
-    expect(catalog?.uri).toBe("cc5://morphs/catalog");
+    expect(catalog?.uri).toBe("cc4://morphs/catalog");
   });
 
-  it("registers avatar-state with cc5://avatar/current URI", () => {
+  it("registers avatar-state with cc4://avatar/current URI", () => {
     const resources = server.getRegisteredResources();
     const avatarState = resources.find((r) => r.name === "avatar-state");
     expect(avatarState).toBeDefined();
-    expect(avatarState?.uri).toBe("cc5://avatar/current");
+    expect(avatarState?.uri).toBe("cc4://avatar/current");
   });
 });
 
@@ -84,7 +84,7 @@ describe("morph-catalog resource handler", () => {
     Face: [{ id: "Nose_Size", display_name: "Nose Size" }],
   };
 
-  const uri = new URL("cc5://morphs/catalog");
+  const uri = new URL("cc4://morphs/catalog");
 
   it("returns the morph catalog as formatted JSON", async () => {
     bridge.getMorphCatalog.mockResolvedValue(catalog);
@@ -109,7 +109,7 @@ describe("morph-catalog resource handler", () => {
   });
 
   it("returns error JSON when bridge throws", async () => {
-    bridge.getMorphCatalog.mockRejectedValue(new Error("CC5 offline"));
+    bridge.getMorphCatalog.mockRejectedValue(new Error("CC4 offline"));
     const handler = server.getRegisteredResource("morph-catalog");
     const result = await handler(uri);
     const parsed = JSON.parse(result.contents[0].text);
@@ -118,7 +118,7 @@ describe("morph-catalog resource handler", () => {
   });
 
   it("error response still returns application/json mimeType", async () => {
-    bridge.getMorphCatalog.mockRejectedValue(new Error("CC5 offline"));
+    bridge.getMorphCatalog.mockRejectedValue(new Error("CC4 offline"));
     const handler = server.getRegisteredResource("morph-catalog");
     const result = await handler(uri);
     expect(result.contents[0].mimeType).toBe("application/json");
@@ -141,7 +141,7 @@ describe("avatar-state resource handler", () => {
     active_morphs: { Fat: 0.3, Muscular: 0.5 },
   };
 
-  const uri = new URL("cc5://avatar/current");
+  const uri = new URL("cc4://avatar/current");
 
   it("returns avatar info as formatted JSON", async () => {
     bridge.getAvatarInfo.mockResolvedValue(sampleInfo);

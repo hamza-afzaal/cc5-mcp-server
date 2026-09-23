@@ -1,13 +1,13 @@
 /**
- * Content management tools for CC5 (clothing, hair, accessories).
+ * Content management tools for CC4 (clothing, hair, accessories).
  */
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CC5Bridge } from "../cc5-bridge.js";
+import type { CC4Bridge } from "../cc4-bridge.js";
 import { bridgeCall } from "../util.js";
 
-export function registerContentTools(server: McpServer, bridge: CC5Bridge) {
+export function registerContentTools(server: McpServer, bridge: CC4Bridge) {
   server.tool(
     "list_clothes",
     "List all clothing items currently worn by the avatar. Returns name, ID, and type for each item.",
@@ -72,7 +72,7 @@ export function registerContentTools(server: McpServer, bridge: CC5Bridge) {
 
   server.tool(
     "browse_content",
-    "Browse available CC5 content files by category. Returns file paths that can be loaded with load_asset. Wearables: cloth_upper, cloth_lower, cloth, shoes, accessory_head, accessory_body. Scene/animation: pose, motion, expression, props, light, camera, character (pose/motion may be empty on a base install without content packs).",
+    "Browse available CC4 content files by category. Returns file paths that can be loaded with load_asset. Wearables: cloth_upper, cloth_lower, cloth, shoes, accessory_head, accessory_body. Scene/animation: pose, motion, expression, props, light, camera, character (pose/motion may be empty on a base install without content packs).",
     {
       folder_type: z.enum([
         "cloth_upper", "cloth_lower", "cloth", "shoes", "accessory_head", "accessory_body",

@@ -100,8 +100,8 @@ describe("search_morphs handler", () => {
     bridge.searchMorphs.mockRejectedValue(new Error("bridge unreachable"));
     const handler = server.getRegisteredTool("search_morphs");
     const result = await handler({ query: "fat" });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge unreachable");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge unreachable");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 
   it("returns content with type 'text'", async () => {
@@ -170,8 +170,8 @@ describe("adjust_morph handler", () => {
     bridge.setMorph.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("adjust_morph");
     const result = await handler({ morph_id: "Fat", value: 0.5 });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 
   it("works with value = 0 (minimum boundary)", async () => {
@@ -237,7 +237,7 @@ describe("adjust_multiple_morphs handler", () => {
     bridge.setMultipleMorphs.mockRejectedValue(new Error("network error"));
     const handler = server.getRegisteredTool("adjust_multiple_morphs");
     const result = await handler({ morphs });
-    expect(result.content[0].text).toContain("CC5 bridge error: network error");
+    expect(result.content[0].text).toContain("CC4 bridge error: network error");
   });
 });
 
@@ -277,6 +277,6 @@ describe("get_morph_value handler", () => {
     bridge.getMorphValue.mockRejectedValue(new Error("bridge error"));
     const handler = server.getRegisteredTool("get_morph_value");
     const result = await handler({ morph_id: "Fat" });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge error");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge error");
   });
 });

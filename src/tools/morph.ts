@@ -1,14 +1,14 @@
 /**
- * Morph adjustment tools for CC5.
+ * Morph adjustment tools for CC4.
  * Controls facial features, body shape, and other character morphs.
  */
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CC5Bridge } from "../cc5-bridge.js";
+import type { CC4Bridge } from "../cc4-bridge.js";
 import { bridgeCall } from "../util.js";
 
-export function registerMorphTools(server: McpServer, bridge: CC5Bridge) {
+export function registerMorphTools(server: McpServer, bridge: CC4Bridge) {
   server.tool(
     "search_morphs",
     "Search the morph catalog by keyword. Much faster than downloading the full catalog. Use this to find morph IDs for specific features (e.g., 'nose', 'eye', 'jaw').",
