@@ -7,11 +7,8 @@ import type {
   CC4Response,
   MorphCatalog,
   AvatarInfo,
-  OperationResult,
   CreateAvatarResult,
   DeleteAvatarResult,
-  CaptureResult,
-  MorphSetRequest,
   CameraInfo,
   FocalLengthResult,
   LightInfo,
@@ -24,20 +21,27 @@ import type {
   SetAmbientResult,
   SetIblResult,
   ExpressionInfo,
-  ResetMorphsResult,
   MaterialInfo,
   DiffuseColor,
   SetDiffuseColorResult,
   ShaderParameters,
   SetShaderParameterResult,
-  ClothingItem,
-  HairItem,
-  AccessoryItem,
+  DiagnosticQuery,
+  OperationResult,
   RemoveItemResult,
   ColorResult,
   ExportFbxOptions,
-  ExportFbxResult,
-  DiagnosticQuery,
+  MorphSearchResult,
+  MorphCatalogStatus,
+  MorphValue,
+  SetMorphsResult,
+  ItemList,
+  LoadItemResult,
+  SaveProjectResult,
+  LicenseResult,
+  CaptureViewsResult,
+  ViewPreset,
+  LodLevel,
   JobInfo,
 } from "./types.js";
 
@@ -161,36 +165,8 @@ export class CC4Bridge {
     return this.request<AvatarInfo | null>("/avatar/info");
   }
 
-  async searchMorphs(query: string, category?: string): Promise<Array<{ id: string; display_name: string; category: string }>> {
-    return this.request<Array<{ id: string; display_name: string; category: string }>>("/morphs/search", "POST", {
-      query,
-      category: category ?? "",
-    });
-  }
-
   async getMorphCatalog(): Promise<MorphCatalog> {
     return this.request<MorphCatalog>("/morphs/catalog");
-  }
-
-  async getMorphValue(
-    morphId: string,
-  ): Promise<{ success: boolean; morph_id?: string; value?: number; error?: string }> {
-    return this.request("/morph/get", "POST", {
-      morph_id: morphId,
-    });
-  }
-
-  async setMorph(morphId: string, value: number): Promise<OperationResult> {
-    return this.request<OperationResult>("/morph/set", "POST", {
-      morph_id: morphId,
-      value,
-    });
-  }
-
-  async setMultipleMorphs(
-    morphs: MorphSetRequest[]
-  ): Promise<OperationResult> {
-    return this.request<OperationResult>("/morphs/set", "POST", { morphs });
   }
 
   async createDefaultAvatar(): Promise<CreateAvatarResult> {
@@ -201,46 +177,6 @@ export class CC4Bridge {
     return this.request<DeleteAvatarResult>("/avatar/delete", "POST", { name });
   }
 
-  async loadAsset(filePath: string): Promise<OperationResult> {
-    return this.request<OperationResult>("/asset/load", "POST", {
-      file_path: filePath,
-    }, LONG_REQUEST_TIMEOUT_MS);
-  }
-
-  async exportFbx(
-    outputPath: string,
-    options: number = 0,
-    extra: ExportFbxOptions = {},
-  ): Promise<ExportFbxResult> {
-    const body: Record<string, unknown> = {
-      output_path: outputPath,
-      options,
-    };
-    if (extra.target_tool !== undefined) body.target_tool = extra.target_tool;
-    if (extra.sub_d_level !== undefined) body.sub_d_level = extra.sub_d_level;
-    if (extra.include_current_pose !== undefined) body.include_current_pose = extra.include_current_pose;
-    if (extra.delete_hidden_faces !== undefined) body.delete_hidden_faces = extra.delete_hidden_faces;
-    if (extra.use_smooth_mesh !== undefined) body.use_smooth_mesh = extra.use_smooth_mesh;
-    if (extra.remove_eyelash !== undefined) body.remove_eyelash = extra.remove_eyelash;
-    if (extra.remove_tearline_occlusion !== undefined) body.remove_tearline_occlusion = extra.remove_tearline_occlusion;
-    if (extra.embed_textures !== undefined) body.embed_textures = extra.embed_textures;
-    if (extra.export_motion !== undefined) body.export_motion = extra.export_motion;
-    if (extra.fps !== undefined) body.fps = extra.fps;
-    if (extra.motion_range !== undefined) body.motion_range = extra.motion_range;
-    if (extra.convert_image_format !== undefined) body.convert_image_format = extra.convert_image_format;
-    if (extra.texture_size !== undefined) body.texture_size = extra.texture_size;
-    if (extra.export_json !== undefined) body.export_json = extra.export_json;
-    return this.request<ExportFbxResult>("/export/fbx", "POST", body, LONG_REQUEST_TIMEOUT_MS);
-  }
-
-  async captureViewport(outputPath?: string, width?: number, height?: number): Promise<CaptureResult> {
-    const body: Record<string, unknown> = {};
-    if (outputPath) body.output_path = outputPath;
-    if (width !== undefined) body.width = width;
-    if (height !== undefined) body.height = height;
-    return this.request<CaptureResult>("/viewport/capture", "POST", body, LONG_REQUEST_TIMEOUT_MS);
-  }
-
   // --- Undo / Redo ---
 
   async undo(): Promise<OperationResult> {
@@ -249,6 +185,78 @@ export class CC4Bridge {
 
   async redo(): Promise<OperationResult> {
     return this.request<OperationResult>("/redo", "POST", {});
+  }
+
+  // --- Morphs ---
+
+  async getMorphStatus(): Promise<MorphCatalogStatus> {
+    return this.request<MorphCatalogStatus>("/morphs/status");
+  }
+
+  async searchMorphs(query: string, category?: string, limit?: number): Promise<MorphSearchResult> {
+    return this.request<MorphSearchResult>("/morphs/search", "POST", {
+      query,
+      category: category ?? "",
+      limit: limit ?? 25,
+    });
+  }
+
+  async setMorphs(morphs: MorphValue[]): Promise<SetMorphsResult> {
+    return this.request<SetMorphsResult>("/morphs/set", "POST", { morphs });
+  }
+
+  // --- Items ---
+
+  async listItems(): Promise<ItemList> {
+    return this.request<ItemList>("/items");
+  }
+
+  async loadItem(filePath: string): Promise<LoadItemResult> {
+    return this.request<LoadItemResult>("/item/load", "POST", { file_path: filePath }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  async removeItem(itemName: string): Promise<RemoveItemResult> {
+    return this.request<RemoveItemResult>("/item/remove", "POST", { item_name: itemName });
+  }
+
+  async setColor(target: "eyes" | "hair", r: number, g: number, b: number): Promise<ColorResult> {
+    return this.request<ColorResult>("/color", "POST", { target, r, g, b });
+  }
+
+  // --- Project / optimize / export ---
+
+  async saveProjectAs(path: string): Promise<SaveProjectResult> {
+    return this.request<SaveProjectResult>("/project/save_as", "POST", { path }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  async checkExportLicense(item?: string): Promise<LicenseResult> {
+    return this.request<LicenseResult>("/license/check", "POST", { item: item ?? "" });
+  }
+
+  async captureViews(presets?: ViewPreset[], width?: number, height?: number, prefix?: string): Promise<CaptureViewsResult> {
+    const body: Record<string, unknown> = {};
+    if (presets) body.presets = presets;
+    if (width !== undefined) body.width = width;
+    if (height !== undefined) body.height = height;
+    if (prefix) body.prefix = prefix;
+    return this.request<CaptureViewsResult>("/views/capture", "POST", body, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  /** Start an FBX export job; poll with getJobStatus. */
+  async startExportFbx(outputPath: string, options: ExportFbxOptions = {}): Promise<{ job_id: string; status: string }> {
+    return this.startJob("export_fbx", { output_path: outputPath, ...options });
+  }
+
+  /** Start an irreversible ActorBUILD/LOD conversion job (CC4 shows two OK dialogs). */
+  async startConvertLod(level: LodLevel): Promise<{ job_id: string; status: string }> {
+    return this.startJob("convert_lod", { level });
+  }
+
+  async startMergeMaterials(meshNames?: string[], textureSize?: number): Promise<{ job_id: string; status: string }> {
+    const params: Record<string, unknown> = {};
+    if (meshNames && meshNames.length) params.mesh_names = meshNames;
+    if (textureSize !== undefined) params.texture_size = textureSize;
+    return this.startJob("merge_materials", params);
   }
 
   // --- Camera ---
@@ -350,14 +358,6 @@ export class CC4Bridge {
     return this.request<ExpressionInfo>("/expressions");
   }
 
-  // --- Reset Morphs ---
-
-  async resetAllMorphs(avatarName?: string): Promise<ResetMorphsResult> {
-    const body: Record<string, unknown> = {};
-    if (avatarName) body.avatar_name = avatarName;
-    return this.request<ResetMorphsResult>("/morphs/reset", "POST", body);
-  }
-
   // --- Material / Texture ---
 
   async getMaterialInfo(avatarName?: string): Promise<MaterialInfo> {
@@ -413,40 +413,10 @@ export class CC4Bridge {
     });
   }
 
-  // --- Content Management (Tier 1) ---
-
-  async listClothes(): Promise<ClothingItem[]> {
-    return this.request<ClothingItem[]>("/clothes");
-  }
-
-  async listHair(): Promise<HairItem[]> {
-    return this.request<HairItem[]>("/hair");
-  }
-
-  async listAccessories(): Promise<AccessoryItem[]> {
-    return this.request<AccessoryItem[]>("/accessories");
-  }
-
-  async removeSceneItem(itemName: string): Promise<RemoveItemResult> {
-    return this.request<RemoveItemResult>("/item/remove", "POST", {
-      item_name: itemName,
-    });
-  }
-
   async browseContent(folderType: string): Promise<string[]> {
     return this.request<string[]>("/content/browse", "POST", {
       folder_type: folderType,
     });
-  }
-
-  // --- Convenience Color Shortcuts (Tier 3) ---
-
-  async setEyeColor(r: number, g: number, b: number): Promise<ColorResult> {
-    return this.request<ColorResult>("/color/eye", "POST", { r, g, b });
-  }
-
-  async setHairColor(r: number, g: number, b: number): Promise<ColorResult> {
-    return this.request<ColorResult>("/color/hair", "POST", { r, g, b });
   }
 
 }

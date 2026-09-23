@@ -2,23 +2,11 @@
  * Scene and avatar management tools for CC4.
  */
 
-import path from "node:path";
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CC4Bridge } from "../cc4-bridge.js";
 import type { AvatarInfo } from "../types.js";
 import { bridgeCall } from "../util.js";
-
-function validateCapturePath(filePath: string): string | null {
-  if (filePath.includes("..")) {
-    return "Path traversal ('..') is not allowed";
-  }
-  const normalized = path.resolve(filePath);
-  if (!normalized.toLowerCase().endsWith(".png")) {
-    return "Output path must end with .png";
-  }
-  return null;
-}
 
 export function formatAvatarInfo(info: AvatarInfo | null): string {
   if (!info) return "No avatar in the scene.";
@@ -90,7 +78,7 @@ export function registerSceneTools(server: McpServer, bridge: CC4Bridge) {
 
   server.tool(
     "create_avatar",
-    "Create a new NEUTRAL base avatar in the CC4 scene (additive). WARNING: this base has no skin/eye textures, eyebrows, eyelashes or hair — it renders like a pale, blank-eyed mannequin. For a real, textured human, load a character template (e.g. Camila) with load_asset. Use delete_avatar first to replace the current avatar.",
+    "Create a new NEUTRAL base avatar in the CC4 scene (additive). WARNING: this base has no skin/eye textures, eyebrows, eyelashes or hair — it renders like a pale, blank-eyed mannequin. For a real, textured human, load a character base with load_item or apply_recipe. Use delete_avatar first to replace the current avatar.",
     {},
     async () => bridgeCall(
       () => bridge.createDefaultAvatar(),
@@ -114,41 +102,4 @@ export function registerSceneTools(server: McpServer, bridge: CC4Bridge) {
     )
   );
 
-  server.tool(
-    "capture_viewport",
-    "Render the CC4 viewport to a PNG (RenderImage) and return the image. Use frame_camera first to choose the view.",
-    {
-      output_path: z.string().optional().describe("Output PNG file path. Defaults to a temp file if omitted."),
-      width: z.number().int().min(16).max(7680).optional().describe("Image width in px (default 1280)."),
-      height: z.number().int().min(16).max(4320).optional().describe("Image height in px (default 720)."),
-    },
-    async ({ output_path, width, height }) => {
-      if (output_path) {
-        const pathError = validateCapturePath(output_path);
-        if (pathError) {
-          return { content: [{ type: "text" as const, text: pathError }] };
-        }
-      }
-      try {
-        const result = await bridge.captureViewport(output_path, width, height);
-        if (!result.success) {
-          return { content: [{ type: "text" as const, text: `Failed: ${result.error}` }] };
-        }
-        const content: Array<{ type: "text"; text: string } | { type: "image"; data: string; mimeType: string }> = [];
-        if (result.base64) {
-          content.push({ type: "image" as const, data: result.base64, mimeType: "image/png" });
-          content.push({ type: "text" as const, text: `Viewport captured: ${result.path ?? "temp file"}` });
-        } else {
-          content.push({
-            type: "text" as const,
-            text: `Viewport rendered to ${result.path ?? "?"} but not embedded${result.warning ? `: ${result.warning}` : "."}`,
-          });
-        }
-        return { content };
-      } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : String(err);
-        return { content: [{ type: "text" as const, text: `CC4 bridge error: ${message}` }] };
-      }
-    }
-  );
 }

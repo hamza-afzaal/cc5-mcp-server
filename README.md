@@ -21,18 +21,23 @@ RLPy is not thread-safe. The plugin's HTTP threads queue each action, and a QTim
 4. Register with Claude Code:
    `claude mcp add --scope user --transport stdio cc4 -- node <abs path>\build\index.js`
 
-## Tools (Phase 1a set; reshaped in Phase 2)
+## Tools (44)
 
 | Area | Tools |
 |---|---|
-| Connection & scene | `check_connection`, `list_avatars`, `get_avatar_info`, `create_avatar`, `delete_avatar`, `capture_viewport` |
-| Introspection | `diagnostics` (fixed allowlist of read-only queries, replacing code execution) |
-| Morphs | `search_morphs`, `adjust_morph`, `adjust_multiple_morphs`, `get_morph_value`, `reset_morphs` |
-| Content | `list_clothes`, `list_hair`, `list_accessories`, `remove_scene_item`, `browse_content`, `load_asset` |
-| Export | `export_fbx` (Unity preset, `export_json` sidecar, texture cap, hidden-mesh / tearline removal) |
-| Look-dev | `set_eye_color`, `set_hair_color`, `get_material_info`, `get/set_diffuse_color`, `get_shader_parameters`, `set_shader_parameter`, `get_expression_info` |
-| Camera & lights | `get_camera_info`, `set_camera_focal_length`, `frame_camera`, `get_lights`, `get_light_info`, `set_light_color/multiplier/active/shadow`, `get_visual_settings`, `set_ambient`, `set_ibl` |
-| Edit | `undo`, `redo` |
+| Connection & scene | `check_connection`, `list_avatars`, `get_avatar_info`, `create_avatar`, `delete_avatar`, `undo`, `redo` |
+| Recipes (S1, design §6) | `apply_recipe`, `export_recipe`; sample: `recipes/sample-camila-01.json` |
+| Morphs | `search_morphs` (display name → id, min/max), `set_morphs` (batch, one undo, fails loudly on unknown names) |
+| Content (S0 allowlist) | `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `browse_content`, `set_color` |
+| Review (Gate 1) | `capture_views` (full / head / three-quarter) |
+| Optimize (S2, on saved copies) | `save_project_as`, `convert_lod` (ActorBUILD / LOD1 / LOD2; two CC4 OK dialogs), `merge_materials` (clothing atlas) |
+| Export (S3) | `start_export_fbx` (Unity + JSON, hidden/tearline removal, texture cap, LOD label), `get_export_status` (FBX counts + design §4 budget check), `export_motions`, `check_export_license` |
+| Introspection | `diagnostics` (fixed read-only allowlist) |
+| Look-dev (kept) | `get_camera_info`, `set_camera_focal_length`, `frame_camera`, lights (`get_lights`, `get_light_info`, `set_light_color/multiplier/active/shadow`), `get_visual_settings`, `set_ambient`, `set_ibl`, `get_material_info`, `get/set_diffuse_color`, `get_shader_parameters`, `set_shader_parameter`, `get_expression_info` |
+
+`assets/allowlist.json` lists every item recipes and `load_item` may use (`CC4_ALLOWLIST` overrides the path). What CC4 can and can't automate is recorded in `docs/spikes.md`.
+
+Helper scripts: `node tools/mcp_call.mjs <tool> '<json>'` calls tools through a real MCP client; `node tools/replay_check.mjs <recipe.json>` checks that a recipe replays identically; `python tools/fbx_stats.py <file.fbx>` prints budget stats.
 
 ## Configuration
 
@@ -41,10 +46,12 @@ Set these in the environment of the process that launches CC4 (plugin side) or t
 | Variable | Side | Default | Purpose |
 |---|---|---|---|
 | `CC4_BRIDGE_URL` | Node | `http://127.0.0.1:5101` | Bridge URL (loopback only) |
+| `CC4_ALLOWLIST` | Node | `<repo>/assets/allowlist.json` | Asset allowlist (S0) |
 | `CC4_REQUEST_TIMEOUT_MS` | Node | `30000` | Default request timeout (export/load/render use 310 s) |
 | `CC4_BRIDGE_PORT` | CC4 | `5101` | Bridge port |
 | `CC4_EXPORT_DIR` | CC4 | `%USERPROFILE%\CC4Export` | Where bare export filenames go |
 | `CC4_DEV_MODE` | CC4 | `0` | `1` enables `POST /reload` (hot reload of `cc4_api.py`) |
+| `CC4_PLUGIN_DEV_DIR` | CC4 | *(empty)* | Dev mode only: load plugin code from this folder (e.g. the repo's `cc4-plugin/`) |
 | `CC4_RELOAD_SECRET` | CC4 | *(empty)* | Required `X-Reload-Token` for `/reload`; reload is refused while empty |
 | `CC4_ROOT` | CC4 | auto | CC4 install folder if auto-detection fails |
 

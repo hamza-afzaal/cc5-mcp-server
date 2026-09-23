@@ -38,7 +38,7 @@ export function registerCameraTools(server: McpServer, bridge: CC4Bridge) {
 
   server.tool(
     "frame_camera",
-    "Move the viewport camera to a preset view. Use 'face' to frame the head close-up (so eye/lip/skin color and facial morphs are actually visible in capture_viewport — a full-body shot is too small), 'home'/'all' to reset to the whole character, or front/back/left/right/top/bottom/focus.",
+    "Move the viewport camera to a preset view. Use 'face' to frame the head close-up (so eye/lip/skin color and facial morphs are actually visible in capture_views — a full-body shot is too small), 'home'/'all' to reset to the whole character, or front/back/left/right/top/bottom/focus.",
     {
       view: z.enum(["face", "front", "back", "left", "right", "top", "bottom", "home", "all", "focus"])
         .default("face").describe("Preset view. 'face' = head close-up, 'home'/'all' = whole body."),

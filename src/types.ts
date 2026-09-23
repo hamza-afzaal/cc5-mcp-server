@@ -225,6 +225,10 @@ export interface ExportFbxOptions {
   texture_size?: number;
   /** EExportFbxOptions3_ExportJson — the JSON sidecar CCiC Unity Tools needs. */
   export_json?: boolean;
+  /** Motion file exported with the avatar (SetIncludeMotionPath). */
+  include_motion_path?: string;
+  /** Skeleton + animation only (EExportFbxOptions_RemoveAllMesh). */
+  motion_only?: boolean;
 }
 
 export interface ExportFbxResult extends OperationResult {
@@ -287,3 +291,95 @@ export interface JobInfo<T = unknown> {
   result?: T;
 }
 
+
+// --- Pipeline (Phase 2) ---
+
+export interface MorphSearchHit {
+  id: string;
+  display_name: string;
+  category: string;
+  /** UI default range reported by CC4; not enforced (spike 0). */
+  min: number;
+  max: number;
+}
+
+export interface MorphSearchResult {
+  results: MorphSearchHit[];
+  total_matches: number;
+}
+
+export interface MorphCatalogStatus {
+  ready: boolean;
+  categories: number;
+  morphs: number;
+}
+
+/** One entry for set_morphs: a display name (optionally with category) or an internal ID. */
+export interface MorphValue {
+  display_name?: string;
+  id?: string;
+  category?: string;
+  value: number;
+}
+
+export interface AppliedMorph {
+  id: string;
+  display_name: string;
+  requested: number;
+  value: number;
+  warning?: string;
+}
+
+export interface SetMorphsResult extends OperationResult {
+  applied?: AppliedMorph[];
+  problems?: Array<Record<string, unknown>>;
+}
+
+export interface SceneItem {
+  name: string;
+  meshes: string[];
+}
+
+export interface ItemList {
+  avatar: string;
+  clothes: SceneItem[];
+  hair: SceneItem[];
+  accessories: SceneItem[];
+}
+
+export interface LoadItemResult extends OperationResult {
+  path?: string;
+  seconds?: number;
+  avatar?: string | null;
+  added?: { clothes: string[]; hair: string[]; accessories: string[] };
+}
+
+export interface SaveProjectResult extends OperationResult {
+  path?: string;
+  previous_project?: string;
+  current_project?: string;
+  is_current?: boolean;
+  size_bytes?: number;
+}
+
+export interface LicenseResult extends OperationResult {
+  item?: string;
+  exportable?: boolean;
+}
+
+export interface ViewResult {
+  preset: string;
+  success: boolean;
+  path?: string;
+  base64?: string;
+  warning?: string;
+  error?: string;
+  method?: string;
+}
+
+export interface CaptureViewsResult extends OperationResult {
+  views?: ViewResult[];
+}
+
+export type ViewPreset = "full" | "head" | "three_quarter";
+export type LodLevel = "actorbuild" | "lod1" | "lod2";

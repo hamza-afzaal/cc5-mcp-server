@@ -33,8 +33,8 @@ beforeEach(() => {
 // ── registration ──────────────────────────────────────────────────────────────
 
 describe("registerSceneTools – registration", () => {
-  it("registers exactly 6 tools", () => {
-    expect(server.tool).toHaveBeenCalledTimes(6);
+  it("registers exactly 5 tools", () => {
+    expect(server.tool).toHaveBeenCalledTimes(5);
   });
 
   it("registers delete_avatar", () => {
@@ -76,15 +76,6 @@ describe("registerSceneTools – registration", () => {
   it("registers create_avatar", () => {
     expect(server.tool).toHaveBeenCalledWith(
       "create_avatar",
-      expect.any(String),
-      expect.any(Object),
-      expect.any(Function)
-    );
-  });
-
-  it("registers capture_viewport", () => {
-    expect(server.tool).toHaveBeenCalledWith(
-      "capture_viewport",
       expect.any(String),
       expect.any(Object),
       expect.any(Function)
@@ -231,84 +222,6 @@ describe("delete_avatar handler", () => {
     expect(result.content[0].text).toContain("CC4 bridge error: CC4 not running");
   });
 });
-
-// ── capture_viewport ──────────────────────────────────────────────────────────
-
-describe("capture_viewport handler", () => {
-  it("returns success message with capture path when path is provided", async () => {
-    bridge.captureViewport.mockResolvedValue(CAPTURE_SUCCESS);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/temp/capture.png" });
-    // Handler returns [image, text] when bridge supplies base64 data
-    expect(result.content[0].type).toBe("image");
-    expect(result.content[1].text).toContain("Viewport captured:");
-    expect(result.content[1].text).toContain("C:/temp/capture.png");
-  });
-
-  it("returns success message with result.path when no output_path arg given", async () => {
-    const captured: CaptureResult = { success: true, path: "/tmp/cc4_snap.png", base64: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" };
-    bridge.captureViewport.mockResolvedValue(captured);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({});
-    // Handler returns [image, text] when bridge supplies base64 data
-    expect(result.content[0].type).toBe("image");
-    expect(result.content[1].text).toContain("Viewport captured:");
-    expect(result.content[1].text).toContain("/tmp/cc4_snap.png");
-  });
-
-  it("returns failure message when capture operation fails", async () => {
-    const failed: CaptureResult = { success: false, error: "no render context" };
-    bridge.captureViewport.mockResolvedValue(failed);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({});
-    expect(result.content[0].text).toBe("Failed: no render context");
-  });
-
-  it("rejects path containing '..'", async () => {
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/safe/../../../etc/evil.png" });
-    expect(result.content[0].text).toContain("Path traversal");
-    expect(bridge.captureViewport).not.toHaveBeenCalled();
-  });
-
-  it("rejects non-.png extension", async () => {
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/out/frame.jpg" });
-    expect(result.content[0].text).toContain(".png");
-    expect(bridge.captureViewport).not.toHaveBeenCalled();
-  });
-
-  it("calls bridge.captureViewport with the output path", async () => {
-    bridge.captureViewport.mockResolvedValue(CAPTURE_SUCCESS);
-    const handler = server.getRegisteredTool("capture_viewport");
-    await handler({ output_path: "C:/temp/capture.png" });
-    expect(bridge.captureViewport).toHaveBeenCalledWith("C:/temp/capture.png", undefined, undefined);
-  });
-
-  it("calls bridge.captureViewport with undefined when no path given", async () => {
-    const captured: CaptureResult = { success: true, path: "/tmp/snap.png" };
-    bridge.captureViewport.mockResolvedValue(captured);
-    const handler = server.getRegisteredTool("capture_viewport");
-    await handler({});
-    expect(bridge.captureViewport).toHaveBeenCalledWith(undefined, undefined, undefined);
-  });
-
-  it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.captureViewport.mockRejectedValue(new Error("render failed"));
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("CC4 bridge error: render failed");
-  });
-
-  it("returns image content followed by text content on success", async () => {
-    bridge.captureViewport.mockResolvedValue(CAPTURE_SUCCESS);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/temp/capture.png" });
-    expect(result.content[0].type).toBe("image");
-    expect(result.content[1].type).toBe("text");
-  });
-});
-
 
 // ── get_avatar_info ───────────────────────────────────────────────────────────
 

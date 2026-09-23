@@ -265,264 +265,6 @@ describe("CC4Bridge.getMorphCatalog", () => {
   });
 });
 
-// ── getMorphValue ─────────────────────────────────────────────────────────────
-
-describe("CC4Bridge.getMorphValue", () => {
-  it("returns the numeric morph value", async () => {
-    mockFetch<number>({ result: 0.75 });
-    const result = await bridge.getMorphValue("Fat");
-    expect(result).toBe(0.75);
-  });
-
-  it("returns 0 when the morph is at zero", async () => {
-    mockFetch<number>({ result: 0 });
-    const result = await bridge.getMorphValue("Thin");
-    expect(result).toBe(0);
-  });
-
-  it("returns null when no morph found", async () => {
-    mockFetch<null>({ result: null });
-    const result = await bridge.getMorphValue("NonExistent");
-    expect(result).toBeNull();
-  });
-
-  it("sends POST /morph/get with morph_id in body", async () => {
-    mockFetch<number>({ result: 0.5 });
-    await bridge.getMorphValue("Nose_Size");
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/morph/get",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ morph_id: "Nose_Size" }),
-      })
-    );
-  });
-
-  it("throws on bridge error", async () => {
-    mockFetch({ error: "morph not found" });
-    await expect(bridge.getMorphValue("Unknown")).rejects.toThrow("CC4 error: morph not found");
-  });
-});
-
-// ── setMorph ──────────────────────────────────────────────────────────────────
-
-describe("CC4Bridge.setMorph", () => {
-  const successResult: OperationResult = { success: true };
-  const failureResult: OperationResult = { success: false, error: "morph locked" };
-
-  it("returns success result when morph is set", async () => {
-    mockFetch<OperationResult>({ result: successResult });
-    const result = await bridge.setMorph("Fat", 0.5);
-    expect(result.success).toBe(true);
-  });
-
-  it("returns failure result when CC4 rejects the operation", async () => {
-    mockFetch<OperationResult>({ result: failureResult });
-    const result = await bridge.setMorph("Fat", 0.5);
-    expect(result.success).toBe(false);
-    expect(result.error).toBe("morph locked");
-  });
-
-  it("sends POST /morph/set with morph_id and value in body", async () => {
-    mockFetch<OperationResult>({ result: successResult });
-    await bridge.setMorph("Head_Narrow", 0.3);
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/morph/set",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ morph_id: "Head_Narrow", value: 0.3 }),
-      })
-    );
-  });
-
-  it("throws when HTTP status is not OK", async () => {
-    mockFetchHttpError(400, "Bad Request");
-    await expect(bridge.setMorph("Fat", 0.5)).rejects.toThrow("CC4 bridge error (400)");
-  });
-
-  it("throws on network failure", async () => {
-    mockFetchError("network timeout");
-    await expect(bridge.setMorph("Fat", 0.5)).rejects.toThrow("network timeout");
-  });
-});
-
-// ── setMultipleMorphs ─────────────────────────────────────────────────────────
-
-describe("CC4Bridge.setMultipleMorphs", () => {
-  it("sends POST /morphs/set with morphs array", async () => {
-    const morphs = [
-      { id: "Fat", value: 0.3 },
-      { id: "Muscular", value: 0.6 },
-    ];
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.setMultipleMorphs(morphs);
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/morphs/set",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ morphs }),
-      })
-    );
-  });
-
-  it("returns success when all morphs are applied", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    const result = await bridge.setMultipleMorphs([{ id: "Fat", value: 0.5 }]);
-    expect(result.success).toBe(true);
-  });
-
-  it("handles empty morphs array", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    const result = await bridge.setMultipleMorphs([]);
-    expect(result.success).toBe(true);
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.objectContaining({ body: JSON.stringify({ morphs: [] }) })
-    );
-  });
-
-  it("throws on HTTP error", async () => {
-    mockFetchHttpError(500, "server crash");
-    await expect(bridge.setMultipleMorphs([{ id: "Fat", value: 0.5 }])).rejects.toThrow(
-      "CC4 bridge error (500)"
-    );
-  });
-});
-
-// ── loadAsset ─────────────────────────────────────────────────────────────────
-
-describe("CC4Bridge.loadAsset", () => {
-  it("sends POST /asset/load with file_path in body", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.loadAsset("C:/Assets/MyChar.iAvatar");
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/asset/load",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ file_path: "C:/Assets/MyChar.iAvatar" }),
-      })
-    );
-  });
-
-  it("returns success on successful load", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    const result = await bridge.loadAsset("C:/Assets/Character.ccm");
-    expect(result.success).toBe(true);
-  });
-
-  it("returns failure when CC4 cannot load the asset", async () => {
-    mockFetch<OperationResult>({ result: { success: false, error: "file not found" } });
-    const result = await bridge.loadAsset("C:/Missing/file.iAvatar");
-    expect(result.success).toBe(false);
-    expect(result.error).toBe("file not found");
-  });
-
-  it("throws on network error", async () => {
-    mockFetchError("connection refused");
-    await expect(bridge.loadAsset("C:/file.iAvatar")).rejects.toThrow("connection refused");
-  });
-});
-
-// ── exportFbx ─────────────────────────────────────────────────────────────────
-
-describe("CC4Bridge.exportFbx", () => {
-  it("sends POST /export/fbx with output_path and default options=0", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.exportFbx("C:/Export/character.fbx");
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/export/fbx",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ output_path: "C:/Export/character.fbx", options: 0 }),
-      })
-    );
-  });
-
-  it("sends custom options value when provided", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.exportFbx("C:/out.fbx", 3);
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.objectContaining({ body: JSON.stringify({ output_path: "C:/out.fbx", options: 3 }) })
-    );
-  });
-
-  it("forwards CC4 dialog options (mesh+motion, embed textures, fps, subd) to the body", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.exportFbx("C:/out.fbx", 0, {
-      target_tool: "UE5",
-      export_motion: true,
-      embed_textures: true,
-      fps: 30,
-      sub_d_level: 0,
-    });
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.objectContaining({
-        body: JSON.stringify({
-          output_path: "C:/out.fbx",
-          options: 0,
-          target_tool: "UE5",
-          sub_d_level: 0,
-          embed_textures: true,
-          export_motion: true,
-          fps: 30,
-        }),
-      })
-    );
-  });
-
-  it("forwards motion_range, texture_size, and convert_image_format", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.exportFbx("C:/out.fbx", 0, {
-      motion_range: [0, 100],
-      texture_size: 2048,
-      convert_image_format: true,
-    });
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.objectContaining({
-        body: JSON.stringify({
-          output_path: "C:/out.fbx",
-          options: 0,
-          motion_range: [0, 100],
-          convert_image_format: true,
-          texture_size: 2048,
-        }),
-      })
-    );
-  });
-
-  it("omits unset optional params from the body", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    await bridge.exportFbx("C:/out.fbx", 0, { export_motion: false });
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      expect.any(String),
-      expect.objectContaining({
-        body: JSON.stringify({ output_path: "C:/out.fbx", options: 0, export_motion: false }),
-      })
-    );
-  });
-
-  it("returns success result on successful export", async () => {
-    mockFetch<OperationResult>({ result: { success: true } });
-    const result = await bridge.exportFbx("C:/out.fbx");
-    expect(result.success).toBe(true);
-  });
-
-  it("returns failure when export fails", async () => {
-    mockFetch<OperationResult>({ result: { success: false, error: "disk full" } });
-    const result = await bridge.exportFbx("C:/out.fbx");
-    expect(result.success).toBe(false);
-    expect(result.error).toBe("disk full");
-  });
-
-  it("throws on HTTP error", async () => {
-    mockFetchHttpError(500, "export failed");
-    await expect(bridge.exportFbx("C:/out.fbx")).rejects.toThrow("CC4 bridge error (500)");
-  });
-});
-
 // ── createDefaultAvatar ───────────────────────────────────────────────────────
 
 describe("CC4Bridge.createDefaultAvatar", () => {
@@ -581,66 +323,6 @@ describe("CC4Bridge.createDefaultAvatar", () => {
   });
 });
 
-// ── captureViewport ───────────────────────────────────────────────────────────
-
-describe("CC4Bridge.captureViewport", () => {
-  it("returns CaptureResult with path on success", async () => {
-    const captured: CaptureResult = { success: true, path: "C:/temp/capture.png" };
-    mockFetch<CaptureResult>({ result: captured });
-    const result = await bridge.captureViewport("C:/temp/capture.png");
-    expect(result.success).toBe(true);
-    expect(result.path).toBe("C:/temp/capture.png");
-  });
-
-  it("sends POST /viewport/capture with empty body when no path provided", async () => {
-    mockFetch<CaptureResult>({ result: { success: true, path: "/tmp/cc4_capture.png" } });
-    await bridge.captureViewport();
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/viewport/capture",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({}),
-      })
-    );
-  });
-
-  it("sends POST /viewport/capture with provided output path", async () => {
-    mockFetch<CaptureResult>({ result: { success: true } });
-    await bridge.captureViewport("C:/screenshots/view.png");
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/viewport/capture",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ output_path: "C:/screenshots/view.png" }),
-      })
-    );
-  });
-
-  it("returns failure when viewport capture fails", async () => {
-    mockFetch<CaptureResult>({ result: { success: false, error: "no render context" } });
-    const result = await bridge.captureViewport();
-    expect(result.success).toBe(false);
-    expect(result.error).toBe("no render context");
-  });
-
-  it("throws on HTTP error", async () => {
-    mockFetchHttpError(500, "render failed");
-    await expect(bridge.captureViewport()).rejects.toThrow("CC4 bridge error (500)");
-  });
-
-  it("throws on network error", async () => {
-    mockFetchError("timeout");
-    await expect(bridge.captureViewport()).rejects.toThrow("timeout");
-  });
-
-  it("returns base64 field when bridge provides it", async () => {
-    const captured: CaptureResult = { success: true, path: "/tmp/c.png", base64: "abc123" };
-    mockFetch<CaptureResult>({ result: captured });
-    const result = await bridge.captureViewport();
-    expect(result.base64).toBe("abc123");
-  });
-});
-
 // ── request internals ─────────────────────────────────────────────────────────
 
 describe("CC4Bridge internal request handling", () => {
@@ -675,77 +357,6 @@ describe("CC4Bridge internal request handling", () => {
   it("throws when result field is undefined in the response", async () => {
     mockFetch({});
     await expect(bridge.getAvatars()).rejects.toThrow("CC4 bridge returned empty result");
-  });
-});
-
-// ── searchMorphs ──────────────────────────────────────────────────────────────
-
-describe("CC4Bridge.searchMorphs", () => {
-  type SearchResult = Array<{ id: string; display_name: string; category: string }>;
-
-  const sampleResults: SearchResult = [
-    { id: "Nose_Size", display_name: "Nose Size", category: "Head" },
-    { id: "Nose_Tip_Scale", display_name: "Nose Tip Scale", category: "Head" },
-  ];
-
-  it("returns search results on success", async () => {
-    mockFetch<SearchResult>({ result: sampleResults });
-    const result = await bridge.searchMorphs("nose");
-    expect(result).toEqual(sampleResults);
-    expect(result).toHaveLength(2);
-  });
-
-  it("returns an empty array when no morphs match", async () => {
-    mockFetch<SearchResult>({ result: [] });
-    const result = await bridge.searchMorphs("xyznonexistent");
-    expect(result).toEqual([]);
-  });
-
-  it("sends POST /morphs/search with query in body", async () => {
-    mockFetch<SearchResult>({ result: [] });
-    await bridge.searchMorphs("eye");
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/morphs/search",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ query: "eye", category: "" }),
-      })
-    );
-  });
-
-  it("sends category in body when provided", async () => {
-    mockFetch<SearchResult>({ result: [] });
-    await bridge.searchMorphs("fat", "Body");
-    expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "http://localhost:5101/morphs/search",
-      expect.objectContaining({
-        method: "POST",
-        body: JSON.stringify({ query: "fat", category: "Body" }),
-      })
-    );
-  });
-
-  it("defaults category to empty string when not provided", async () => {
-    mockFetch<SearchResult>({ result: [] });
-    await bridge.searchMorphs("jaw");
-    const callArgs = vi.mocked(fetch).mock.calls[0];
-    const body = JSON.parse((callArgs[1] as RequestInit).body as string);
-    expect(body.category).toBe("");
-  });
-
-  it("throws on bridge error field", async () => {
-    mockFetch({ error: "RLPy not ready" });
-    await expect(bridge.searchMorphs("test")).rejects.toThrow("CC4 error: RLPy not ready");
-  });
-
-  it("throws on HTTP error", async () => {
-    mockFetchHttpError(500, "Internal Server Error");
-    await expect(bridge.searchMorphs("test")).rejects.toThrow("CC4 bridge error (500)");
-  });
-
-  it("throws on network failure", async () => {
-    mockFetchError("fetch failed");
-    await expect(bridge.searchMorphs("test")).rejects.toThrow("fetch failed");
   });
 });
 
@@ -932,7 +543,6 @@ describe("CC4Bridge.setDiffuseColor", () => {
   });
 });
 
-
 // ── health / diagnostics / jobs ──────────────────────────────────────────────
 
 describe("CC4Bridge.getHealth", () => {
@@ -977,12 +587,71 @@ describe("CC4Bridge jobs", () => {
   });
 });
 
-describe("CC4Bridge.exportFbx export_json", () => {
-  it("forwards export_json to the bridge", async () => {
-    mockFetch({ result: { success: true, path: "C:/x.fbx", json_exists: true } });
-    await bridge.exportFbx("x.fbx", 0, { target_tool: "Unity", export_json: true });
-    const body = JSON.parse((vi.mocked(fetch).mock.calls[0][1] as RequestInit).body as string);
-    expect(body.export_json).toBe(true);
-    expect(body.target_tool).toBe("Unity");
+
+// ── Phase 2 endpoints ────────────────────────────────────────────────────────
+
+describe("CC4Bridge Phase 2 endpoints", () => {
+  const body = () => JSON.parse((vi.mocked(fetch).mock.calls[0][1] as RequestInit).body as string);
+  const url = () => vi.mocked(fetch).mock.calls[0][0];
+
+  it("searchMorphs sends query, category and limit", async () => {
+    mockFetch({ result: { results: [], total_matches: 0 } });
+    await bridge.searchMorphs("nose", undefined, 5);
+    expect(url()).toBe("http://localhost:5101/morphs/search");
+    expect(body()).toEqual({ query: "nose", category: "", limit: 5 });
+  });
+
+  it("setMorphs posts the batch", async () => {
+    mockFetch({ result: { success: true, applied: [] } });
+    await bridge.setMorphs([{ display_name: "Body Thin", value: 0.3 }]);
+    expect(url()).toBe("http://localhost:5101/morphs/set");
+    expect(body()).toEqual({ morphs: [{ display_name: "Body Thin", value: 0.3 }] });
+  });
+
+  it("getMorphStatus and listItems are GETs", async () => {
+    mockFetch({ result: { ready: true, categories: 123, morphs: 2778 } });
+    expect((await bridge.getMorphStatus()).ready).toBe(true);
+    expect(url()).toBe("http://localhost:5101/morphs/status");
+    mockFetch({ result: { avatar: "Camila", clothes: [], hair: [], accessories: [] } });
+    await bridge.listItems();
+    expect(vi.mocked(fetch).mock.calls[0][0]).toBe("http://localhost:5101/items");
+  });
+
+  it("loadItem, removeItem, setColor, saveProjectAs, checkExportLicense hit their routes", async () => {
+    const cases: Array<[() => Promise<unknown>, string, unknown]> = [
+      [() => bridge.loadItem("D:/a.ccCloth"), "/item/load", { file_path: "D:/a.ccCloth" }],
+      [() => bridge.removeItem("Bra"), "/item/remove", { item_name: "Bra" }],
+      [() => bridge.setColor("eyes", 0.1, 0.2, 0.3), "/color", { target: "eyes", r: 0.1, g: 0.2, b: 0.3 }],
+      [() => bridge.saveProjectAs("copy"), "/project/save_as", { path: "copy" }],
+      [() => bridge.checkExportLicense(), "/license/check", { item: "" }],
+    ];
+    for (const [fn, route, expected] of cases) {
+      mockFetch({ result: { success: true } });
+      await fn();
+      expect(url()).toBe(`http://localhost:5101${route}`);
+      expect(body()).toEqual(expected);
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it("captureViews only sends given options", async () => {
+    mockFetch({ result: { success: true, views: [] } });
+    await bridge.captureViews(["head"], undefined, undefined, "camila");
+    expect(url()).toBe("http://localhost:5101/views/capture");
+    expect(body()).toEqual({ presets: ["head"], prefix: "camila" });
+  });
+
+  it("export/convert/merge start jobs", async () => {
+    mockFetch({ result: { job_id: "job_1", status: "queued" } });
+    await bridge.startExportFbx("a.fbx", { target_tool: "Unity", export_json: true });
+    expect(body()).toEqual({ action: "export_fbx", params: { output_path: "a.fbx", target_tool: "Unity", export_json: true } });
+    vi.unstubAllGlobals();
+    mockFetch({ result: { job_id: "job_2", status: "queued" } });
+    await bridge.startConvertLod("lod1");
+    expect(body()).toEqual({ action: "convert_lod", params: { level: "lod1" } });
+    vi.unstubAllGlobals();
+    mockFetch({ result: { job_id: "job_3", status: "queued" } });
+    await bridge.startMergeMaterials(["Shirt", "Jeans"], 1024);
+    expect(body()).toEqual({ action: "merge_materials", params: { mesh_names: ["Shirt", "Jeans"], texture_size: 1024 } });
   });
 });

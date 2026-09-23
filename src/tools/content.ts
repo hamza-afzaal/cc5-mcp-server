@@ -1,103 +1,96 @@
 /**
- * Content management tools for CC4 (clothing, hair, accessories).
+ * Clothes, hair and accessory tools. Loading is gated by assets/allowlist.json (design S0).
  */
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import type { CC4Bridge } from "../cc4-bridge.js";
+import { AllowlistIndex, loadAllowlist, type AllowlistItem } from "../allowlist.js";
+import type { ItemList } from "../types.js";
 import { bridgeCall } from "../util.js";
 
-export function registerContentTools(server: McpServer, bridge: CC4Bridge) {
+export type AllowlistProvider = () => AllowlistIndex;
+export const defaultAllowlistProvider: AllowlistProvider = () => new AllowlistIndex(loadAllowlist());
+
+const LOADABLE_TYPES = ["base", "clothes", "shoes", "hair", "accessory", "skin"] as const;
+
+export function formatItems(items: ItemList, allowlist?: AllowlistIndex): string {
+  const lines = [`Avatar: ${items.avatar}`];
+  for (const [label, list, types] of [
+    ["Clothes", items.clothes, ["clothes", "shoes"]],
+    ["Hair", items.hair, ["hair"]],
+    ["Accessories", items.accessories, ["accessory"]],
+  ] as const) {
+    lines.push(`${label} (${list.length}):`);
+    for (const item of list) {
+      const hit = allowlist?.bySceneName(item.name, types);
+      const tag = allowlist ? (hit ? `allowlist:${hit.id}${hit.exportable ? "" : " (NOT exportable)"}` : "not in allowlist") : "";
+      lines.push(`  - ${item.name}${tag ? `  [${tag}]` : ""}  meshes: ${item.meshes.join(", ") || "-"}`);
+    }
+  }
+  return lines.join("\n");
+}
+
+export function registerContentTools(server: McpServer, bridge: CC4Bridge, getAllowlist: AllowlistProvider = defaultAllowlistProvider) {
   server.tool(
-    "list_clothes",
-    "List all clothing items currently worn by the avatar. Returns name, ID, and type for each item.",
+    "list_items",
+    "List the clothes, hair and accessories on the current avatar with their scene mesh names.",
     {},
-    async () => bridgeCall(
-      () => bridge.listClothes(),
-      (clothes) => {
-        if (clothes.length === 0) {
-          return "No clothing items on the avatar.";
-        }
-        const lines = clothes.map(c => `- ${c.name} (ID: ${c.id}, Type: ${c.type})`);
-        return `Found ${clothes.length} clothing item(s):\n${lines.join("\n")}`;
-      },
-    )
+    async () => bridgeCall(() => bridge.listItems(), (items) => formatItems(items)),
   );
 
   server.tool(
-    "list_hair",
-    "List all hair items on the current avatar. Returns name, ID, and type for each item.",
+    "get_inventory",
+    "List the avatar's clothes, hair and accessories joined against assets/allowlist.json: allowlist ID, exportability, or 'not in allowlist'.",
     {},
-    async () => bridgeCall(
-      () => bridge.listHair(),
-      (hairs) => {
-        if (hairs.length === 0) {
-          return "No hair items on the avatar.";
-        }
-        const lines = hairs.map(h => `- ${h.name} (ID: ${h.id}, Type: ${h.type})`);
-        return `Found ${hairs.length} hair item(s):\n${lines.join("\n")}`;
-      },
-    )
+    async () => bridgeCall(async () => ({ items: await bridge.listItems(), allowlist: getAllowlist() }),
+      ({ items, allowlist }) => formatItems(items, allowlist)),
   );
 
   server.tool(
-    "list_accessories",
-    "List all accessories on the current avatar. Returns name and ID for each item.",
-    {},
-    async () => bridgeCall(
-      () => bridge.listAccessories(),
-      (accessories) => {
-        if (accessories.length === 0) {
-          return "No accessories on the avatar.";
-        }
-        const lines = accessories.map(a => `- ${a.name} (ID: ${a.id})`);
-        return `Found ${accessories.length} accessory(ies):\n${lines.join("\n")}`;
-      },
-    )
-  );
-
-  server.tool(
-    "remove_scene_item",
-    "Remove a clothing, hair, or accessory item from the avatar by name. Use list_clothes, list_hair, or list_accessories first to find item names.",
+    "load_item",
+    "Load an allowlisted content item (base avatar, clothing, shoes, hair, accessory or skin preset) into CC4. Takes 'allowlist:<id>' or a path that is listed in assets/allowlist.json. Anything not allowlisted or not exportable is refused.",
     {
-      item_name: z.string().max(256).describe("Name of the item to remove"),
+      item: z.string().min(1).max(1024).describe("'allowlist:clothes/basic_tshirt' or an allowlisted absolute path"),
     },
-    async ({ item_name }) => bridgeCall(
-      () => bridge.removeSceneItem(item_name),
-      (result) => result.success
-        ? `Removed item: ${result.removed}`
-        : `Failed: ${result.error}`,
-    )
+    async ({ item }) => {
+      let entry: AllowlistItem;
+      try {
+        entry = getAllowlist().resolve(item, LOADABLE_TYPES);
+      } catch (e) {
+        return { content: [{ type: "text" as const, text: `Refused: ${(e as Error).message}` }] };
+      }
+      return bridgeCall(() => bridge.loadItem(entry.path), (r) => {
+        const added = r.added ? [...r.added.clothes, ...r.added.hair, ...r.added.accessories] : [];
+        const unverified = entry.verified ? "" : `\nNote: license for ${entry.id} not yet verified (${entry.license}).`;
+        return r.success
+          ? `Loaded ${entry.id} in ${r.seconds ?? "?"} s. Added: ${added.join(", ") || "(no new item; base or skin load)"}${unverified}`
+          : `Failed to load ${entry.id}: ${r.error}`;
+      });
+    },
+  );
+
+  server.tool(
+    "remove_item",
+    "Remove a clothing, hair or accessory item from the current avatar by its scene name (see list_items).",
+    {
+      name: z.string().min(1).max(256).describe("Scene item name, e.g. 'Basic T-shirts'"),
+    },
+    async ({ name }) => bridgeCall(() => bridge.removeItem(name),
+      (r) => (r.success ? `Removed: ${r.removed ?? name}` : `Failed: ${r.error}`)),
   );
 
   server.tool(
     "browse_content",
-    "Browse available CC4 content files by category. Returns file paths that can be loaded with load_asset. Wearables: cloth_upper, cloth_lower, cloth, shoes, accessory_head, accessory_body. Scene/animation: pose, motion, expression, props, light, camera, character (pose/motion may be empty on a base install without content packs).",
+    "Browse CC4's installed content folders (for authoring assets/allowlist.json). Returns up to 200 file paths. Loading still requires an allowlist entry.",
     {
       folder_type: z.enum([
-        "cloth_upper", "cloth_lower", "cloth", "shoes", "accessory_head", "accessory_body",
+        "cloth_upper", "cloth_lower", "shoes", "accessory_head", "accessory_body", "cloth",
         "pose", "motion", "expression", "props", "light", "camera", "character",
-      ]).default("cloth_upper")
-        .describe("Content category. Wearables: cloth_upper/cloth_lower/cloth/shoes/accessory_head/accessory_body. Scene & animation: pose/motion/expression/props/light/camera/character. Load a returned path with load_asset."),
+        "project", "gloves", "skin", "skin_head",
+      ]).describe("Content folder type"),
     },
-    async ({ folder_type }) => bridgeCall(
-      () => bridge.browseContent(folder_type),
-      (files) => {
-        if (files.length === 0) {
-          return `No content files found for category '${folder_type}'.`;
-        }
-        // Check if the first entry is an error message
-        if (files.length === 1 && (files[0].startsWith("Unknown folder") || files[0].startsWith("Error") || files[0].startsWith("Content browsing"))) {
-          return files[0];
-        }
-        const display = files.slice(0, 50);
-        let text = `Found ${files.length} content file(s) for '${folder_type}':\n`;
-        text += display.map(f => `- ${f}`).join("\n");
-        if (files.length > 50) {
-          text += `\n... and ${files.length - 50} more`;
-        }
-        return text;
-      },
-    )
+    async ({ folder_type }) => bridgeCall(() => bridge.browseContent(folder_type),
+      (files) => (files.length ? `${files.length} file(s):\n${files.map((f) => `- ${f}`).join("\n")}` : `No content found for ${folder_type}.`)),
   );
 }

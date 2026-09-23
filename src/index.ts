@@ -15,7 +15,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CC4Bridge } from "./cc4-bridge.js";
 import { registerMorphTools } from "./tools/morph.js";
 import { registerSceneTools } from "./tools/scene.js";
-import { registerAssetTools } from "./tools/asset.js";
+import { registerPipelineTools } from "./tools/pipeline.js";
 import { registerEditTools } from "./tools/edit.js";
 import { registerCameraTools } from "./tools/camera.js";
 import { registerLightTools } from "./tools/light.js";
@@ -38,7 +38,7 @@ async function main() {
   // Register all tools
   registerMorphTools(server, bridge);
   registerSceneTools(server, bridge);
-  registerAssetTools(server, bridge);
+  registerPipelineTools(server, bridge);
   registerEditTools(server, bridge);
   registerCameraTools(server, bridge);
   registerLightTools(server, bridge);
