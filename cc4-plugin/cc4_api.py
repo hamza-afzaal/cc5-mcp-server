@@ -2192,6 +2192,15 @@ def spike_merge_material_uv(mesh_names: list, texture_size: int) -> dict[str, An
             "before": before, "after": _avatar_snapshot(get_first_avatar())}
 
 
+def spike_select_avatar() -> dict[str, Any]:
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    RLPy.RScene.SelectObject(avatar)
+    _invalidate_caches()
+    return {"success": True, "selected": [o.GetName() for o in RLPy.RScene.GetSelectedObjects()]}
+
+
 def spike_snapshot() -> dict[str, Any]:
     avatar = get_first_avatar()
     if not avatar:
@@ -2207,6 +2216,7 @@ if os.environ.get("CC4_DEV_MODE") == "1":
         "spike_load_project": (lambda p: spike_load_project(p["path"]), ["path"], LONG_TIMEOUT_S),
         "spike_license":      (lambda p: spike_license(), [], DEFAULT_TIMEOUT_S),
         "spike_snapshot":     (lambda p: spike_snapshot(), [], DEFAULT_TIMEOUT_S),
+        "spike_select_avatar": (lambda p: spike_select_avatar(), [], DEFAULT_TIMEOUT_S),
         "spike_convert_lod":  (lambda p: spike_convert_lod(
             p["level"], bool(p.get("bake_expression", True)), bool(p.get("bake_texture", True)), p.get("pose", "default"),
         ), ["level"], LONG_TIMEOUT_S),
@@ -2218,6 +2228,7 @@ if os.environ.get("CC4_DEV_MODE") == "1":
         "/spike/load_project": "spike_load_project",
         "/spike/license": "spike_license",
         "/spike/snapshot": "spike_snapshot",
+        "/spike/select_avatar": "spike_select_avatar",
         "/spike/convert_lod": "spike_convert_lod",
         "/spike/merge_material_uv": "spike_merge_material_uv",
     })
