@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "color-expert": {
+      "source": "meodai/skill.color-expert",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "c8b3cda16f67273d91e7b8de177a1cff42c8ba9d1abe079bf411875af03bfc27"
+    }
+  }
+}

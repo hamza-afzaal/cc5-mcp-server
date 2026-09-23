@@ -1,16 +1,16 @@
 /**
- * Light control tools for CC5.
+ * Light control tools for CC4.
  */
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CC5Bridge } from "../cc5-bridge.js";
+import type { CC4Bridge } from "../cc4-bridge.js";
 import { bridgeCall } from "../util.js";
 
-export function registerLightTools(server: McpServer, bridge: CC5Bridge) {
+export function registerLightTools(server: McpServer, bridge: CC4Bridge) {
   server.tool(
     "get_lights",
-    "List all lights in the CC5 scene. Returns light names, IDs, and types (spot, point, directional).",
+    "List all lights in the CC4 scene. Returns light names, IDs, and types (spot, point, directional).",
     {},
     async () => bridgeCall(
       () => bridge.getLights(),
@@ -90,7 +90,7 @@ export function registerLightTools(server: McpServer, bridge: CC5Bridge) {
 
   server.tool(
     "set_light_active",
-    "Turn a light on or off by name. Use this to shape a scene by toggling key/fill/rim lights (CC5 lighting workflow). Use get_lights first to find available light names.",
+    "Turn a light on or off by name. Use this to shape a scene by toggling key/fill/rim lights (CC4 lighting workflow). Use get_lights first to find available light names.",
     {
       light_name: z.string().max(256).describe("Name of the light to toggle"),
       active: z.boolean().describe("true = on, false = off"),

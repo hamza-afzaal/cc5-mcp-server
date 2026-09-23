@@ -27,8 +27,8 @@ beforeEach(() => {
 // ── tool registration ─────────────────────────────────────────────────────────
 
 describe("registerMaterialTools – registration", () => {
-  it("registers exactly 9 tools", () => {
-    expect(server.tool).toHaveBeenCalledTimes(9);
+  it("registers exactly 5 tools", () => {
+    expect(server.tool).toHaveBeenCalledTimes(5);
   });
 
   it("registers get_shader_parameters", () => {
@@ -136,8 +136,8 @@ describe("get_material_info handler", () => {
     bridge.getMaterialInfo.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("get_material_info");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 
   it("returns content with type 'text'", async () => {
@@ -189,7 +189,7 @@ describe("get_diffuse_color handler", () => {
     bridge.getDiffuseColor.mockRejectedValue(new Error("timeout"));
     const handler = server.getRegisteredTool("get_diffuse_color");
     const result = await handler({ mesh_name: "Mesh", material_name: "Mat" });
-    expect(result.content[0].text).toContain("CC5 bridge error: timeout");
+    expect(result.content[0].text).toContain("CC4 bridge error: timeout");
   });
 
   it("handles RGB values of exactly 0 and 1 (boundary values)", async () => {
@@ -270,7 +270,7 @@ describe("set_diffuse_color handler", () => {
   });
 
   it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.setDiffuseColor.mockRejectedValue(new Error("CC5 not responding"));
+    bridge.setDiffuseColor.mockRejectedValue(new Error("CC4 not responding"));
     const handler = server.getRegisteredTool("set_diffuse_color");
     const result = await handler({
       mesh_name: "Mesh",
@@ -279,7 +279,7 @@ describe("set_diffuse_color handler", () => {
       g: 0,
       b: 0,
     });
-    expect(result.content[0].text).toContain("CC5 bridge error: CC5 not responding");
+    expect(result.content[0].text).toContain("CC4 bridge error: CC4 not responding");
   });
 
   it("handles RGB boundary values 0 and 1", async () => {
@@ -347,7 +347,7 @@ describe("get_shader_parameters handler", () => {
     bridge.getShaderParameters.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("get_shader_parameters");
     const result = await handler({ mesh_name: "M", material_name: "Mat" });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
   });
 });
 
@@ -406,6 +406,6 @@ describe("set_shader_parameter handler", () => {
       parameter_name: "SSS Radius",
       values: [1.5],
     });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
   });
 });

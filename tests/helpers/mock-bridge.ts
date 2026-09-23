@@ -1,12 +1,12 @@
 /**
- * Shared mock factory for CC5Bridge.
- * Returns a vi.fn()-backed partial mock that satisfies the CC5Bridge interface.
+ * Shared mock factory for CC4Bridge.
+ * Returns a vi.fn()-backed partial mock that satisfies the CC4Bridge interface.
  */
 
 import { vi } from "vitest";
-import type { CC5Bridge } from "../../src/cc5-bridge.js";
+import type { CC4Bridge } from "../../src/cc4-bridge.js";
 import type {
-  CC5Avatar,
+  CC4Avatar,
   AvatarInfo,
   MorphCatalog,
   OperationResult,
@@ -23,40 +23,46 @@ import type {
   SetAmbientResult,
   SetIblResult,
   ExpressionInfo,
-  ExpressionItem,
-  ExpressionSetResult,
-  ExpressionResetResult,
   ResetMorphsResult,
   MaterialInfo,
   DiffuseColor,
   SetDiffuseColorResult,
-  MaterialProperties,
-  SetMaterialPropertyResult,
   ShaderParameters,
   SetShaderParameterResult,
-  CreateActorMixerOptions,
-  CreateActorMixerResult,
 } from "../../src/types.js";
 
 export type MockBridge = {
-  [K in keyof CC5Bridge]: ReturnType<typeof vi.fn>;
+  [K in keyof CC4Bridge]: ReturnType<typeof vi.fn>;
 };
 
 export function createMockBridge(): MockBridge {
   return {
     healthCheck: vi.fn<[], Promise<boolean>>(),
-    getAvatars: vi.fn<[], Promise<CC5Avatar[]>>(),
+    getHealth: vi.fn(),
+    diagnostics: vi.fn(),
+    startJob: vi.fn(),
+    getJobStatus: vi.fn(),
+    getMorphStatus: vi.fn(),
+    getWorkspace: vi.fn(),
+    setCharacter: vi.fn(),
+    searchMorphs: vi.fn(),
+    setMorphs: vi.fn(),
+    listItems: vi.fn(),
+    loadItem: vi.fn(),
+    removeItem: vi.fn(),
+    setColor: vi.fn(),
+    saveProjectAs: vi.fn(),
+    checkExportLicense: vi.fn(),
+    captureViews: vi.fn(),
+    startExportFbx: vi.fn(),
+    startConvertLod: vi.fn(),
+    startMergeMaterials: vi.fn(),
+    browseContent: vi.fn(),
+    getAvatars: vi.fn<[], Promise<CC4Avatar[]>>(),
     getAvatarInfo: vi.fn<[], Promise<AvatarInfo | null>>(),
     getMorphCatalog: vi.fn<[], Promise<MorphCatalog>>(),
-    getMorphValue: vi.fn<[string], Promise<{ success: boolean; morph_id?: string; value?: number; error?: string }>>(),
-    setMorph: vi.fn<[string, number], Promise<OperationResult>>(),
-    setMultipleMorphs: vi.fn<[Array<{ morph_id: string; value: number }>], Promise<OperationResult>>(),
     createDefaultAvatar: vi.fn<[], Promise<CreateAvatarResult>>(),
     deleteAvatar: vi.fn<[string], Promise<DeleteAvatarResult>>(),
-    loadAsset: vi.fn<[string], Promise<OperationResult>>(),
-    exportFbx: vi.fn<[string, number?, Record<string, unknown>?], Promise<OperationResult>>(),
-    captureViewport: vi.fn<[string?], Promise<CaptureResult>>(),
-    setSubdivisionLevel: vi.fn<[number], Promise<OperationResult>>(),
     undo: vi.fn<[], Promise<OperationResult>>(),
     redo: vi.fn<[], Promise<OperationResult>>(),
     getCameraInfo: vi.fn<[], Promise<CameraInfo>>(),
@@ -72,20 +78,11 @@ export function createMockBridge(): MockBridge {
     setAmbient: vi.fn<[number, number, number], Promise<SetAmbientResult>>(),
     setIbl: vi.fn<[string, boolean], Promise<SetIblResult>>(),
     getExpressionInfo: vi.fn<[], Promise<ExpressionInfo>>(),
-    setExpression: vi.fn<[ExpressionItem[]], Promise<ExpressionSetResult>>(),
-    resetExpression: vi.fn<[], Promise<ExpressionResetResult>>(),
-    resetAllMorphs: vi.fn<[string?], Promise<ResetMorphsResult>>(),
-    searchMorphs: vi.fn<[string, string?], Promise<Array<{ id: string; display_name: string; category: string }>>>(),
     getMaterialInfo: vi.fn<[string?], Promise<MaterialInfo>>(),
     getDiffuseColor: vi.fn<[string, string], Promise<DiffuseColor>>(),
     setDiffuseColor: vi.fn<[string, string, number, number, number], Promise<SetDiffuseColorResult>>(),
-    getMaterialProperties: vi.fn<[string, string], Promise<MaterialProperties>>(),
-    setMaterialOpacity: vi.fn<[string, string, number], Promise<SetMaterialPropertyResult>>(),
-    setMaterialGlossiness: vi.fn<[string, string, number], Promise<SetMaterialPropertyResult>>(),
-    setMaterialSpecular: vi.fn<[string, string, number], Promise<SetMaterialPropertyResult>>(),
     getShaderParameters: vi.fn<[string, string], Promise<ShaderParameters>>(),
     setShaderParameter: vi.fn<[string, string, string, number[]], Promise<SetShaderParameterResult>>(),
-    createActorMixer: vi.fn<[CreateActorMixerOptions], Promise<CreateActorMixerResult>>(),
   };
 }
 

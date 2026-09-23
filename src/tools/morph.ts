@@ -1,82 +1,54 @@
 /**
- * Morph adjustment tools for CC5.
- * Controls facial features, body shape, and other character morphs.
+ * Shaping morph tools for CC4: search by display name, set in one undoable batch.
  */
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import type { CC5Bridge } from "../cc5-bridge.js";
+import type { CC4Bridge } from "../cc4-bridge.js";
+import type { SetMorphsResult } from "../types.js";
 import { bridgeCall } from "../util.js";
 
-export function registerMorphTools(server: McpServer, bridge: CC5Bridge) {
+export const MorphValueSchema = z.object({
+  display_name: z.string().min(1).max(256).optional().describe("Slider display name as shown in CC4, e.g. 'Nose Width'"),
+  id: z.string().min(1).max(256).optional().describe("Internal morph ID (from search_morphs) when the display name is ambiguous"),
+  category: z.string().max(256).optional().describe("Category prefix to disambiguate a display name, e.g. 'Actor'"),
+  value: z.number().describe("Slider value; clamped to [-1, 1]"),
+}).refine((m) => m.display_name || m.id, { message: "each morph needs display_name or id" });
+
+export function formatSetMorphs(result: SetMorphsResult): string {
+  if (!result.success) {
+    const problems = (result.problems ?? []).map((p) => `  - ${JSON.stringify(p)}`).join("\n");
+    return `Nothing applied: ${result.error}${problems ? `\n${problems}` : ""}`;
+  }
+  const lines = (result.applied ?? []).map((m) =>
+    `  ${m.display_name} = ${Math.round(m.value * 1e4) / 1e4}${m.warning ? `  (${m.warning})` : ""}`);
+  return `Applied ${lines.length} morph(s) as one undo step:\n${lines.join("\n")}`;
+}
+
+export function registerMorphTools(server: McpServer, bridge: CC4Bridge) {
   server.tool(
     "search_morphs",
-    "Search the morph catalog by keyword. Much faster than downloading the full catalog. Use this to find morph IDs for specific features (e.g., 'nose', 'eye', 'jaw').",
+    "Search CC4 shaping morphs by display name (then internal ID). Exact matches rank first. Returns id, display_name, category and CC4's reported min/max. The min/max is only the UI default range: CC4 accepts values outside it.",
     {
-      query: z.string().max(256).describe("Search keyword (e.g., 'nose', 'eye size', 'jaw', 'fat')"),
-      category: z.string().max(256).optional().describe("Optional category filter (e.g., 'Body', 'Head')"),
+      query: z.string().min(1).max(256).describe("Words from the slider name, e.g. 'nose width', 'body thin', 'jaw'"),
+      category: z.string().max(256).optional().describe("Optional category prefix, e.g. 'Actor' or 'Actor/Body'"),
+      limit: z.number().int().min(1).max(200).optional().describe("Max results (default 25)"),
     },
-    async ({ query, category }) => bridgeCall(
-      () => bridge.searchMorphs(query, category),
-      (results) => results.length > 0
-        ? `Found ${results.length} morph(s):\n${results.map(r => `- ${r.display_name} (ID: ${r.id})`).join("\n")}`
-        : `No morphs found matching '${query}'`,
+    async ({ query, category, limit }) => bridgeCall(
+      () => bridge.searchMorphs(query, category, limit),
+      (r) => r.results.length === 0
+        ? `No morphs match '${query}'.`
+        : `${r.results.length} of ${r.total_matches} match(es):\n` + r.results
+          .map((m) => `- ${m.display_name} [${m.category}] range ${m.min}..${m.max}  (id: ${m.id})`).join("\n"),
     )
   );
 
   server.tool(
-    "adjust_morph",
-    "Adjust a single morph slider on the current character. Use get_morph_catalog first to discover available morph IDs.",
+    "set_morphs",
+    "Set several shaping morphs at once, by display name (preferred) or id, as ONE undoable action. Every entry is resolved first: an unknown or ambiguous name fails the whole call and nothing is applied. Values are clamped to [-1, 1]; values outside CC4's reported UI range are applied with a warning.",
     {
-      morph_id: z.string().describe("The morph slider ID (e.g., 'Fat', 'Head_Narrow', 'Nose_Size')"),
-      value: z.number().min(-1).max(1).describe("Morph value between -1.0 and 1.0. Negative values shrink features."),
+      morphs: z.array(MorphValueSchema).min(1).max(500).describe("Morph values to set"),
     },
-    async ({ morph_id, value }) => bridgeCall(
-      () => bridge.setMorph(morph_id, value),
-      (result) => result.success ? `Set morph '${morph_id}' to ${value}` : `Failed: ${result.error}`,
-    )
-  );
-
-  server.tool(
-    "adjust_multiple_morphs",
-    "Adjust multiple morph sliders at once. More efficient than calling adjust_morph repeatedly. Use for batch character modifications.",
-    {
-      morphs: z.array(z.object({
-        morph_id: z.string().max(256).describe("Morph slider ID"),
-        value: z.number().min(-1).max(1).describe("Value -1.0 to 1.0"),
-      })).max(500).describe("Array of morph adjustments (max 500)"),
-    },
-    async ({ morphs }) => bridgeCall(
-      () => bridge.setMultipleMorphs(morphs),
-      (result) => result.success ? `Applied ${morphs.length} morph adjustments` : `Failed: ${result.error}`,
-    )
-  );
-
-  server.tool(
-    "get_morph_value",
-    "Get the current value of a specific morph slider.",
-    {
-      morph_id: z.string().describe("The morph slider ID to query"),
-    },
-    async ({ morph_id }) => bridgeCall(
-      () => bridge.getMorphValue(morph_id),
-      (result) => result.success
-        ? `Morph '${morph_id}' current value: ${result.value}`
-        : `Could not get morph value for '${morph_id}': ${result.error ?? "unknown error"}`,
-    )
-  );
-
-  server.tool(
-    "reset_morphs",
-    "Reset all morph sliders to zero for the current avatar (or a named avatar). Useful for starting fresh with character customization.",
-    {
-      avatar_name: z.string().max(256).optional().describe("Name of the avatar to reset. Defaults to the first avatar if omitted."),
-    },
-    async ({ avatar_name }) => bridgeCall(
-      () => bridge.resetAllMorphs(avatar_name),
-      (result) => result.success
-        ? `Reset ${result.reset_count ?? 0} morph(s) to zero`
-        : `Failed: ${result.error}`,
-    )
+    async ({ morphs }) => bridgeCall(() => bridge.setMorphs(morphs), formatSetMorphs)
   );
 }

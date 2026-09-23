@@ -1,8 +1,8 @@
 /**
- * Type definitions for CC5 MCP Server.
+ * Type definitions for CC4 MCP Server.
  */
 
-export interface CC5Avatar {
+export interface CC4Avatar {
   name: string;
   id: string;
   type: string;
@@ -23,13 +23,30 @@ export interface MorphSetRequest {
   value: number;
 }
 
-export interface AvatarInfo {
-  name: string;
+export interface ActiveMorph {
   id: string;
-  active_morphs: Record<string, number>;
+  display_name: string;
+  category: string;
+  value: number;
 }
 
-export interface CC5Response<T = unknown> {
+export interface AvatarInfo {
+  name: string;
+  id: string | number;
+  avatar_type?: number;
+  generation?: number;
+  /** "CC4Standard" | "CC4Extended" | "Traditional" | "None" | raw value. */
+  facial_profile?: string | null;
+  skin_bone_count?: number;
+  subdiv_level?: number;
+  materials?: { total: number; per_mesh: Record<string, number> };
+  items?: { clothes: string[]; hair: string[]; accessories: string[] };
+  active_morphs?: ActiveMorph[];
+  /** Per-field read failures (the rest of the info is still valid). */
+  errors?: Record<string, string>;
+}
+
+export interface CC4Response<T = unknown> {
   result?: T;
   error?: string;
 }
@@ -48,6 +65,7 @@ export interface DeleteAvatarResult extends OperationResult {
 }
 
 export interface CaptureResult extends OperationResult {
+  warning?: string;
   path?: string;
   base64?: string;
 }
@@ -119,20 +137,6 @@ export interface ExpressionInfo {
   [group: string]: string[];
 }
 
-export interface ExpressionItem {
-  name: string;
-  weight: number;
-}
-
-export interface ExpressionSetResult extends OperationResult {
-  applied?: ExpressionItem[];
-  skipped?: (string | null)[];
-}
-
-export interface ExpressionResetResult extends OperationResult {
-  reset_count?: number;
-}
-
 export interface ResetMorphsResult extends OperationResult {
   reset_count?: number;
 }
@@ -152,23 +156,6 @@ export interface DiffuseColor {
 export interface SetDiffuseColorResult extends OperationResult {
   mesh?: string;
   material?: string;
-}
-
-export interface MaterialProperties {
-  mesh: string;
-  material: string;
-  opacity?: number;
-  glossiness?: number;
-  specular?: number;
-  error?: string;
-}
-
-export interface SetMaterialPropertyResult extends OperationResult {
-  mesh?: string;
-  material?: string;
-  opacity?: number;
-  glossiness?: number;
-  specular?: number;
 }
 
 export interface ShaderParameters extends OperationResult {
@@ -214,20 +201,7 @@ export interface ColorResult extends OperationResult {
   applied_to?: string[];
 }
 
-// --- Visibility & Scene (Tier 4) ---
-
-export interface SetVisibleResult extends OperationResult {
-  item?: string;
-  visible?: boolean;
-}
-
-export interface SceneObject {
-  name: string;
-  id: number;
-  type: string;
-}
-
-// --- Mesh-to-MetaHuman pipeline ---
+// --- FBX export ---
 
 export interface ExportFbxOptions {
   target_tool?: "UE5" | "Default" | "Maya" | "Unity" | "Unreal";
@@ -249,6 +223,12 @@ export interface ExportFbxOptions {
   convert_image_format?: boolean;
   /** "Max Texture Size" in pixels (0 = original). */
   texture_size?: number;
+  /** EExportFbxOptions3_ExportJson — the JSON sidecar CCiC Unity Tools needs. */
+  export_json?: boolean;
+  /** Motion file exported with the avatar (SetIncludeMotionPath). */
+  include_motion_path?: string;
+  /** Skeleton + animation only (EExportFbxOptions_RemoveAllMesh). */
+  motion_only?: boolean;
 }
 
 export interface ExportFbxResult extends OperationResult {
@@ -256,7 +236,7 @@ export interface ExportFbxResult extends OperationResult {
   flags?: number;
   flags2?: number;
   flags3?: number;
-  flags_applied?: boolean;
+  size_bytes?: number;
   notes?: string[];
   target_tool?: string;
   /** HD Character Subdivision Level actually applied (SetExportLevel). */
@@ -273,84 +253,143 @@ export interface ExportFbxResult extends OperationResult {
   embed_textures?: boolean;
   /** Whether image format conversion was applied. */
   convert_image_format?: boolean;
+  /** Whether the .json sidecar exists next to the FBX (only when export_json was requested). */
+  json_exists?: boolean;
 }
 
-export interface BakeSkinResult extends OperationResult {
-  resolution?: number;
-  triggered_action?: string;
-  manual_step_required?: boolean;
-  instructions?: string;
-  notes?: string[];
+// --- Diagnostics ---
+
+export const DIAGNOSTIC_QUERIES = [
+  "symbol_search",
+  "method_list",
+  "signature",
+  "enum_values",
+  "avatar_type",
+  "facial_profile_type",
+  "viseme_names",
+  "expression_slider_names",
+  "skin_bone_count",
+  "materials_per_mesh",
+  "morph_minmax",
+  "content_files",
+  "project_path",
+] as const;
+
+export type DiagnosticQuery = (typeof DIAGNOSTIC_QUERIES)[number];
+
+// --- Jobs ---
+
+export type JobStatus = "queued" | "running" | "done" | "failed";
+
+export interface JobInfo<T = unknown> {
+  job_id: string;
+  action: string;
+  status: JobStatus;
+  submitted_at: number;
+  started_at?: number;
+  finished_at?: number;
+  result?: T;
 }
 
-export interface ExportHeadMetaHumanResult extends OperationResult {
-  triggered_action?: string;
-  manual_step_required?: boolean;
-  instructions?: string;
-  output_dir?: string;
-  character_name?: string;
-  gender?: string;
-  notes?: string[];
+
+// --- Pipeline (Phase 2) ---
+
+export interface MorphSearchHit {
+  id: string;
+  display_name: string;
+  category: string;
+  /** UI default range reported by CC4; not enforced (spike 0). */
+  min: number;
+  max: number;
 }
 
-// --- ActorMIXER PRO: Create Mixer Assets ---
-
-/** Head-part checkboxes on the Create Mixer Assets dialog (default: all true). */
-export interface MixerHeadParts {
-  eyes?: boolean;
-  forehead?: boolean;
-  chin?: boolean;
-  mouth?: boolean;
-  ears?: boolean;
-  nose?: boolean;
-  head_shape?: boolean;
+export interface MorphSearchResult {
+  results: MorphSearchHit[];
+  total_matches: number;
 }
 
-/** Body-part checkboxes (default: all false). */
-export interface MixerBodyParts {
-  body?: boolean;
-  torso?: boolean;
+export interface MorphCatalogStatus {
+  ready: boolean;
+  categories: number;
+  morphs: number;
 }
 
-/**
- * 'Save Presets' groupbox + children. `enabled` toggles the groupbox itself.
- * Default: enabled with character/head/head_parts/body on, body_parts off.
- */
-export interface MixerSavePresets {
-  enabled?: boolean;
-  character?: boolean;
-  head?: boolean;
-  head_parts?: boolean;
-  body?: boolean;
-  body_parts?: boolean;
+/** One entry for set_morphs: a display name (optionally with category) or an internal ID. */
+export interface MorphValue {
+  display_name?: string;
+  id?: string;
+  category?: string;
+  value: number;
 }
 
-/** 'Save Avatar Presets' groupbox (default: disabled). */
-export interface MixerSaveAvatarPresets {
-  enabled?: boolean;
+export interface AppliedMorph {
+  id: string;
+  display_name: string;
+  requested: number;
+  value: number;
+  warning?: string;
 }
 
-export interface CreateActorMixerOptions {
-  morph_name?: string;
-  slider_path?: string;
-  use_parts_folder?: boolean;
-  head_parts?: MixerHeadParts;
-  body_parts?: MixerBodyParts;
-  save_presets?: MixerSavePresets;
-  save_avatar_presets?: MixerSaveAvatarPresets;
-  /** Safety gate. false (default) => set fields then CANCEL (dry-run). true => click Create once. */
-  confirm_create?: boolean;
+export interface SetMorphsResult extends OperationResult {
+  applied?: AppliedMorph[];
+  problems?: Array<Record<string, unknown>>;
 }
 
-export interface CreateActorMixerResult extends OperationResult {
-  morph_name?: string;
-  created?: boolean;
-  dry_run?: boolean;
-  new_presets?: string[];
-  presets_dir?: string;
-  scheduled?: boolean;
-  notes?: string[];
-  poll_endpoint?: string;
-  /** True when the open avatar holds trial content; ActorMIXER refuses to run. */
-  trial_content?: boolean;
+export interface SceneItem {
+  name: string;
+  meshes: string[];
 }
+
+export interface ItemList {
+  avatar: string;
+  clothes: SceneItem[];
+  hair: SceneItem[];
+  accessories: SceneItem[];
+}
+
+export interface LoadItemResult extends OperationResult {
+  path?: string;
+  seconds?: number;
+  avatar?: string | null;
+  added?: { clothes: string[]; hair: string[]; accessories: string[] };
+}
+
+export interface SaveProjectResult extends OperationResult {
+  path?: string;
+  previous_project?: string;
+  current_project?: string;
+  is_current?: boolean;
+  size_bytes?: number;
+}
+
+export interface LicenseResult extends OperationResult {
+  item?: string;
+  exportable?: boolean;
+}
+
+export interface ViewResult {
+  preset: string;
+  success: boolean;
+  path?: string;
+  base64?: string;
+  warning?: string;
+  error?: string;
+  method?: string;
+}
+
+export interface CaptureViewsResult extends OperationResult {
+  views?: ViewResult[];
+}
+
+export interface WorkspaceInfo {
+  /** Root folder all bridge output goes to (default <art>/characters). */
+  root: string;
+  exists?: boolean;
+  /** Current character id, or null for _testbench. */
+  character: string | null;
+  /** Folder that receives bare output names now. */
+  folder: string;
+}
+
+export type ViewPreset = "full" | "head" | "three_quarter";
+export type LodLevel = "actorbuild" | "lod1" | "lod2";

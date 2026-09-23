@@ -1,0 +1,103 @@
+{
+  "environment": {
+    "ok": true,
+    "result": {
+      "product": "Character Creator",
+      "version": [
+        4,
+        70,
+        5323
+      ],
+      "python": "3.8.8 (tags/v3.8.8:024d805, Feb 19 2021, 13:18:16) [MSC v.1928 64 bit (AMD64)]",
+      "program_path": "C:\\Program Files\\Reallusion\\Character Creator 4\\Bin64\\CharacterCreator.exe"
+    }
+  },
+  "api_surface": {
+    "ok": true,
+    "result": {
+      "RLPy.RScene.GetAvatars": true,
+      "RLPy.RFileIO.LoadObject": true,
+      "RLPy.RFileIO.LoadFile": true,
+      "RLPy.RFileIO.ExportFbxFile": true,
+      "RLPy.RExportFbxSetting": true,
+      "RLPy.EExportFbxOptions2_UnityPreset": true,
+      "RLPy.RGlobal.RenderImage": true,
+      "RLPy.RGlobal.SetRenderExportParameter": true,
+      "RLPy.RGlobal.Undo": true,
+      "RLPy.RApplication.GetContentFilesInFolder": true,
+      "RLPy.RScene.SetHDSubdivisionLevel": false
+    }
+  },
+  "avatar_loaded": true,
+  "avatar": {
+    "ok": true,
+    "result": {
+      "name": "Camila",
+      "methods": {
+        "GetAvatarShapingComponent": true,
+        "GetMaterialComponent": true,
+        "GetClothes": true,
+        "GetHairs": true,
+        "GetAccessories": true,
+        "GetFaceComponent": true
+      }
+    }
+  },
+  "shaping_morphs": {
+    "ok": true,
+    "result": {
+      "categories": 120,
+      "morph_ids": 2798,
+      "tested_id": "2019-11-11-15-30-40_cc3_dh_female_head",
+      "set_to": 0.5,
+      "read_back": 0.5,
+      "roundtrip_ok": true,
+      "sample_ids": [
+        "2019-11-11-15-30-40_cc3_dh_female_head",
+        "2020-05-12-16-02-47_cc3plus_female_head",
+        "2019-11-07-11-38-08_digital female_head",
+        "2018-09-20-17-10-06_cc3_female",
+        "cc embed morphs/embed_full_head1",
+        "2019-11-11-15-43-00_cc3_dh_male_head",
+        "2020-05-12-16-04-56_cc3plus_male_head",
+        "2019-11-14-16-25-02_digital male_head",
+        "2018-09-20-16-56-52_cc3_male_01",
+        "cc embed morphs/embed_full_head2"
+      ]
+    }
+  },
+  "materials": {
+    "ok": true,
+    "result": {
+      "meshes": 11,
+      "materials_on_first_mesh": [
+        "Scalp",
+        "Hair"
+      ]
+    }
+  },
+  "fbx_export_unity": {
+    "ok": true,
+    "result": {
+      "path": "C:\\Users\\hamza\\AppData\\Local\\Temp\\cc4_mcp_probe\\probe_unity.fbx",
+      "exists": true,
+      "size_mb": 17.36,
+      "seconds": 9.8
+    }
+  },
+  "viewport_render": {
+    "ok": true,
+    "result": {
+      "path": "C:\\Users\\hamza\\AppData\\Local\\Temp\\cc4_mcp_probe\\probe_view.png",
+      "exists": true
+    }
+  },
+  "bridge_pattern": {
+    "ok": true,
+    "response": {
+      "dispatched": true,
+      "on_main_thread": true,
+      "avatar_count_via_rlpy": 1
+    }
+  }
+}

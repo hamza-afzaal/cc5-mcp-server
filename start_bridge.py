@@ -1,57 +1,55 @@
 """
-CC5 MCP Bridge Starter — run from CC5's Script Editor.
+CC4 MCP Bridge manual starter — run from CC4's Script > Load Python.
+
+Normally not needed: the installed plugin starts the bridge when CC4 launches.
+Use this only if auto-loading fails (see docs/spikes.md, spike 0).
 """
 import os
 import socket
 import sys
 
-# Derive plugin dir from this script's location
-_plugin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cc5-plugin")
+# Prefer the repo copy next to this script, else the installed plugin.
+_plugin_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cc4-plugin")
 if not os.path.isdir(_plugin_dir):
-    # Fallback: installed plugin location
     _plugin_dir = os.path.join(
-        os.environ.get("CC5_ROOT", r"C:\Program Files\Reallusion\Character Creator 5"),
-        "Bin64", "OpenPlugin", "CC5_MCP_Bridge",
+        os.environ.get("CC4_ROOT", r"C:\Program Files\Reallusion\Character Creator 4"),
+        "Bin64", "OpenPlugin", "CC4_MCP_Bridge",
     )
 if _plugin_dir not in sys.path:
     sys.path.insert(0, _plugin_dir)
 
 # Clear module cache to load latest code
-for m in ["server", "cc5_api"]:
+for m in ["server", "cc4_api"]:
     if m in sys.modules:
         del sys.modules[m]
 
-import RLPy
 from PySide2.QtCore import QTimer
 import server as bridge_server
 
-BRIDGE_PORT = int(os.environ.get("CC5_BRIDGE_PORT", "5101"))
+BRIDGE_PORT = int(os.environ.get("CC4_BRIDGE_PORT", "5101"))
 
 _timer = None
 _thread = None
 
 
-def _find_free_port(start: int) -> int:
-    for port in range(start, start + 10):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-            if s.connect_ex(("127.0.0.1", port)) != 0:
-                return port
-        finally:
-            s.close()
-    raise RuntimeError(f"No free port found in range {start}-{start+9}")
+def _port_free(port: int) -> bool:
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        return s.connect_ex(("127.0.0.1", port)) != 0
+    finally:
+        s.close()
 
 
 def _start():
     global _timer, _thread
-    port = _find_free_port(BRIDGE_PORT)
-    if port != BRIDGE_PORT:
-        print(f"[CC5 MCP Bridge] WARNING: Port {BRIDGE_PORT} in use. Started on {port}. Update CC5_BRIDGE_URL.")
-    _thread = bridge_server.start_server(port=port)
+    if not _port_free(BRIDGE_PORT):
+        # Do not silently move ports: the MCP server would talk to whatever owns 5101.
+        raise RuntimeError(f"Port {BRIDGE_PORT} is already in use (bridge already running?)")
+    _thread = bridge_server.start_server(port=BRIDGE_PORT)
     _timer = QTimer()
     _timer.timeout.connect(bridge_server.process_command_queue)
-    _timer.start(50)  # 50ms for faster response
-    print(f"[CC5 MCP Bridge] Started on http://127.0.0.1:{port}")
+    _timer.start(16)
+    print(f"[CC4 MCP Bridge] Started on http://127.0.0.1:{BRIDGE_PORT}")
 
 
 _start()

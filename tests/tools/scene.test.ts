@@ -1,7 +1,7 @@
 /**
  * Unit tests for registerSceneTools.
  * Tool handlers use bridgeCall, so bridge errors become content text responses.
- * The check_cc5_connection handler has its own try/catch with specific behavior.
+ * The check_connection handler reports bridge health details.
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
@@ -14,7 +14,7 @@ import {
   CAPTURE_SUCCESS,
 } from "../helpers/mock-bridge.js";
 import type { MockBridge } from "../helpers/mock-bridge.js";
-import type { CC5Avatar, AvatarInfo, CreateAvatarResult, CaptureResult } from "../../src/types.js";
+import type { CC4Avatar, AvatarInfo, CreateAvatarResult, CaptureResult } from "../../src/types.js";
 
 import { createMockServer } from "../helpers/mock-server.js";
 
@@ -33,8 +33,8 @@ beforeEach(() => {
 // ── registration ──────────────────────────────────────────────────────────────
 
 describe("registerSceneTools – registration", () => {
-  it("registers exactly 7 tools", () => {
-    expect(server.tool).toHaveBeenCalledTimes(7);
+  it("registers exactly 5 tools", () => {
+    expect(server.tool).toHaveBeenCalledTimes(5);
   });
 
   it("registers delete_avatar", () => {
@@ -64,9 +64,9 @@ describe("registerSceneTools – registration", () => {
     );
   });
 
-  it("registers check_cc5_connection", () => {
+  it("registers check_connection", () => {
     expect(server.tool).toHaveBeenCalledWith(
-      "check_cc5_connection",
+      "check_connection",
       expect.any(String),
       expect.any(Object),
       expect.any(Function)
@@ -82,30 +82,13 @@ describe("registerSceneTools – registration", () => {
     );
   });
 
-  it("registers capture_viewport", () => {
-    expect(server.tool).toHaveBeenCalledWith(
-      "capture_viewport",
-      expect.any(String),
-      expect.any(Object),
-      expect.any(Function)
-    );
-  });
-
-  it("registers set_subdivision_level", () => {
-    expect(server.tool).toHaveBeenCalledWith(
-      "set_subdivision_level",
-      expect.any(String),
-      expect.any(Object),
-      expect.any(Function)
-    );
-  });
 });
 
 // ── list_avatars ──────────────────────────────────────────────────────────────
 
 describe("list_avatars handler", () => {
   it("lists avatars with names and IDs", async () => {
-    const avatars: CC5Avatar[] = [
+    const avatars: CC4Avatar[] = [
       { id: "a1", name: "Hero", type: "character" },
       { id: "a2", name: "Villain", type: "character" },
     ];
@@ -137,7 +120,7 @@ describe("list_avatars handler", () => {
     bridge.getAvatars.mockRejectedValue(new Error("connection refused"));
     const handler = server.getRegisteredTool("list_avatars");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: connection refused");
+    expect(result.content[0].text).toContain("CC4 bridge error: connection refused");
   });
 
   it("returns content with type 'text'", async () => {
@@ -148,106 +131,13 @@ describe("list_avatars handler", () => {
   });
 
   it("formats avatar list with dash prefix per avatar", async () => {
-    const avatars: CC5Avatar[] = [
+    const avatars: CC4Avatar[] = [
       { id: "x1", name: "Alpha", type: "character" },
     ];
     bridge.getAvatars.mockResolvedValue(avatars);
     const handler = server.getRegisteredTool("list_avatars");
     const result = await handler({});
     expect(result.content[0].text).toContain("- Alpha (ID: x1)");
-  });
-});
-
-// ── get_avatar_info ───────────────────────────────────────────────────────────
-
-describe("get_avatar_info handler", () => {
-  const sampleInfo: AvatarInfo = {
-    id: "av1",
-    name: "TestHero",
-    active_morphs: { Fat: 0.3, Muscular: 0.5, Thin: 0.1 },
-  };
-
-  it("shows avatar name and active morph count", async () => {
-    bridge.getAvatarInfo.mockResolvedValue(sampleInfo);
-    const handler = server.getRegisteredTool("get_avatar_info");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("TestHero");
-    expect(result.content[0].text).toContain("Active morphs (3)");
-  });
-
-  it("lists each morph and its value", async () => {
-    bridge.getAvatarInfo.mockResolvedValue(sampleInfo);
-    const handler = server.getRegisteredTool("get_avatar_info");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("Fat");
-    expect(result.content[0].text).toContain("0.3");
-    expect(result.content[0].text).toContain("Muscular");
-    expect(result.content[0].text).toContain("0.5");
-  });
-
-  it("shows no-avatar message when info is null", async () => {
-    bridge.getAvatarInfo.mockResolvedValue(null);
-    const handler = server.getRegisteredTool("get_avatar_info");
-    const result = await handler({});
-    expect(result.content[0].text).toBe("No avatar in the scene.");
-  });
-
-  it("shows zero active morphs correctly", async () => {
-    bridge.getAvatarInfo.mockResolvedValue({
-      id: "av2",
-      name: "Plain",
-      active_morphs: {},
-    });
-    const handler = server.getRegisteredTool("get_avatar_info");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("Active morphs (0)");
-  });
-
-  it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.getAvatarInfo.mockRejectedValue(new Error("not connected"));
-    const handler = server.getRegisteredTool("get_avatar_info");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: not connected");
-  });
-});
-
-// ── check_cc5_connection ──────────────────────────────────────────────────────
-
-describe("check_cc5_connection handler", () => {
-  it("returns connected message when bridge is healthy", async () => {
-    bridge.healthCheck.mockResolvedValue(true);
-    const handler = server.getRegisteredTool("check_cc5_connection");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("connected and ready");
-  });
-
-  it("returns not-responding message when healthCheck returns false", async () => {
-    bridge.healthCheck.mockResolvedValue(false);
-    const handler = server.getRegisteredTool("check_cc5_connection");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("NOT responding");
-    expect(result.content[0].text).toContain("Character Creator 5");
-  });
-
-  it("returns not-responding message when healthCheck throws", async () => {
-    bridge.healthCheck.mockRejectedValue(new Error("ECONNREFUSED"));
-    const handler = server.getRegisteredTool("check_cc5_connection");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("NOT responding");
-  });
-
-  it("calls bridge.healthCheck once per invocation", async () => {
-    bridge.healthCheck.mockResolvedValue(true);
-    const handler = server.getRegisteredTool("check_cc5_connection");
-    await handler({});
-    expect(bridge.healthCheck).toHaveBeenCalledTimes(1);
-  });
-
-  it("returns content with type 'text'", async () => {
-    bridge.healthCheck.mockResolvedValue(true);
-    const handler = server.getRegisteredTool("check_cc5_connection");
-    const result = await handler({});
-    expect(result.content[0].type).toBe("text");
   });
 });
 
@@ -286,10 +176,10 @@ describe("create_avatar handler", () => {
   });
 
   it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.createDefaultAvatar.mockRejectedValue(new Error("CC5 not running"));
+    bridge.createDefaultAvatar.mockRejectedValue(new Error("CC4 not running"));
     const handler = server.getRegisteredTool("create_avatar");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: CC5 not running");
+    expect(result.content[0].text).toContain("CC4 bridge error: CC4 not running");
   });
 
   it("returns content with type 'text'", async () => {
@@ -326,132 +216,86 @@ describe("delete_avatar handler", () => {
   });
 
   it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.deleteAvatar.mockRejectedValue(new Error("CC5 not running"));
+    bridge.deleteAvatar.mockRejectedValue(new Error("CC4 not running"));
     const handler = server.getRegisteredTool("delete_avatar");
     const result = await handler({ name: "Camila" });
-    expect(result.content[0].text).toContain("CC5 bridge error: CC5 not running");
+    expect(result.content[0].text).toContain("CC4 bridge error: CC4 not running");
   });
 });
 
-// ── capture_viewport ──────────────────────────────────────────────────────────
+// ── get_avatar_info ───────────────────────────────────────────────────────────
 
-describe("capture_viewport handler", () => {
-  it("returns success message with capture path when path is provided", async () => {
-    bridge.captureViewport.mockResolvedValue(CAPTURE_SUCCESS);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/temp/capture.png" });
-    // Handler returns [image, text] when bridge supplies base64 data
-    expect(result.content[0].type).toBe("image");
-    expect(result.content[1].text).toContain("Viewport captured:");
-    expect(result.content[1].text).toContain("C:/temp/capture.png");
+describe("get_avatar_info handler", () => {
+  const FULL_INFO: AvatarInfo = {
+    name: "Camila",
+    id: 7,
+    avatar_type: 8,
+    generation: 3,
+    facial_profile: "CC4Standard",
+    skin_bone_count: 181,
+    subdiv_level: 0,
+    materials: { total: 24, per_mesh: { CC_Base_Body: 6, CC_Base_Eye: 4 } },
+    items: { clothes: ["High_Heels"], hair: ["Side part wavy"], accessories: [] },
+    active_morphs: [{ id: "cc embed morphs/embed_full_body5", display_name: "Body Thin", category: "Body", value: 0.3 }],
+  };
+
+  it("shows the pipeline-relevant fields", async () => {
+    bridge.getAvatarInfo.mockResolvedValue(FULL_INFO);
+    const text = (await server.getRegisteredTool("get_avatar_info")({})).content[0].text;
+    expect(text).toContain("Avatar: Camila (ID: 7)");
+    expect(text).toContain("Facial profile: CC4Standard");
+    expect(text).toContain("Skin bones: 181");
+    expect(text).toContain("Materials: 24");
+    expect(text).toContain("CC_Base_Body: 6");
+    expect(text).toContain("Hair: Side part wavy");
+    expect(text).toContain("Accessories: none");
   });
 
-  it("returns success message with result.path when no output_path arg given", async () => {
-    const captured: CaptureResult = { success: true, path: "/tmp/cc5_snap.png", base64: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" };
-    bridge.captureViewport.mockResolvedValue(captured);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({});
-    // Handler returns [image, text] when bridge supplies base64 data
-    expect(result.content[0].type).toBe("image");
-    expect(result.content[1].text).toContain("Viewport captured:");
-    expect(result.content[1].text).toContain("/tmp/cc5_snap.png");
+  it("lists active morphs by display name with their IDs", async () => {
+    bridge.getAvatarInfo.mockResolvedValue(FULL_INFO);
+    const text = (await server.getRegisteredTool("get_avatar_info")({})).content[0].text;
+    expect(text).toContain("Active morphs (1):");
+    expect(text).toContain("Body Thin [Body] = 0.3  (id: cc embed morphs/embed_full_body5)");
   });
 
-  it("returns failure message when capture operation fails", async () => {
-    const failed: CaptureResult = { success: false, error: "no render context" };
-    bridge.captureViewport.mockResolvedValue(failed);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({});
-    expect(result.content[0].text).toBe("Failed: no render context");
+  it("reports per-field read errors without failing", async () => {
+    bridge.getAvatarInfo.mockResolvedValue({ name: "Camila", id: 7, errors: { skin_bone_count: "AttributeError" } });
+    const text = (await server.getRegisteredTool("get_avatar_info")({})).content[0].text;
+    expect(text).toContain("Active morphs (0):");
+    expect(text).toContain("skin_bone_count: AttributeError");
   });
 
-  it("rejects path containing '..'", async () => {
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/safe/../../../etc/evil.png" });
-    expect(result.content[0].text).toContain("Path traversal");
-    expect(bridge.captureViewport).not.toHaveBeenCalled();
-  });
-
-  it("rejects non-.png extension", async () => {
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/out/frame.jpg" });
-    expect(result.content[0].text).toContain(".png");
-    expect(bridge.captureViewport).not.toHaveBeenCalled();
-  });
-
-  it("calls bridge.captureViewport with the output path", async () => {
-    bridge.captureViewport.mockResolvedValue(CAPTURE_SUCCESS);
-    const handler = server.getRegisteredTool("capture_viewport");
-    await handler({ output_path: "C:/temp/capture.png" });
-    expect(bridge.captureViewport).toHaveBeenCalledWith("C:/temp/capture.png", undefined, undefined);
-  });
-
-  it("calls bridge.captureViewport with undefined when no path given", async () => {
-    const captured: CaptureResult = { success: true, path: "/tmp/snap.png" };
-    bridge.captureViewport.mockResolvedValue(captured);
-    const handler = server.getRegisteredTool("capture_viewport");
-    await handler({});
-    expect(bridge.captureViewport).toHaveBeenCalledWith(undefined, undefined, undefined);
+  it("shows a no-avatar message when the bridge returns null", async () => {
+    bridge.getAvatarInfo.mockResolvedValue(null);
+    const text = (await server.getRegisteredTool("get_avatar_info")({})).content[0].text;
+    expect(text).toBe("No avatar in the scene.");
   });
 
   it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.captureViewport.mockRejectedValue(new Error("render failed"));
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: render failed");
-  });
-
-  it("returns image content followed by text content on success", async () => {
-    bridge.captureViewport.mockResolvedValue(CAPTURE_SUCCESS);
-    const handler = server.getRegisteredTool("capture_viewport");
-    const result = await handler({ output_path: "C:/temp/capture.png" });
-    expect(result.content[0].type).toBe("image");
-    expect(result.content[1].type).toBe("text");
+    bridge.getAvatarInfo.mockRejectedValue(new Error("timeout"));
+    const text = (await server.getRegisteredTool("get_avatar_info")({})).content[0].text;
+    expect(text).toContain("CC4 bridge error: timeout");
   });
 });
 
-// ── set_subdivision_level ─────────────────────────────────────────────────────
+// ── check_connection ──────────────────────────────────────────────────────────
 
-describe("set_subdivision_level handler", () => {
-  it("returns success message with the level on success", async () => {
-    bridge.setSubdivisionLevel.mockResolvedValue(SUCCESS);
-    const handler = server.getRegisteredTool("set_subdivision_level");
-    const result = await handler({ level: 2 });
-    expect(result.content[0].text).toBe("Subdivision level set to 2");
+describe("check_connection handler", () => {
+  it("reports health details when the bridge answers", async () => {
+    bridge.getHealth.mockResolvedValue({
+      status: "ok", service: "cc4-mcp-bridge", version: "2.0.0",
+      dev_mode: false, python: "3.8.8", queue_depth: 0, port: 5101,
+    });
+    const text = (await server.getRegisteredTool("check_connection")({})).content[0].text;
+    expect(text).toContain("CC4 bridge is connected");
+    expect(text).toContain("Python 3.8.8");
+    expect(text).toContain("dev mode off");
   });
 
-  it("returns failure message when operation returns failure", async () => {
-    bridge.setSubdivisionLevel.mockResolvedValue(FAILURE);
-    const handler = server.getRegisteredTool("set_subdivision_level");
-    const result = await handler({ level: 1 });
-    expect(result.content[0].text).toBe("Failed: operation failed");
-  });
-
-  it("calls bridge.setSubdivisionLevel with the level", async () => {
-    bridge.setSubdivisionLevel.mockResolvedValue(SUCCESS);
-    const handler = server.getRegisteredTool("set_subdivision_level");
-    await handler({ level: 0 });
-    expect(bridge.setSubdivisionLevel).toHaveBeenCalledWith(0);
-  });
-
-  it("works for level 0 (base mesh)", async () => {
-    bridge.setSubdivisionLevel.mockResolvedValue(SUCCESS);
-    const handler = server.getRegisteredTool("set_subdivision_level");
-    const result = await handler({ level: 0 });
-    expect(result.content[0].text).toBe("Subdivision level set to 0");
-  });
-
-  it("works for level 1 (medium)", async () => {
-    bridge.setSubdivisionLevel.mockResolvedValue(SUCCESS);
-    const handler = server.getRegisteredTool("set_subdivision_level");
-    const result = await handler({ level: 1 });
-    expect(result.content[0].text).toBe("Subdivision level set to 1");
-  });
-
-  it("returns bridge error text when bridge throws (does not propagate)", async () => {
-    bridge.setSubdivisionLevel.mockRejectedValue(new Error("CC5 crashed"));
-    const handler = server.getRegisteredTool("set_subdivision_level");
-    const result = await handler({ level: 2 });
-    expect(result.content[0].text).toContain("CC5 bridge error: CC5 crashed");
+  it("reports not responding when health is null", async () => {
+    bridge.getHealth.mockResolvedValue(null);
+    const text = (await server.getRegisteredTool("check_connection")({})).content[0].text;
+    expect(text).toContain("NOT responding");
+    expect(text).toContain("Character Creator 4");
   });
 });

@@ -1,31 +1,31 @@
 /**
- * Type-level and structural tests for the CC5 type definitions.
+ * Type-level and structural tests for the CC4 type definitions.
  * These compile-time checks verify that the types have the expected shapes.
  */
 
 import { describe, it, expect } from "vitest";
 import type {
-  CC5Avatar,
+  CC4Avatar,
   MorphEntry,
   MorphCatalog,
   MorphSetRequest,
   AvatarInfo,
-  CC5Response,
+  CC4Response,
   OperationResult,
 } from "../src/types.js";
 
-// ── CC5Avatar ─────────────────────────────────────────────────────────────────
+// ── CC4Avatar ─────────────────────────────────────────────────────────────────
 
-describe("CC5Avatar type", () => {
+describe("CC4Avatar type", () => {
   it("accepts a valid avatar object", () => {
-    const avatar: CC5Avatar = { id: "a1", name: "Hero", type: "character" };
+    const avatar: CC4Avatar = { id: "a1", name: "Hero", type: "character" };
     expect(avatar.id).toBe("a1");
     expect(avatar.name).toBe("Hero");
     expect(avatar.type).toBe("character");
   });
 
   it("id, name, type are all strings", () => {
-    const avatar: CC5Avatar = { id: "123", name: "Test", type: "npc" };
+    const avatar: CC4Avatar = { id: "123", name: "Test", type: "npc" };
     expect(typeof avatar.id).toBe("string");
     expect(typeof avatar.name).toBe("string");
     expect(typeof avatar.type).toBe("string");
@@ -122,29 +122,29 @@ describe("AvatarInfo type", () => {
   });
 });
 
-// ── CC5Response ───────────────────────────────────────────────────────────────
+// ── CC4Response ───────────────────────────────────────────────────────────────
 
-describe("CC5Response type", () => {
+describe("CC4Response type", () => {
   it("accepts a result-only response", () => {
-    const resp: CC5Response<string> = { result: "ok" };
+    const resp: CC4Response<string> = { result: "ok" };
     expect(resp.result).toBe("ok");
     expect(resp.error).toBeUndefined();
   });
 
   it("accepts an error-only response", () => {
-    const resp: CC5Response<string> = { error: "something went wrong" };
+    const resp: CC4Response<string> = { error: "something went wrong" };
     expect(resp.error).toBe("something went wrong");
     expect(resp.result).toBeUndefined();
   });
 
   it("accepts an empty response (both fields optional)", () => {
-    const resp: CC5Response = {};
+    const resp: CC4Response = {};
     expect(resp.result).toBeUndefined();
     expect(resp.error).toBeUndefined();
   });
 
   it("defaults generic type to unknown when not specified", () => {
-    const resp: CC5Response = { result: { anything: true } };
+    const resp: CC4Response = { result: { anything: true } };
     expect(resp.result).toEqual({ anything: true });
   });
 });

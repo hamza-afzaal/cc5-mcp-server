@@ -160,8 +160,8 @@ describe("get_lights handler", () => {
     bridge.getLights.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("get_lights");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 });
 
@@ -221,8 +221,8 @@ describe("set_light_color handler", () => {
     bridge.setLightColor.mockRejectedValue(new Error("network error"));
     const handler = server.getRegisteredTool("set_light_color");
     const result = await handler({ light_name: "KeyLight", r: 1.0, g: 0.0, b: 0.0 });
-    expect(result.content[0].text).toContain("CC5 bridge error: network error");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: network error");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 });
 
@@ -261,7 +261,7 @@ describe("set_light_active handler", () => {
     bridge.setLightActive.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("set_light_active");
     const result = await handler({ light_name: "KeyLight", active: true });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
   });
 });
 
@@ -300,7 +300,7 @@ describe("set_light_shadow handler", () => {
     bridge.setLightShadow.mockRejectedValue(new Error("network error"));
     const handler = server.getRegisteredTool("set_light_shadow");
     const result = await handler({ light_name: "KeyLight", darken_strength: 0.2 });
-    expect(result.content[0].text).toContain("CC5 bridge error: network error");
+    expect(result.content[0].text).toContain("CC4 bridge error: network error");
   });
 });
 
@@ -326,7 +326,7 @@ describe("get_visual_settings handler", () => {
     bridge.getVisualSettings.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("get_visual_settings");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
   });
 });
 
@@ -351,7 +351,7 @@ describe("set_ambient handler", () => {
     bridge.setAmbient.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("set_ambient");
     const result = await handler({ r: 0.5, g: 0.5, b: 0.5 });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
   });
 });
 
@@ -390,6 +390,6 @@ describe("set_ibl handler", () => {
     bridge.setIbl.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("set_ibl");
     const result = await handler({ enable: true });
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
   });
 });

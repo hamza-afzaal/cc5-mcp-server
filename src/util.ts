@@ -15,12 +15,12 @@ export async function bridgeCall<T>(
     const result = await fn();
     return { content: [{ type: "text" as const, text: formatSuccess(result) }] };
   } catch (err: unknown) {
-    console.error("[CC5 Bridge] bridgeCall caught error:", err);
+    console.error("[CC4 Bridge] bridgeCall caught error:", err);
     const message = err instanceof Error ? err.message : String(err);
     return {
       content: [{
         type: "text" as const,
-        text: `CC5 bridge error: ${message}. Is CC5 running with the MCP Bridge plugin?`,
+        text: `CC4 bridge error: ${message}. Is CC4 running with the MCP Bridge plugin?`,
       }],
     };
   }

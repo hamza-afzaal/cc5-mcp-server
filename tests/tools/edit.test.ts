@@ -83,8 +83,8 @@ describe("undo handler", () => {
     bridge.undo.mockRejectedValue(new Error("bridge down"));
     const handler = server.getRegisteredTool("undo");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: bridge down");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 });
 
@@ -123,7 +123,7 @@ describe("redo handler", () => {
     bridge.redo.mockRejectedValue(new Error("network error"));
     const handler = server.getRegisteredTool("redo");
     const result = await handler({});
-    expect(result.content[0].text).toContain("CC5 bridge error: network error");
-    expect(result.content[0].text).toContain("Is CC5 running");
+    expect(result.content[0].text).toContain("CC4 bridge error: network error");
+    expect(result.content[0].text).toContain("Is CC4 running");
   });
 });
