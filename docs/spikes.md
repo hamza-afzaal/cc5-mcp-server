@@ -2,7 +2,7 @@
 
 Run through the live bridge on 2026-09-23. Test character: the **CC4 Camila template** (`D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Camila.ccAvatar`, underwear only, no hair). For spikes 5, 3 and 6 she also wore Basic T-shirts, Biker_Jeans and Canvas Shoes. Raw outputs are in `spikes-output/` (git-ignored); the scripts are in `tools/spikes/`. Triangle and material counts come from the exported FBX via `tools/fbx_stats.py`.
 
-Status: **in progress.** Spikes 0, 2 (partial), 3, 4, 5, 6 and 9 are done. Spikes 1, 7 and 8 (need UI steps) and the rest of 2 (needs an iContent item) are open.
+Status: spikes 0, 1, 3, 4, 5, 6, 8 and 9 are done. Spike 2 is partial (deferred: no known iContent item to test with; confirm on the go). Spike 7 is pending a UI step.
 
 ---
 
@@ -24,14 +24,14 @@ Status: **in progress.** Spikes 0, 2 (partial), 3, 4, 5, 6 and 9 are done. Spike
 | Export Unity + `ExportJson` as a job | ✅ 4–6.5 s; `.json` sidecar written next to the FBX | — |
 | **GIL during export** | ✅ `/health` answered 22/22 pings (max 0.59 s); job status observed `running` | job polling works as designed |
 
-## Spike 2: license check (partial)
+## Spike 2: license check (partial; deferred)
 
-`RFileIO.CheckExportFbxHasLicense(obj) -> bool` is callable on the avatar and on each clothing object. It returned `true` for Camila, Bra and Underwear_Bottoms. **Still open:** a non-exportable (iContent) item to see whether it ever returns `false`.
+`RFileIO.CheckExportFbxHasLicense(obj) -> bool` is callable on the avatar and on each clothing object. It returned `true` for Camila, Bra and Underwear_Bottoms. **Deferred:** no iContent item was known to test with. `check_export_license` ships labelled "only observed returning true", and the first non-exportable item met in S0 allowlist work completes this spike.
 
 ## Spike 3: ActorBUILD conversion (bakeExpression=True, bakeTexture=True, pose=Default)
 
 - ⚠️ **`ConvertTo` opens two modal dialogs** ("Convert base will only override the body's skin weights…" and a clothing follow-up) and blocks the main thread until a human clicks OK. The kickoff rules out dialog automation, so **`convert_lod` is semi-automated**: the bridge starts it as a job and reports `waiting_for_user` until someone clicks OK in CC4.
-- The reported time (760 s) includes waiting on the dialogs; the conversion itself is short (to re-measure).
+- The same dialogs very likely appear for LOD1/LOD2 too (the user clicked through them during the batch run without tracking which conversion raised them). The reported time (760 s) includes waiting on the dialogs; the conversion itself is short (to re-measure).
 - Result on the copy (clothed Camila):
 
 | | Before | After ActorBUILD |
@@ -88,3 +88,13 @@ Each run: saved copy of clothed Camila → `ConvertTo` → Unity export (JSON, h
 - **LOD1 and LOD2 meet design §4** on triangles, materials and bones (LOD1 ≤ 25k / ≤ 5 / ≤ ~100; LOD2 ≤ 10k / ≤ 2). They're remeshed into one mesh with one baked atlas, which also solves draw calls for background characters.
 - **But LOD1 exports no facial blendshapes** (1 shape), even though the scene still reports the CC4Extended profile with 160 sliders (presumably bone-driven). Design §4 wants "SALSA visemes only" on LOD1, so at M2 check whether SALSA can drive LOD1 through the jaw bone, or use ActorBUILD as LOD1.
 - Proposed LOD chain for `convert_lod` / S2: **LOD0 = ActorBUILD** (+ hidden-mesh removal, + `MergeMaterialUV` on clothing), **LOD1/LOD2 = `ConvertTo(LOD1/LOD2)`**, each from its own saved copy of the authored base. Every `ConvertTo` needs a human OK in CC4.
+
+## Spike 1: `EExportFbxOptions2_InstaLodPreset` ❌ (no effect from Python)
+
+The user set InstaLOD **Merge Materials → by type** in CC4's Export FBX dialog and saved it. Exporting the clothed base project via `RExportFbxSetting` with and without `InstaLodPreset` (flags2 33554434 vs 167772162) gave **identical** FBX files: 9 meshes, 42,224 triangles, 19 material slots, 19 unique materials.
+
+**Decision:** Python can't trigger InstaLOD material merging. `merge_materials` uses `MergeMaterialUV` (spike 9) for clothing/accessories; InstaLOD merge-by-type stays a **manual-checklist** step (export from the UI dialog) if M2 needs it.
+
+## Spike 8: Game Base → Single Material ✅ (UI only; recorded, not used)
+
+The user confirmed CC4 4.70 still offers **Convert to Game Base → Single Material** in the UI. The static RLPy search found no Python entry point (only read-only `EAvatarGeneration_CC_Game_Base_*` enums), and CC4 ships neutral Game Base avatars (`Program/CCBaseData/NeutralAvatar/RL_CharacterCreator_Base_Game_G1_One_UV.ccAvatar`, etc.). Not used on production characters: it merges the tongue into the body (SALSA OneClick risk).

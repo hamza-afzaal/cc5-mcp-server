@@ -412,6 +412,7 @@ def export_fbx(
     convert_image_format: bool = False,
     texture_size: int | None = None,
     export_json: bool = False,
+    instalod_preset: bool = False,
 ) -> dict[str, Any]:
     """Export the current avatar as FBX via RExportFbxSetting (CC4 export dialog parity).
 
@@ -433,6 +434,7 @@ def export_fbx(
         convert_image_format: EExportFbxOptions_ConvertTifToPNG.
         texture_size: max texture size in px (0 = original).
         export_json: EExportFbxOptions3_ExportJson (needed by CCiC Unity Tools).
+        instalod_preset: EExportFbxOptions2_InstaLodPreset (applies the InstaLOD settings saved in CC4's export dialog; spike 1).
 
     There is deliberately no flag-less 2-arg fallback: if RExportFbxSetting fails
     the export fails, so a result never claims options that were not applied.
@@ -508,6 +510,8 @@ def export_fbx(
         flags |= _safe_flag("EExportFbxOptions_ConvertTifToPNG")
     if export_json:
         flags3 |= _safe_flag("EExportFbxOptions3_ExportJson")
+    if instalod_preset:
+        flags2 |= _safe_flag("EExportFbxOptions2_InstaLodPreset")
 
     applied: dict[str, Any] = {}
     try:
@@ -1922,6 +1926,7 @@ def _export_fbx_action(p: dict) -> Any:
         convert_image_format=bool(p.get("convert_image_format", False)),
         texture_size=_opt_int(p, "texture_size"),
         export_json=bool(p.get("export_json", False)),
+        instalod_preset=bool(p.get("instalod_preset", False)),
     )
 
 
