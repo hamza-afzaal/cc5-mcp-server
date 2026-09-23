@@ -2,7 +2,7 @@
 
 Run through the live bridge on 2026-09-23. Test character: the **CC4 Camila template** (`D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Camila.ccAvatar`, underwear only, no hair). For spikes 5, 3 and 6 she also wore Basic T-shirts, Biker_Jeans and Canvas Shoes. Raw outputs are in `spikes-output/` (git-ignored); the scripts are in `tools/spikes/`. Triangle and material counts come from the exported FBX via `tools/fbx_stats.py`.
 
-Status: **in progress.** Spikes 0, 2 (partial), 3 (ActorBUILD), 4 and 5 are done. Spikes 1, 6, 7, 8, 9 and LOD1/LOD2 are open.
+Status: **in progress.** Spikes 0, 2 (partial), 3 (ActorBUILD), 4, 5 and 9 are done. Spikes 1, 6, 7, 8 and LOD1/LOD2 are open.
 
 ---
 
@@ -62,3 +62,12 @@ Clothed Camila, Unity + JSON, mesh only:
 | `RemoveHiddenMesh` + `RemoveTearLineAndOcclusion` | 9 | 42,224 | 19 | 382 | 37 |
 
 Hidden body faces drop by 9,150 triangles, the fully covered Bra is dropped, underwear falls to 20 triangles, and tearline/occlusion (and their 210 blendshapes) are removed. **Decision:** both flags default **on** in `start_export_fbx`, as the kickoff proposed.
+
+## Spike 9: `RIMaterialComponent.MergeMaterialUV` ✅ (works; limited effect on draw calls)
+
+On a saved copy of clothed Camila: `MergeMaterialUV(["Basic_T_shirts", "Biker_Jeans", "Canvas_shoes"], 1024, Png, 2)` took 44 s and opened **no dialog**.
+
+- The three clothing meshes now share **one material** (`3_meshes_Merge`) with a single 1024² atlas: diffuse, normal and opacity. In the scene each mesh lists the merged material three times; the FBX shows one slot per mesh (`__meshes_Merge`).
+- FBX after hidden/tearline removal: 42,224 triangles, **19 material slots (unchanged)**, 17 unique materials (down from 19), 33 textures (down from 37).
+- **Reading:** the merge is automatable and cuts materials and texture memory, but the meshes stay separate, so Unity still issues one draw call per mesh×material. **Design §4 "draw calls (materials) ≤ 8" needs mesh merging too** (InstaLOD, the kickoff's spike 1, or the Blender S4 stage). The body alone contributes 6 slots (head/body/arm/leg skin, nails, eyelash). Merging those means atlasing across the CCiC skin shader's per-region materials, which M2 should decide together with SALSA binding.
+- Safe candidate for `merge_materials`: clothing + accessories (+ shoes), never `CC_Base_Body`/`CC_Game_Body` without an M2 check.
