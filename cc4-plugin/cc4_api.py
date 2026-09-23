@@ -2225,6 +2225,9 @@ def capture_views(presets: list | None = None, width: int = 1280, height: int = 
     cam = RLPy.RScene.GetCurrentCamera()
     if not avatar or not cam:
         return {"success": False, "error": "Need an avatar and a camera"}
+    # Camera presets frame the SELECTED object: after apply_recipe the last loaded
+    # item (e.g. shoes) is selected, which framed only the feet (Phase 3 E2E).
+    RLPy.RScene.SelectObject(avatar)
     out_dir = output_dir or character_dir("renders")
     if not _is_within(out_dir, WORKSPACE_ROOT):
         return {"success": False, "error": f"Refusing to write outside the workspace ({WORKSPACE_ROOT}): {out_dir}"}

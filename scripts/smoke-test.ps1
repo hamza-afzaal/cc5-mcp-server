@@ -143,7 +143,8 @@ $morphId = $search.Json.result.results[0].id
 
 # --- 6. Camera, lights, visual settings (set back to current values) ---
 [void](Check "frame camera" POST "/camera/frame" -Body @{ view = "front" })
-[void](Check "focal length (Preview Camera may refuse)" POST "/camera/focal" -Body @{ focal_length = 50 } -Expect @(200, 400))
+$cam = (Check "camera info" GET "/camera/info").Json.result
+[void](Check "focal length (same)" POST "/camera/focal" -Body @{ focal_length = $cam.focal_length } -Expect @(200, 400))
 $lights = (Invoke-Bridge GET "/lights").Json.result
 if ($lights -and $lights.Count -gt 0) {
     $name = $lights[0].name

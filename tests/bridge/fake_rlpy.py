@@ -64,6 +64,11 @@ class _Avatar:
 
 class RScene:
     avatars = []
+    selected = []
+
+    @staticmethod
+    def SelectObject(obj):
+        RScene.selected = [obj]
 
     @staticmethod
     def GetAvatars():
