@@ -23,6 +23,32 @@ describe("fbxStats", () => {
     expect(stats.per_mesh[0]).toMatchObject({ triangles: 5, blendshapes: 3, materials: ["Std_Skin_Head", "Std_Skin_Body"] });
   });
 
+  it("reads 64-bit (v7500+) headers the same way", () => {
+    const wide = fbxStats(sampleCharacterFbx(7500));
+    expect({ ...wide, per_mesh: undefined }).toEqual({ ...stats, per_mesh: undefined });
+  });
+
+  it("decodes every property type, including zlib arrays", () => {
+    const nodes = parseFbx(sampleCharacterFbx());
+    const geom = nodes.find((n) => n.name === "Objects")!.children.find((c) => c.name === "Geometry")!;
+    const get = (n: string) => geom.children.find((c) => c.name === n)!.props[0];
+    expect(get("Vertices")).toEqual([0, 0, 0, 1, 0, 0]);
+    expect(get("Weights")).toEqual([0.5, 0.5]);
+    expect(get("Ids")).toEqual([1n, 2n]);
+    expect(get("Flags")).toEqual([true, false]);
+    const scalars = geom.children.find((c) => c.name === "Props70")!.children[0].props;
+    expect(scalars).toEqual(["Scalars", 3, true, 7, 1.5, 2.5, Buffer.from([1, 2])]);
+  });
+
+  it("rejects unknown property types", () => {
+    const buf = sampleCharacterFbx();
+    // String props are 'S' + uint32 length + bytes; overwrite the type code of "Scalars".
+    const at = buf.indexOf(Buffer.from("Scalars", "latin1")) - 5;
+    expect(String.fromCharCode(buf[at])).toBe("S");
+    buf.write("Z", at, "latin1");
+    expect(() => parseFbx(buf)).toThrow(/Unknown FBX property type 'Z'/);
+  });
+
   it("rejects non-binary input", () => {
     expect(() => parseFbx(Buffer.from("; FBX 7.4.0 project file"))).toThrow(/Not a binary FBX/);
   });

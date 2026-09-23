@@ -93,7 +93,8 @@ export function registerPipelineTools(
     { recipe: RecipeSchema.describe("Recipe object, recipe_version '0.1'") },
     async ({ recipe }) => {
       try {
-        return text(formatApplyReport(await applyRecipe(bridge, getAllowlist(), recipe)));
+        // Parse here too: defaults (e.g. clothes: []) must hold whoever calls the handler.
+        return text(formatApplyReport(await applyRecipe(bridge, getAllowlist(), RecipeSchema.parse(recipe))));
       } catch (e) {
         return text(`Recipe not applied: ${(e as Error).message}`);
       }
