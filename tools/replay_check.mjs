@@ -2,7 +2,7 @@
 /**
  * M1 exit check: a recipe replays identically.
  *
- *   node tools/replay_check.mjs recipes/sample-camila-01.json
+ *   node tools/replay_check.mjs ../cc4-recepies/recipes/sample-camila-01.json
  *
  * apply → export (A); apply again → export (B); apply A → export (C). Passes when
  * A, B and C are identical. Talks to the built MCP server over stdio.

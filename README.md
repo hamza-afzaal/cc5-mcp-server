@@ -24,22 +24,25 @@ RLPy is not thread-safe. The plugin's HTTP threads queue each action, and a QTim
 
 ## Where files go
 
-Everything the bridge writes stays under `D:\Business\Codert` (the folder that holds this repo):
+Everything stays under `D:\Business\Code\art`:
 
 ```
-art  cc5-mcp-server\          this repo (code, tests, docs, recipes\, assetsllowlist.json)
-  characters\              workspace (not in git)
-    <recipe id>\           recipe.applied.json, projects\, exports\, renders\, reports    _testbench\            spikes, E2E runs, anything without a character
+art\
+  cc5-mcp-server\     this repo: bridge code, tests, docs, assets\allowlist.json
+  cc4-recepies\       recipes repo (git@github.com:CraftXR/cc4-recepies.git), small JSON only
+  characters\         workspace, not in git
+    <recipe id>\      recipe.applied.json, projects\, exports\, renders\, reports\
+    _testbench\       spikes, E2E runs, anything without a character
 ```
 
-`apply_recipe` selects the recipe's folder; `set_character` does it by hand. Bare file names go to the current character's folder, and the bridge **refuses to write outside the workspace**.
+`apply_recipe` selects the recipe's folder; `set_character` does it by hand. Bare file names go to the current character's folder, and the bridge **refuses to write outside the workspace**. Program Files holds only the plugin junction.
 
 ## Tools (45)
 
 | Area | Tools |
 |---|---|
 | Connection & scene | `check_connection`, `list_avatars`, `get_avatar_info`, `create_avatar`, `delete_avatar`, `set_character`, `undo`, `redo` |
-| Recipes (S1, design §6) | `apply_recipe`, `export_recipe`; sample: `recipes/sample-camila-01.json` |
+| Recipes (S1, design §6) | `apply_recipe`, `export_recipe`; recipes live in `..\cc4-recepies` (sample: `recipes/sample-camila-01.json`) |
 | Morphs | `search_morphs` (display name → id, min/max), `set_morphs` (batch, one undo, fails loudly on unknown names) |
 | Content (S0 allowlist) | `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `browse_content`, `set_color` |
 | Review (Gate 1) | `capture_views` (full / head / three-quarter) |
