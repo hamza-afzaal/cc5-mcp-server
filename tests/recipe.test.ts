@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, afterAll } from "vitest";
 import { applyRecipe, exportRecipe, RecipeSchema, resolveRecipe, setLastAppliedRecipe, type Recipe } from "../src/recipe.js";
 import { createMockBridge, type MockBridge } from "./helpers/mock-bridge.js";
 import { fixtureAllowlist } from "./helpers/allowlist-fixture.js";
@@ -48,6 +48,7 @@ function happyBridge(): MockBridge {
 }
 
 beforeEach(() => setLastAppliedRecipe(null));
+afterAll(() => fs.rmSync(CHAR_DIR, { recursive: true, force: true }));
 
 describe("RecipeSchema", () => {
   it("parses the design §6 shape with defaults", () => {

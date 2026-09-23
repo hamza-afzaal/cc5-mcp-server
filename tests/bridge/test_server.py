@@ -21,12 +21,15 @@ PLUGIN_DIR = os.path.normpath(os.path.join(HERE, "..", "..", "cc4-plugin"))
 sys.path.insert(0, HERE)
 sys.path.insert(0, PLUGIN_DIR)
 
+import atexit  # noqa: E402
+import shutil  # noqa: E402
 import tempfile  # noqa: E402
 
 import fake_rlpy  # noqa: E402
 
 sys.modules["RLPy"] = fake_rlpy
 WORKSPACE = tempfile.mkdtemp(prefix="cc4_ws_")
+atexit.register(shutil.rmtree, WORKSPACE, True)
 os.environ["CC4_WORKSPACE"] = WORKSPACE
 os.environ.pop("CC4_DEV_MODE", None)
 os.environ.pop("CC4_RELOAD_SECRET", None)
