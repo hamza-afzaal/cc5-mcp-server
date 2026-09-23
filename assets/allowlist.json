@@ -1,84 +1,316 @@
 {
   "version": 1,
-  "notes": "S0 allowlist (design §5). Starter entries are CC4 bundled templates used in the Phase 1b spikes; their license is 'cc4-bundled' and verified=false until someone confirms Reallusion's export terms for bundled content. Add owned Standard-license items here before using them in recipes. Hair templates are .rlHair (Smart Hair); none listed yet.",
+  "notes": "S0 allowlist (design \u00a75). Everything in D:/Business/Reallusion/Reallusion Templates (CC4 bundled content and purchased packs) is cleared for commercial use by the owner (2026-09-23). Add items here as recipes need them. Hair: Lite Hair Plus Female/Male Vol.1 (.rlHair, 1 mesh / 1 material each; loading verified).",
   "items": [
     {
       "id": "base/cc4_camila",
       "type": "base",
       "path": "D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Camila.ccAvatar",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "scene_names": ["Camila"],
-      "verified": false
+      "scene_names": [
+        "Camila"
+      ],
+      "verified": true
     },
     {
       "id": "base/cc4_kevin",
       "type": "base",
       "path": "D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Kevin.ccAvatar",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "scene_names": ["Kevin"],
-      "verified": false
+      "scene_names": [
+        "Kevin"
+      ],
+      "verified": true
     },
     {
       "id": "base/cc4_susan",
       "type": "base",
       "path": "D:/Business/Reallusion/Reallusion Templates/Actor/Character/CC4 Susan.ccAvatar",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "scene_names": ["Susan"],
-      "verified": false
+      "scene_names": [
+        "Susan"
+      ],
+      "verified": true
     },
     {
       "id": "clothes/basic_tshirt",
       "type": "clothes",
       "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Basic T-shirts.ccCloth",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "scene_names": ["Basic T-shirts"],
-      "verified": false
+      "scene_names": [
+        "Basic T-shirts"
+      ],
+      "verified": true
     },
     {
       "id": "clothes/biker_jeans",
       "type": "clothes",
       "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Biker_Jeans.ccCloth",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "scene_names": ["Biker_Jeans"],
-      "verified": false
+      "scene_names": [
+        "Biker_Jeans"
+      ],
+      "verified": true
     },
     {
       "id": "shoes/canvas_shoes",
       "type": "shoes",
       "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shoes/Canvas Shoes.ccShoes",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "scene_names": ["Canvas shoes"],
-      "verified": false
+      "scene_names": [
+        "Canvas shoes"
+      ],
+      "verified": true
     },
     {
       "id": "motion/female_idle_1",
       "type": "motion",
       "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Idle/Female Idle_1.rlMotion",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "verified": false
+      "verified": true
     },
     {
       "id": "motion/male_breathe_1",
       "type": "motion",
       "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/1.Human Male/Idle/Breathe_1.rlMotion",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "verified": false
+      "verified": true
     },
     {
       "id": "motion/male_relax_sit",
       "type": "motion",
       "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/1.Human Male/Idle/Relax_Sit.rlMotion",
-      "license": "cc4-bundled",
+      "license": "cc4-bundled (commercial use confirmed by owner 2026-09-23)",
       "exportable": true,
-      "verified": false
+      "verified": true
+    },
+    {
+      "id": "hair/double_tied_wavy",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Double Tied Wavy.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Double Tied Wavy"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/headband_braid",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Headband Braid.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Headband Braid"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/high_tied_dreads",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/High Tied Dreads.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "High Tied Dreads"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/low_twists_ponytail",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Low Twists Ponytail.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Low Twists Ponytail"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/side_tied_wavy",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Side Tied Wavy.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Side Tied Wavy"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/side_tucked_lob",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Side Tucked Lob.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Side Tucked Lob"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/side_tucked_wavy",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Side Tucked Wavy.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Side Tucked Wavy"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/soft_waves_lob",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Soft Waves Lob.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Soft Waves Lob"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/tucked_finger_waves",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Tucked Finger Waves.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Tucked Finger Waves"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/tucked_long_stright_hair",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Tucked Long Stright Hair.rlHair",
+      "license": "purchased pack: Lite Hair Plus Female Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Tucked Long Stright Hair"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/all_around_buzz_cut",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/All-around Buzz Cut.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "All-around Buzz Cut"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/bowl_cut",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Bowl Cut.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Bowl Cut"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/classic_slick_back",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Classic Slick Back.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Classic Slick Back"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/curtain_bangs",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Curtain Bangs.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Curtain Bangs"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/fluffy_wavy_bob",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Fluffy Wavy Bob.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Fluffy Wavy Bob"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/half_up_high_twists",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Half-up High Twists.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Half-up High Twists"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/long_dreads",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Long Dreads.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Long Dreads"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/shaggy_mop_tops",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Shaggy Mop Tops.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Shaggy Mop Tops"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/side_swept_wavy_bangs",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Side-swept Wavy Bangs.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Side-swept Wavy Bangs"
+      ],
+      "verified": true
+    },
+    {
+      "id": "hair/tousled_tops",
+      "type": "hair",
+      "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Male Vol.1/Tousled Tops.rlHair",
+      "license": "purchased pack: Lite Hair Plus Male Vol.1 (commercial use confirmed by owner 2026-09-23)",
+      "exportable": true,
+      "scene_names": [
+        "Tousled Tops"
+      ],
+      "verified": true
     }
   ]
 }
