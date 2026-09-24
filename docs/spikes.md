@@ -18,7 +18,7 @@ Status: **Phase 1b complete.** All spikes are done except spike 2, which is part
 | ⚠️ **`FloatPair` iteration** | `__getitem__` is `index % 2` and never raises `IndexError`, so `list(pair)` never ends. It hung CC4 at 35 GB. | Fixed; rule added to `.claude/rules/cc4-dev.md`; regression test in `tests/bridge`. |
 | Undo grouping | ✅ one `Undo` reverts a whole `BeginAction` batch of morphs | `set_morphs` = one undo step |
 | `.ccCloth` / `.ccShoes` load, `RScene.RemoveObject` | ✅ 1.9 s load; remove works | `load_item` / `remove_item` |
-| Hair content | Templates are **`.rlHair` / `.rlHairStyle`** (Smart Hair), not `.ccHair` | allowlist + `load_item` must accept `.rlHair`; loading them is untested |
+| Hair content | Templates are **`.rlHair` / `.rlHairStyle`** (Smart Hair), not `.ccHair` | allowlist + `load_item` accept `.rlHair`. **Verified later (2026-09-23):** Lite Hair Plus styles load in ~1.6 s as 1 mesh / 1 material, and the scene name equals the file stem |
 | `SetCameraLocation(Front/Face/All)` + `RenderImage` @ 1280×720 | ✅ well framed (fixes the ~10% framing seen in probe 1) | `capture_views` full = Front, head = Face; three_quarter still needs a camera transform |
 | `SaveProject(path)` | ✅ 0.35 s, 119 MB `.ccProject`; **current project switches to the copy** | the `convert_lod` guard (current path == saved-as path) works |
 | Export Unity + `ExportJson` as a job | ✅ 4–6.5 s; `.json` sidecar written next to the FBX | — |
@@ -95,9 +95,11 @@ The user set InstaLOD **Merge Materials → by type** in CC4's Export FBX dialog
 
 **Decision:** Python can't trigger InstaLOD material merging. `merge_materials` uses `MergeMaterialUV` (spike 9) for clothing/accessories; InstaLOD merge-by-type stays a **manual-checklist** step (export from the UI dialog) if M2 needs it.
 
-## Spike 8: Game Base → Single Material ✅ (UI only; recorded, not used)
+## Spike 8: Game Base → Single Material ✅ (UI only; superseded by the decimation test below)
 
-The user confirmed CC4 4.70 still offers **Convert to Game Base → Single Material** in the UI. The static RLPy search found no Python entry point (only read-only `EAvatarGeneration_CC_Game_Base_*` enums), and CC4 ships neutral Game Base avatars (`Program/CCBaseData/NeutralAvatar/RL_CharacterCreator_Base_Game_G1_One_UV.ccAvatar`, etc.). Not used on production characters: it merges the tongue into the body (SALSA OneClick risk).
+The user confirmed CC4 4.70 still offers **Convert to Game Base → Single Material** in the UI. The static RLPy search found no Python entry point (only read-only `EAvatarGeneration_CC_Game_Base_*` enums), and CC4 ships neutral Game Base avatars (`Program/CCBaseData/NeutralAvatar/RL_CharacterCreator_Base_Game_G1_One_UV.ccAvatar`, etc.).
+
+*Original concern (kickoff):* that it merges the tongue into the body and breaks SALSA OneClick. **Measured in the decimation test below, that concern didn't hold:** the tongue stays a separate `CC_Game_Tongue` mesh with 41 blendshapes, the body keeps all 152, and the result is the decided hero route. The remaining SALSA check is binding to the renamed `CC_Game_Body` / `CC_Game_Tongue` meshes in Unity (M2); Ava already uses `CC_Game_Body` with SALSA.
 
 ## Spike 7: Optimize & Decimate "Custom" ✅ (UI only; templates can be saved)
 
@@ -117,7 +119,7 @@ Python still has no route to it (`EConvertCharacterLevel` has no Custom). It sta
 | Morph catalog readiness | Automated check: reload the base if the catalog shows only "Actor Parts" |
 | ActorBUILD / LOD1 / LOD2 | **Semi-automated**: `convert_lod` job + a human clicks OK on two CC4 dialogs |
 | Material merge (clothing/accessories) | **Automated** via `MergeMaterialUV` (reduces materials/textures, not draw calls) |
-| InstaLOD merge-by-type, Custom decimation, Game Base single material | **Manual checklist** (UI only) |
+| InstaLOD merge-by-type, Custom decimation, Game Base single material | **Manual checklist** (UI only). Game Base Single Material is the hero route (decimation test) |
 | License check | Callable; only ever observed returning `true` so far |
 
 ## Decimation test: Game Base vs Custom (2026-09-23, UI conversions, measured via the bridge)

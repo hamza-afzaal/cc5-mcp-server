@@ -56,7 +56,9 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 
 ### UI-only (manual checklist steps)
 
-InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Custom** (no saved profiles; per conversion) · Convert to Game Base → Single Material (don't use on production; merges the tongue) · clicking OK on `ConvertTo` dialogs.
+InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Custom** (templates are saved as `.ini` in `%LOCALAPPDATA%\Reallusion\Character Creator\4.0\4.0\CCBasics\LODTemplates`; Expression Morphs are greyed out whenever Polygon Reduction is on, so it's for background characters only) · **Convert to Game Base → Single Material** (the **hero route**: ~32k tris / 17 draw calls on clothed Camila, all face blendshapes kept, tongue stays separate) · clicking OK on `ConvertTo` dialogs.
+
+**Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4). Details: the decimation test in `docs/spikes.md`.
 
 ## Tools (45) and the S1–S3 flow
 
