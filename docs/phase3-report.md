@@ -59,4 +59,4 @@ This export is the authored character **before** S2 optimization (no ActorBUILD,
 - Motion FBX contains a second, date-named animation stack (the scene timeline).
 - T-shirt hem shows black patches in renders (clothing/underwear clipping); look-dev.
 - The full-body view fills only ~12% of the 16:9 frame width; a portrait size (e.g. 720×1280) may suit Gate 1 better.
-- Allowlist licenses are all `verified: false` (bundled CC4 content) until confirmed.
+- ~~Allowlist licenses are all `verified: false` until confirmed.~~ **Resolved after this report (PR #2):** the owner confirmed commercial use, all entries are `verified: true`, and 20 purchased Lite Hair Plus styles were added.

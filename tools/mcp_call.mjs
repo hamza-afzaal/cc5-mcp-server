@@ -14,6 +14,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { failed } from "./mcp_failures.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const imgDir = path.join(root, "..", "characters", "_testbench", "mcp_call");
@@ -30,7 +31,7 @@ await client.connect(new StdioClientTransport({
   command: process.execPath,
   args: [path.join(root, "build", "index.js")],
   env: { ...process.env },
-  stderr: "ignore",
+  stderr: process.env.MCP_CALL_STDERR ? "inherit" : "ignore",
 }));
 
 try {
@@ -54,14 +55,28 @@ try {
           console.log(c.text);
         }
       }
-      if (step.wait_job) {
-        const id = /job_\d+/.exec(res.content.map((c) => c.text ?? "").join(" "))?.[0];
-        for (;;) {
-          const st = await client.callTool({ name: "get_export_status", arguments: { job_id: id } });
-          const text = st.content[0].text;
-          if (!/: (queued|running)/.test(text.split("\n")[0])) { console.log(`--- ${text}`); break; }
-          await new Promise((r) => setTimeout(r, 1000));
+      let out = res.content.map((c) => c.text ?? "").join("\n");
+      if (step.wait_job && !failed(out)) {
+        const id = /job_\d+/.exec(out)?.[0];
+        if (!id) {
+          out += "\nFailed: no job id in the response";
+        } else {
+          for (;;) {
+            const st = await client.callTool({ name: "get_export_status", arguments: { job_id: id } });
+            const text = st.content.map((c) => c.text ?? "").join("\n");
+            if (!/: (queued|running)/.test(text.split("\n")[0])) {
+              console.log(`--- ${text}`);
+              out = text;
+              break;
+            }
+            await new Promise((r) => setTimeout(r, 1000));
+          }
         }
+      }
+      if (!step.optional && failed(out)) {
+        console.error(`\nStopping: step '${step.tool}' failed (mark it "optional": true to continue).`);
+        process.exitCode = 1;
+        break;
       }
     }
   }
