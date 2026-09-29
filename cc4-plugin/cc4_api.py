@@ -2434,6 +2434,7 @@ def _export_fbx_action(p: dict) -> Any:
         instalod_preset=bool(p.get("instalod_preset", False)),
         include_motion_path=str(p.get("include_motion_path", "")),
         motion_only=bool(p.get("motion_only", False)),
+        reset_bone_scale=bool(p.get("reset_bone_scale", False)),
     )
 
 

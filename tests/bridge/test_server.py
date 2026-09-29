@@ -253,6 +253,15 @@ class RegistryConsistencyTest(unittest.TestCase):
         for action in cc4_api.JOB_ACTIONS:
             self.assertIn(action, cc4_api.ACTIONS)
 
+    def test_export_action_forwards_every_export_fbx_option(self):
+        # reset_bone_scale was once added to export_fbx but not to the action, so the TS option was silently dropped
+        import inspect
+        import cc4_api
+        params = list(inspect.signature(cc4_api.export_fbx).parameters)[2:]  # after output_path, options_flags
+        source = inspect.getsource(cc4_api._export_fbx_action)
+        for name in params:
+            self.assertIn("{}=".format(name), source, "export_fbx option '{}' is not forwarded by the action".format(name))
+
 
 if __name__ == "__main__":
     unittest.main()
