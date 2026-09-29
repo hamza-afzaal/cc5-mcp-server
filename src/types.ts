@@ -229,6 +229,8 @@ export interface ExportFbxOptions {
   include_motion_path?: string;
   /** Skeleton + animation only (EExportFbxOptions_RemoveAllMesh). */
   motion_only?: boolean;
+  /** EExportFbxOptions2_ResetBoneScale: bake bone scales into the mesh (all bones exported at scale 1). */
+  reset_bone_scale?: boolean;
 }
 
 export interface ExportFbxResult extends OperationResult {

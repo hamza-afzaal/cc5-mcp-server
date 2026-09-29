@@ -31,8 +31,8 @@ describe("registerPipelineTools", () => {
 
 describe("labelledPath", () => {
   it("appends the LOD label once", () => {
-    expect(labelledPath("camila.fbx", "LOD0")).toBe("camila_LOD0.fbx");
-    expect(labelledPath("camila_LOD0.fbx", "LOD0")).toBe("camila_LOD0.fbx");
+    expect(labelledPath("camila.fbx", "LOD0")).toBe("camila.fbx"); // hero keeps its plain name (CCiC isLOD)
+    expect(labelledPath("camila_LOD1.fbx", "LOD1")).toBe("camila_LOD1.fbx");
     expect(labelledPath("C:/out/camila.fbx", "LOD1")).toBe(path.join("C:/out", "camila_LOD1.fbx"));
     expect(labelledPath("camila.fbx")).toBe("camila.fbx");
   });
@@ -41,18 +41,18 @@ describe("labelledPath", () => {
 describe("start_export_fbx", () => {
   beforeEach(() => bridge.startExportFbx.mockResolvedValue({ job_id: "job_7", status: "queued" }));
 
-  it("always uses the Unity preset + JSON sidecar, with hidden mesh / tearline removal and mesh-only on by default", async () => {
+  it("always uses the Unity preset + JSON sidecar, with hidden mesh / tearline removal, reset bone scale and mesh-only on by default", async () => {
     const [{ text }] = await call("start_export_fbx", { path: "camila", lod_label: "LOD0", texture_size_cap: 2048 });
-    expect(bridge.startExportFbx).toHaveBeenCalledWith("camila_LOD0.fbx", {
+    expect(bridge.startExportFbx).toHaveBeenCalledWith("camila.fbx", {
       target_tool: "Unity", export_json: true, delete_hidden_faces: true, remove_tearline_occlusion: true,
-      export_motion: false, sub_d_level: 0, texture_size: 2048,
+      export_motion: false, sub_d_level: 0, reset_bone_scale: true, texture_size: 2048,
     });
     expect(text).toContain('get_export_status("job_7")');
   });
 
   it("lets flags be turned off", async () => {
-    await call("start_export_fbx", { path: "x.fbx", remove_hidden_mesh: false, remove_tearline_occlusion: false, mesh_only: false });
-    expect(bridge.startExportFbx.mock.calls[0][1]).toMatchObject({ delete_hidden_faces: false, remove_tearline_occlusion: false, export_motion: true });
+    await call("start_export_fbx", { path: "x.fbx", remove_hidden_mesh: false, remove_tearline_occlusion: false, mesh_only: false, reset_bone_scale: false });
+    expect(bridge.startExportFbx.mock.calls[0][1]).toMatchObject({ delete_hidden_faces: false, remove_tearline_occlusion: false, export_motion: true, reset_bone_scale: false });
   });
 
   it("resolves an included motion through the allowlist", async () => {

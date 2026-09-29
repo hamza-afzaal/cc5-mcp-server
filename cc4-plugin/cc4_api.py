@@ -442,6 +442,7 @@ def export_fbx(
     instalod_preset: bool = False,
     include_motion_path: str = "",
     motion_only: bool = False,
+    reset_bone_scale: bool = False,
 ) -> dict[str, Any]:
     """Export the current avatar as FBX via RExportFbxSetting (CC4 export dialog parity).
 
@@ -466,6 +467,9 @@ def export_fbx(
         instalod_preset: EExportFbxOptions2_InstaLodPreset. No effect from Python (spike 1); kept for completeness.
         include_motion_path: motion file exported with the avatar (RExportFbxSetting.SetIncludeMotionPath).
         motion_only: EExportFbxOptions_RemoveAllMesh (skeleton + animation only).
+        reset_bone_scale: EExportFbxOptions2_ResetBoneScale. Bakes CC4's body-proportion bone scales into the
+            mesh so every bone exports at scale 1. Needed for Unity: CC4 otherwise writes non-uniform bone
+            scales with segment scale compensation (InheritType Rrs), which distorts characters in Unity.
 
     There is deliberately no flag-less 2-arg fallback: if RExportFbxSetting fails
     the export fails, so a result never claims options that were not applied.
@@ -545,6 +549,8 @@ def export_fbx(
         flags2 |= _safe_flag("EExportFbxOptions2_InstaLodPreset")
     if motion_only:
         flags |= _safe_flag("EExportFbxOptions_RemoveAllMesh")
+    if reset_bone_scale:
+        flags2 |= _safe_flag("EExportFbxOptions2_ResetBoneScale")
     if include_motion_path:
         if ".." in include_motion_path or not os.path.isfile(include_motion_path):
             return {"success": False, "error": f"Motion file not found: {include_motion_path}"}

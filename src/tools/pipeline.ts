@@ -28,7 +28,8 @@ export function formatApplyReport(r: ApplyReport): string {
 
 /** Put the LOD label into the file name unless it is already there. */
 export function labelledPath(outputPath: string, lod?: string): string {
-  if (!lod) return outputPath;
+  // LOD0 is the hero model and keeps its plain name: CCiC flags any "*_LOD0" file as an LOD-group member (isLOD=true)
+  if (!lod || lod.toUpperCase() === "LOD0") return outputPath;
   const parsed = path.parse(outputPath);
   if (parsed.name.toUpperCase().endsWith(`_${lod.toUpperCase()}`)) return outputPath;
   const name = `${parsed.name}_${lod}${parsed.ext || ".fbx"}`;
@@ -177,18 +178,19 @@ export function registerPipelineTools(
 
   server.tool(
     "start_export_fbx",
-    "Start a Unity FBX export job for the current avatar. Always sets the Unity preset and the JSON sidecar (CCiC Unity Tools). Hidden-mesh and tearline/occlusion removal default ON (spike 5). Poll get_export_status for the result and a design §4 budget check.",
+    "Start a Unity FBX export job for the current avatar. Always sets the Unity preset and the JSON sidecar (CCiC Unity Tools). Hidden-mesh and tearline/occlusion removal and Reset Bone Scale default ON (spike 5; Unity distortion fix). Poll get_export_status for the result and a design §4 budget check.",
     {
       path: z.string().min(1).max(1024).describe("File name (goes to <workspace>/<character>/exports) or an absolute .fbx path inside the workspace"),
-      lod_label: z.enum(["LOD0", "LOD1", "LOD2"]).optional().describe("Appended to the file name and used for the budget check"),
+      lod_label: z.enum(["LOD0", "LOD1", "LOD2"]).optional().describe("Used for the budget check; LOD1/LOD2 are also appended to the file name (LOD0 is not: CCiC treats *_LOD0 files as LOD-group members)"),
       texture_size_cap: z.union([z.literal(256), z.literal(512), z.literal(1024), z.literal(2048), z.literal(4096)]).optional()
         .describe("One max texture size for the whole export (design §4: 2048 LOD0, 1024 LOD1, 512 LOD2)"),
       remove_hidden_mesh: z.boolean().optional().describe("Default true"),
       remove_tearline_occlusion: z.boolean().optional().describe("Default true"),
       mesh_only: z.boolean().optional().describe("Default true (LOD group members carry no motion)"),
       include_motion: z.string().max(1024).optional().describe("'allowlist:motion/...' exported with the mesh (sets mesh_only false)"),
+      reset_bone_scale: z.boolean().optional().describe("Default true: bake CC4's body-proportion bone scales into the mesh so all bones export at scale 1 (Unity distorts scaled bones with segment scale compensation)"),
     },
-    async ({ path: p, lod_label, texture_size_cap, remove_hidden_mesh, remove_tearline_occlusion, mesh_only, include_motion }) => {
+    async ({ path: p, lod_label, texture_size_cap, remove_hidden_mesh, remove_tearline_occlusion, mesh_only, include_motion, reset_bone_scale }) => {
       const outputPath = labelledPath(p.toLowerCase().endsWith(".fbx") ? p : `${p}.fbx`, lod_label);
       if (outputPath.includes("..")) return text("Path traversal ('..') is not allowed");
       const options: ExportFbxOptions = {
@@ -198,6 +200,7 @@ export function registerPipelineTools(
         remove_tearline_occlusion: remove_tearline_occlusion ?? true,
         export_motion: !(mesh_only ?? true),
         sub_d_level: 0,
+        reset_bone_scale: reset_bone_scale ?? true,
       };
       if (texture_size_cap !== undefined) options.texture_size = texture_size_cap;
       if (include_motion) {
