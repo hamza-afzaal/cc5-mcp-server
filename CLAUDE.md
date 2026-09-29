@@ -14,8 +14,9 @@ Everything stays under `D:\Business\Code\art`:
 
 | Path | What | In git |
 |---|---|---|
-| `cc5-mcp-server\` | this repo: bridge code, tests, docs, `assets\allowlist.json` | yes (`cc4-port` branch) |
+| `cc5-mcp-server\` | this repo: bridge code, tests, docs, `assets\allowlist.json` | yes (`main`) |
 | `cc4-recepies\` | recipes, `recipes\<id>.json` (git@github.com:CraftXR/cc4-recepies.git) | yes, small JSON only |
+| `blender-pipeline\` | S4 refinement stage: edits the CC4 export in place (decimate clothing/teeth, prune unused shapes), with its own `CLAUDE.md`; output in `characters\<id>\blender\` | yes (local for now) |
 | `characters\<recipe id>\` | `recipe.applied.json`, `projects\`, `exports\`, `renders\`, `reports\` | **no** |
 | `characters\_testbench\` | spikes (`phase1b-spikes\`), E2E transcripts, smoke tests, scratch | **no** |
 | `C:\Program Files\…\Character Creator 4\Bin64\OpenPlugin\CC4_MCP_Bridge` | a **junction** to `cc4-plugin\`, nothing else | — |
@@ -58,7 +59,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 
 InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Custom** (templates are saved as `.ini` in `%LOCALAPPDATA%\Reallusion\Character Creator\4.0\4.0\CCBasics\LODTemplates`; Expression Morphs are greyed out whenever Polygon Reduction is on, so it's for background characters only) · **Convert to Game Base → Single Material** (the **hero route**: ~32k tris / 17 draw calls on clothed Camila, all face blendshapes kept, tongue stays separate) · clicking OK on `ConvertTo` dialogs.
 
-**Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4). Details: the decimation test in `docs/spikes.md`.
+**Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4): `python ..\blender-pipeline\tools\run_s4.py ..\blender-pipeline\params\<id>.json` reads `characters\<id>\exports\` and writes `characters\<id>\blender\` (see `..\blender-pipeline\CLAUDE.md`). Details of the decimation test: `docs/spikes.md`.
 
 ## Tools (45) and the S1–S3 flow
 
