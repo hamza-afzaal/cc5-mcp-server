@@ -45,14 +45,14 @@ describe("start_export_fbx", () => {
     const [{ text }] = await call("start_export_fbx", { path: "camila", lod_label: "LOD0", texture_size_cap: 2048 });
     expect(bridge.startExportFbx).toHaveBeenCalledWith("camila.fbx", {
       target_tool: "Unity", export_json: true, delete_hidden_faces: true, remove_tearline_occlusion: true,
-      export_motion: false, sub_d_level: 0, reset_bone_scale: true, texture_size: 2048,
+      export_motion: false, sub_d_level: 0, reset_bone_scale: true, pbr_texture_layout: "format_directory", texture_size: 2048,
     });
     expect(text).toContain('get_export_status("job_7")');
   });
 
   it("lets flags be turned off", async () => {
-    await call("start_export_fbx", { path: "x.fbx", remove_hidden_mesh: false, remove_tearline_occlusion: false, mesh_only: false, reset_bone_scale: false });
-    expect(bridge.startExportFbx.mock.calls[0][1]).toMatchObject({ delete_hidden_faces: false, remove_tearline_occlusion: false, export_motion: true, reset_bone_scale: false });
+    await call("start_export_fbx", { path: "x.fbx", remove_hidden_mesh: false, remove_tearline_occlusion: false, mesh_only: false, reset_bone_scale: false, pbr_texture_layout: "none" });
+    expect(bridge.startExportFbx.mock.calls[0][1]).toMatchObject({ delete_hidden_faces: false, remove_tearline_occlusion: false, export_motion: true, reset_bone_scale: false, pbr_texture_layout: "" });
   });
 
   it("resolves an included motion through the allowlist", async () => {

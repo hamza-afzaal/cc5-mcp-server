@@ -443,6 +443,7 @@ def export_fbx(
     include_motion_path: str = "",
     motion_only: bool = False,
     reset_bone_scale: bool = False,
+    pbr_texture_layout: str = "",
 ) -> dict[str, Any]:
     """Export the current avatar as FBX via RExportFbxSetting (CC4 export dialog parity).
 
@@ -470,6 +471,10 @@ def export_fbx(
         reset_bone_scale: EExportFbxOptions2_ResetBoneScale. Bakes CC4's body-proportion bone scales into the
             mesh so every bone exports at scale 1. Needed for Unity: CC4 otherwise writes non-uniform bone
             scales with segment scale compensation (InheritType Rrs), which distorts characters in Unity.
+        pbr_texture_layout: "format_directory" | "one_directory" | "diffuse_layer" | "" -> the matching
+            EExportFbxOptions_ExportPbrTextureAsImageIn* flag. Writes the per-material texture folder with the
+            custom-shader maps (eye sclera/mask, teeth, hair) that CCiC needs; without it the JSON's shader image
+            paths are empty.
 
     There is deliberately no flag-less 2-arg fallback: if RExportFbxSetting fails
     the export fails, so a result never claims options that were not applied.
@@ -551,6 +556,15 @@ def export_fbx(
         flags |= _safe_flag("EExportFbxOptions_RemoveAllMesh")
     if reset_bone_scale:
         flags2 |= _safe_flag("EExportFbxOptions2_ResetBoneScale")
+    _PBR_LAYOUT = {
+        "format_directory": "EExportFbxOptions_ExportPbrTextureAsImageInFormatDirectory",
+        "one_directory": "EExportFbxOptions_ExportPbrTextureAsImageInOneDirectory",
+        "diffuse_layer": "EExportFbxOptions_ExportPbrTextureAsImageInDiffuseLayer",
+    }
+    if pbr_texture_layout:
+        if pbr_texture_layout not in _PBR_LAYOUT:
+            return {"success": False, "error": f"Unknown pbr_texture_layout: {pbr_texture_layout}"}
+        flags |= _safe_flag(_PBR_LAYOUT[pbr_texture_layout])
     if include_motion_path:
         if ".." in include_motion_path or not os.path.isfile(include_motion_path):
             return {"success": False, "error": f"Motion file not found: {include_motion_path}"}
@@ -2435,6 +2449,7 @@ def _export_fbx_action(p: dict) -> Any:
         include_motion_path=str(p.get("include_motion_path", "")),
         motion_only=bool(p.get("motion_only", False)),
         reset_bone_scale=bool(p.get("reset_bone_scale", False)),
+        pbr_texture_layout=str(p.get("pbr_texture_layout", "")),
     )
 
 

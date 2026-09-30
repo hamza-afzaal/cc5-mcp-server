@@ -188,9 +188,11 @@ export function registerPipelineTools(
       remove_tearline_occlusion: z.boolean().optional().describe("Default true"),
       mesh_only: z.boolean().optional().describe("Default true (LOD group members carry no motion)"),
       include_motion: z.string().max(1024).optional().describe("'allowlist:motion/...' exported with the mesh (sets mesh_only false)"),
+      pbr_texture_layout: z.enum(["format_directory", "one_directory", "diffuse_layer", "none"]).optional()
+        .describe("How CC4 writes PBR/custom-shader textures (eye, teeth, hair maps CCiC needs). Default format_directory"),
       reset_bone_scale: z.boolean().optional().describe("Default true: bake CC4's body-proportion bone scales into the mesh so all bones export at scale 1 (Unity distorts scaled bones with segment scale compensation)"),
     },
-    async ({ path: p, lod_label, texture_size_cap, remove_hidden_mesh, remove_tearline_occlusion, mesh_only, include_motion, reset_bone_scale }) => {
+    async ({ path: p, lod_label, texture_size_cap, remove_hidden_mesh, remove_tearline_occlusion, mesh_only, include_motion, reset_bone_scale, pbr_texture_layout }) => {
       const outputPath = labelledPath(p.toLowerCase().endsWith(".fbx") ? p : `${p}.fbx`, lod_label);
       if (outputPath.includes("..")) return text("Path traversal ('..') is not allowed");
       const options: ExportFbxOptions = {
@@ -201,6 +203,7 @@ export function registerPipelineTools(
         export_motion: !(mesh_only ?? true),
         sub_d_level: 0,
         reset_bone_scale: reset_bone_scale ?? true,
+        pbr_texture_layout: pbr_texture_layout === "none" ? "" : (pbr_texture_layout ?? "format_directory"),
       };
       if (texture_size_cap !== undefined) options.texture_size = texture_size_cap;
       if (include_motion) {
