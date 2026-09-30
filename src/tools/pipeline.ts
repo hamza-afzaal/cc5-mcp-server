@@ -121,6 +121,14 @@ export function registerPipelineTools(
   );
 
   server.tool(
+    "open_project",
+    "Open an existing .ccProject from the workspace (e.g. a saved Game Base conversion) to re-export it. A bare name is looked up in <workspace>/<character>/projects (see set_character). Paths outside the workspace are refused. The opened project is NOT a saved copy: run save_project_as before any irreversible step.",
+    { path: z.string().min(1).max(1024).describe("File name or absolute path, e.g. 'test-kevin-01_gamebase_converted'") },
+    async ({ path: p }) => bridgeCall(() => bridge.openProject(p),
+      (r) => (r.success ? `Opened ${r.path} (${r.seconds} s). Avatar: ${r.avatar ?? "none"}.` : `Failed: ${r.error}`)),
+  );
+
+  server.tool(
     "save_project_as",
     "Save the current project as a NEW .ccProject; the copy becomes the current project. Required before convert_lod or merge_materials (design D6). A bare name goes to <workspace>/<character>/projects (see set_character). Paths outside the workspace are refused. Never overwrites.",
     { path: z.string().min(1).max(1024).describe("File name or absolute path, e.g. 'patient-older-m-01_lod0'") },

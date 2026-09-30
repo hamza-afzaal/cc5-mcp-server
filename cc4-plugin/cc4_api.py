@@ -2091,6 +2091,29 @@ def save_project_as(path: str) -> dict[str, Any]:
             "size_bytes": os.path.getsize(path)}
 
 
+def open_project(path: str) -> dict[str, Any]:
+    """Open an existing .ccProject from the workspace (e.g. a saved Game Base conversion).
+
+    Only files under the workspace are accepted. The opened project does NOT count as a saved copy, so irreversible
+    operations still need save_project_as first (design D6).
+    """
+    path, path_error = workspace_path(path, "projects")
+    if path_error:
+        return {"success": False, "error": path_error}
+    if not path.lower().endswith(".ccproject"):
+        path += ".ccProject"
+    if not os.path.isfile(path):
+        return {"success": False, "error": f"Project not found: {path}"}
+    t0 = time.time()
+    status = RLPy.RFileIO.LoadProject(path)
+    seconds = round(time.time() - t0, 2)
+    if not _ok(status):
+        return {"success": False, "error": f"LoadProject failed ({status})", "path": path}
+    avatar = get_first_avatar()
+    return {"success": True, "path": path, "seconds": seconds, "current_project": current_project_path(),
+            "avatar": avatar.GetName() if avatar else None}
+
+
 def _require_saved_copy() -> str | None:
     current = current_project_path()
     if not current or _norm_path(current) not in bridge_state.saved_as_paths:
@@ -2479,6 +2502,7 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "set_color":             (lambda p: set_color(p["target"], float(p["r"]), float(p["g"]), float(p["b"])), ["target", "r", "g", "b"], DEFAULT_TIMEOUT_S),
     # Project / optimize / export
     "save_project_as":       (lambda p: save_project_as(p["path"]), ["path"], LONG_TIMEOUT_S),
+    "open_project":          (lambda p: open_project(p["path"]), ["path"], LONG_TIMEOUT_S),
     "convert_lod":           (lambda p: convert_lod(p["level"], bool(p.get("bake_expression", True))), ["level"], LONG_TIMEOUT_S),
     "merge_materials":       (lambda p: merge_materials(p.get("mesh_names"), int(p.get("texture_size", 1024))), [], LONG_TIMEOUT_S),
     "check_export_license":  (lambda p: check_export_license(p.get("item", "")), [], DEFAULT_TIMEOUT_S),
@@ -2543,6 +2567,7 @@ POST_ROUTES: dict[str, str] = {
     "/content/browse":      "browse_content",
     "/color":               "set_color",
     "/project/save_as":     "save_project_as",
+    "/project/open":        "open_project",
     "/license/check":       "check_export_license",
     "/views/capture":       "capture_views",
     "/camera/focal":        "set_camera_focal_length",

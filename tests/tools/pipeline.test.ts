@@ -23,7 +23,7 @@ beforeEach(() => {
 describe("registerPipelineTools", () => {
   it("registers the Phase 2 pipeline tools", () => {
     expect(server.tool.mock.calls.map((c) => c[0])).toEqual([
-      "apply_recipe", "export_recipe", "set_character", "save_project_as", "convert_lod", "merge_materials", "capture_views",
+      "apply_recipe", "export_recipe", "set_character", "open_project", "save_project_as", "convert_lod", "merge_materials", "capture_views",
       "start_export_fbx", "get_export_status", "check_export_license", "export_motions",
     ]);
   });
@@ -113,6 +113,13 @@ describe("convert_lod / merge_materials / save_project_as / license", () => {
     bridge.startMergeMaterials.mockResolvedValue({ job_id: "job_5", status: "queued" });
     await call("merge_materials", { texture_size: 1024 });
     expect(bridge.startMergeMaterials).toHaveBeenCalledWith(undefined, 1024);
+  });
+
+  it("opens a saved project and reports failures", async () => {
+    bridge.openProject.mockResolvedValue({ success: true, path: "C:/p/x.ccProject", seconds: 3.2, avatar: "Kevin" });
+    expect((await call("open_project", { path: "x" }))[0].text).toBe("Opened C:/p/x.ccProject (3.2 s). Avatar: Kevin.");
+    bridge.openProject.mockResolvedValue({ success: false, error: "Project not found: C:/p/y.ccProject" });
+    expect((await call("open_project", { path: "y" }))[0].text).toBe("Failed: Project not found: C:/p/y.ccProject");
   });
 
   it("reports save-as", async () => {

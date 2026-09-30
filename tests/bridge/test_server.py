@@ -227,6 +227,19 @@ class BridgeHttpTest(unittest.TestCase):
         _, err = cc4_api.workspace_path(os.path.join(WORKSPACE, "..", "x.fbx"), "exports")
         self.assertIn("Unsafe", err)
 
+    def test_open_project_only_inside_workspace_and_existing(self):
+        import cc4_api
+        outside = os.path.join(tempfile.gettempdir(), "elsewhere.ccProject")
+        self.assertIn("outside the workspace", cc4_api.open_project(outside)["error"])
+        self.assertIn("not found", cc4_api.open_project("missing_project")["error"])
+        proj = os.path.join(WORKSPACE, "_testbench", "projects", "saved.ccProject")
+        os.makedirs(os.path.dirname(proj), exist_ok=True)
+        open(proj, "w").close()
+        r = cc4_api.open_project(proj)
+        self.assertTrue(r["success"], r)
+        # opening does not make it a saved copy: irreversible steps stay refused
+        self.assertNotIn(os.path.normcase(os.path.realpath(proj)), {os.path.normcase(p) for p in cc4_api.bridge_state.saved_as_paths})
+
     def test_absolute_paths_inside_workspace_are_allowed(self):
         import cc4_api
         inside = os.path.join(WORKSPACE, "_testbench", "exports", "a.fbx")

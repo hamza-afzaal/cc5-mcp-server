@@ -38,6 +38,7 @@ import type {
   ItemList,
   LoadItemResult,
   SaveProjectResult,
+  OpenProjectResult,
   LicenseResult,
   CaptureViewsResult,
   ViewPreset,
@@ -239,6 +240,10 @@ export class CC4Bridge {
 
   async saveProjectAs(path: string): Promise<SaveProjectResult> {
     return this.request<SaveProjectResult>("/project/save_as", "POST", { path }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  async openProject(path: string): Promise<OpenProjectResult> {
+    return this.request<OpenProjectResult>("/project/open", "POST", { path }, LONG_REQUEST_TIMEOUT_MS);
   }
 
   async checkExportLicense(item?: string): Promise<LicenseResult> {

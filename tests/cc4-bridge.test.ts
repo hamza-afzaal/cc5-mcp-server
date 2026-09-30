@@ -623,6 +623,7 @@ describe("CC4Bridge Phase 2 endpoints", () => {
       [() => bridge.removeItem("Bra"), "/item/remove", { item_name: "Bra" }],
       [() => bridge.setColor("eyes", 0.1, 0.2, 0.3), "/color", { target: "eyes", r: 0.1, g: 0.2, b: 0.3 }],
       [() => bridge.saveProjectAs("copy"), "/project/save_as", { path: "copy" }],
+      [() => bridge.openProject("copy"), "/project/open", { path: "copy" }],
       [() => bridge.checkExportLicense(), "/license/check", { item: "" }],
     ];
     for (const [fn, route, expected] of cases) {

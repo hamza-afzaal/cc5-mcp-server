@@ -52,6 +52,7 @@ export function createMockBridge(): MockBridge {
     removeItem: vi.fn(),
     setColor: vi.fn(),
     saveProjectAs: vi.fn(),
+    openProject: vi.fn(),
     checkExportLicense: vi.fn(),
     captureViews: vi.fn(),
     startExportFbx: vi.fn(),

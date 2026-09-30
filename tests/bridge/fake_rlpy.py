@@ -93,6 +93,11 @@ class RFileIO:
         RFileIO.loaded.append(path)
         return RStatus.Success
 
+    @staticmethod
+    def LoadProject(path):
+        RFileIO.loaded.append(path)
+        return RStatus.Success
+
 
 class RApplication:
     @staticmethod

@@ -358,6 +358,13 @@ export interface LoadItemResult extends OperationResult {
   added?: { clothes: string[]; hair: string[]; accessories: string[] };
 }
 
+export interface OpenProjectResult extends OperationResult {
+  path?: string;
+  seconds?: number;
+  current_project?: string | null;
+  avatar?: string | null;
+}
+
 export interface SaveProjectResult extends OperationResult {
   path?: string;
   previous_project?: string;

@@ -42,6 +42,8 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 - Jobs: `/health` and job status stay responsive during exports (the GIL is not held).
 - Renders: `SetCameraLocation(Front/Face)` + `RenderImage` at any size. Presets frame the **selected** object, so select the avatar first. The Preview Camera has no Transform control, so three-quarter views turn the avatar and restore it.
 - `RIAvatar.ConvertTo(ActorBuild | LOD1 | LOD2, bakeExpression, bakeTexture, pose)` works on copies, but **shows two modal OK dialogs** (semi-automatic). `bakeTexture=False` has no observable effect.
+- **`ConvertTo(ActorBuild)` is not the hero route.** It can't set Single Material, separate eyelash or texture size, and it ignores the UI dialog's last-used settings: the body comes out with 6 materials instead of 1 (tested 2026-09-30). **Convert to Game Base stays a manual UI step.**
+- `RFileIO.LoadProject` works (`open_project` tool): re-export a saved conversion under a new name without converting again. An opened project is not a saved copy (irreversible steps still need `save_project_as`).
 - `RIMaterialComponent.MergeMaterialUV(meshes, size, Png, 2)`: shared atlas, no dialog, ~40 s; reduces materials, not draw calls.
 - `RFileIO.CheckExportFbxHasLicense(obj) -> bool`: callable; only ever seen returning `true`.
 
@@ -63,9 +65,9 @@ InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Cust
 
 **Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4): `python ..\blender-pipeline\tools\run_s4.py ..\blender-pipeline\params\<id>.json` reads `characters\<id>\exports\` and writes `characters\<id>\blender\` (see `..\blender-pipeline\CLAUDE.md`). Details of the decimation test: `docs/spikes.md`.
 
-## Tools (45) and the S1–S3 flow
+## Tools (46) and the S1–S3 flow
 
-`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `search_morphs`, `set_morphs`, `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
+`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
 
 ## Unity export profile (working)
 
