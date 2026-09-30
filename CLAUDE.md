@@ -18,7 +18,7 @@ Everything stays under `D:\Business\Code\art`:
 |---|---|---|
 | `cc5-mcp-server\` | this repo: bridge code, tests, docs, `assets\allowlist.json` | yes (`main`) |
 | `cc4-recepies\` | recipes, `recipes\<id>.json` (git@github.com:CraftXR/cc4-recepies.git) | yes, small JSON only |
-| `blender-pipeline\` | S4 refinement stage: edits the CC4 export in place (decimate clothing/teeth, prune unused shapes), with its own `CLAUDE.md`; output in `characters\<id>\blender\` | yes (local for now) |
+| `blender-pipeline\` | S4 refinement stage: edits the CC4 export in place (decimate clothing/teeth, prune unused shapes), with its own `CLAUDE.md`; output in `characters\<id>\blender\` (git@github.com:CraftXR/blender-pipeline.git, private) | yes (`main`) |
 | `characters\<recipe id>\` | `recipe.applied.json`, `projects\`, `exports\`, `renders\`, `reports\` | **no** |
 | `characters\_testbench\` | spikes (`phase1b-spikes\`), E2E transcripts, smoke tests, scratch | **no** |
 | `C:\Program Files\…\Character Creator 4\Bin64\OpenPlugin\CC4_MCP_Bridge` | a **junction** to `cc4-plugin\`, nothing else | — |
