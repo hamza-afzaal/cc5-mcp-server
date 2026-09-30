@@ -47,7 +47,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 - **`ConvertTo(ActorBuild)` is not the hero route.** It can't set Single Material, separate eyelash or texture size, and it ignores the UI dialog's last-used settings: the body comes out with 6 materials instead of 1 (tested 2026-09-30). **Convert to Game Base stays a manual UI step.**
 - `RFileIO.LoadProject` works (`open_project` tool): re-export a saved conversion under a new name without converting again. An opened project is not a saved copy (irreversible steps still need `save_project_as`).
 - `RIMaterialComponent.MergeMaterialUV(meshes, size, Png, 2)`: shared atlas, no dialog, ~40 s; reduces materials, not draw calls.
-- `RFileIO.CheckExportFbxHasLicense(obj) -> bool`: callable; only ever seen returning `true`.
+- `RFileIO.CheckExportFbxHasLicense(obj) -> bool` (`check_export_license`) **does catch unowned content**. AC Fiona 8K (an After Choices character that sits in the template folder but isn't owned) returned NOT exportable, and CC4 showed "DRM Missing" for her head and body sliders. Being in the template folder doesn't mean you own it. **Load and run `check_export_license` before marking any new allowlist item `verified`.**
 
 ### Traps (each one bit us)
 
