@@ -6,6 +6,8 @@ An MCP server that lets Claude drive **Character Creator 4.70** for the CraftXR 
 Claude ⇄ stdio ⇄ src/ (Node/TS MCP server) ⇄ HTTP 127.0.0.1:5101 ⇄ cc4-plugin/ (Python 3.8 inside CC4) ⇄ RLPy ⇄ CC4
 ```
 
+**New avatar? Follow [the end-to-end checklist](docs/new-avatar-checklist.md).**
+
 **Design docs:** [pipeline design v0.3](docs/craftxr-character-pipeline-design.md) · [color & realism spec](docs/craftxr-character-color-realism-spec.md) · [kickoff v2](docs/cc4-bridge-kickoff-v2.md) · [Phase 0 plan + decisions](docs/phase0-plan.md) · [spike results](docs/spikes.md) · [Phase 3 report](docs/phase3-report.md) · [CC4 RLPy reference](docs/rlpy-api-reference.md) · [facial inventory](docs/facial-inventory.json)
 
 ## Where things live
