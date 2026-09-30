@@ -53,6 +53,8 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 - ActorBUILD renames `CC_Base_Body` → `CC_Game_Body` (SALSA OneClick binds by mesh name). LOD1/LOD2 are remeshed into one mesh with **no facial blendshapes**.
 - `GetMotionBones` and `RScene.SetHDSubdivisionLevel` don't exist in CC4. Facial blendshapes aren't mesh morphs before export; use the facial profile/viseme components.
 - The `InstaLodPreset` export flag does nothing from Python.
+- Every `export_fbx` option must also be forwarded in `_export_fbx_action` (a hand-written list); `reset_bone_scale` was once silently dropped there. `tests/bridge/test_server.py` now fails on any missing one.
+- Purchased Lite Hair Plus styles use plain **PBR** in CC4 (only diffuse/normal/opacity/AO maps; no flow/ID/root), so no RLHair shader is exported for them; that's by design, not an export bug.
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
@@ -71,8 +73,11 @@ InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Cust
 
 | Setting | Value |
 |---|---|
-| Preset | `EExportFbxOptions2_UnityPreset \| YUp` (flags2 = 33554434) |
-| Options | `AutoSkinRigidMesh \| TPoseOnMotionFirstFrame \| RemoveHiddenMesh \| RemoveTearLineAndOcclusion` (flags = 295176) |
+| Preset | `EExportFbxOptions2_UnityPreset \| YUp \| ResetBoneScale` (flags2 = 33570818) |
+| Options | `AutoSkinRigidMesh \| TPoseOnMotionFirstFrame \| RemoveHiddenMesh \| RemoveTearLineAndOcclusion \| ExportPbrTextureAsImageInFormatDirectory` (flags = 17072392) |
+| Bone scales | **Reset Bone Scale on** (`reset_bone_scale`, default true): bakes body-proportion bone scales into the mesh, so every bone exports at scale 1 with InheritType 0 (like Ava). Without it CC4 writes non-uniform scales with segment scale compensation, which Unity ignores (Camila's head 0.62×, Kevin's hands 2.3×). |
+| Textures | **`textures/<name>/<mesh>/<mesh>/<material>/`** (`pbr_texture_layout: format_directory`, default): the per-material folder with the custom-shader maps (RLEye, RLTeethGum, RLHair). Without it the JSON's shader image paths are empty and eyes, teeth, brows and lashes need hand fixes in Unity. |
+| File name | hero LOD0 exports keep a plain name (no `_LOD0` suffix): CCiC flags `*_LOD0` files as LOD-group members (`isLOD=true`) |
 | JSON sidecar | `EExportFbxOptions3_ExportJson` (flags3 = 1), required by CCiC Unity Tools |
 | Subdivision | `SetExportLevel(0)` (base mesh) |
 | Motion | `EnableExportMotion(false)` for LOD meshes ("mesh only") |
