@@ -8,7 +8,7 @@ Claude ⇄ stdio ⇄ src/ (Node/TS MCP server) ⇄ HTTP 127.0.0.1:5101 ⇄ cc4-p
 
 **New avatar? Follow [the end-to-end checklist](docs/new-avatar-checklist.md).**
 
-**What we own and what it's for:** [content inventory](docs/content-inventory.md).
+**What we own and what it's for:** [content inventory](docs/content-inventory.md). A SessionStart hook runs `tools/content_scan.py --hook`. When it reports library changes, catalog them in the inventory and run `python tools/content_scan.py --write` (see the inventory's "Keeping this in sync").
 
 **Design docs:** [pipeline design v0.3](docs/craftxr-character-pipeline-design.md) · [color & realism spec](docs/craftxr-character-color-realism-spec.md) · [kickoff v2](docs/cc4-bridge-kickoff-v2.md) · [Phase 0 plan + decisions](docs/phase0-plan.md) · [spike results](docs/spikes.md) · [Phase 3 report](docs/phase3-report.md) · [CC4 RLPy reference](docs/rlpy-api-reference.md) · [facial inventory](docs/facial-inventory.json)
 

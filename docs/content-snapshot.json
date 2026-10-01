@@ -1,0 +1,4240 @@
+{
+ "templates": "D:\\Business\\Reallusion\\Reallusion Templates",
+ "scanned": "2026-10-01 17:43",
+ "folders": {
+  "Accessory/Arm/Actor Group": {
+   "files": {
+    ".iacc": 8
+   }
+  },
+  "Accessory/Arm/Samples": {
+   "files": {
+    ".iacc": 30
+   }
+  },
+  "Accessory/Head": {
+   "files": {
+    ".ccacc": 10
+   }
+  },
+  "Accessory/Head/CC3": {
+   "files": {
+    ".ccacc": 1
+   }
+  },
+  "Accessory/Others/Alika": {
+   "files": {
+    ".ccacc": 2
+   }
+  },
+  "Accessory/Others/Eddy": {
+   "files": {
+    ".ccacc": 2
+   }
+  },
+  "Accessory/Others/Hivewire_Huntress": {
+   "files": {
+    ".ccacc": 3
+   }
+  },
+  "Accessory/Others/Light Armor": {
+   "files": {
+    ".ccacc": 1
+   }
+  },
+  "Actor/Avatar Control/After Choices/AC The Stars": {
+   "files": {
+    ".ccslider": 2
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs": {
+   "files": {
+    ".ccslider": 175
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/CC3_Character": {
+   "files": {
+    ".ccslider": 18
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/CC4 Characters": {
+   "files": {
+    ".ccslider": 12
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/Expressions": {
+   "files": {
+    ".ccslider": 313
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/Eyelash": {
+   "files": {
+    ".ccslider": 4
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/Nail": {
+   "files": {
+    ".ccslider": 1
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/Pose Corrective": {
+   "files": {
+    ".ccslider": 55
+   }
+  },
+  "Actor/Avatar Control/CC Embed Morphs/Tongue": {
+   "files": {
+    ".ccslider": 7
+   }
+  },
+  "Actor/Avatar Control/Essential Body Morphs": {
+   "files": {
+    ".ccslider": 90
+   }
+  },
+  "Actor/Avatar Control/Essential Head Morphs": {
+   "files": {
+    ".ccslider": 169
+   }
+  },
+  "Actor/Avatar Control/Headshot Morph 1000+/Embed": {
+   "files": {
+    ".ccslider": 309
+   }
+  },
+  "Actor/Avatar Control/Headshot Morph 1000+/Pack": {
+   "files": {
+    ".ccslider": 1020
+   }
+  },
+  "Actor/Avatar Control/Makeup & SFX_Eyelash": {
+   "files": {
+    ".ccslider": 8
+   }
+  },
+  "Actor/Avatar Control/Realistic Human Skin_Nail": {
+   "files": {
+    ".ccslider": 8
+   }
+  },
+  "Actor/Avatar Control/Ultimate Morphs": {
+   "files": {
+    ".ccslider": 222
+   }
+  },
+  "Actor/Avatar Control/Wrinkle Essentials/Expressions/Smile_Line": {
+   "files": {
+    ".ccslider": 48
+   }
+  },
+  "Actor/Character": {
+   "files": {
+    ".ccavatar": 3
+   }
+  },
+  "Actor/Character/ActorCore Crowd": {
+   "files": {
+    ".iavatar": 10
+   }
+  },
+  "Actor/Character/After Choices/AC The Stars": {
+   "files": {
+    ".ccavatar": 3
+   }
+  },
+  "Actor/Character/Base": {
+   "files": {
+    ".ccavatar": 4
+   }
+  },
+  "Actor/Character/Base/CC3+": {
+   "files": {
+    ".ccavatar": 6
+   }
+  },
+  "Actor/Character/Clothed": {
+   "files": {
+    ".ccavatar": 3
+   }
+  },
+  "Actor/Character/Clothed/CC3": {
+   "files": {
+    ".ccavatar": 4
+   }
+  },
+  "Actor/Character/Creature": {
+   "files": {
+    ".iavatar": 1
+   }
+  },
+  "Actor/Character/Human Anatomy": {
+   "files": {
+    ".ccavatar": 12
+   }
+  },
+  "Actor/Character/Humanoid": {
+   "files": {
+    ".iavatar": 2
+   }
+  },
+  "Actor/Character/Mannequin": {
+   "files": {
+    ".ccavatar": 2
+   }
+  },
+  "Actor/Character/Motion Dummy": {
+   "files": {
+    ".iavatar": 3
+   }
+  },
+  "Actor/Character/Stylized": {
+   "files": {
+    ".ccavatar": 2
+   }
+  },
+  "Actor/Expression Wrinkles": {
+   "files": {
+    ".rlwrinkle": 4
+   }
+  },
+  "Actor/Expression Wrinkles/4K": {
+   "files": {
+    ".rlwrinkle": 4
+   }
+  },
+  "Actor/Expression Wrinkles/Wrinkle Essentials/Realistic": {
+   "files": {
+    ".rlwrinkle": 5
+   }
+  },
+  "Actor/Expression Wrinkles/Wrinkle Essentials/Realistic/4K": {
+   "files": {
+    ".rlwrinkle": 5
+   }
+  },
+  "Actor/Expression Wrinkles/Wrinkle Essentials/Stylized": {
+   "files": {
+    ".rlwrinkle": 5
+   }
+  },
+  "Actor/Expression Wrinkles/Wrinkle Essentials/Stylized/4K": {
+   "files": {
+    ".rlwrinkle": 5
+   }
+  },
+  "Actor/Eye": {
+   "files": {
+    ".cceye": 15
+   }
+  },
+  "Actor/Eye/Human Anatomy": {
+   "files": {
+    ".cceye": 12
+   }
+  },
+  "Actor/Eye/Stylized": {
+   "files": {
+    ".cceye": 8
+   }
+  },
+  "Actor/Facial Profile": {
+   "files": {
+    ".ccfacialprofile": 2
+   }
+  },
+  "Actor/Facial Profile/Custom Profile": {
+   "files": {
+    ".ccfacialprofile": 7
+   }
+  },
+  "Actor/Facial Profile/Traditional": {
+   "files": {
+    ".ccfacialprofile": 2
+   }
+  },
+  "Actor/Facial Profile/Wrinkle Enhancement": {
+   "files": {
+    ".ccfacialprofile": 4
+   }
+  },
+  "Actor/Teeth": {
+   "files": {
+    ".ccteeth": 8
+   }
+  },
+  "Actor/Teeth/Human Anatomy": {
+   "files": {
+    ".ccteeth": 12
+   }
+  },
+  "Actor/Teeth/Stylized": {
+   "files": {
+    ".ccteeth": 2
+   }
+  },
+  "Animation/Expression": {
+   "files": {
+    ".italk": 2
+   }
+  },
+  "Animation/Expression/AC The Stars": {
+   "files": {
+    ".italk": 3
+   }
+  },
+  "Animation/Expression/Expression Wrinkles/Regional Influence": {
+   "files": {
+    ".italk": 14
+   }
+  },
+  "Animation/Expression/Expression Wrinkles/Sample Animation": {
+   "files": {
+    ".italk": 3
+   }
+  },
+  "Animation/Expression/Expression Wrinkles/Wrinkle Creation": {
+   "files": {
+    ".italk": 4
+   }
+  },
+  "Animation/Expression/Expression_Loop": {
+   "files": {
+    ".italk": 1
+   }
+  },
+  "Animation/Expression/Expression_Loop/All": {
+   "files": {
+    ".italk": 36
+   }
+  },
+  "Animation/Expression/Expression_Loop/Anger": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Expression_Loop/Disgust": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Expression_Loop/Fear": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Expression_Loop/Happy": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Expression_Loop/Neutral": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Expression_Loop/Sad": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Expression_Loop/Surprise": {
+   "files": {
+    ".italk": 5
+   }
+  },
+  "Animation/Expression/Female": {
+   "files": {
+    ".italk": 6
+   }
+  },
+  "Animation/Expression/Male": {
+   "files": {
+    ".italk": 6
+   }
+  },
+  "Animation/Gesture": {
+   "files": {
+    ".ihand": 32
+   }
+  },
+  "Animation/Gesture/Hold": {
+   "files": {
+    ".ihand": 18
+   }
+  },
+  "Animation/Gesture/Sign": {
+   "files": {
+    ".ihand": 21
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/01_Preset/01_Stand/2 People/2StandDrink_MF": {
+   "files": {
+    ".imotionplus": 2
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/01_Preset/01_Stand/2 People/2StandDrink_MM": {
+   "files": {
+    ".imotionplus": 2
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/01_Preset/01_Stand/2 People/2Stand_FF": {
+   "files": {
+    ".imotionplus": 2
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/01_Preset/01_Stand/2 People/2Stand_MF": {
+   "files": {
+    ".imotionplus": 2
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/01_Preset/01_Stand/2 People/2Stand_MM": {
+   "files": {
+    ".imotionplus": 2
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/02_Idle/01_Stand/Female": {
+   "files": {
+    ".imotionplus": 5
+   }
+  },
+  "Animation/Motion Plus/Actor Group/Embed/02_Idle/01_Stand/Male": {
+   "files": {
+    ".imotionplus": 5
+   }
+  },
+  "Animation/Motion Plus/Animated/1.Acting/01_Male": {
+   "files": {
+    ".imotionplus": 7
+   }
+  },
+  "Animation/Motion Plus/Animated/1.Acting/02_Female": {
+   "files": {
+    ".imotionplus": 7
+   }
+  },
+  "Animation/Motion Plus/Animated/1.Acting/03_Toon": {
+   "files": {
+    ".imotionplus": 6
+   }
+  },
+  "Animation/Motion Plus/Animated/1.Acting/04_Neutral": {
+   "files": {
+    ".imotionplus": 1
+   }
+  },
+  "Animation/Motion Plus/Animated/2.Calibration/01_Body Rig": {
+   "files": {
+    ".imotionplus": 6
+   }
+  },
+  "Animation/Motion Plus/Animated/2.Calibration/02_Facial Rig": {
+   "files": {
+    ".imotionplus": 9
+   }
+  },
+  "Animation/Motion Plus/Animated/2.Calibration/03_Soft Physics": {
+   "files": {
+    ".imotionplus": 4
+   }
+  },
+  "Animation/Motion Plus/Animated/Coyote": {
+   "files": {
+    ".imotionplus": 6
+   }
+  },
+  "Animation/Motion Plus/Animated/Raptoid": {
+   "files": {
+    ".imotionplus": 13
+   }
+  },
+  "Animation/Motion Plus/Animated/TRex": {
+   "files": {
+    ".imotionplus": 6
+   }
+  },
+  "Animation/Motion Plus/Still Pose": {
+   "files": {
+    ".imotionplus": 1
+   }
+  },
+  "Animation/Motion Plus/Still Pose/1.Male": {
+   "files": {
+    ".imotionplus": 6
+   }
+  },
+  "Animation/Motion Plus/Still Pose/2.Female": {
+   "files": {
+    ".imotionplus": 6
+   }
+  },
+  "Animation/Motion/1.Human Male/Idle": {
+   "files": {
+    ".rlmotion": 4
+   }
+  },
+  "Animation/Motion/1.Human Male/Move": {
+   "files": {
+    ".rlmotion": 6
+   }
+  },
+  "Animation/Motion/1.Human Male/Perform": {
+   "files": {
+    ".rlmotion": 9
+   }
+  },
+  "Animation/Motion/1.Human Male/Perform/Hold Gun": {
+   "files": {
+    ".rlmotion": 9
+   }
+  },
+  "Animation/Motion/2.Human Female/Idle": {
+   "files": {
+    ".rlmotion": 2
+   }
+  },
+  "Animation/Motion/2.Human Female/Move": {
+   "files": {
+    ".rlmotion": 6
+   }
+  },
+  "Animation/Motion/2.Human Female/Perform": {
+   "files": {
+    ".rlmotion": 11
+   }
+  },
+  "Animation/Motion/2.Human Female/Perform/Dual Gun": {
+   "files": {
+    ".rlmotion": 12
+   }
+  },
+  "Animation/Motion/Coyote": {
+   "files": {
+    ".rlmotion": 15
+   }
+  },
+  "Animation/Motion/TRex": {
+   "files": {
+    ".rlmotion": 19
+   }
+  },
+  "Animation/Persona": {
+   "files": {
+    ".rlpersona": 4
+   }
+  },
+  "Animation/Pose/1.Male Pose": {
+   "files": {
+    ".rlpose": 19
+   }
+  },
+  "Animation/Pose/2.Female Pose": {
+   "files": {
+    ".rlpose": 19
+   }
+  },
+  "Animation/Pose/Calibration": {
+   "files": {
+    ".rlpose": 6
+   }
+  },
+  "Animation/Pose/Checking Pose": {
+   "files": {
+    ".rlpose": 14
+   }
+  },
+  "Animation/Pose/Samples": {
+   "files": {
+    ".rlpose": 60
+   }
+  },
+  "Avatar Preset/Body Morph": {
+   "files": {
+    ".ccavatarpreset": 4
+   }
+  },
+  "Avatar Preset/Body Morph/CC3+": {
+   "files": {
+    ".ccavatarpreset": 6
+   }
+  },
+  "Avatar Preset/Eyelash": {
+   "files": {
+    ".ccavatarpreset": 4
+   }
+  },
+  "Avatar Preset/Eyelash/Makeup & SFX": {
+   "files": {
+    ".ccavatarpreset": 8
+   }
+  },
+  "Avatar Preset/Eyelash/Stylized": {
+   "files": {
+    ".ccavatarpreset": 6
+   }
+  },
+  "Avatar Preset/Full Body Morph": {
+   "files": {
+    ".ccavatarpreset": 4
+   }
+  },
+  "Avatar Preset/Full Body Morph Skin": {
+   "files": {
+    ".ccavatarpreset": 4
+   }
+  },
+  "Avatar Preset/Full Body Morph Skin/CC3+": {
+   "files": {
+    ".ccavatarpreset": 2
+   }
+  },
+  "Avatar Preset/Full Body Morph/CC3+": {
+   "files": {
+    ".ccavatarpreset": 7
+   }
+  },
+  "Avatar Preset/Head Morph": {
+   "files": {
+    ".ccavatarpreset": 4
+   }
+  },
+  "Avatar Preset/Head Morph Skin": {
+   "files": {
+    ".ccavatarpreset": 4
+   }
+  },
+  "Avatar Preset/Head Morph Skin/CC3+": {
+   "files": {
+    ".ccavatarpreset": 2
+   }
+  },
+  "Avatar Preset/Head Morph Skin/Human Anatomy": {
+   "files": {
+    ".ccavatarpreset": 10
+   }
+  },
+  "Avatar Preset/Head Morph Skin/SkinGen": {
+   "files": {
+    ".ccavatarpreset": 1
+   }
+  },
+  "Avatar Preset/Head Morph Skin/SkinGen Bonus": {
+   "files": {
+    ".ccavatarpreset": 1
+   }
+  },
+  "Avatar Preset/Head Morph/CC3+": {
+   "files": {
+    ".ccavatarpreset": 14
+   }
+  },
+  "Avatar Preset/Nail": {
+   "files": {
+    ".ccavatarpreset": 2
+   }
+  },
+  "Avatar Preset/Nail/Realistic Human Skin": {
+   "files": {
+    ".ccavatarpreset": 9
+   }
+  },
+  "Cloth/Coats": {
+   "files": {
+    ".cccloth": 8
+   }
+  },
+  "Cloth/Coats/CC3": {
+   "files": {
+    ".cccloth": 1
+   }
+  },
+  "Cloth/Full-body/CC3": {
+   "files": {
+    ".cccloth": 1
+   }
+  },
+  "Cloth/Others": {
+   "files": {
+    ".cccloth": 10
+   }
+  },
+  "Cloth/Others/Alika": {
+   "files": {
+    ".cccloth": 7,
+    ".ccshoes": 1
+   }
+  },
+  "Cloth/Others/CC3": {
+   "files": {
+    ".cccloth": 1
+   }
+  },
+  "Cloth/Others/Eddy": {
+   "files": {
+    ".cccloth": 9,
+    ".ccshoes": 1
+   }
+  },
+  "Cloth/Others/Hivewire_Huntress": {
+   "files": {
+    ".cccloth": 4,
+    ".ccgloves": 1,
+    ".ccshoes": 1
+   }
+  },
+  "Cloth/Others/Light Armor": {
+   "files": {
+    ".cccloth": 6,
+    ".ccshoes": 1
+   }
+  },
+  "Cloth/Pants": {
+   "files": {
+    ".cccloth": 17
+   }
+  },
+  "Cloth/Pants/CC3": {
+   "files": {
+    ".cccloth": 1
+   }
+  },
+  "Cloth/Shirts": {
+   "files": {
+    ".cccloth": 33
+   }
+  },
+  "Cloth/Shirts/CC3": {
+   "files": {
+    ".cccloth": 6
+   }
+  },
+  "Cloth/Shoes": {
+   "files": {
+    ".ccshoes": 15
+   }
+  },
+  "Cloth/Shoes/CC3": {
+   "files": {
+    ".ccshoes": 8
+   }
+  },
+  "Cloth/Skirts": {
+   "files": {
+    ".cccloth": 5
+   }
+  },
+  "Cloth/Underwear": {
+   "files": {
+    ".cccloth": 18
+   }
+  },
+  "Cloth/Underwear/CC3": {
+   "files": {
+    ".cccloth": 2
+   }
+  },
+  "Cloth/Underwear/The1990sSwim": {
+   "files": {
+    ".cccloth": 1
+   }
+  },
+  "Hair/Element/Beard": {
+   "files": {
+    ".rlhairelement": 8
+   }
+  },
+  "Hair/Element/DorothyJean/RealisticHairV3": {
+   "files": {
+    ".rlhairelement": 1
+   }
+  },
+  "Hair/Element/Hair": {
+   "files": {
+    ".rlhairelement": 4
+   }
+  },
+  "Hair/Element/Hair/Accessory": {
+   "files": {
+    ".rlhairelement": 4
+   }
+  },
+  "Hair/Group": {
+   "files": {
+    ".rlhair": 1
+   }
+  },
+  "Hair/Group/Beard": {
+   "files": {
+    ".rlhair": 4
+   }
+  },
+  "Hair/Group/DorothyJean/RealisticHairV3/ShortHair001": {
+   "files": {
+    ".cchair": 1
+   }
+  },
+  "Hair/Group/Eyebrows": {
+   "files": {
+    ".rlhair": 4
+   }
+  },
+  "Hair/Group/Eyebrows/Stylized": {
+   "files": {
+    ".rlhair": 2
+   }
+  },
+  "Hair/Group/Hair": {
+   "files": {
+    ".rlhair": 4
+   }
+  },
+  "Hair/Group/Hair/Stylized": {
+   "files": {
+    ".rlhair": 2
+   }
+  },
+  "Hair/Group/Lite Hair Plus Female Vol.1": {
+   "files": {
+    ".rlhair": 10
+   }
+  },
+  "Hair/Group/Lite Hair Plus Male Vol.1": {
+   "files": {
+    ".rlhair": 10
+   }
+  },
+  "Hair/Style": {
+   "files": {
+    ".rlhairstyle": 5
+   }
+  },
+  "Makeup/Eye Makeup": {
+   "files": {
+    ".ccskingenpreset": 3
+   },
+   "presets_textures_ok": [
+    3,
+    3
+   ]
+  },
+  "Makeup/Eye Makeup/Eyeliner": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Makeup/Eye Makeup/Eyeliner/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 22
+   },
+   "presets_textures_ok": [
+    0,
+    22
+   ]
+  },
+  "Makeup/Eye Makeup/Eyeshadow": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Makeup/Eye Makeup/Eyeshadow/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 26
+   },
+   "presets_textures_ok": [
+    1,
+    26
+   ]
+  },
+  "Makeup/Eye Makeup/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 28
+   },
+   "presets_textures_ok": [
+    0,
+    28
+   ]
+  },
+  "Makeup/Eyebrow": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    4,
+    4
+   ]
+  },
+  "Makeup/Eyebrow/Human Anatomy": {
+   "files": {
+    ".ccskingenpreset": 11
+   },
+   "presets_textures_ok": [
+    0,
+    11
+   ]
+  },
+  "Makeup/Eyebrow/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 13
+   },
+   "presets_textures_ok": [
+    0,
+    13
+   ]
+  },
+  "Makeup/Eyebrow/Makeup & SFX/Male": {
+   "files": {
+    ".ccskingenpreset": 12
+   },
+   "presets_textures_ok": [
+    1,
+    12
+   ]
+  },
+  "Makeup/Eyebrow/Makeup & SFX/Trimmed": {
+   "files": {
+    ".ccskingenpreset": 11
+   },
+   "presets_textures_ok": [
+    0,
+    11
+   ]
+  },
+  "Makeup/Eyelash": {
+   "files": {
+    ".ccskingenpreset": 7
+   },
+   "presets_textures_ok": [
+    7,
+    7
+   ]
+  },
+  "Makeup/Eyelash/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 9
+   },
+   "presets_textures_ok": [
+    0,
+    9
+   ]
+  },
+  "Makeup/Eyelash/Makeup & SFX/Mascara": {
+   "files": {
+    ".ccskingenpreset": 15
+   },
+   "presets_textures_ok": [
+    1,
+    15
+   ]
+  },
+  "Makeup/Foundation Makeup/1_Foundation": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Makeup/Foundation Makeup/2_Contour": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    6,
+    6
+   ]
+  },
+  "Makeup/Foundation Makeup/2_Contour/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    0,
+    5
+   ]
+  },
+  "Makeup/Foundation Makeup/2_Contour/Makeup & SFX/Parts": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    0,
+    6
+   ]
+  },
+  "Makeup/Foundation Makeup/3_Blush": {
+   "files": {
+    ".ccskingenpreset": 7
+   },
+   "presets_textures_ok": [
+    7,
+    7
+   ]
+  },
+  "Makeup/Foundation Makeup/4_Highlight": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Makeup/Foundation Makeup/4_Highlight/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    0,
+    5
+   ]
+  },
+  "Makeup/Foundation Makeup/4_Highlight/Makeup & SFX/Parts": {
+   "files": {
+    ".ccskingenpreset": 7
+   },
+   "presets_textures_ok": [
+    1,
+    7
+   ]
+  },
+  "Makeup/Foundation Makeup/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    4,
+    5
+   ]
+  },
+  "Makeup/Full Makeup": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Makeup/Full Makeup/Makeup & SFX/1_Daily": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    0,
+    8
+   ]
+  },
+  "Makeup/Full Makeup/Makeup & SFX/2_Party": {
+   "files": {
+    ".ccskingenpreset": 15
+   },
+   "presets_textures_ok": [
+    0,
+    15
+   ]
+  },
+  "Makeup/Full Makeup/Makeup & SFX/3_Special": {
+   "files": {
+    ".ccskingenpreset": 13
+   },
+   "presets_textures_ok": [
+    0,
+    13
+   ]
+  },
+  "Makeup/Full Makeup/Makeup & SFX/4_Warrior": {
+   "files": {
+    ".ccskingenpreset": 10
+   },
+   "presets_textures_ok": [
+    0,
+    10
+   ]
+  },
+  "Makeup/Lip Makeup": {
+   "files": {
+    ".ccskingenpreset": 10
+   },
+   "presets_textures_ok": [
+    10,
+    10
+   ]
+  },
+  "Makeup/Lip Makeup/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 28
+   },
+   "presets_textures_ok": [
+    20,
+    28
+   ]
+  },
+  "Makeup/Lip Makeup/Shape": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    4,
+    4
+   ]
+  },
+  "Makeup/Miscellaneous": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Makeup/Miscellaneous/Makeup & SFX": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    0,
+    8
+   ]
+  },
+  "Makeup/Miscellaneous/Makeup & SFX/Camouflage": {
+   "files": {
+    ".ccskingenpreset": 12
+   },
+   "presets_textures_ok": [
+    0,
+    12
+   ]
+  },
+  "Makeup/Miscellaneous/Makeup & SFX/Scar": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    0,
+    6
+   ]
+  },
+  "Makeup/Miscellaneous/Makeup & SFX/Tribe Paint": {
+   "files": {
+    ".ccskingenpreset": 9
+   },
+   "presets_textures_ok": [
+    0,
+    9
+   ]
+  },
+  "Makeup/SkinGen Tools/Decal": {
+   "files": {
+    ".ccskingentool": 1,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/Generator": {
+   "files": {
+    ".ccskingentool": 2,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/Part": {
+   "files": {
+    ".ccskingentool": 4,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/Specific": {
+   "files": {
+    ".ccskingentool": 7,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G3_F": {
+   "files": {
+    ".ccskingentool": 2,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G3_M": {
+   "files": {
+    ".ccskingentool": 2,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G81_F": {
+   "files": {
+    ".ccskingentool": 3
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G81_M": {
+   "files": {
+    ".ccskingentool": 3
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G8_F": {
+   "files": {
+    ".ccskingentool": 2,
+    ".dat": 1,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G8_M": {
+   "files": {
+    ".ccskingentool": 2,
+    ".svg": 1
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G9_F": {
+   "files": {
+    ".ccskingentool": 2
+   }
+  },
+  "Makeup/SkinGen Tools/UV Transfer/Daz G9_M": {
+   "files": {
+    ".ccskingentool": 2
+   }
+  },
+  "Media/Material Plus/Eyebrows/Female_Angled": {
+   "files": {
+    ".imtlplus": 3
+   }
+  },
+  "Media/Material Plus/Eyebrows/Male_Bushy": {
+   "files": {
+    ".imtlplus": 4
+   }
+  },
+  "Media/Material Plus/Hair/Chic bun medium": {
+   "files": {
+    ".imtlplus": 32
+   }
+  },
+  "Media/Material Plus/Hair/Classic short": {
+   "files": {
+    ".imtlplus": 10
+   }
+  },
+  "Media/Material Plus/Hair/Short blowback": {
+   "files": {
+    ".imtlplus": 9
+   }
+  },
+  "Media/Material Plus/Hair/Side part wavy": {
+   "files": {
+    ".imtlplus": 10
+   }
+  },
+  "Media/Material/Beard": {
+   "files": {
+    ".imtl": 4
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Double Tied Wavy": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Headband Braid": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/High Tied Dreads": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Low Twists Ponytail": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Side Tied Wavy": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Side Tucked Lob": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Side Tucked Wavy": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Soft Waves Lob": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Tucked Finger Waves": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Female Vol.1/Tucked Long Stright Hair": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/All-around Buzz Cut": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Bowl Cut": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Classic Slick Back": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Curtain Bangs": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Fluffy Wavy Bob": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Half-up High Twists": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Long Dreads": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Shaggy Mop Tops": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Side-swept Wavy Bangs": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/Lite Hair Plus Male Vol.1/Tousled Tops": {
+   "files": {
+    ".imtl": 6
+   }
+  },
+  "Media/Material/hair_material": {
+   "files": {
+    ".imtl": 7
+   }
+  },
+  "Others/Folder Icon/Hair/Element/Beard": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Folder Icon/Hair/Element/Eyebrows": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Folder Icon/Hair/Element/Hair": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Folder Icon/Hair/Group/Beard": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Folder Icon/Hair/Group/Eyebrows": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Folder Icon/Hair/Group/Hair": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Folder Icon/Hair/Group/Hair/_Legacy": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Others/Profile/Content Patch/Accessory/RL_G6_Cloth_Cape Shawl": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Accessory/RL_G6_Cloth_Tied-up Shirt": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_Afro": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_AfroRollers": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_Bald": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_BaldBarcode": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_BangsShort": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_Cornrow": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_DoubleBuns": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_DoubleTails": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_HatLong": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_HatShort": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_Mohawk": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_MohawkShort": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_Pompadour": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_SlickedBun": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Hair/RL_Hair_SlickedTail": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Boxers": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Classic Shorts": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Jeans": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Jogging Pants": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Low-rise Shorts": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Mini Skirt": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Skinny Pants": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Skirt": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Slit Skirt": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Lower/RL_G6_Cloth_Underwear Bottom": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Shoes/RL_G6_Cloth_Boots": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Shoes/RL_G6_Cloth_Flip-flops": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Shoes/RL_G6_Cloth_High-Heel": {
+   "files": {
+    ".ini": 3
+   }
+  },
+  "Others/Profile/Content Patch/Shoes/RL_G6_Cloth_Slip-ons": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Shoes/RL_G6_Cloth_Sneakers": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Shoes/RL_G6_Cloth_low-heeled sandals": {
+   "files": {
+    ".ini": 2
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Blazer": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Bra": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Camisole": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Cardigan": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Dress": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Henley Longsleeve": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Hoodie": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Shirt": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_T-shirt": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Content Patch/Upper/RL_G6_Cloth_Tank top": {
+   "files": {
+    ".ini": 1
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/00_Jade": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/00_Zane": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01A_ExPlus Closed": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01B_ExPlus Open": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01C_ExPlus Brows": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01D_ExPlus Eyes": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01E_ExPlus Mouth": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01F_ExPlus Lips Tongue": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01G_ExPlus Mumble": {
+   "files": {
+    ".jpg": 7
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01_Stylized": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01_Universal Closed": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/01_Universal Open": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/02_Christian": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/03_Natalie": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/04_Cartoon Female": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/04_Cartoon Male": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/04_Heidi": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/04_Mason": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/05_Chuck": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/05_Gwynn": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/06_Dylan": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/06_Jana": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/07_Jimmy": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/3DX_Custom": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/01 Eyes Head Look": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/02 Face Head Front": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/03 Face Head Turn": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/04 Face - Jaw Closed": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/05 Face - Jaw Open": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/06 Brows": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/07 Eyes": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/08 Nose Cheeks Ears": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/09 Mouth Lips": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/10 Mouth Mumble": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/11 Mouth Tongue": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/12 Jaw Neck": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/13 Head": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/CC4_Camila": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Extended/CC4_Kevin": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/01 Eyes Head Look": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/02 Face Head Front": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/03 Face Head Turn": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/04 Face - Jaw Closed": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/05 Face - Jaw Open": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/06 Brows": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/07 Eyes": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/08 Nose Cheeks": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/09 Mouth Lips": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/10 Mouth Mumble": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/11 Mouth Tongue": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/12 Jaw": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/13 Head": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/CC4_Coyote": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/CC4 Standard/CC4_TRex": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Face Puppet/IC7 Standard/Solo Feature": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Arc_009": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_009": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Arc/Support_010": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Ball_000": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Ball_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Ball_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Ball_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Ball_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Box_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Box_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Box_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Box_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Box_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cone_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cross_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cross_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cross_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cross_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cylinder_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cylinder_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cylinder_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cylinder_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Cylinder_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Pyramid_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Pyramid_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Pyramid_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Pyramid_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Pyramid_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Base/Torus_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Box": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Caltrop": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Cylindania": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Cylinder": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Dodecahedron": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Hexagonal_Prism": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Hexagonal_Pyramid": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Podium": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Rounded_Box": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Sphere": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Beveled/Twisted_Box": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_009": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_010": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_011": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_012": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_013": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_014": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_015": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_016": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_017": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_018": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_019": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_020": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_021": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_022": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_023": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_024": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_025": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_026": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_027": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_028": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_029": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_030": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Capsule/Capsule_031": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_009": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_010": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_011": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_012": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_013": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Column/Column_014": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Bowl_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Bowl_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Bowl_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Box_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Box_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Box_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Container/Can_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_009": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_010": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_011": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_012": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_013": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_014": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_015": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_016": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Pipe/Pipe_017": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_005": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_006": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_007": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_008": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_009": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_010": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_011": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Podium/Podium_012": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Quad Mesh/Box": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Quad Mesh/Plane_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Quad Mesh/Plane_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Quad Mesh/Plane_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Quad Mesh/Plane_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Quad Mesh/Sphere": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Wall and Floor/Door_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Wall and Floor/Floor_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Wall and Floor/Wall_001": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Wall and Floor/Wall_002": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Wall and Floor/Wall_003": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Profile/Substance Preset/3Dblock source map/Wall and Floor/Wall_004": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Skin Textures/MakeUp/1_Source/Decal/Eyebrow/CC3_DH_0Female": {
+   "files": {
+    ".jpg": 3,
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/MakeUp/1_Source/Decal/Eyebrow/CC3_DH_0Male": {
+   "files": {
+    ".jpg": 2,
+    ".png": 3
+   }
+  },
+  "Others/Skin Textures/MakeUp/1_Source/Eyebrow/Female": {
+   "files": {
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/MakeUp/1_Source/Eyebrow/Male": {
+   "files": {
+    ".png": 3
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Blush": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Contour": {
+   "files": {
+    ".jpg": 5,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyelash": {
+   "files": {
+    ".jpg": 11
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyelash/Lower Lash": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyelash/RGB": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyelash/Upper Lash": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeliner": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/1_Base": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/2_Crease": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/3_Outer V": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/4_Lid": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/5_Bottom": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/6_Inner V": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Eyeshadow/7_Hightlight": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Foundation": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Highlight": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Lip/1_Base": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Lip/2_Heart": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Lip/3_Contour": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Lip/4_Highlight": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/MakeUp/4_Range/Miscellaneous": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinBase": {
+   "files": {
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash": {
+   "files": {
+    ".jpg": 4,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Baby": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Default_female": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Default_male": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Heavy": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Muscle": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Neutral": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Old": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Eyelash/Thin": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails": {
+   "files": {
+    ".jpg": 5,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Baby": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Default_female": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Default_male": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Heavy": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Muscle": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Neutral": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Old": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Nails/Thin": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm": {
+   "files": {
+    ".jpg": 6,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/Baby": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/Heavy": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/Muscle": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/Neutral": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/Old": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/Thin": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/default_female": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Arm/default_male": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body": {
+   "files": {
+    ".jpg": 6,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/Baby": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/Heavy": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/Muscle": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/Neutral": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/Old": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/Thin": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/default_female": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Body/default_male": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head": {
+   "files": {
+    ".jpg": 6,
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/Baby": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/Heavy": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/Muscle": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/Old": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/Thin": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/default_female": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/default_male": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Head/neutral": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg": {
+   "files": {
+    ".jpg": 6,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/Baby": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/Heavy": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/Muscle": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/Neutral": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/Old": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/Thin": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/default_female": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinBase/RL_CC3_Plus/Std_Skin_Leg/default_male": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/CC3_BaseFemale": {
+   "files": {
+    ".jpg": 24
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/CC3_BaseMale": {
+   "files": {
+    ".jpg": 20
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/CC3_DH_0Female": {
+   "files": {
+    ".jpg": 25,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/CC3_DH_0Male": {
+   "files": {
+    ".jpg": 25,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/CC3_DH_Jody": {
+   "files": {
+    ".jpg": 24
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/CC3_DH_Kevin": {
+   "files": {
+    ".jpg": 24
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/WhiteFemale01": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/WhiteFemale04": {
+   "files": {
+    ".jpg": 12
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/WhiteFemale06": {
+   "files": {
+    ".jpg": 12
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/WhiteMale02": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/WhiteMale04": {
+   "files": {
+    ".jpg": 12
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/BaseSkin/WhiteMale06": {
+   "files": {
+    ".jpg": 16
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/DullSkin": {
+   "files": {
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Misc/Freckle": {
+   "files": {
+    ".jpg": 1,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/MultiTexture/Female01": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/MultiTexture/Male01": {
+   "files": {
+    ".jpg": 7
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Muscle": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Nails/Aged": {
+   "files": {
+    ".jpg": 5,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Nails/Healthy": {
+   "files": {
+    ".jpg": 5,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Nails/Healthy-Dark": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Nails/Male": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Achilles": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Areola": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Elbow": {
+   "files": {
+    ".jpg": 2,
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Eye": {
+   "files": {
+    ".jpg": 4,
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Foot": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Hand": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Head": {
+   "files": {
+    ".jpg": 2,
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Lip": {
+   "files": {
+    ".jpg": 8
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/SkinDecal/Navel": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Vascular": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Wrinkle_Decal/DoubleEyelid": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Wrinkle_Decal/Neck": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/1_Source/Wrinkle_Head": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/2_LayerMask/Body": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/2_LayerMask/Head": {
+   "files": {
+    ".jpg": 9
+   }
+  },
+  "Others/Skin Textures/SkinGen/2_LayerMask/Leg": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/DetailSkin/Arm": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/DetailSkin/Body": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/DetailSkin/Head": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/DetailSkin/Leg": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Dirt": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Hair/Beard": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Hair/Body/Arm": {
+   "files": {
+    ".jpg": 7
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Hair/Body/Body": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Hair/Body/Leg": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Hair/Scalp": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Misc": {
+   "files": {
+    ".jpg": 28
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Nails": {
+   "files": {
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Scales": {
+   "files": {
+    ".png": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Scar": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/SkinGen/3_Pattern/Tattoo": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/DetailSkin_Arm": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/DetailSkin_Body": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/DetailSkin_Head": {
+   "files": {
+    ".jpg": 7
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/DetailSkin_Leg": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Hair/Beard": {
+   "files": {
+    ".jpg": 9
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Hair/Body/Arm": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Hair/Body/Body": {
+   "files": {
+    ".jpg": 7
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Hair/Body/Leg": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Hair/Moustache": {
+   "files": {
+    ".jpg": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Hair/Scalp": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Liquid": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Muscle_Arm": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Muscle_Body": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Muscle_Head": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Muscle_Leg": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Nails": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Oily_Head": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Pore": {
+   "files": {
+    ".jpg": 2
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Scales": {
+   "files": {
+    ".jpg": 2,
+    ".png": 1
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Suntan": {
+   "files": {
+    ".jpg": 8
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Vascular_Arm": {
+   "files": {
+    ".png": 5
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Vascular_Body": {
+   "files": {
+    ".jpg": 2,
+    ".png": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Vascular_Head": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Vascular_Leg": {
+   "files": {
+    ".png": 3
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Wrinkle": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Others/Skin Textures/SkinGen/4_Range/Wrinkle_Head": {
+   "files": {
+    ".jpg": 6
+   }
+  },
+  "Others/Skin Textures/Wrinkle References": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Others/Skin Textures/Wrinkle References/Wrinkle Mask": {
+   "files": {
+    ".png": 14
+   }
+  },
+  "Project/CC Project": {
+   "files": {
+    ".ccproject": 7
+   }
+  },
+  "Project/CC Project/CC3": {
+   "files": {
+    ".ccproject": 2
+   }
+  },
+  "Props/01_Softbox": {
+   "files": {
+    ".iprop": 3
+   }
+  },
+  "Props/02_Reflector": {
+   "files": {
+    ".iprop": 3
+   }
+  },
+  "Props/03_Backplane": {
+   "files": {
+    ".iprop": 3
+   }
+  },
+  "Props/04_Special Light": {
+   "files": {
+    ".iprop": 3
+   }
+  },
+  "Props/05_Floor": {
+   "files": {
+    ".iprop": 4
+   }
+  },
+  "Props/06_Wall": {
+   "files": {
+    ".iprop": 4
+   }
+  },
+  "Props/07_Image Plane": {
+   "files": {
+    ".iprop": 2
+   }
+  },
+  "Props/08_Mask": {
+   "files": {
+    ".iprop": 3
+   }
+  },
+  "Props/3D Blocks": {
+   "files": {
+    ".iprop": 42
+   }
+  },
+  "Props/Headshot Ref": {
+   "files": {
+    ".iprop": 9,
+    ".svg": 1
+   }
+  },
+  "Skin/Acquired/1_Dirt": {
+   "files": {
+    ".ccskingenpreset": 1
+   },
+   "presets_textures_ok": [
+    1,
+    1
+   ]
+  },
+  "Skin/Acquired/1_Dirt/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 3
+   },
+   "presets_textures_ok": [
+    0,
+    3
+   ]
+  },
+  "Skin/Acquired/2_Scar": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Acquired/2_Scar/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    0,
+    8
+   ]
+  },
+  "Skin/Acquired/3_Tattoo": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Acquired/3_Tattoo/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 10
+   },
+   "presets_textures_ok": [
+    1,
+    10
+   ]
+  },
+  "Skin/Acquired/4_Liquid": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Acquired/4_Liquid/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    4,
+    8
+   ]
+  },
+  "Skin/Acquired/5_Scales": {
+   "files": {
+    ".ccskingenpreset": 1
+   },
+   "presets_textures_ok": [
+    1,
+    1
+   ]
+  },
+  "Skin/Acquired/5_Scales/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    0,
+    2
+   ]
+  },
+  "Skin/Blemish/1_Freckle": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Blemish/1_Freckle/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 13
+   },
+   "presets_textures_ok": [
+    1,
+    13
+   ]
+  },
+  "Skin/Blemish/2_Mole": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Blemish/2_Mole/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    1,
+    2
+   ]
+  },
+  "Skin/Blemish/3_Acne": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Blemish/3_Acne/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 7
+   },
+   "presets_textures_ok": [
+    3,
+    7
+   ]
+  },
+  "Skin/Blemish/4_Suntan": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Blemish/4_Suntan/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    0,
+    8
+   ]
+  },
+  "Skin/Body Hair": {
+   "files": {
+    ".ccskingenpreset": 3
+   },
+   "presets_textures_ok": [
+    3,
+    3
+   ]
+  },
+  "Skin/Body Hair/Beard": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    4,
+    4
+   ]
+  },
+  "Skin/Body Hair/Beard/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 14
+   },
+   "presets_textures_ok": [
+    0,
+    14
+   ]
+  },
+  "Skin/Body Hair/Realistic Human Skin/Arm": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    5,
+    6
+   ]
+  },
+  "Skin/Body Hair/Realistic Human Skin/Leg": {
+   "files": {
+    ".ccskingenpreset": 7
+   },
+   "presets_textures_ok": [
+    3,
+    7
+   ]
+  },
+  "Skin/Body Hair/Realistic Human Skin/Torso": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    2,
+    8
+   ]
+  },
+  "Skin/Body Hair/Scalp": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    4,
+    4
+   ]
+  },
+  "Skin/Body Hair/Scalp/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 12
+   },
+   "presets_textures_ok": [
+    2,
+    12
+   ]
+  },
+  "Skin/Full Skin": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Full Skin/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    0,
+    8
+   ]
+  },
+  "Skin/Nails": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Skin/Nails/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    0,
+    6
+   ]
+  },
+  "Skin/Nails/Realistic Human Skin/Manicure": {
+   "files": {
+    ".ccskingenpreset": 18
+   },
+   "presets_textures_ok": [
+    6,
+    18
+   ]
+  },
+  "Skin/Normal Effects/1_Facial Wrinkle": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Normal Effects/1_Facial Wrinkle/Facial Part": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    4,
+    4
+   ]
+  },
+  "Skin/Normal Effects/1_Facial Wrinkle/Facial Part/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 26
+   },
+   "presets_textures_ok": [
+    0,
+    26
+   ]
+  },
+  "Skin/Normal Effects/1_Facial Wrinkle/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 10
+   },
+   "presets_textures_ok": [
+    0,
+    10
+   ]
+  },
+  "Skin/Normal Effects/2_Body": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Normal Effects/2_Body/Realistic Human Skin/1_Muscle": {
+   "files": {
+    ".ccskingenpreset": 9
+   },
+   "presets_textures_ok": [
+    0,
+    9
+   ]
+  },
+  "Skin/Normal Effects/2_Body/Realistic Human Skin/2_Aged Wrinkle": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    0,
+    6
+   ]
+  },
+  "Skin/Normal Effects/2_Body/Realistic Human Skin/3_Sinew": {
+   "files": {
+    ".ccskingenpreset": 3
+   },
+   "presets_textures_ok": [
+    0,
+    3
+   ]
+  },
+  "Skin/Normal Effects/2_Body/Realistic Human Skin/4_Fat Creases": {
+   "files": {
+    ".ccskingenpreset": 6
+   },
+   "presets_textures_ok": [
+    0,
+    6
+   ]
+  },
+  "Skin/Normal Effects/2_Body/Realistic Human Skin/5_Vascular": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    0,
+    2
+   ]
+  },
+  "Skin/Normal Effects/3_Noise": {
+   "files": {
+    ".ccskingenpreset": 3
+   },
+   "presets_textures_ok": [
+    3,
+    3
+   ]
+  },
+  "Skin/Normal Effects/4_Levels/1_Face": {
+   "files": {
+    ".ccskingenpreset": 10
+   },
+   "presets_textures_ok": [
+    10,
+    10
+   ]
+  },
+  "Skin/Normal Effects/4_Levels/2_Body": {
+   "files": {
+    ".ccskingenpreset": 3
+   },
+   "presets_textures_ok": [
+    3,
+    3
+   ]
+  },
+  "Skin/Overall/Normal": {
+   "files": {
+    ".ccskin": 6
+   }
+  },
+  "Skin/Overall/Normal/4K": {
+   "files": {
+    ".ccskin": 4
+   }
+  },
+  "Skin/Overall/Normal/AC The Stars": {
+   "files": {
+    ".ccskin": 2
+   }
+  },
+  "Skin/Overall/Normal/CC3+": {
+   "files": {
+    ".ccskin": 2
+   }
+  },
+  "Skin/Overall/Realistic Human Skin": {
+   "files": {
+    ".ccskin": 12
+   }
+  },
+  "Skin/Overall/Special": {
+   "files": {
+    ".ccskin": 2
+   }
+  },
+  "Skin/Skin Base": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    4,
+    4
+   ]
+  },
+  "Skin/Skin Base/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 13
+   },
+   "presets_textures_ok": [
+    0,
+    13
+   ]
+  },
+  "Skin/Skin Details/1_Skin Decal": {
+   "files": {
+    ".ccskingenpreset": 10
+   },
+   "presets_textures_ok": [
+    10,
+    10
+   ]
+  },
+  "Skin/Skin Details/1_Skin Decal/Face": {
+   "files": {
+    ".ccskingenpreset": 1
+   },
+   "presets_textures_ok": [
+    1,
+    1
+   ]
+  },
+  "Skin/Skin Details/1_Skin Decal/Face/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 8
+   },
+   "presets_textures_ok": [
+    0,
+    8
+   ]
+  },
+  "Skin/Skin Details/1_Skin Decal/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 13
+   },
+   "presets_textures_ok": [
+    2,
+    13
+   ]
+  },
+  "Skin/Skin Details/2_Skin Noise": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Skin Details/3_Coloration": {
+   "files": {
+    ".ccskingenpreset": 5
+   },
+   "presets_textures_ok": [
+    5,
+    5
+   ]
+  },
+  "Skin/Skin Details/3_Coloration/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 9
+   },
+   "presets_textures_ok": [
+    0,
+    9
+   ]
+  },
+  "Skin/Skin Details/4_Capillary": {
+   "files": {
+    ".ccskingenpreset": 7
+   },
+   "presets_textures_ok": [
+    7,
+    7
+   ]
+  },
+  "Skin/Skin Details/5_Roughness": {
+   "files": {
+    ".ccskingenpreset": 2
+   },
+   "presets_textures_ok": [
+    2,
+    2
+   ]
+  },
+  "Skin/Skin Details/5_Roughness/Realistic Human Skin": {
+   "files": {
+    ".ccskingenpreset": 4
+   },
+   "presets_textures_ok": [
+    0,
+    4
+   ]
+  },
+  "Skin/SkinGen Tools/Decal": {
+   "files": {
+    ".ccskingentool": 1,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/Generator": {
+   "files": {
+    ".ccskingentool": 2,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/Part": {
+   "files": {
+    ".ccskingentool": 7,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/Specific": {
+   "files": {
+    ".ccskingentool": 10,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer": {
+   "files": {
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G3_F": {
+   "files": {
+    ".ccskingentool": 8,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G3_M": {
+   "files": {
+    ".ccskingentool": 8,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G81_F": {
+   "files": {
+    ".ccskingentool": 9
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G81_M": {
+   "files": {
+    ".ccskingentool": 9
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G8_F": {
+   "files": {
+    ".ccskingentool": 8,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G8_M": {
+   "files": {
+    ".ccskingentool": 8,
+    ".svg": 1
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G9_F": {
+   "files": {
+    ".ccskingentool": 8
+   }
+  },
+  "Skin/SkinGen Tools/UV Transfer/Daz G9_M": {
+   "files": {
+    ".ccskingentool": 8
+   }
+  },
+  "Stage/Camera/Headshot Ref": {
+   "files": {
+    ".cccam": 6,
+    ".svg": 1
+   }
+  },
+  "Stage/Image Layer/Image": {
+   "files": {
+    ".iimglayer": 4
+   }
+  },
+  "Stage/Image Layer/Video": {
+   "files": {
+    ".iimglayer": 5
+   }
+  },
+  "Texture/SkinTextures/Makeup/1_Source/SkinTool": {
+   "files": {
+    ".png": 4
+   }
+  },
+  "Texture/SkinTextures/Makeup/4_Range/SkinTool": {
+   "files": {
+    ".jpg": 7,
+    ".png": 15
+   }
+  },
+  "Texture/SkinTextures/SkinGen/1_Source/SkinTool": {
+   "files": {
+    ".jpg": 7,
+    ".png": 2
+   }
+  },
+  "Texture/SkinTextures/SkinGen/3_Pattern/SkinTool": {
+   "files": {
+    ".jpg": 28,
+    ".png": 1
+   }
+  },
+  "Texture/SkinTextures/SkinGen/4_Range/SkinTool": {
+   "files": {
+    ".jpg": 27
+   }
+  },
+  "Texture/SkinTextures/UVTransfer/Daz_G3F": {
+   "files": {
+    ".png": 18
+   }
+  },
+  "Texture/SkinTextures/UVTransfer/Daz_G3M": {
+   "files": {
+    ".png": 18
+   }
+  },
+  "Texture/SkinTextures/UVTransfer/Daz_G8F": {
+   "files": {
+    ".png": 18
+   }
+  },
+  "Texture/SkinTextures/UVTransfer/Daz_G8M": {
+   "files": {
+    ".png": 18
+   }
+  }
+ }
+}
