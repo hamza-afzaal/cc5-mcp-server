@@ -366,6 +366,83 @@
    "exportable": true,
    "scene_names": [],
    "verified": true
+  },
+  {
+   "id": "clothes/layered_sweater",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Layered sweater.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Layered sweater"
+   ],
+   "verified": true
+  },
+  {
+   "id": "clothes/fit_shirt",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Fit shirts.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Fit shirts"
+   ],
+   "verified": true
+  },
+  {
+   "id": "clothes/turtleneck_sweater",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Turtleneck sweater.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Turtleneck sweater"
+   ],
+   "verified": true
+  },
+  {
+   "id": "clothes/slim_jeans",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Slim Jeans.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Slim Jeans"
+   ],
+   "verified": true
+  },
+  {
+   "id": "clothes/slim_fit_pants",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Slim fit pants.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Slim fit pants"
+   ],
+   "verified": true
+  },
+  {
+   "id": "clothes/knee_length_skirt",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Skirts/Knee length skirt.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Knee length skirt"
+   ],
+   "verified": true
+  },
+  {
+   "id": "shoes/sport_sneakers",
+   "type": "shoes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shoes/Sport sneakers.ccShoes",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license exportable 2026-10-01",
+   "exportable": true,
+   "scene_names": [
+    "Sport sneakers"
+   ],
+   "verified": true
   }
  ]
 }
