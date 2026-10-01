@@ -17,7 +17,8 @@ import sys
 
 TEMPLATES = os.environ.get("CC4_TEMPLATES", r"D:\Business\Reallusion\Reallusion Templates")
 # CC3-template-relative prefix -> folder in our template library
-PREFIXES = {"texture\\skintextures\\": os.path.join("Others", "Skin Textures")}
+PREFIXES = {"texture\\skintextures\\": [os.path.join("Others", "Skin Textures"),
+                                        os.path.join("Texture", "SkinTextures")]}
 UTF16 = re.compile(rb"(?:[\x20-\x7e]\x00){6,}")
 
 
@@ -37,10 +38,13 @@ def refs(path):
 def resolve(ref, templates=TEMPLATES):
     """Installed file for a reference, None if missing, "" if we don't judge it (Substance tool resources)."""
     low = ref.lower()
-    for prefix, folder in PREFIXES.items():
+    for prefix, folders in PREFIXES.items():
         if low.startswith(prefix):
-            p = os.path.join(templates, folder, ref[len(prefix):])
-            return p if os.path.isfile(p) else None
+            for folder in folders:
+                p = os.path.join(templates, folder, ref[len(prefix):])
+                if os.path.isfile(p):
+                    return p
+            return None
     return ""
 
 
