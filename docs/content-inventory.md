@@ -29,7 +29,9 @@ Sliders load into the catalog by themselves once downloaded. The bridge caches t
 - ActorCore Crowd (Casual_F/M, Kid; `.iAvatar`) and Party characters: pre-made, for background characters.
 - **Not owned:** AC Fiona 8K / AC Fiona makeup (skins included).
 
-## Skin and make-up (SkinGen; applied by the owner in the Appearance Editor, since there's no Python API)
+## Skin and make-up (SkinGen presets)
+
+Applied with `load_item` (types `makeup` and `skin`), then `save_project_as` and `open_project` to leave SkinGen mode; see the CLAUDE.md traps. Fine layer editing (strength, placement) is still done by hand in the Appearance Editor.
 
 - Skin bases: Default Female, Realistic Human Skin (Female Asian, Female Old), Female/Male Old full skins.
 - **Still empty:** `Skin/Skin Details`, `Skin/Blemish`, `Skin/Acquired`, `Skin/Normal Effects`. Pores, freckles, redness and tired layers come from these. If SkinGen Premium includes them, they aren't downloaded yet.
