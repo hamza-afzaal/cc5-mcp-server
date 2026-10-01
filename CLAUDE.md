@@ -61,6 +61,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 - The `InstaLodPreset` export flag does nothing from Python.
 - Every `export_fbx` option must also be forwarded in `_export_fbx_action` (a hand-written list); `reset_bone_scale` was once silently dropped there. `tests/bridge/test_server.py` now fails on any missing one.
 - Purchased Lite Hair Plus styles use plain **PBR** in CC4 (only diffuse/normal/opacity/AO maps; no flow/ID/root), so no RLHair shader is exported for them; that's by design, not an export bug.
+- **`set_color` on hair flattens textured (plain PBR) hair.** On Lite Hair Plus it turned the hair into a flat, untextured beige shell instead of tinting it (2026-09-30, Megan); undo restored it. Pick a hair whose texture already has the right colour, or recolour in CC4's material/texture settings, then check with `capture_views` (head preset).
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
