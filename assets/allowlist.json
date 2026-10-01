@@ -374,8 +374,8 @@
    "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
    "exportable": true,
    "scene_names": [],
-   "verified": false,
-   "notes": "hairline shading at the scalp; fills bare skin under card hair (Megan parting). Textures installed (tools/preset_refs.py, 2026-10-01); verify after first apply."
+   "verified": true,
+   "notes": "hairline shading at the scalp; fills bare skin under card hair (Megan parting). Applied to Megan 2026-10-01, no texture dialog, check_export_license exportable. Hairline + Basic Light + Basic Heavy together hide the bare parting under Lite Hair."
   },
   {
    "id": "skin/scalp_basic_light",
@@ -384,8 +384,18 @@
    "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
    "exportable": true,
    "scene_names": [],
-   "verified": false,
-   "notes": "light all-over scalp shading. Textures installed (tools/preset_refs.py, 2026-10-01); verify after first apply."
+   "verified": true,
+   "notes": "light all-over scalp shading. Applied to Megan 2026-10-01, no texture dialog, check_export_license exportable. Hairline + Basic Light + Basic Heavy together hide the bare parting under Lite Hair."
+  },
+  {
+   "id": "skin/scalp_basic_heavy",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Body Hair/Scalp/Basic_Heavy.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "heavy all-over scalp shading. Applied to Megan 2026-10-01, no texture dialog, check_export_license exportable. Hairline + Basic Light + Basic Heavy together hide the bare parting under Lite Hair."
   },
   {
    "id": "skin/scalp_edge_smooth",
