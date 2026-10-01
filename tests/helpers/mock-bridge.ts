@@ -27,6 +27,8 @@ import type {
   MaterialInfo,
   DiffuseColor,
   SetDiffuseColorResult,
+  SetTextureColorResult,
+  TextureColorAdjust,
   ShaderParameters,
   SetShaderParameterResult,
 } from "../../src/types.js";
@@ -82,6 +84,7 @@ export function createMockBridge(): MockBridge {
     getMaterialInfo: vi.fn<[string?], Promise<MaterialInfo>>(),
     getDiffuseColor: vi.fn<[string, string], Promise<DiffuseColor>>(),
     setDiffuseColor: vi.fn<[string, string, number, number, number], Promise<SetDiffuseColorResult>>(),
+    setTextureColor: vi.fn<[string, string, TextureColorAdjust], Promise<SetTextureColorResult>>(),
     getShaderParameters: vi.fn<[string, string], Promise<ShaderParameters>>(),
     setShaderParameter: vi.fn<[string, string, string, number[]], Promise<SetShaderParameterResult>>(),
   };

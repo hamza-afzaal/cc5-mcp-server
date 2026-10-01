@@ -158,6 +158,24 @@ export interface SetDiffuseColorResult extends OperationResult {
   material?: string;
 }
 
+/** CC4's texture colour adjustment: hue, saturation, brightness, contrast, cyan, magenta, yellow (-100..100, 0 = unchanged). */
+export interface TextureColorAdjust {
+  hue?: number;
+  saturation?: number;
+  brightness?: number;
+  contrast?: number;
+  cyan?: number;
+  magenta?: number;
+  yellow?: number;
+}
+
+export interface SetTextureColorResult extends OperationResult {
+  mesh?: string;
+  material?: string;
+  /** Values read back from CC4: [hue, saturation, brightness, contrast, cyan, magenta, yellow]. */
+  values?: number[];
+}
+
 export interface ShaderParameters extends OperationResult {
   mesh?: string;
   material?: string;
@@ -275,6 +293,7 @@ export const DIAGNOSTIC_QUERIES = [
   "skin_bone_count",
   "materials_per_mesh",
   "morph_minmax",
+  "image_color",
   "content_files",
   "project_path",
 ] as const;

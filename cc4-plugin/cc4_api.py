@@ -1336,6 +1336,39 @@ def get_diffuse_color(mesh_name: str, material_name: str) -> dict[str, Any]:
         return {"success": False, "error": str(e)}
 
 
+def set_texture_color(mesh_name: str, material_name: str, hue: float = 0, saturation: float = 0,
+                      brightness: float = 0, contrast: float = 0, cyan: float = 0, magenta: float = 0,
+                      yellow: float = 0) -> dict[str, Any]:
+    """Colour-adjust a material's diffuse texture (CC4's texture HSBC/CMY settings), keeping the texture.
+
+    Unlike set_diffuse_color (a flat tint that flattens textured hair), this recolours the image itself:
+    use it for hair, brows and clothing. 0 = unchanged; each value is clamped to -100..100.
+    """
+    error = _validate_material_names(mesh_name, material_name)
+    if error:
+        return {"success": False, "error": error}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    mat_comp, error = _get_valid_mesh_material(avatar, mesh_name, material_name)
+    if error:
+        return {"success": False, "error": error}
+
+    def clamp(v: float) -> float:
+        return max(-100.0, min(100.0, float(v)))
+
+    hsbc = RLPy.RVector4(clamp(hue), clamp(saturation), clamp(brightness), clamp(contrast))
+    cmy = RLPy.RVector3(clamp(cyan), clamp(magenta), clamp(yellow))
+    try:
+        RLPy.RGlobal.BeginAction("Set Texture Color")
+        status = mat_comp.SetImageColor(mesh_name, material_name, RLPy.EMaterialTextureChannel_Diffuse, 0.0, hsbc, cmy)
+        RLPy.RGlobal.ObjectModified(avatar, _EOMTYPE_MATERIAL)
+    finally:
+        RLPy.RGlobal.EndAction()
+    values = [int(v) for v in mat_comp.GetImageColor(mesh_name, material_name, RLPy.EMaterialTextureChannel_Diffuse)]
+    return {"success": _ok(status), "mesh": mesh_name, "material": material_name, "values": values}
+
+
 def set_diffuse_color(mesh_name: str, material_name: str, r: float, g: float, b: float) -> dict[str, Any]:
     """Set the diffuse color of a material (for skin tone, clothing color, etc.)."""
     error = _validate_material_names(mesh_name, material_name)
@@ -2283,6 +2316,17 @@ def capture_views(presets: list | None = None, width: int = 1280, height: int = 
     out_dir = output_dir or character_dir("renders")
     if not _is_within(out_dir, WORKSPACE_ROOT):
         return {"success": False, "error": f"Refusing to write outside the workspace ({WORKSPACE_ROOT}): {out_dir}"}
+    # Warm-up: the first render after a material/texture change catches the texture half rebuilt (hair came
+    # out flat pale blonde, then natural brown on the next render of the same state). Render once, discard.
+    warm = os.path.join(out_dir, f"{prefix}__warmup.png")
+    try:
+        cam.SetCameraLocation(getattr(RLPy, _VIEW_PRESETS[presets[0]]))
+        capture_viewport(warm, 320, 240)
+    except Exception as e:
+        print(f"[CC4 MCP Bridge] warm-up render failed: {e}")
+    finally:
+        if os.path.exists(warm):
+            os.remove(warm)
     views = []
     for preset in presets:
         entry: dict[str, Any] = {"preset": preset}
@@ -2415,7 +2459,17 @@ def _diag_morph_minmax(avatar, arg: str) -> Any:
     return {"id": arg, "min": float(raw.first), "max": float(raw.second)}
 
 
+def _diag_image_color(avatar, arg: str) -> Any:
+    """Current colour adjustment (HSBC/CMY) of a material's diffuse texture. arg: 'mesh|material'."""
+    mesh, _, material = (arg or "").partition("|")
+    if not mesh or not material:
+        return {"success": False, "error": "image_color needs 'arg' as 'mesh|material'"}
+    values = avatar.GetMaterialComponent().GetImageColor(mesh, material, RLPy.EMaterialTextureChannel_Diffuse)
+    return {"mesh": mesh, "material": material, "values": [int(v) for v in values]}  # IntVector iterates normally
+
+
 DIAGNOSTIC_QUERIES: dict[str, Any] = {
+    "image_color": _with_avatar(_diag_image_color),
     "symbol_search": _diag_symbol_search,
     "method_list": _diag_method_list,
     "signature": _diag_signature,
@@ -2538,6 +2592,7 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "get_expression_info":   (lambda p: get_expression_info(), [], DEFAULT_TIMEOUT_S),
     "get_material_info":     (lambda p: get_material_info(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
     "get_diffuse_color":     (lambda p: get_diffuse_color(p["mesh_name"], p["material_name"]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
+    "set_texture_color":     (lambda p: set_texture_color(p["mesh_name"], p["material_name"], *[float(p.get(k, 0)) for k in ("hue", "saturation", "brightness", "contrast", "cyan", "magenta", "yellow")]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
     "set_diffuse_color":     (lambda p: set_diffuse_color(p["mesh_name"], p["material_name"], float(p["r"]), float(p["g"]), float(p["b"])), ["mesh_name", "material_name", "r", "g", "b"], DEFAULT_TIMEOUT_S),
     "get_shader_parameters": (lambda p: get_shader_parameters(p["mesh_name"], p["material_name"]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
     "set_shader_parameter":  (lambda p: set_shader_parameter(p["mesh_name"], p["material_name"], p["parameter_name"], list(p["values"])), ["mesh_name", "material_name", "parameter_name", "values"], DEFAULT_TIMEOUT_S),
@@ -2591,6 +2646,7 @@ POST_ROUTES: dict[str, str] = {
     "/material/info":       "get_material_info",
     "/material/color/get":  "get_diffuse_color",
     "/material/color/set":  "set_diffuse_color",
+    "/material/texture_color/set": "set_texture_color",
     "/material/shader/get": "get_shader_parameters",
     "/material/shader/set": "set_shader_parameter",
     "/diagnostics":         "diagnostics",

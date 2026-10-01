@@ -67,7 +67,14 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - A second preset of a kind already on the avatar opens an **Add / Replace** dialog that waits for the owner, so apply each kind once, starting from a project without make-up.
   - The Human Anatomy brow presets point to a texture in a CC3 template folder (`C:\Users\Public\Documents\Reallusion\Template\Character Creator 3 Template\...\Makeup\1_S*.png`) that isn't installed. A "texture failed to load" dialog then waits for OK.
   - Base characters with 3D brow meshes (Camila's `Camila_Brow`) keep those brows; a SkinGen brow layer only paints the skin.
-- **`set_color` on hair flattens textured (plain PBR) hair.** On Lite Hair Plus it turned the hair into a flat, untextured beige shell instead of tinting it (2026-09-30, Megan); undo restored it. Pick a hair whose texture already has the right colour, or recolour in CC4's material/texture settings, then check with `capture_views` (head preset).
+- **The first render after a material or texture change is stale.** It catches the texture half rebuilt: the same hair state rendered once as a flat, pale blonde shell, then as natural brown on the next render (2026-10-01).
+  - `capture_views` now does a throwaway warm-up render first.
+  - On 2026-09-30 I wrongly blamed `set_color` for "flattening" hair because of this.
+- **Recolour textured items (hair, brows, clothing) with `set_texture_color`.**
+  - It wraps CC4's texture HSBC/CMY colour adjustment (`RIMaterialComponent.SetImageColor`): 7 values, −100..100, 0 = unchanged, read back with `diagnostics image_color "mesh|material"`.
+  - On Megan: near-black Lite Hair, brightness +30 → natural medium brown. Brows (`Female_Brow`, both materials), brightness +15 and yellow +20 → warm brown matching the hair.
+  - Saturation +45 or more brings out a green undertone in that hair texture.
+  - `set_color` / `set_diffuse_color` set a diffuse tint instead.
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
@@ -76,9 +83,9 @@ InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Cust
 
 **Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4): `python ..\blender-pipeline\tools\run_s4.py ..\blender-pipeline\params\<id>.json` reads `characters\<id>\exports\` and writes `characters\<id>\blender\` (see `..\blender-pipeline\CLAUDE.md`). Details of the decimation test: `docs/spikes.md`.
 
-## Tools (46) and the S1–S3 flow
+## Tools (47) and the S1–S3 flow
 
-`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
+`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_texture_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
 
 ## Unity export profile (working)
 

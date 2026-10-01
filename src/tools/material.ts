@@ -65,6 +65,24 @@ export function registerMaterialTools(server: McpServer, bridge: CC4Bridge) {
     )
   );
 
+  const adjust = z.number().min(-100).max(100).optional();
+  server.tool(
+    "set_texture_color",
+    "Colour-adjust a material's diffuse TEXTURE (CC4's texture hue/saturation/brightness/contrast and cyan/magenta/yellow settings), keeping its detail. Use this for hair, brows and clothing; set_diffuse_color is a flat tint that flattens textured hair. Values -100..100, 0 = unchanged; each call sets all seven (omitted = 0). Check with capture_views.",
+    {
+      mesh_name: z.string().max(256).describe("Mesh name (from get_material_info)"),
+      material_name: z.string().max(256).describe("Material name (from get_material_info)"),
+      hue: adjust, saturation: adjust, brightness: adjust, contrast: adjust,
+      cyan: adjust, magenta: adjust, yellow: adjust,
+    },
+    async ({ mesh_name, material_name, ...values }) => bridgeCall(
+      () => bridge.setTextureColor(mesh_name, material_name, values),
+      (result) => result.success
+        ? `Texture colour of ${result.mesh ?? mesh_name}/${result.material ?? material_name} set; CC4 reads back [H,S,B,C,C,M,Y] = [${(result.values ?? []).join(", ")}]`
+        : `Failed: ${result.error}`,
+    )
+  );
+
   server.tool(
     "get_shader_parameters",
     "Get the Digital Human Shader parameters for a material (skin roughness scales, SSS radius/falloff/IOR, micronormal strength, specular, etc.). Each value is a list of floats. Use get_material_info first for valid mesh/material names, then set_shader_parameter to change one.",

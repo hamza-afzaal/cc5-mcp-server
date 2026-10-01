@@ -28,7 +28,7 @@ beforeEach(() => {
 
 describe("registerMaterialTools – registration", () => {
   it("registers exactly 5 tools", () => {
-    expect(server.tool).toHaveBeenCalledTimes(5);
+    expect(server.tool).toHaveBeenCalledTimes(6);
   });
 
   it("registers get_shader_parameters", () => {
@@ -407,5 +407,24 @@ describe("set_shader_parameter handler", () => {
       values: [1.5],
     });
     expect(result.content[0].text).toContain("CC4 bridge error: bridge down");
+  });
+});
+
+// ── set_texture_color ─────────────────────────────────────────────────────────
+
+describe("set_texture_color handler", () => {
+  it("passes only the given adjustments and reports CC4's read-back", async () => {
+    bridge.setTextureColor.mockResolvedValue({ success: true, mesh: "Female_Brow", material: "Female_Brow", values: [0, -30, 25, 0, 0, 0, 0] });
+    const text = (await server.getRegisteredTool("set_texture_color")({
+      mesh_name: "Female_Brow", material_name: "Female_Brow", saturation: -30, brightness: 25,
+    })).content[0].text;
+    expect(bridge.setTextureColor).toHaveBeenCalledWith("Female_Brow", "Female_Brow", { saturation: -30, brightness: 25 });
+    expect(text).toContain("[0, -30, 25, 0, 0, 0, 0]");
+  });
+
+  it("reports a failure", async () => {
+    bridge.setTextureColor.mockResolvedValue({ success: false, error: "Mesh not found" });
+    const text = (await server.getRegisteredTool("set_texture_color")({ mesh_name: "X", material_name: "Y" })).content[0].text;
+    expect(text).toBe("Failed: Mesh not found");
   });
 });

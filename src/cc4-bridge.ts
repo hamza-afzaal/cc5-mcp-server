@@ -24,6 +24,8 @@ import type {
   MaterialInfo,
   DiffuseColor,
   SetDiffuseColorResult,
+  SetTextureColorResult,
+  TextureColorAdjust,
   ShaderParameters,
   SetShaderParameterResult,
   DiagnosticQuery,
@@ -403,6 +405,14 @@ export class CC4Bridge {
       r,
       g,
       b,
+    });
+  }
+
+  async setTextureColor(meshName: string, materialName: string, adjust: TextureColorAdjust): Promise<SetTextureColorResult> {
+    return this.request<SetTextureColorResult>("/material/texture_color/set", "POST", {
+      mesh_name: meshName,
+      material_name: materialName,
+      ...adjust,
     });
   }
 
