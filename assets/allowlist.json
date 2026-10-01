@@ -368,6 +368,36 @@
    "verified": true
   },
   {
+   "id": "skin/scalp_hairline",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Body Hair/Scalp/Hairline.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "hairline shading at the scalp; fills bare skin under card hair (Megan parting). Textures installed (tools/preset_refs.py, 2026-10-01); verify after first apply."
+  },
+  {
+   "id": "skin/scalp_basic_light",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Body Hair/Scalp/Basic_Light.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "light all-over scalp shading. Textures installed (tools/preset_refs.py, 2026-10-01); verify after first apply."
+  },
+  {
+   "id": "skin/scalp_edge_smooth",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Body Hair/Scalp/Realistic Human Skin/Edge Smooth.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "soft scalp edge. Textures installed (tools/preset_refs.py, 2026-10-01); verify after first apply."
+  },
+  {
    "id": "clothes/layered_sweater",
    "type": "clothes",
    "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Layered sweater.ccCloth",

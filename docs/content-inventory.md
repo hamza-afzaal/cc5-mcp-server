@@ -34,7 +34,27 @@ Sliders load into the catalog by themselves once downloaded. The bridge caches t
 Applied with `load_item` (types `makeup` and `skin`), then `save_project_as` and `open_project` to leave SkinGen mode; see the CLAUDE.md traps. Fine layer editing (strength, placement) is still done by hand in the Appearance Editor.
 
 - Skin bases: Default Female, Realistic Human Skin (Female Asian, Female Old), Female/Male Old full skins.
-- **Still empty:** `Skin/Skin Details`, `Skin/Blemish`, `Skin/Acquired`, `Skin/Normal Effects`. Pores, freckles, redness and tired layers come from these. If SkinGen Premium includes them, they aren't downloaded yet.
+
+### Texture check (run before applying or allowlisting any preset)
+
+A preset only stores paths to its textures (CC3-template-relative, installed here under `Others\Skin Textures\`). When one is missing, CC4 opens a "texture failed to load" dialog that waits for OK.
+
+```bash
+python tools/preset_refs.py "D:/Business/Reallusion/Reallusion Templates/Skin" --json ../characters/_testbench/preset_refs.json
+```
+
+It was calibrated on 2026-10-01: it flags the Human Anatomy brow preset that opened the dialog, and passes the five presets that applied cleanly.
+
+### SkinGen library (downloaded 2026-10-01; 639 Skin + Makeup presets scanned)
+
+- **The base presets (folder roots) are complete.** All of `Skin/Skin Base`, `Body Hair` (incl. `Scalp`: Base Male, Basic_Light, Basic_Heavy, Hairline; `Beard`: 4), `Skin Details` (Skin Decal 10, Skin Noise 2, Coloration 5, Capillary 7, Roughness 2), `Blemish` (Mole, Acne, Suntan: 2 each), `Normal Effects` (Facial Wrinkle 2 + Facial Part 4, Body 2, Noise 3, Levels 13), `Acquired` (Dirt, Scar, Tattoo, Liquid, Scales), `Nails` 5, and every make-up root folder.
+- **The add-on pack presets are mostly missing their textures:** 441 of 639 fail. The preset files arrived but the pack textures didn't (missing folders such as `SkinGen\4_Range\Wrinkle_*`, `SkinGen\1_Source\Muscle`, `MakeUp\4_Range\Eyelash|Eyeshadow|Eyeliner`, `MakeUp\1_Source\Eyebrow\Female`).
+  - `Realistic Human Skin`: 0–2 per folder, apart from Scalp (Edge Smooth, Receding), Liquid 4/8, Acne 3/7, Manicure 6/18.
+  - `Makeup & SFX`: 0 per folder, apart from Lip 20/28.
+  - `Human Anatomy` brows: 0/11.
+  - Ask the owner whether the packs have a separate texture/resource download before using any of them.
+- Useful for patients: Scalp Hairline (bare parting under card hair), Skin Details Coloration/Capillary (redness, tired skin), Normal Effects Levels (face/body), Blemish Mole/Acne. **Fat Creases and Aged Wrinkle (Body) are pack presets with missing textures.**
+- `Skin/SkinGen Tools/UV Transfer` (Daz G8.1/G9, `.ccSkinGenTool`): for importing Daz skins; not needed.
 - Make-up (Makeup & SFX and others): Full Makeup (Cordial, Enchanting, Intellectual…), Foundation (foundation 5, contour 17, blush 7, highlight 17), Eye (eyeliner 27, eyeshadow 31+28), Lip (11 looks + 28), Eyebrow (36 + Human Anatomy 11), Eyelash (mascara and natural sets).
 - SkinGen tools (Decal, Part, Specific: Lip, Eyeshadow, Eyebrow, Scar…).
 
