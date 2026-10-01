@@ -123,7 +123,7 @@ Verified display names per archetype, filled in during M1/M2 from real CC4 data.
 ## Manual steps
 
 1. **Install / repair the plugin link** (Administrator PowerShell, CC4 closed): `powershell -ExecutionPolicy Bypass -File install-plugin.ps1` (`-Uninstall` removes the junction only).
-2. **Launch CC4.** For hot reload, launch it with `CC4_DEV_MODE=1` and `CC4_RELOAD_SECRET=<secret>` in its environment. Plain launches run with dev mode off.
+2. **Launch CC4.** For hot reload, the owner runs `powershell -ExecutionPolicy Bypass -File D:\Business\Code\art\cc5-mcp-server\scripts\start-cc4-dev.ps1`, which sets `CC4_DEV_MODE=1` and `CC4_RELOAD_SECRET` (read from `characters\_testbench\.cc4_reload_secret`). Plain launches run with dev mode off.
 3. **Click OK** on CC4's two dialogs whenever `convert_lod` runs, then poll `get_export_status`.
 4. **Allowlist upkeep:** add owned Standard-license items to `assets/allowlist.json` (type, path, license, `exportable`, `scene_names`) and set `verified: true` once the license is confirmed. Hair templates are `.rlHair`.
 5. **Unity side (M2):** CCiC import, SALSA OneClick, validator. Ask the user; nothing in this repo touches Unity.
