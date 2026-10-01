@@ -57,6 +57,14 @@ describe("load_item", () => {
     expect(text).toContain("license for clothes/basic_tshirt not yet verified");
   });
 
+  it("applies a SkinGen make-up preset and says how to leave SkinGen mode", async () => {
+    bridge.loadItem.mockResolvedValue({ success: true, seconds: 19, added: { clothes: [], hair: [], accessories: [] } });
+    const text = (await server.getRegisteredTool("load_item")({ item: "allowlist:makeup/lip_nature" })).content[0].text;
+    expect(bridge.loadItem).toHaveBeenCalledWith("D:/T/Makeup/Lip Makeup/Nature.ccSkinGenPreset");
+    expect(text).toContain("SkinGen mode");
+    expect(text).toContain("open_project");
+  });
+
   it("refuses paths outside the allowlist without calling CC4", async () => {
     const text = (await server.getRegisteredTool("load_item")({ item: "C:/Downloads/pirated.ccCloth" })).content[0].text;
     expect(text).toContain("Refused: Path is not in the allowlist");

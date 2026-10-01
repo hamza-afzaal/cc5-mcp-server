@@ -2006,7 +2006,7 @@ def set_morphs(entries: list) -> dict[str, Any]:
 
 _ITEM_EXTENSIONS = (".ccavatar", ".ccproject", ".cccloth", ".ccshoes", ".ccacc", ".ccaccessory", ".cchair",
                     ".rlhair", ".rlhairstyle", ".ccskin", ".ccavatarpreset", ".iavatar", ".iclothes", ".ihair",
-                    ".iaccessory", ".ishoe", ".iskin")
+                    ".iaccessory", ".ishoe", ".iskin", ".ccskingenpreset")
 
 
 def _item_names(avatar) -> dict[str, list[str]]:
@@ -2052,7 +2052,13 @@ def load_item(file_path: str) -> dict[str, Any]:
     avatar = get_first_avatar()
     before = _item_names(avatar) if avatar else {}
     t0 = time.time()
-    status = RLPy.RFileIO.LoadFile(file_path)
+    if file_path.lower().endswith(".ccskingenpreset") and avatar:
+        # SkinGen / make-up presets apply to a character: target the avatar like a double-click on it does.
+        # CC4 then stays in SkinGen mode (hair, brows and clothes hidden; RScene.Show doesn't help) until the
+        # project is saved and reopened. A second preset of a kind already applied opens an Add/Replace dialog.
+        status = RLPy.RFileIO.LoadFile(file_path, True, avatar)
+    else:
+        status = RLPy.RFileIO.LoadFile(file_path)
     seconds = round(time.time() - t0, 2)
     _invalidate_caches()
     avatar = get_first_avatar()

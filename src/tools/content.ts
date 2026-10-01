@@ -12,7 +12,7 @@ import { bridgeCall } from "../util.js";
 export type AllowlistProvider = () => AllowlistIndex;
 export const defaultAllowlistProvider: AllowlistProvider = () => new AllowlistIndex(loadAllowlist());
 
-const LOADABLE_TYPES = ["base", "clothes", "shoes", "hair", "accessory", "skin"] as const;
+const LOADABLE_TYPES = ["base", "clothes", "shoes", "hair", "accessory", "skin", "makeup"] as const;
 
 export function formatItems(items: ItemList, allowlist?: AllowlistIndex): string {
   const lines = [`Avatar: ${items.avatar}`];
@@ -49,7 +49,7 @@ export function registerContentTools(server: McpServer, bridge: CC4Bridge, getAl
 
   server.tool(
     "load_item",
-    "Load an allowlisted content item (base avatar, clothing, shoes, hair, accessory or skin preset) into CC4. Takes 'allowlist:<id>' or a path that is listed in assets/allowlist.json. Anything not allowlisted or not exportable is refused.",
+    "Load an allowlisted content item (base avatar, clothing, shoes, hair, accessory, skin preset, or SkinGen make-up preset applied to the current avatar) into CC4. After make-up, CC4 stays in SkinGen mode (hair, brows and clothes hidden) until you save_project_as and open_project the copy; a second preset of a kind already applied opens an Add/Replace dialog in CC4. Takes 'allowlist:<id>' or a path that is listed in assets/allowlist.json. Anything not allowlisted or not exportable is refused.",
     {
       item: z.string().min(1).max(1024).describe("'allowlist:clothes/basic_tshirt' or an allowlisted absolute path"),
     },
@@ -63,8 +63,11 @@ export function registerContentTools(server: McpServer, bridge: CC4Bridge, getAl
       return bridgeCall(() => bridge.loadItem(entry.path), (r) => {
         const added = r.added ? [...r.added.clothes, ...r.added.hair, ...r.added.accessories] : [];
         const unverified = entry.verified ? "" : `\nNote: license for ${entry.id} not yet verified (${entry.license}).`;
+        const makeup = entry.type === "makeup"
+          ? "\nCC4 is now in SkinGen mode (hair, brows, clothes hidden): save_project_as a copy and open_project it before rendering."
+          : "";
         return r.success
-          ? `Loaded ${entry.id} in ${r.seconds ?? "?"} s. Added: ${added.join(", ") || "(no new item; base or skin load)"}${unverified}`
+          ? `Loaded ${entry.id} in ${r.seconds ?? "?"} s. Added: ${added.join(", ") || "(no new item; base or skin load)"}${unverified}${makeup}`
           : `Failed to load ${entry.id}: ${r.error}`;
       });
     },

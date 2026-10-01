@@ -61,7 +61,12 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 - The `InstaLodPreset` export flag does nothing from Python.
 - Every `export_fbx` option must also be forwarded in `_export_fbx_action` (a hand-written list); `reset_bone_scale` was once silently dropped there. `tests/bridge/test_server.py` now fails on any missing one.
 - Purchased Lite Hair Plus styles use plain **PBR** in CC4 (only diffuse/normal/opacity/AO maps; no flow/ID/root), so no RLHair shader is exported for them; that's by design, not an export bug.
-- **SkinGen and make-up presets can't be applied from Python.** `RFileIO.LoadFile(<x>.ccSkinGenPreset)` (tested with Lip Makeup/Nature) took 19 s, didn't visibly change the lips, and **hid the hair, brows and clothes** in the viewport and renders. The items stayed in the scene; reopening the saved project restored them. There's no SkinGen API, so skin, make-up and brows are manual Appearance Editor steps for the owner.
+- **SkinGen and make-up presets work from Python, with one extra step.**
+  - Apply them with `load_item` (type `makeup`, or `skin` for a `.ccSkinGenPreset` skin base); the bridge calls `RFileIO.LoadFile(path, True, avatar)`.
+  - CC4 then **stays in SkinGen mode**, with hair, brows and clothes hidden in the viewport and renders. `RScene.Show` doesn't bring them back, and there's no API to leave the mode. **`save_project_as` a copy, then `open_project` it.** That leaves the mode, and the make-up is kept: Megan, 2026-09-30.
+  - A second preset of a kind already on the avatar opens an **Add / Replace** dialog that waits for the owner, so apply each kind once, starting from a project without make-up.
+  - The Human Anatomy brow presets point to a texture in a CC3 template folder (`C:\Users\Public\Documents\Reallusion\Template\Character Creator 3 Template\...\Makeup\1_S*.png`) that isn't installed. A "texture failed to load" dialog then waits for OK.
+  - Base characters with 3D brow meshes (Camila's `Camila_Brow`) keep those brows; a SkinGen brow layer only paints the skin.
 - **`set_color` on hair flattens textured (plain PBR) hair.** On Lite Hair Plus it turned the hair into a flat, untextured beige shell instead of tinting it (2026-09-30, Megan); undo restored it. Pick a hair whose texture already has the right colour, or recolour in CC4's material/texture settings, then check with `capture_views` (head preset).
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 

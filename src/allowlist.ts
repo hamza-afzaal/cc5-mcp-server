@@ -11,7 +11,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 
-export const ITEM_TYPES = ["base", "clothes", "shoes", "hair", "accessory", "skin", "motion"] as const;
+export const ITEM_TYPES = ["base", "clothes", "shoes", "hair", "accessory", "skin", "makeup", "motion"] as const;
 export type ItemType = (typeof ITEM_TYPES)[number];
 
 export const AllowlistItemSchema = z.object({

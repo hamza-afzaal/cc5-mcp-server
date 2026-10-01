@@ -311,6 +311,61 @@
     "Tousled Tops"
    ],
    "verified": true
+  },
+  {
+   "id": "skin/skingen_default_female",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Base/Default Female.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true
+  },
+  {
+   "id": "makeup/brow_human_anatomy_female_heavy",
+   "type": "makeup",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Makeup/Eyebrow/Human Anatomy/Female Heavy.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "texture missing (CC3 template path); CC4 shows a 'texture failed to load' dialog. Don't use until the texture is found."
+  },
+  {
+   "id": "makeup/foundation_light",
+   "type": "makeup",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Makeup/Foundation Makeup/1_Foundation/Light.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true
+  },
+  {
+   "id": "makeup/blush_round",
+   "type": "makeup",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Makeup/Foundation Makeup/3_Blush/Round.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true
+  },
+  {
+   "id": "makeup/lip_nature",
+   "type": "makeup",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Makeup/Lip Makeup/Nature.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true
+  },
+  {
+   "id": "makeup/eyelash_nature",
+   "type": "makeup",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Makeup/Eyelash/Nature.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true
   }
  ]
 }
