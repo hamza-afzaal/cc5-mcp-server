@@ -8,6 +8,8 @@ Claude ⇄ stdio ⇄ src/ (Node/TS MCP server) ⇄ HTTP 127.0.0.1:5101 ⇄ cc4-p
 
 **New avatar? Follow [the end-to-end checklist](docs/new-avatar-checklist.md).**
 
+**What we own and what it's for:** [content inventory](docs/content-inventory.md).
+
 **Design docs:** [pipeline design v0.3](docs/craftxr-character-pipeline-design.md) · [color & realism spec](docs/craftxr-character-color-realism-spec.md) · [kickoff v2](docs/cc4-bridge-kickoff-v2.md) · [Phase 0 plan + decisions](docs/phase0-plan.md) · [spike results](docs/spikes.md) · [Phase 3 report](docs/phase3-report.md) · [CC4 RLPy reference](docs/rlpy-api-reference.md) · [facial inventory](docs/facial-inventory.json)
 
 ## Where things live
@@ -52,7 +54,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 ### Traps (each one bit us)
 
 - **Never iterate SWIG `FloatPair`** (e.g. `GetShapingMorphMinMax`): `__getitem__` never raises `IndexError`, so `list(pair)` hangs CC4 (it reached 35 GB). Use `.first/.second`.
-- **Morph catalog not ready:** an avatar loaded right after CC4 starts shows only 3 "Actor Parts" categories and its sliders read 0. Reload the avatar (`apply_recipe` does this automatically).
+- **Morph catalog not ready:** an avatar loaded right after CC4 starts shows only 3 "Actor Parts" categories and its sliders read 0. Reload the avatar (`apply_recipe` does this automatically). The bridge caches the catalog per avatar. It no longer caches a near-empty catalog (fewer than 100 sliders), but slider packs downloaded mid-session still only show up after the next `load_item` of the base.
 - `GetShapingMorphMinMax` is only the UI default range and **isn't enforced**; it also differed between sessions. Clamp to ±1 and warn instead.
 - ActorBUILD renames `CC_Base_Body` → `CC_Game_Body` (SALSA OneClick binds by mesh name). LOD1/LOD2 are remeshed into one mesh with **no facial blendshapes**.
 - `GetMotionBones` and `RScene.SetHDSubdivisionLevel` don't exist in CC4. Facial blendshapes aren't mesh morphs before export; use the facial profile/viseme components.

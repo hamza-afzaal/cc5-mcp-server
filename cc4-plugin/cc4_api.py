@@ -213,7 +213,10 @@ def get_morph_catalog() -> dict[str, list[dict[str, str]]]:
             for i in range(len(ids))
         ]
 
-    _morph_catalog_cache[avatar_id] = catalog
+    # CC4 reports a partial catalog (a few "Actor Parts" categories) right after startup; caching that
+    # would hide every slider for this avatar until the next load, so only cache a populated catalog
+    if sum(len(v) for v in catalog.values()) >= 100:
+        _morph_catalog_cache[avatar_id] = catalog
     return catalog
 
 
