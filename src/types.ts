@@ -353,6 +353,20 @@ export interface AppliedMorph {
   warning?: string;
 }
 
+export interface TimelineState {
+  frame?: number;
+  end_frame?: number;
+  end_ms?: number;
+}
+
+export interface ApplyMotionResult extends OperationResult, TimelineState {
+  path?: string;
+  seconds?: number;
+  avatar?: string;
+}
+
+export interface SetTimeResult extends OperationResult, TimelineState {}
+
 export interface FixEyeElementResult extends OperationResult {
   avatar?: string;
 }

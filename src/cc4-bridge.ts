@@ -38,6 +38,8 @@ import type {
   MorphValue,
   SetMorphsResult,
   FixEyeElementResult,
+  ApplyMotionResult,
+  SetTimeResult,
   ItemList,
   LoadItemResult,
   SaveProjectResult,
@@ -222,6 +224,14 @@ export class CC4Bridge {
 
   async loadItem(filePath: string): Promise<LoadItemResult> {
     return this.request<LoadItemResult>("/item/load", "POST", { file_path: filePath }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  async applyMotion(filePath: string): Promise<ApplyMotionResult> {
+    return this.request<ApplyMotionResult>("/motion/apply", "POST", { file_path: filePath }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  async setTime(frame: number): Promise<SetTimeResult> {
+    return this.request<SetTimeResult>("/timeline/set", "POST", { frame });
   }
 
   async removeItem(itemName: string): Promise<RemoveItemResult> {

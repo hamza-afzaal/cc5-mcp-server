@@ -93,6 +93,60 @@
    "verified": true
   },
   {
+   "id": "motion/female_sit_talk",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Perform/Sit Talk.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "seated talking idle (doctor's office). Applied to Megan 2026-10-01 (apply_motion), check_export_license exportable."
+  },
+  {
+   "id": "motion/female_stand_to_sit",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Perform/Stand to Sit.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "sit-down transition"
+  },
+  {
+   "id": "motion/female_sit_to_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Perform/Sit to Stand.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "stand-up transition"
+  },
+  {
+   "id": "motion/pose_sit_talk_5",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Pose/Samples/Sit Talk 5.rlPose",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "seated pose for clipping checks. Applied to Megan 2026-10-01 (apply_motion), check_export_license exportable."
+  },
+  {
+   "id": "motion/pose_sitting_look_on",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Pose/Samples/Sitting Look On.rlPose",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "seated pose for clipping checks. Applied to Megan 2026-10-01 (apply_motion), check_export_license exportable."
+  },
+  {
+   "id": "motion/pose_sit_call_1",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Pose/Samples/Sit Call_1.rlPose",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "seated pose, arm raised (phone). Applied to Megan 2026-10-01 (apply_motion), check_export_license exportable."
+  },
+  {
    "id": "hair/double_tied_wavy",
    "type": "hair",
    "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Lite Hair Plus Female Vol.1/Double Tied Wavy.rlHair",

@@ -608,6 +608,17 @@ describe("CC4Bridge Phase 2 endpoints", () => {
     expect(body()).toEqual({ morphs: [{ display_name: "Body Thin", value: 0.3 }] });
   });
 
+  it("applyMotion and setTime post to their routes", async () => {
+    mockFetch({ result: { success: true, end_frame: 10 } });
+    await bridge.applyMotion("D:/T/Sit.rlMotion");
+    expect(url()).toBe("http://localhost:5101/motion/apply");
+    expect(body()).toEqual({ file_path: "D:/T/Sit.rlMotion" });
+    mockFetch({ result: { success: true, frame: 3 } });
+    await bridge.setTime(3);
+    expect(url()).toBe("http://localhost:5101/timeline/set");
+    expect(body()).toEqual({ frame: 3 });
+  });
+
   it("fixEyeElement posts to /morphs/fix_eye", async () => {
     mockFetch({ result: { success: true, avatar: "Camila" } });
     expect(await bridge.fixEyeElement()).toEqual({ success: true, avatar: "Camila" });

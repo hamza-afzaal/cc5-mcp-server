@@ -74,6 +74,38 @@ export function registerContentTools(server: McpServer, bridge: CC4Bridge, getAl
   );
 
   server.tool(
+    "apply_motion",
+    "Put an allowlisted motion or pose ('allowlist:motion/...', .rlMotion / .rlPose / .iMotion) on the current avatar at time 0, for seated/animated clipping checks and renders. Returns the timeline length in frames; use set_time to pick a frame before capture_views. Reopen the project (open_project) to remove it. Anything not allowlisted is refused.",
+    {
+      motion: z.string().min(1).max(1024).describe("'allowlist:motion/female_sit_talk' or an allowlisted absolute path"),
+    },
+    async ({ motion }) => {
+      let entry: AllowlistItem;
+      try {
+        entry = getAllowlist().resolve(motion, ["motion"]);
+      } catch (e) {
+        return { content: [{ type: "text" as const, text: `Refused: ${(e as Error).message}` }] };
+      }
+      return bridgeCall(() => bridge.applyMotion(entry.path), (r) => {
+        const unverified = entry.verified ? "" : `\nNote: license for ${entry.id} not yet verified (${entry.license}).`;
+        return r.success
+          ? `Applied ${entry.id} in ${r.seconds ?? "?"} s. Timeline: frames 0..${r.end_frame ?? "?"}, now at ${r.frame ?? "?"}.${unverified}`
+          : `Failed to apply ${entry.id}: ${r.error}`;
+      });
+    },
+  );
+
+  server.tool(
+    "set_time",
+    "Move CC4's timeline to a frame, so the avatar takes that frame of its motion (see apply_motion); capture_views then renders that pose.",
+    {
+      frame: z.number().int().min(0).max(1_000_000).describe("Frame index (0-based, project fps)"),
+    },
+    async ({ frame }) => bridgeCall(() => bridge.setTime(frame),
+      (r) => (r.success ? `Timeline at frame ${r.frame ?? frame} of 0..${r.end_frame ?? "?"}.` : `Failed: ${r.error}`)),
+  );
+
+  server.tool(
     "remove_item",
     "Remove a clothing, hair or accessory item from the current avatar by its scene name (see list_items).",
     {

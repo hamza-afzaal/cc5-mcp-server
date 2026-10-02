@@ -2124,6 +2124,79 @@ def load_item(file_path: str) -> dict[str, Any]:
             "avatar": avatar.GetName() if avatar else None, "added": added}
 
 
+_MOTION_EXTENSIONS = (".rlmotion", ".rlpose", ".imotion", ".imotionplus")
+
+
+def _timeline() -> dict[str, Any]:
+    fps = RLPy.RGlobal.GetFps()
+    end = RLPy.RGlobal.GetEndTime()
+    now = RLPy.RGlobal.GetTime()
+    return {"end_frame": int(fps.GetFrameIndex(end)), "frame": int(fps.GetFrameIndex(now)),
+            "end_ms": end.ToFloat()}
+
+
+def apply_motion(file_path: str) -> dict[str, Any]:
+    """Put a motion or pose (.rlMotion / .rlPose / .iMotion) on the current avatar at time 0
+    (RFileIO.LoadMotion). Path allowlisting is enforced by the MCP server. Reopen the project to remove it."""
+    decoded = urllib.parse.unquote(file_path)
+    if "\x00" in decoded or ".." in decoded:
+        return {"success": False, "error": "Unsafe path"}
+    if not file_path.lower().endswith(_MOTION_EXTENSIONS):
+        return {"success": False, "error": f"Unsupported motion type: {os.path.splitext(file_path)[1]}"}
+    if not os.path.isfile(file_path):
+        return {"success": False, "error": f"File not found: {file_path}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    t0 = time.time()
+    status = RLPy.RFileIO.LoadMotion(file_path, RLPy.RTime.FromValue(0), avatar)
+    seconds = round(time.time() - t0, 2)
+    RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
+    clip_frames = None
+    try:
+        # CC4's project end time stays at 0 after LoadMotion: extend it to the clip so set_time can reach every frame
+        skel = avatar.GetSkeletonComponent()
+        count = skel.GetClipCount() if skel else 0
+        if count:
+            clip = skel.GetClip(count - 1)
+            clip_end = clip.ClipTimeToSceneTime(clip.GetClipLength())
+            fps = RLPy.RGlobal.GetFps()
+            clip_frames = int(fps.GetFrameIndex(clip_end))
+            if RLPy.RGlobal.GetEndTime() < clip_end:
+                RLPy.RGlobal.SetEndTime(clip_end)
+    except Exception:
+        pass
+    return {"success": _ok(status), "path": file_path, "seconds": seconds, "avatar": avatar.GetName(),
+            "clip_frames": clip_frames, **_timeline()}
+
+
+def set_time(frame: int) -> dict[str, Any]:
+    """Move the timeline to a frame (the avatar takes that frame's motion pose; renders show it)."""
+    try:
+        fps = RLPy.RGlobal.GetFps()
+        frame = max(0, int(frame))
+        target = fps.IndexedFrameTime(frame)
+        method = "SetTime"
+        status = RLPy.RGlobal.SetTime(target)
+        if RLPy.RGlobal.GetTime() != target:
+            # CC4 ignored SetTime: play the one-frame range and pause on it
+            method = "Play+Pause"
+            RLPy.RGlobal.Play(target, target + fps.IndexedFrameTime(1))
+            RLPy.RGlobal.Pause()
+            status = RLPy.RGlobal.SetTime(target)
+        # nudge so the viewport re-evaluates the pose (RLPy Local Move example)
+        one = RLPy.RTime.FromValue(1)
+        RLPy.RGlobal.SetTime(RLPy.RGlobal.GetTime() + one)
+        RLPy.RGlobal.SetTime(RLPy.RGlobal.GetTime() - one)
+        if hasattr(RLPy.RGlobal, "ForceViewportUpdate"):
+            RLPy.RGlobal.ForceViewportUpdate()
+        reached = RLPy.RGlobal.GetTime() == target
+        return {"success": _ok(status) and reached, "method": method,
+                **({} if reached else {"error": "CC4 did not move the timeline"}), **_timeline()}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
 def set_color(target: str, r: float, g: float, b: float) -> Any:
     t = (target or "").lower()
     if t in ("eye", "eyes"):
@@ -2585,6 +2658,8 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "list_items":            (lambda p: list_items(), [], DEFAULT_TIMEOUT_S),
     "load_item":             (lambda p: load_item(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
     "remove_item":           (lambda p: remove_scene_item(p["item_name"]), ["item_name"], DEFAULT_TIMEOUT_S),
+    "apply_motion":          (lambda p: apply_motion(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
+    "set_time":              (lambda p: set_time(int(p["frame"])), ["frame"], DEFAULT_TIMEOUT_S),
     "browse_content":        (lambda p: browse_content(p.get("folder_type", "cloth_upper")), [], DEFAULT_TIMEOUT_S),
     "set_color":             (lambda p: set_color(p["target"], float(p["r"]), float(p["g"]), float(p["b"])), ["target", "r", "g", "b"], DEFAULT_TIMEOUT_S),
     # Project / optimize / export
@@ -2653,6 +2728,8 @@ POST_ROUTES: dict[str, str] = {
     "/morphs/fix_eye":      "fix_eye_element",
     "/item/load":           "load_item",
     "/item/remove":         "remove_item",
+    "/motion/apply":        "apply_motion",
+    "/timeline/set":        "set_time",
     "/content/browse":      "browse_content",
     "/color":               "set_color",
     "/project/save_as":     "save_project_as",

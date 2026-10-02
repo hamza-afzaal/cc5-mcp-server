@@ -76,6 +76,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - Saturation +45 or more brings out a green undertone in that hair texture.
   - `set_color` / `set_diffuse_color` set a diffuse tint instead.
 - **Human Anatomy sliders (`Body HA …` / `Head HA …`) leave a dark crescent above the upper lids**, plus a line across the irises, in CC4's viewport (already visible at 0.1). **Fix: `fix_eye_element`** (CC4's *Fix Eye Element*, `RIAvatarShapingComponent.FixEyeElement()`: no dialog, one undo step). `apply_recipe` runs it after the morphs; after manual `set_morphs`, call it yourself. Eyelid, lash, eyeball and occlusion sliders don't fix it. The exported mesh was clean even before the fix. Details: `../blender-pipeline/docs/body-proportions.md` (Megan, 2026-10-01).
+- **Motions and poses:** `apply_motion` (allowlisted `motion` items; `RFileIO.LoadMotion` at time 0) works, and capture_views then renders the pose. **CC4 ignores `RGlobal.SetTime` from Python**: even Play+Pause and a 1-tick nudge leave the timeline at frame 0, so `set_time` reports failure. For seated checks use `.rlPose` poses, or a motion whose frame 0 is the wanted pose (Female Sit Talk is seated at frame 0). Frame-by-frame motion checks belong in Blender on `export_motions` clips (2026-10-01).
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
@@ -84,9 +85,9 @@ InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Cust
 
 **Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4): `python ..\blender-pipeline\tools\run_s4.py ..\blender-pipeline\params\<id>.json` reads `characters\<id>\exports\` and writes `characters\<id>\blender\` (see `..\blender-pipeline\CLAUDE.md`). Details of the decimation test: `docs/spikes.md`.
 
-## Tools (48) and the S1–S3 flow
+## Tools (50) and the S1–S3 flow
 
-`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `fix_eye_element`, `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_texture_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
+`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `fix_eye_element`, `apply_motion` / `set_time` (seated and pose renders), `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_texture_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
 
 ## Unity export profile (working)
 

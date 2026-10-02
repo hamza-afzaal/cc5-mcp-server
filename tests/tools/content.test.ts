@@ -23,7 +23,7 @@ beforeEach(() => {
 
 describe("registerContentTools", () => {
   it("registers the item tools", () => {
-    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["list_items", "get_inventory", "load_item", "remove_item", "browse_content"]);
+    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["list_items", "get_inventory", "load_item", "apply_motion", "set_time", "remove_item", "browse_content"]);
   });
 });
 
@@ -91,5 +91,41 @@ describe("remove_item / browse_content", () => {
     bridge.browseContent.mockResolvedValue(["D:/T/Shoes/Canvas Shoes.ccShoes"]);
     const text = (await server.getRegisteredTool("browse_content")({ folder_type: "shoes" })).content[0].text;
     expect(text).toContain("1 file(s)");
+  });
+});
+
+describe("apply_motion", () => {
+  it("applies an allowlisted motion and reports the timeline", async () => {
+    bridge.applyMotion.mockResolvedValue({ success: true, seconds: 0.6, frame: 0, end_frame: 1179 });
+    const text = (await server.getRegisteredTool("apply_motion")({ motion: "allowlist:motion/female_idle_1" })).content[0].text;
+    expect(bridge.applyMotion).toHaveBeenCalledWith("D:/T/Motion/Female Idle_1.rlMotion");
+    expect(text).toContain("Applied motion/female_idle_1 in 0.6 s. Timeline: frames 0..1179, now at 0.");
+  });
+
+  it("refuses anything that isn't an allowlisted motion", async () => {
+    const text = (await server.getRegisteredTool("apply_motion")({ motion: "D:/elsewhere/Sit.rlMotion" })).content[0].text;
+    expect(text).toMatch(/^Refused/);
+    expect(bridge.applyMotion).not.toHaveBeenCalled();
+  });
+
+  it("reports a bridge failure", async () => {
+    bridge.applyMotion.mockResolvedValue({ success: false, error: "No avatar in scene" });
+    const text = (await server.getRegisteredTool("apply_motion")({ motion: "allowlist:motion/female_idle_1" })).content[0].text;
+    expect(text).toBe("Failed to apply motion/female_idle_1: No avatar in scene");
+  });
+});
+
+describe("set_time", () => {
+  it("moves the timeline", async () => {
+    bridge.setTime.mockResolvedValue({ success: true, frame: 30, end_frame: 1179 });
+    const text = (await server.getRegisteredTool("set_time")({ frame: 30 })).content[0].text;
+    expect(bridge.setTime).toHaveBeenCalledWith(30);
+    expect(text).toBe("Timeline at frame 30 of 0..1179.");
+  });
+
+  it("reports when CC4 doesn't move", async () => {
+    bridge.setTime.mockResolvedValue({ success: false, error: "CC4 did not move the timeline" });
+    const text = (await server.getRegisteredTool("set_time")({ frame: 30 })).content[0].text;
+    expect(text).toBe("Failed: CC4 did not move the timeline");
   });
 });
