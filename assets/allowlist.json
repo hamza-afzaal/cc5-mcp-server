@@ -400,8 +400,8 @@
    "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
    "exportable": true,
    "scene_names": [],
-   "verified": false,
-   "notes": "texture missing (CC3 template path); CC4 shows a 'texture failed to load' dialog. Don't use until the texture is found."
+   "verified": true,
+   "notes": "Human Anatomy brow (SkinGen layer under Camila's 3D brows). Texture now installed (whole-pack install; preset_refs: 0 missing), loads with no dialog. Applied to Megan via recipe 2026-10-02, check_export_license exportable."
   },
   {
    "id": "makeup/foundation_light",

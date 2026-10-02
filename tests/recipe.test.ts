@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, it, expect, beforeEach, afterAll } from "vitest";
-import { applyRecipe, exportRecipe, RecipeSchema, resolveRecipe, setLastAppliedRecipe, type Recipe } from "../src/recipe.js";
+import { applyRecipe, exportRecipe, RecipeSchema, resolveRecipe, setLastAppliedRecipe, skinGenExitProject, type Recipe } from "../src/recipe.js";
 import { createMockBridge, type MockBridge } from "./helpers/mock-bridge.js";
 import { fixtureAllowlist } from "./helpers/allowlist-fixture.js";
 
@@ -45,8 +45,20 @@ function happyBridge(): MockBridge {
   ] });
   b.fixEyeElement.mockResolvedValue({ success: true, avatar: "Camila" });
   b.setColor.mockResolvedValue({ success: true, applied_to: ["CC_Base_Eye/Std_Eye_R"] });
+  b.removeItem.mockResolvedValue({ success: true });
+  b.setTextureColor.mockImplementation(async (mesh: string, material: string) => ({ success: true, mesh, material, values: [0, 0, 30, 0, 0, 0, 0] }));
+  b.saveProjectAs.mockImplementation(async (p: string) => ({ success: true, path: `D:/chars/${p}.ccProject`, is_current: true }));
+  b.openProject.mockResolvedValue({ success: true });
   return b;
 }
+
+/** Megan-style look: skin base + stacked layers, texture colours, base underwear removed. */
+const LOOK = {
+  recipe_version: "0.2",
+  skin: { preset: "allowlist:skin/rhs_athletic", layers: ["allowlist:skin/scalp_hairline", "allowlist:makeup/lip_nature"] },
+  remove_base_items: ["Bra"],
+  texture_colors: [{ mesh: "Side_Tucked_Lob", material: "Hair", brightness: 30 }],
+};
 
 beforeEach(() => setLastAppliedRecipe(null));
 afterAll(() => fs.rmSync(CHAR_DIR, { recursive: true, force: true }));
@@ -56,6 +68,20 @@ describe("RecipeSchema", () => {
     const r = RecipeSchema.parse({ recipe_version: "0.1", id: "x", archetype: "a", base: { item: "allowlist:base/cc4_camila" } });
     expect(r.morphs).toEqual([]);
     expect(r.clothes).toEqual([]);
+  });
+
+  it("names the SkinGen exit copy with a UTC timestamp", () => {
+    expect(skinGenExitProject("megan", new Date("2026-10-02T15:04:05Z"))).toBe("megan_recipe_20261002-150405");
+  });
+
+  it("accepts 0.2 look fields and bounds texture colour adjustments to -100..100 integers", () => {
+    const r = recipe(LOOK);
+    expect(r.skin?.layers).toHaveLength(2);
+    expect(r.remove_base_items).toEqual(["Bra"]);
+    expect(() => recipe({ texture_colors: [{ mesh: "m", material: "x", brightness: 101 }] })).toThrow();
+    expect(() => recipe({ texture_colors: [{ mesh: "m", material: "x", hue: 1.5 }] })).toThrow();
+    expect(() => recipe({ texture_colors: [{ mesh: "m", material: "x", tint: 3 }] })).toThrow();
+    expect(() => recipe({ recipe_version: "0.3" })).toThrow();
   });
 
   it("rejects typos in field names (strict)", () => {
@@ -74,6 +100,12 @@ describe("RecipeSchema", () => {
 });
 
 describe("resolveRecipe", () => {
+  it("accepts skin and makeup presets as skin layers, nothing else", () => {
+    expect(() => resolveRecipe(recipe(LOOK), fixtureAllowlist())).not.toThrow();
+    expect(() => resolveRecipe(recipe({ skin: { layers: ["allowlist:hair/short_grey"] } }), fixtureAllowlist()))
+      .toThrow(/skin.layers\[0\]: .*expected skin or makeup/);
+  });
+
   it("collects every bad reference into one error", () => {
     const r = recipe({
       clothes: ["allowlist:clothes/icontent_coat", "allowlist:clothes/nope"],
@@ -108,6 +140,48 @@ describe("applyRecipe", () => {
     ]);
     expect(b.setMorphs).toHaveBeenCalledWith(RAW.morphs);
     expect(b.setColor).toHaveBeenCalledWith("eyes", 0.28, 0.22, 0.16);
+  });
+
+  it("replays the look: outfit, base item removal, then skin base and layers in order, texture colours, then leaves SkinGen mode", async () => {
+    const b = happyBridge();
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe(LOOK));
+    expect(report.ok).toBe(true);
+    expect(report.steps.map((s) => s.step)).toEqual([
+      "set_character", "clear_scene", "load_base", "morphs", "fix_eye_element",
+      "load_hair", "load_clothes", "load_clothes", "remove_base_item",
+      "load_skin", "load_skin_layer", "load_skin_layer", "color_eyes", "texture_color", "leave_skingen",
+    ]);
+    expect(b.loadItem.mock.calls.map((c) => c[0]).slice(4, 7)).toEqual([
+      "D:/T/Skin/Skin Base/Female Athletic.ccSkinGenPreset", "D:/T/Skin/Scalp/Hairline.ccSkinGenPreset",
+      "D:/T/Makeup/Lip Makeup/Nature.ccSkinGenPreset",
+    ]);
+    expect(b.removeItem).toHaveBeenCalledWith("Bra");
+    expect(b.setTextureColor).toHaveBeenCalledWith("Side_Tucked_Lob", "Hair", { brightness: 30 });
+    const copy = b.saveProjectAs.mock.calls[0][0] as string;
+    expect(copy).toMatch(new RegExp(`^${RAW.id}_recipe_\\d{8}-\\d{6}$`));
+    expect(b.openProject).toHaveBeenCalledWith(`D:/chars/${copy}.ccProject`);
+    expect(report.warnings.join()).not.toMatch(/loaded but added no new scene item/);
+  });
+
+  it("skips the SkinGen exit without skin presets, and warns about a base item the base didn't bring", async () => {
+    const b = happyBridge();
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({ remove_base_items: ["Panties"] }));
+    expect(report.ok).toBe(true);
+    expect(b.saveProjectAs).not.toHaveBeenCalled();
+    expect(report.warnings.join()).toMatch(/the base brought no 'Panties' \(base items: Bra\)/);
+  });
+
+  it.each([
+    ["removeItem", "remove_base_item"],
+    ["setTextureColor", "texture_color"],
+    ["saveProjectAs", "leave_skingen"],
+    ["openProject", "leave_skingen"],
+  ] as const)("stops at %s failure", async (method, step) => {
+    const b = happyBridge();
+    b[method].mockResolvedValue({ success: false, error: "nope" });
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe(LOOK));
+    expect(report.ok).toBe(false);
+    expect(report.steps.at(-1)).toMatchObject({ step, ok: false });
   });
 
   it("runs Fix Eye Element after the morphs; a failure is a warning, not a stop", async () => {
@@ -193,12 +267,63 @@ describe("exportRecipe", () => {
     const out = await exportRecipe(sceneBridge() as never, fixtureAllowlist());
     expect(out.recipe).toMatchObject({
       base: { item: "allowlist:base/cc4_camila" },
-      morphs: [{ display_name: "Body Thin", category: "Actor", value: 0.35 }],
+      morphs: [{ id: "a", display_name: "Body Thin", category: "Actor", value: 0.35 }],
       hair: "allowlist:hair/short_grey",
       clothes: ["allowlist:clothes/basic_tshirt", "allowlist:shoes/canvas_shoes"],
     });
     expect(out.unmapped_items).toEqual(["Bra", "Mystery Hat"]);
+    expect(out.recipe).toMatchObject({ recipe_version: "0.2", remove_base_items: [], texture_colors: [] });
+    expect(out.notes.join()).toMatch(/SkinGen layers can't be read back/);
     expect(RecipeSchema.safeParse(out.recipe).success).toBe(true);
+  });
+
+  it("reads non-zero texture colour adjustments back from CC4", async () => {
+    const b = sceneBridge();
+    b.diagnostics.mockImplementation(async (q: string, arg?: string) => {
+      if (q === "materials_per_mesh") return { CC_Base_Body: ["Std_Skin_Head"], Side_Tucked_Lob: ["Hair", "Scalp"], CC_Base_EyeOcclusion: ["Std_Eye_Occlusion_R"] };
+      if (arg === "CC_Base_EyeOcclusion|Std_Eye_Occlusion_R") return { values: [-999] }; // no diffuse texture
+      if (arg === "Side_Tucked_Lob|Hair") return { values: [0, 0, 30, 0, 0, 0, 20] };
+      return { values: [0, 0, 0, 0, 0, 0, 0] };
+    });
+    const out = await exportRecipe(b as never, fixtureAllowlist());
+    expect(out.recipe.texture_colors).toEqual([{ mesh: "Side_Tucked_Lob", material: "Hair", brightness: 30, yellow: 20 }]);
+    expect(RecipeSchema.safeParse(out.recipe).success).toBe(true);
+  });
+
+  it("carries the applied recipe's texture colours (CC4 bakes them on save) and lets a live adjustment replace one", async () => {
+    const b = sceneBridge();
+    const applied = recipe({ texture_colors: [{ mesh: "Hair", material: "Hair", brightness: 30 }, { mesh: "Brow", material: "Brow", yellow: 20 }] });
+    setLastAppliedRecipe(applied);
+    b.diagnostics.mockImplementation(async (q: string, arg?: string) => {
+      if (q === "materials_per_mesh") return { Hair: ["Hair"], Brow: ["Brow"] };
+      if (arg === "Brow|Brow") return { values: [0, 0, 10, 0, 0, 0, 0] };
+      return { values: [0, 0, 0, 0, 0, 0, 0] }; // saved: baked, reads 0
+    });
+    const out = await exportRecipe(b as never, fixtureAllowlist());
+    expect(out.recipe.texture_colors).toEqual([{ mesh: "Hair", material: "Hair", brightness: 30 }, { mesh: "Brow", material: "Brow", brightness: 10 }]);
+  });
+
+  it("reads the hair tint (set_color hair) back from the hair meshes' diffuse colour", async () => {
+    const b = sceneBridge();
+    b.listItems.mockResolvedValue({ ...EMPTY_ITEMS, hair: [{ name: "Short Grey", meshes: ["Short_Grey"] }] });
+    b.diagnostics.mockImplementation(async (q: string) =>
+      q === "materials_per_mesh" ? { Short_Grey: ["Short_Grey_Cap", "Short_Grey"] } : { values: [0, 0, 0, 0, 0, 0, 0] });
+    b.getDiffuseColor.mockImplementation(async (_m: string, mat: string) =>
+      mat === "Short_Grey" ? { r: 0.357, g: 0.259, b: 0.176 } : { r: 1, g: 1, b: 1 });
+    const out = await exportRecipe(b as never, fixtureAllowlist());
+    expect(out.recipe.colors).toEqual({ hair: [0.36, 0.26, 0.18] });
+    expect(RecipeSchema.safeParse(out.recipe).success).toBe(true);
+
+    b.getDiffuseColor.mockResolvedValue({ r: 1, g: 1, b: 1 });
+    expect((await exportRecipe(b as never, fixtureAllowlist())).recipe.colors).toBeUndefined();
+  });
+
+  it("notes when the material list can't be read", async () => {
+    const b = sceneBridge();
+    b.diagnostics.mockResolvedValue({ success: false, error: "No avatar" });
+    const out = await exportRecipe(b as never, fixtureAllowlist());
+    expect(out.recipe.texture_colors).toEqual([]);
+    expect(out.notes.join()).toMatch(/Hair tint and texture colours not read back: No avatar/);
   });
 
   it("leaves out items the base brought, and carries unreadable fields from the applied recipe", async () => {
@@ -212,8 +337,18 @@ describe("exportRecipe", () => {
     ] });
     const out = await exportRecipe(b as never, fixtureAllowlist());
     expect(out.unmapped_items).toEqual(["Mystery Hat"]);
-    expect(out.recipe.morphs).toEqual([{ display_name: "Body Thin", category: "Actor", value: 0.35 }]);
+    expect(out.recipe.morphs).toEqual([{ id: "a", display_name: "Body Thin", category: "Actor", value: 0.35 }]);
     expect(out.recipe).toMatchObject({ id: RAW.id, mst: 5, colors: RAW.colors, motions: RAW.motions });
+  });
+
+  it("lists base items the character no longer wears and carries the skin layers", async () => {
+    const b = sceneBridge();
+    b.listItems.mockResolvedValueOnce({ ...EMPTY_ITEMS, clothes: [{ name: "Bra", meshes: [] }] }); // what the base brought
+    await applyRecipe(b as never, fixtureAllowlist(), recipe(LOOK));
+    b.listItems.mockResolvedValueOnce({ ...EMPTY_ITEMS, clothes: [{ name: "Basic T-shirts", meshes: [] }] }); // Bra removed
+    const out = await exportRecipe(b as never, fixtureAllowlist());
+    expect(out.recipe).toMatchObject({ remove_base_items: ["Bra"], skin: LOOK.skin });
+    expect(RecipeSchema.safeParse(out.recipe).success).toBe(true);
   });
 
   it("fails without an avatar", async () => {

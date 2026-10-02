@@ -2111,8 +2111,18 @@ def load_item(file_path: str) -> dict[str, Any]:
     if file_path.lower().endswith(".ccskingenpreset") and avatar:
         # SkinGen / make-up presets apply to a character: target the avatar like a double-click on it does.
         # CC4 then stays in SkinGen mode (hair, brows and clothes hidden; RScene.Show doesn't help) until the
-        # project is saved and reopened. A second preset of a kind already applied opens an Add/Replace dialog.
-        status = RLPy.RFileIO.LoadFile(file_path, True, avatar)
+        # project is saved and reopened. A second preset of a kind already applied opens an Add/Replace dialog;
+        # silent mode is meant to answer it with the default button (Add).
+        g = RLPy.RGlobal
+        silent = hasattr(g, "SetSilentMode")
+        was_silent = bool(g.GetSilentMode()) if silent else False
+        try:
+            if silent:
+                g.SetSilentMode(True)
+            status = RLPy.RFileIO.LoadFile(file_path, True, avatar)
+        finally:
+            if silent:
+                g.SetSilentMode(was_silent)
     else:
         status = RLPy.RFileIO.LoadFile(file_path)
     seconds = round(time.time() - t0, 2)

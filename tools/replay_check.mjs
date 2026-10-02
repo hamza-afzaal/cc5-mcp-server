@@ -31,7 +31,8 @@ async function exportIt() {
   const out = text(await client.callTool({ name: "export_recipe", arguments: {} }));
   return JSON.parse(out.split("\n\nNotes:")[0]);
 }
-const canon = (r) => JSON.stringify({ ...r, morphs: [...r.morphs].sort((a, b) => a.display_name.localeCompare(b.display_name)) }, null, 2);
+const morphKey = (m) => m.id ?? m.display_name;
+const canon = (r) => JSON.stringify({ ...r, morphs: [...r.morphs].sort((a, b) => morphKey(a).localeCompare(morphKey(b))) }, null, 2);
 
 try {
   await apply(recipe);

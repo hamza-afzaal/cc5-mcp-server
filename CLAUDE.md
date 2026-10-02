@@ -63,8 +63,8 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
 - Purchased Lite Hair Plus styles use plain **PBR** in CC4 (only diffuse/normal/opacity/AO maps; no flow/ID/root), so no RLHair shader is exported for them; that's by design, not an export bug.
 - **SkinGen and make-up presets work from Python, with one extra step.**
   - Apply them with `load_item` (type `makeup`, or `skin` for a `.ccSkinGenPreset` skin base); the bridge calls `RFileIO.LoadFile(path, True, avatar)`.
-  - CC4 then **stays in SkinGen mode**, with hair, brows and clothes hidden in the viewport and renders. `RScene.Show` doesn't bring them back, and there's no API to leave the mode. **`save_project_as` a copy, then `open_project` it.** That leaves the mode, and the make-up is kept: Megan, 2026-09-30.
-  - A second preset of a kind already on the avatar opens an **Add / Replace** dialog that waits for the owner, so apply each kind once, starting from a project without make-up.
+  - CC4 then **stays in SkinGen mode**, with hair, brows and clothes hidden in the viewport and renders. `RScene.Show` doesn't bring them back, and there's no API to leave the mode. **`save_project_as` a copy, then `open_project` it.** That leaves the mode, and the make-up is kept: Megan, 2026-09-30. `apply_recipe` does this itself after `skin.preset` / `skin.layers` (copy `<id>_recipe_<timestamp>`).
+  - A second preset of a kind already on the avatar opens an **Add / Replace** dialog. `load_item` wraps SkinGen presets in `RGlobal.SetSilentMode(True)`, which answers **Add** (tested: a second Blush Round stacked, 2026-10-02). Without it the dialog waits for the owner.
   - The Human Anatomy brow presets point to a texture in a CC3 template folder (`C:\Users\Public\Documents\Reallusion\Template\Character Creator 3 Template\...\Makeup\1_S*.png`) that isn't installed. A "texture failed to load" dialog then waits for OK. **Run `python tools/preset_refs.py <preset or folder>` before applying a preset**: it lists missing textures. Presets downloaded one at a time miss their pack's textures. Install **whole packs** through CC4's Content Manager; since 2026-10-01, 696 of 697 presets pass (`docs/content-inventory.md`).
   - Base characters with 3D brow meshes (Camila's `Camila_Brow`) keep those brows; a SkinGen brow layer only paints the skin.
 - **The first render after a material or texture change is stale.** It catches the texture half rebuilt: the same hair state rendered once as a flat, pale blonde shell, then as natural brown on the next render (2026-10-01).
@@ -75,6 +75,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - On Megan: near-black Lite Hair, brightness +30 → natural medium brown. Brows (`Female_Brow`, both materials), brightness +15 and yellow +20 → warm brown matching the hair.
   - Saturation +45 or more brings out a green undertone in that hair texture.
   - `set_color` / `set_diffuse_color` set a diffuse tint instead.
+  - **Saving bakes the adjustment into the texture**: after a reopen the values read 0 but the colour stays (2026-10-02). `export_recipe` can only read unsaved adjustments, so recipes carry `texture_colors`.
 - **Human Anatomy sliders (`Body HA …` / `Head HA …`) leave a dark crescent above the upper lids**, plus a line across the irises, in CC4's viewport (already visible at 0.1). **Fix: `fix_eye_element`** (CC4's *Fix Eye Element*, `RIAvatarShapingComponent.FixEyeElement()`: no dialog, one undo step). `apply_recipe` runs it after the morphs; after manual `set_morphs`, call it yourself. Eyelid, lash, eyeball and occlusion sliders don't fix it. The exported mesh was clean even before the fix. Details: `../blender-pipeline/docs/body-proportions.md` (Megan, 2026-10-01).
 - **Motions and poses:** `apply_motion` (allowlisted `motion` items; `RFileIO.LoadMotion` at time 0) works, and capture_views then renders the pose. **CC4 ignores `RGlobal.SetTime` from Python**: even Play+Pause and a 1-tick nudge leave the timeline at frame 0, so `set_time` reports failure. For seated checks use `.rlPose` poses, or a motion whose frame 0 is the wanted pose (Female Sit Talk is seated at frame 0). Frame-by-frame motion checks belong in Blender on `export_motions` clips (2026-10-01).
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
@@ -111,7 +112,7 @@ Measured on clothed Camila: authored LOD0 42.2k tris / 19 material slots; ActorB
 
 ## Morph recipes
 
-Verified display names per archetype, filled in during M1/M2 from real CC4 data. Morphs are matched by **display name** (plus `category` if ambiguous); an unknown name fails the whole `set_morphs` batch.
+Verified display names per archetype, filled in during M1/M2 from real CC4 data. Morphs are matched by **id** when given, else by **display name** (plus `category` if ambiguous); an unknown name fails the whole `set_morphs` batch. The Headshot pack repeats many display names ("Nose Width" under `Actor/Head` and `Actor/Headshot`), so `export_recipe` writes ids too.
 
 | Archetype | Display names (value range used) | Notes |
 |---|---|---|

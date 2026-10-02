@@ -90,8 +90,8 @@ export function registerPipelineTools(
 ) {
   server.tool(
     "apply_recipe",
-    "Replay a character recipe (design §6) into CC4: clear the scene, load the base, set morphs by display name, load skin/hair/clothes/accessories, set eye/hair colors. Every 'allowlist:' reference is resolved first; an unknown, non-exportable or wrong-type item fails before CC4 is touched.",
-    { recipe: RecipeSchema.describe("Recipe object, recipe_version '0.1'") },
+    "Replay a character recipe (design §6) into CC4: clear the scene, load the base, set morphs by display name, load the skin base and stacked SkinGen/make-up layers, hair, clothes and accessories, remove base items the character doesn't wear, set eye/hair colors and texture colour adjustments. After any SkinGen preset it saves '<id>_recipe' and reopens it (that leaves SkinGen mode). Every 'allowlist:' reference is resolved first; an unknown, non-exportable or wrong-type item fails before CC4 is touched.",
+    { recipe: RecipeSchema.describe("Recipe object, recipe_version '0.2' (or '0.1')") },
     async ({ recipe }) => {
       try {
         // Parse here too: defaults (e.g. clothes: []) must hold whoever calls the handler.
@@ -104,7 +104,7 @@ export function registerPipelineTools(
 
   server.tool(
     "export_recipe",
-    "Read the current CC4 character back as a recipe: base, active morphs by display name, and allowlisted clothes/hair/accessories. Fields CC4 can't report (colors, MST, clinical presentation) come from the last recipe applied in this session.",
+    "Read the current CC4 character back as a recipe: base, active morphs by display name, allowlisted clothes/hair/accessories, and unsaved texture colour adjustments (CC4 bakes them into the texture on save). Fields CC4 can't report (skin base and SkinGen layers, removed base items, saved texture colours, colors, MST, clinical presentation) come from the last recipe applied in this session.",
     {},
     async () => bridgeCall(() => exportRecipe(bridge, getAllowlist()), (r) => {
       const notes = r.notes.length ? `\n\nNotes:\n${r.notes.map((n) => `- ${n}`).join("\n")}` : "";
