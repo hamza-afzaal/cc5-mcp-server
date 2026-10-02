@@ -165,6 +165,7 @@ describe("export_motions", () => {
     const [{ text }] = await call("export_motions", { clips: ["allowlist:motion/female_idle_1"], prefix: "p" });
     expect(bridge.startExportFbx).toHaveBeenCalledWith("p_female_idle_1_motion.fbx", {
       target_tool: "Unity", export_motion: true, motion_only: true, include_motion_path: "D:/T/Motion/Female Idle_1.rlMotion", fps: 30,
+      reset_bone_scale: true,   // same skeleton as the hero export
     });
     expect(text).toBe("✓ motion/female_idle_1 → C:/e/p_female_idle_1_motion.fbx");
   });

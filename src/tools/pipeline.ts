@@ -268,6 +268,9 @@ export function registerPipelineTools(
         try {
           const job = await bridge.startExportFbx(name, {
             target_tool: "Unity", export_motion: true, motion_only: true, include_motion_path: item.path, fps: fps ?? 30,
+            // same skeleton as the hero export: without it the clip's bones carry CC4's body-proportion scales
+            // (thigh 1.13/0.89, InheritType 2) while the character's are baked to 1
+            reset_bone_scale: true,
           });
           const done = await waitForJob(bridge, job.job_id, 300_000);
           const r = (done.result ?? {}) as ExportFbxResult;
