@@ -51,4 +51,14 @@ export function registerMorphTools(server: McpServer, bridge: CC4Bridge) {
     },
     async ({ morphs }) => bridgeCall(() => bridge.setMorphs(morphs), formatSetMorphs)
   );
+
+  server.tool(
+    "fix_eye_element",
+    "Run CC4's Fix Eye Element: refit the eyelid/eye elements to the current head shape. Use after shaping sliders that move the eyelids (the Human Anatomy 'Body/Head HA' sliders otherwise leave a dark crescent above the upper lids). One undo step, no dialog. apply_recipe runs it automatically after the morphs.",
+    {},
+    async () => bridgeCall(
+      () => bridge.fixEyeElement(),
+      (r) => r.success ? `Fix Eye Element applied to ${r.avatar ?? "the avatar"}.` : `Fix Eye Element failed: ${r.error}`,
+    )
+  );
 }

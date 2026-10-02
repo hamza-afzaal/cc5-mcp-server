@@ -608,6 +608,13 @@ describe("CC4Bridge Phase 2 endpoints", () => {
     expect(body()).toEqual({ morphs: [{ display_name: "Body Thin", value: 0.3 }] });
   });
 
+  it("fixEyeElement posts to /morphs/fix_eye", async () => {
+    mockFetch({ result: { success: true, avatar: "Camila" } });
+    expect(await bridge.fixEyeElement()).toEqual({ success: true, avatar: "Camila" });
+    expect(url()).toBe("http://localhost:5101/morphs/fix_eye");
+    expect(body()).toEqual({});
+  });
+
   it("getMorphStatus and listItems are GETs", async () => {
     mockFetch({ result: { ready: true, categories: 123, morphs: 2778 } });
     expect((await bridge.getMorphStatus()).ready).toBe(true);

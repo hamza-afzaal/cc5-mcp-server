@@ -353,6 +353,10 @@ export interface AppliedMorph {
   warning?: string;
 }
 
+export interface FixEyeElementResult extends OperationResult {
+  avatar?: string;
+}
+
 export interface SetMorphsResult extends OperationResult {
   applied?: AppliedMorph[];
   problems?: Array<Record<string, unknown>>;

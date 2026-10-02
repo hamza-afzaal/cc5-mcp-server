@@ -43,6 +43,7 @@ function happyBridge(): MockBridge {
     { id: "a", display_name: "Body Thin", requested: 0.35, value: 0.35 },
     { id: "b", display_name: "Nose Width", requested: -0.2, value: -0.2, warning: "outside the UI default range [0, 1] (applied anyway)" },
   ] });
+  b.fixEyeElement.mockResolvedValue({ success: true, avatar: "Camila" });
   b.setColor.mockResolvedValue({ success: true, applied_to: ["CC_Base_Eye/Std_Eye_R"] });
   return b;
 }
@@ -97,7 +98,7 @@ describe("applyRecipe", () => {
     const report = await applyRecipe(b as never, fixtureAllowlist(), recipe());
     expect(report.ok).toBe(true);
     expect(report.steps.map((s) => s.step)).toEqual([
-      "set_character", "clear_scene", "load_base", "morphs", "load_hair", "load_clothes", "load_clothes", "color_eyes",
+      "set_character", "clear_scene", "load_base", "morphs", "fix_eye_element", "load_hair", "load_clothes", "load_clothes", "color_eyes",
     ]);
     expect(b.setCharacter).toHaveBeenCalledWith(RAW.id);
     expect(JSON.parse(fs.readFileSync(path.join(CHAR_DIR, "recipe.applied.json"), "utf-8")).id).toBe(RAW.id);
@@ -107,6 +108,15 @@ describe("applyRecipe", () => {
     ]);
     expect(b.setMorphs).toHaveBeenCalledWith(RAW.morphs);
     expect(b.setColor).toHaveBeenCalledWith("eyes", 0.28, 0.22, 0.16);
+  });
+
+  it("runs Fix Eye Element after the morphs; a failure is a warning, not a stop", async () => {
+    const b = happyBridge();
+    b.fixEyeElement.mockResolvedValue({ success: false, error: "FixEyeElement returned failure" });
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe());
+    expect(report.ok).toBe(true);
+    expect(b.fixEyeElement).toHaveBeenCalledTimes(1);
+    expect(report.warnings.join(" ")).toMatch(/Fix Eye Element failed/);
   });
 
   it("surfaces morph warnings, unverified licenses, tint and motions", async () => {

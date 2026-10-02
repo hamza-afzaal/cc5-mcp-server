@@ -14,8 +14,22 @@ beforeEach(() => {
 });
 
 describe("registerMorphTools", () => {
-  it("registers search_morphs and set_morphs only", () => {
-    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["search_morphs", "set_morphs"]);
+  it("registers search_morphs, set_morphs and fix_eye_element", () => {
+    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["search_morphs", "set_morphs", "fix_eye_element"]);
+  });
+});
+
+describe("fix_eye_element", () => {
+  it("reports success", async () => {
+    bridge.fixEyeElement.mockResolvedValue({ success: true, avatar: "Camila" });
+    const text = (await server.getRegisteredTool("fix_eye_element")({})).content[0].text;
+    expect(text).toBe("Fix Eye Element applied to Camila.");
+  });
+
+  it("reports failure", async () => {
+    bridge.fixEyeElement.mockResolvedValue({ success: false, error: "No avatar in scene" });
+    const text = (await server.getRegisteredTool("fix_eye_element")({})).content[0].text;
+    expect(text).toContain("No avatar in scene");
   });
 });
 

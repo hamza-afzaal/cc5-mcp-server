@@ -186,6 +186,11 @@ export async function applyRecipe(
     const morphWarnings = (morphs.applied ?? []).filter((m) => m.warning).map((m) => `${m.display_name}: ${m.warning}`);
     warnings.push(...morphWarnings);
     steps.push({ step: "morphs", ok: true, detail: { applied: morphs.applied?.length ?? 0 } });
+    // Refit the eyelid elements to the new head shape (the Human Anatomy sliders otherwise leave a crescent above the lids).
+    current = "fix_eye_element";
+    const eyes = await bridge.fixEyeElement();
+    if (eyes.success) steps.push({ step: "fix_eye_element", ok: true });
+    else warnings.push(`Fix Eye Element failed: ${eyes.error}`);
   }
 
   // 3. Skin, hair, clothes, accessories.

@@ -10,7 +10,7 @@ One page for taking a new character from brief to Unity and the web. The details
 2. Check that every part (base, hair, clothes, shoes, motion) is in `assets\allowlist.json` with `verified: true`.
    - **[you]** Anything new: confirm the Standard license before it goes on the list.
    - Garments that aren't CC4 content go through the garment-intake lane (as `.ccCloth`), never through S4.
-3. Write `..\cc4-recepies\recipes\<id>.json` in the format of `kevin.json`. Morphs are matched by display name; record the verified names in the CLAUDE.md morph table.
+3. Write `..\cc4-recepies\recipes\<id>.json` in the format of `kevin.json`. Morphs are matched by display name; record the verified names in the CLAUDE.md morph table. `apply_recipe` runs `fix_eye_element` after the morphs. When shaping by hand with `set_morphs`, call `fix_eye_element` after the last slider change; the Human Anatomy sliders otherwise leave an eyelid crescent.
 
 ## 2. CC4 (S2–S3)
 

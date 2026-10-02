@@ -815,6 +815,29 @@ def capture_viewport(output_path: str = "", width: int = 1280, height: int = 720
         return {"success": False, "error": str(e)}
 
 
+def fix_eye_element() -> dict[str, Any]:
+    """CC4's Fix Eye Element (RIAvatarShapingComponent.FixEyeElement): refits the eyelid/eye elements to the current
+    head shape. Run after shaping sliders that move the eyelids (e.g. the Human Anatomy sliders, which otherwise leave
+    a dark crescent above the upper lids in CC4's viewport). One undo step."""
+    try:
+        avatar = get_first_avatar()
+        if not avatar:
+            return {"success": False, "error": "No avatar in scene"}
+        shaping = avatar.GetAvatarShapingComponent()
+        if not shaping:
+            return {"success": False, "error": "Avatar has no shaping component"}
+        RLPy.RGlobal.BeginAction("Fix Eye Element")
+        try:
+            status = shaping.FixEyeElement()
+        finally:
+            RLPy.RGlobal.EndAction()
+        RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
+        ok = status is None or not hasattr(RLPy, "RStatus") or status == RLPy.RStatus.Success
+        return {"success": ok, "avatar": avatar.GetName()} if ok else {"success": False, "error": "FixEyeElement returned failure"}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
 # --- Undo / Redo ---
 
 def _active_morph_count() -> int:
@@ -2557,6 +2580,7 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "get_morph_value":       (lambda p: get_morph_value(p["morph_id"]), ["morph_id"], DEFAULT_TIMEOUT_S),
     "set_morphs":            (lambda p: set_morphs(p["morphs"]), ["morphs"], DEFAULT_TIMEOUT_S),
     "reset_all_morphs":      (lambda p: reset_all_morphs(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
+    "fix_eye_element":       (lambda p: fix_eye_element(), [], DEFAULT_TIMEOUT_S),
     # Items
     "list_items":            (lambda p: list_items(), [], DEFAULT_TIMEOUT_S),
     "load_item":             (lambda p: load_item(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
@@ -2626,6 +2650,7 @@ POST_ROUTES: dict[str, str] = {
     "/morph/get":           "get_morph_value",
     "/morphs/set":          "set_morphs",
     "/morphs/reset":        "reset_all_morphs",
+    "/morphs/fix_eye":      "fix_eye_element",
     "/item/load":           "load_item",
     "/item/remove":         "remove_item",
     "/content/browse":      "browse_content",

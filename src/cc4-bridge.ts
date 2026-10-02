@@ -37,6 +37,7 @@ import type {
   MorphCatalogStatus,
   MorphValue,
   SetMorphsResult,
+  FixEyeElementResult,
   ItemList,
   LoadItemResult,
   SaveProjectResult,
@@ -207,6 +208,10 @@ export class CC4Bridge {
 
   async setMorphs(morphs: MorphValue[]): Promise<SetMorphsResult> {
     return this.request<SetMorphsResult>("/morphs/set", "POST", { morphs });
+  }
+
+  async fixEyeElement(): Promise<FixEyeElementResult> {
+    return this.request<FixEyeElementResult>("/morphs/fix_eye", "POST", {});
   }
 
   // --- Items ---
