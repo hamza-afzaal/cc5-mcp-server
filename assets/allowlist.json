@@ -398,6 +398,56 @@
    "notes": "heavy all-over scalp shading. Applied to Megan 2026-10-01, no texture dialog, check_export_license exportable. Hairline + Basic Light + Basic Heavy together hide the bare parting under Lite Hair."
   },
   {
+   "id": "skin/rhs_base_female_heavy",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Base/Realistic Human Skin/Female Heavy.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "Realistic Human Skin base, heavy female (BaseSkin/FatFemale). Applied to Megan 2026-10-01 (megan_skin_v1/v2), check_export_license exportable."
+  },
+  {
+   "id": "skin/rhs_dull_skin_eye",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Details/3_Coloration/Realistic Human Skin/Dull Skin Eye.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "dull, tired under-eye colour. Applied to Megan 2026-10-01 (megan_skin_v1/v2), check_export_license exportable."
+  },
+  {
+   "id": "skin/rhs_uneven_face",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Details/3_Coloration/Realistic Human Skin/Uneven Face.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "uneven facial tone. Applied to Megan 2026-10-01 (megan_skin_v1/v2), check_export_license exportable."
+  },
+  {
+   "id": "skin/rhs_oily_t_part",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Details/5_Roughness/Realistic Human Skin/Oily T Part.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "oily T-zone roughness. Applied to Megan 2026-10-01 (megan_skin_v1/v2), check_export_license exportable."
+  },
+  {
+   "id": "skin/rhs_fat_f_medium",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Normal Effects/2_Body/Realistic Human Skin/4_Fat Creases/Fat F 2Medium.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "medium female fat creases (normal). Applied to Megan 2026-10-01 (megan_skin_v1/v2), check_export_license exportable."
+  },
+  {
    "id": "skin/scalp_edge_smooth",
    "type": "skin",
    "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Body Hair/Scalp/Realistic Human Skin/Edge Smooth.ccSkinGenPreset",
