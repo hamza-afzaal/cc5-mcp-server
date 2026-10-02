@@ -1,6 +1,6 @@
 {
  "templates": "D:\\Business\\Reallusion\\Reallusion Templates",
- "scanned": "2026-10-01 17:43",
+ "scanned": "2026-10-01 18:00",
  "folders": {
   "Accessory/Arm/Actor Group": {
    "files": {
@@ -654,7 +654,7 @@
   },
   "Cloth/Others": {
    "files": {
-    ".cccloth": 10
+    ".cccloth": 30
    }
   },
   "Cloth/Others/Alika": {
@@ -1205,6 +1205,11 @@
     ".ccskingentool": 2
    }
   },
+  "Media/IES": {
+   "files": {
+    ".ies": 18
+   }
+  },
   "Media/Material Plus/Eyebrows/Female_Angled": {
    "files": {
     ".imtlplus": 3
@@ -1340,9 +1345,298 @@
     ".imtl": 6
    }
   },
+  "Media/Material/PBR": {
+   "files": {
+    ".imtl": 61
+   }
+  },
+  "Media/Material/SSS": {
+   "files": {
+    ".imtl": 32
+   }
+  },
+  "Media/Material/Traditional": {
+   "files": {
+    ".imtl": 13
+   }
+  },
   "Media/Material/hair_material": {
    "files": {
     ".imtl": 7
+   }
+  },
+  "Media/Sound": {
+   "files": {
+    ".mp3": 3
+   }
+  },
+  "Media/Sound/Horse": {
+   "files": {
+    ".wav": 6
+   }
+  },
+  "Media/Substance": {
+   "files": {
+    ".png": 22
+   }
+  },
+  "Media/Texture/Blend": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/Bump": {
+   "files": {
+    ".jpg": 42
+   }
+  },
+  "Media/Texture/Displacement": {
+   "files": {
+    ".jpg": 31
+   }
+  },
+  "Media/Texture/Glow": {
+   "files": {
+    ".jpg": 43
+   }
+  },
+  "Media/Texture/HDRI": {
+   "files": {
+    ".hdr": 24,
+    ".rlpreviewimage": 24
+   }
+  },
+  "Media/Texture/ImageLayer": {
+   "files": {
+    ".jpg": 8
+   }
+  },
+  "Media/Texture/LUT/Adjust Color": {
+   "files": {
+    ".png": 12
+   }
+  },
+  "Media/Texture/LUT/Film Style": {
+   "files": {
+    ".png": 18
+   }
+  },
+  "Media/Texture/Opacity": {
+   "files": {
+    ".jpg": 33
+   }
+  },
+  "Media/Texture/PBR/01Bricks/Brick Wall_Cracked": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/01Bricks/Brick Wall_Gray": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/01Bricks/Brick Wall_Red": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/02Ground/Ground_Clay": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/02Ground/Ground_Concrete": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/02Ground/Ground_Dirt": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/02Ground/Ground_Gravel": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/03Wood/Wood_Cedar": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/03Wood/Wood_Oak": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/03Wood/Wood_Parquet": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/04Stone/Stone_Black Marble": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/04Stone/Stone_Gravel": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/04Stone/Stone_Rocks": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/04Stone/Stone_White Marble": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/05Concrete/Concrete_Dirt": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/05Concrete/Concrete_Rough": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/05Concrete/Concrete_Smooth": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/05Concrete/Concrete_White": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/06Fabric/Fabric_Checkers": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/06Fabric/Fabric_Jeans": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/06Fabric/Fabric_Leather": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/06Fabric/Fabric_Retro": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/07Wall/Rock Wall": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/07Wall/Stone Wall": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/08Metal/Old Bronze": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/08Metal/Rusty Fence": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/08Metal/Silver": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/PBR/09Roof/Roof_Flake": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/09Roof/Roof_Square": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/10Tiles/Checkered Marble": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/PBR/10Tiles/Checkered Tiles": {
+   "files": {
+    ".jpg": 5
+   }
+  },
+  "Media/Texture/PBR/10Tiles/Triangle Tiles": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/Reflection": {
+   "files": {
+    ".jpg": 9
+   }
+  },
+  "Media/Texture/Sample Prop/Brick Wall": {
+   "files": {
+    ".jpg": 10
+   }
+  },
+  "Media/Texture/Sample Prop/Fence": {
+   "files": {
+    ".jpg": 12,
+    ".png": 2
+   }
+  },
+  "Media/Texture/Sample Prop/Kite": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/Sample Prop/Net": {
+   "files": {
+    ".jpg": 3
+   }
+  },
+  "Media/Texture/Sample Prop/Reliefs": {
+   "files": {
+    ".jpg": 12
+   }
+  },
+  "Media/Texture/Sample Prop/Roof": {
+   "files": {
+    ".jpg": 13
+   }
+  },
+  "Media/Texture/Sample Prop/Table": {
+   "files": {
+    ".jpg": 4
+   }
+  },
+  "Media/Texture/Weight Map": {
+   "files": {
+    ".jpg": 28
+   }
+  },
+  "Media/Video": {
+   "files": {
+    ".avi": 5,
+    ".mp4": 3,
+    ".wmv": 1
    }
   },
   "Others/Folder Icon/Hair/Element/Beard": {
@@ -4170,6 +4464,11 @@
   "Skin/SkinGen Tools/UV Transfer/Daz G9_M": {
    "files": {
     ".ccskingentool": 8
+   }
+  },
+  "Stage/Camera/CC Camera/Headshot Ref": {
+   "files": {
+    ".cccam": 6
    }
   },
   "Stage/Camera/Headshot Ref": {

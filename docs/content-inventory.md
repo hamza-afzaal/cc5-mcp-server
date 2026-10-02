@@ -79,6 +79,18 @@ These are for agenda A (deformation checks) and seated renders. The bridge can't
 - `Avatar Preset` (`.ccAvatarPreset`): body, head and full-body morph presets for CC4 Camila, Kevin and CC3+ Neutral F/M; Head Morph Skin (Human Anatomy, SkinGen, SkinGen Bonus Baby); Nail (PBR Manicure, SSS Natural, Realistic Human Skin).
 - `Actor/Expression Wrinkles/Wrinkle Essentials/Realistic/4K` (`.rlWrinkle`): 4K expression wrinkles. Check the Quest cost before using.
 
+## Media library (2026-10-01, evening)
+
+This is CC4's general **Media** content (`Media/`), not SkinGen. It doesn't fix the missing skin textures.
+
+- `Media/Material` (`.imtl`): PBR 61, SSS 32, Traditional 13. Material presets for props and clothing.
+- `Media/Texture`:
+  - PBR sets: bricks, ground, wood, stone, concrete, fabric (jeans, leather), wall, metal, roof, tiles.
+  - Bump 42, Displacement 31, Opacity 33, Glow 43, Weight Map 28, Reflection 9, LUTs 30.
+  - **HDRI 24**: Office Window, Light Room, Scan Room 1–3, Studio 01–04, Reading Room, … Useful as **render lighting for Gate 1 reviews** (an office-like light for a doctor's-office character).
+- `Media/IES` 18 light profiles; `Media/Sound`, `Media/Video`, `Media/Substance`: not needed.
+- `Cloth/Others`: +20 male underwear (`M_Underwear_A1…J2`). Not needed for Megan.
+
 ## Hair
 
 - Lite Hair Plus Female/Male Vol.1: 20 styles in the approved list (plain PBR card hair, cheap in VR).
