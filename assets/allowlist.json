@@ -77,6 +77,24 @@
    "verified": true
   },
   {
+   "id": "motion/female_idle_2",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Idle/Female Idle_2.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "standing idle (alternative)"
+  },
+  {
+   "id": "motion/female_stand_talk",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Perform/Stand Talk.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "standing talking"
+  },
+  {
    "id": "motion/male_breathe_1",
    "type": "motion",
    "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/1.Human Male/Idle/Breathe_1.rlMotion",
