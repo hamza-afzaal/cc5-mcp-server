@@ -408,6 +408,16 @@
    "notes": "Realistic Human Skin base, heavy female (BaseSkin/FatFemale). Applied to Megan 2026-10-01 (megan_skin_v1/v2), check_export_license exportable."
   },
   {
+   "id": "skin/rhs_base_female_athletic",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Base/Realistic Human Skin/Female Athletic.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "Realistic Human Skin base, athletic female. Applied to Megan 2026-10-01 (megan_skin_athletic), check_export_license exportable."
+  },
+  {
    "id": "skin/rhs_dull_skin_eye",
    "type": "skin",
    "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Details/3_Coloration/Realistic Human Skin/Dull Skin Eye.ccSkinGenPreset",
