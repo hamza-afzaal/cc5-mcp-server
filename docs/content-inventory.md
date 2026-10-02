@@ -91,6 +91,11 @@ This is CC4's general **Media** content (`Media/`), not SkinGen. It doesn't fix 
   - **HDRI 24**: Office Window, Light Room, Scan Room 1–3, Studio 01–04, Reading Room, … Useful as **render lighting for Gate 1 reviews** (an office-like light for a doctor's-office character).
 - `Media/IES` 18 light profiles; `Media/Sound`, `Media/Video`, `Media/Substance`: not needed.
 - `Cloth/Others`: +20 male underwear (`M_Underwear_A1…J2`). Not needed for Megan.
+- Later the same evening:
+  - `Media/Material Plus` (`.imtlplus`): ActorCore casual/party materials, Kevin ActorSCAN, DorothyJean ShortHair001, Turntable.
+  - `Props` (`.iprop`): 3D blocks, light tools, physics and cloth templates, billboards.
+  - `Media/iModel/Samples`, horse motions, water and image-layer videos.
+  - Not needed for avatars. The light tools and blocks could stage review renders.
 
 ## Hair
 
