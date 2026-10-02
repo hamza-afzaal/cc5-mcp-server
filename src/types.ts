@@ -439,5 +439,5 @@ export interface WorkspaceInfo {
   folder: string;
 }
 
-export type ViewPreset = "full" | "head" | "three_quarter";
+export type ViewPreset = "full" | "head" | "three_quarter" | "profile";
 export type LodLevel = "actorbuild" | "lod1" | "lod2";

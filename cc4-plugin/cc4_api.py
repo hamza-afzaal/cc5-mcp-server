@@ -2371,8 +2371,10 @@ def check_export_license(item: str = "") -> dict[str, Any]:
 # --- capture_views ---
 
 _VIEW_PRESETS = {"full": "ECameraLocationType_Front", "head": "ECameraLocationType_Face",
-                 "three_quarter": "ECameraLocationType_Front"}
+                 "three_quarter": "ECameraLocationType_Front", "profile": "ECameraLocationType_Face"}
 THREE_QUARTER_DEG = 35.0
+# The Preview Camera can't be moved, so turned views turn the avatar (and restore it): head side profile for chin/jaw.
+_TURN_DEG = {"three_quarter": THREE_QUARTER_DEG, "profile": 90.0}
 
 
 def _up_axis(avatar) -> tuple:
@@ -2405,7 +2407,7 @@ def _turn_avatar(avatar, degrees: float):
 
 def capture_views(presets: list | None = None, width: int = 1280, height: int = 720,
                   output_dir: str = "", prefix: str = "view") -> dict[str, Any]:
-    """Render framed review views (Gate 1): full body, head close-up, three-quarter."""
+    """Render framed review views (Gate 1): full body, head close-up, three-quarter, head side profile."""
     presets = presets or ["full", "head", "three_quarter"]
     bad = [p for p in presets if p not in _VIEW_PRESETS]
     if bad:
@@ -2438,9 +2440,9 @@ def capture_views(presets: list | None = None, width: int = 1280, height: int = 
         entry: dict[str, Any] = {"preset": preset}
         try:
             restore = None
-            if preset == "three_quarter":
-                restore = _turn_avatar(avatar, THREE_QUARTER_DEG)
-                entry["method"] = f"avatar turned {THREE_QUARTER_DEG:g} degrees, then restored"
+            if preset in _TURN_DEG:
+                restore = _turn_avatar(avatar, _TURN_DEG[preset])
+                entry["method"] = f"avatar turned {_TURN_DEG[preset]:g} degrees, then restored"
             try:
                 cam.SetCameraLocation(getattr(RLPy, _VIEW_PRESETS[preset]))
                 if hasattr(RLPy.RGlobal, "ForceViewportUpdate"):

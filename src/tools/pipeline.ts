@@ -163,7 +163,7 @@ export function registerPipelineTools(
     "capture_views",
     "Render Gate 1 review views of the current avatar: full body (front), head close-up, three-quarter (the avatar is turned 35° for the shot and restored). Returns the images.",
     {
-      presets: z.array(z.enum(["full", "head", "three_quarter"])).min(1).max(3).optional().describe("Default: all three"),
+      presets: z.array(z.enum(["full", "head", "three_quarter", "profile"])).min(1).max(4).optional().describe("Default: full, head, three_quarter. profile = head turned 90 degrees (chin, jaw, neck)"),
       width: z.number().int().min(256).max(3840).optional().describe("Default 1280"),
       height: z.number().int().min(256).max(2160).optional().describe("Default 720"),
       prefix: z.string().regex(/^[A-Za-z0-9_-]{1,64}$/).optional().describe("File name prefix (e.g. the recipe id)"),
