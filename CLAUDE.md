@@ -75,6 +75,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - On Megan: near-black Lite Hair, brightness +30 → natural medium brown. Brows (`Female_Brow`, both materials), brightness +15 and yellow +20 → warm brown matching the hair.
   - Saturation +45 or more brings out a green undertone in that hair texture.
   - `set_color` / `set_diffuse_color` set a diffuse tint instead.
+- **Human Anatomy sliders (`Body HA …` / `Head HA …`) distort the eyelids.** They leave a dark, hard-edged crescent above the upper lids and a line across the irises, already visible at 0.1. It's real geometry, so it reaches Unity. Build heavy bodies from Body Fat A/B, Voluptuous and the belly/hip sliders, and face fullness from Face Heavy, Face Fatter and the chin/jowl sliders. Details: `../blender-pipeline/docs/body-proportions.md` (Megan, 2026-10-01).
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
