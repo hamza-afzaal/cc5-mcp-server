@@ -34,7 +34,10 @@ Continues the CC4 avatar work from CXRP-532 (Kevin & Camila) and the twist fix f
 
 ## 4. Addressables
 
-Megan needs a prod asset id from the backend, mapped like Kevin 42 → `avatar_42`: Default Local Group + `AssetAddressableCatalog`, then SmokeTest load by key. **Ask the owner for the id**, and say whether she replaces Ava's entry in the semaglutide sim or sits next to it.
+**Megan replaces Ava** (owner, 2026-10-01).
+- Point Ava's backend asset id and addressable key at Megan's prefab, so the semaglutide sim and any scene casting Ava get Megan with no backend change.
+- Keep Ava's files in the repo until the A/B approves Megan, so it can be rolled back.
+- If the backend should instead get a new asset id for Megan and retire Ava's, say so and the owner will decide.
 
 ## 5. A/B on Quest: please check and send stills
 
