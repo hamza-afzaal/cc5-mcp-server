@@ -53,17 +53,18 @@ python tools/preset_refs.py "D:/Business/Reallusion/Reallusion Templates/Skin" -
 
 It was calibrated on 2026-10-01: it flags the Human Anatomy brow preset that opened the dialog, and passes the five presets that applied cleanly.
 
-### SkinGen library (downloaded 2026-10-01; 693 Skin + Makeup presets, 475 missing textures after the second download)
+### SkinGen library: complete (2026-10-01 evening; 697 Skin + Makeup presets, 696 with all textures)
 
-The second download (2026-10-01, afternoon) added more presets but **no texture images**: nothing new arrived in `Others\Skin Textures` or `Texture\SkinTextures`. The pack textures are still to find. Base presets still pass.
+The owner installed the whole packs through CC4's Content Manager (Realistic Human Skin, Makeup & SFX, SkinGen resources, Human Anatomy). Earlier, the presets had been downloaded one by one, which leaves pack textures out (441 failed). The only remaining failure is one `Body Hair/Realistic Human Skin/Torso` preset (missing `SkinGen/4_Range/Hair/Body/Body`); we don't need it.
 
-- **The base presets (folder roots) are complete.** All of `Skin/Skin Base`, `Body Hair` (incl. `Scalp`: Base Male, Basic_Light, Basic_Heavy, Hairline; `Beard`: 4), `Skin Details` (Skin Decal 10, Skin Noise 2, Coloration 5, Capillary 7, Roughness 2), `Blemish` (Mole, Acne, Suntan: 2 each), `Normal Effects` (Facial Wrinkle 2 + Facial Part 4, Body 2, Noise 3, Levels 13), `Acquired` (Dirt, Scar, Tattoo, Liquid, Scales), `Nails` 5, and every make-up root folder.
-- **The add-on pack presets are mostly missing their textures:** 441 of 639 fail. The preset files arrived but the pack textures didn't (missing folders such as `SkinGen\4_Range\Wrinkle_*`, `SkinGen\1_Source\Muscle`, `MakeUp\4_Range\Eyelash|Eyeshadow|Eyeliner`, `MakeUp\1_Source\Eyebrow\Female`).
-  - `Realistic Human Skin`: 0–2 per folder, apart from Scalp (Edge Smooth, Receding), Liquid 4/8, Acne 3/7, Manicure 6/18.
-  - `Makeup & SFX`: 0 per folder, apart from Lip 20/28.
-  - `Human Anatomy` brows: 0/11.
-  - Ask the owner whether the packs have a separate texture/resource download before using any of them.
-- Useful for patients: Scalp Hairline (bare parting under card hair), Skin Details Coloration/Capillary (redness, tired skin), Normal Effects Levels (face/body), Blemish Mole/Acne. **Fat Creases and Aged Wrinkle (Body) are pack presets with missing textures.**
+- **Base presets** (folder roots): all of Skin Base, Body Hair (Scalp: Base Male, Basic_Light, Basic_Heavy, Hairline), Skin Details, Blemish, Normal Effects, Acquired, Nails, and every make-up root.
+- **Realistic Human Skin** (the fix for the "clean potato" look). These are textured, realistic skin layers:
+  - Skin Base: Female Heavy, Female Athletic, Female Asian, Female African, Female Old, Baby, and male types. Full Skin: Female Heavy/Athletic/Old/Thin and male. `Skin/Overall/Realistic Human Skin` (`.ccSkin`): the same types as whole skins.
+  - Skin Details: Coloration (Dull Skin Eye/Large/Chest…, **Obesity Pattern**, Uneven Face/Forehead/2 Colors), Roughness (Dry Full, **Oily T Part**, Oily Forehead, Oily Full), Face Decal F1–F4.
+  - Normal Effects: **Fat Creases Fat F 1Light / 2Medium / 3Heavy**, Aged Wrinkle, Facial Wrinkle 01–10 (+ Facial Part), Muscle, Sinew, Vascular.
+  - Blemish (Freckle, Mole, Acne, Suntan), Body Hair (Arm, Leg, Torso, Scalp variants), Nails/Manicure.
+- **Makeup & SFX**: eyeliner, eyeshadow, brows (incl. Male, Trimmed), mascara, contour, highlight, lip, full looks (Daily, Party, Special, Warrior), misc (Camouflage, Scar, Tribe Paint). **Human Anatomy brows** are now complete.
+- **Megan candidates** (BMI 28, tired, early 30s): Skin Base **Female Heavy** (texture source `BaseSkin/FatFemale01|02`), Coloration **Dull Skin Eye** (tired under-eyes) + Uneven Face, Roughness **Oily T Part**, Normal Effects **Fat F 2Medium** (belly and side creases), a light Face Decal F*.
 - `Skin/SkinGen Tools/UV Transfer` (Daz G8.1/G9, `.ccSkinGenTool`): for importing Daz skins; not needed.
 - Make-up (Makeup & SFX and others): Full Makeup (Cordial, Enchanting, Intellectual…), Foundation (foundation 5, contour 17, blush 7, highlight 17), Eye (eyeliner 27, eyeshadow 31+28), Lip (11 looks + 28), Eyebrow (36 + Human Anatomy 11), Eyelash (mascara and natural sets).
 - SkinGen tools (Decal, Part, Specific: Lip, Eyeshadow, Eyebrow, Scar…).
