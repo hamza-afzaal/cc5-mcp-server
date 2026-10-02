@@ -25,7 +25,7 @@ Owned, checked 2026-09-30: one slider from each pack was applied to Camila, and 
 | **Essential Head Morphs** | 169 | face proportions |
 | **Headshot Morph 1000+** | 1,329 | Neck Double Chin, Chin Double, Cheek Jowls, jaw, face lower width, cheek fullness (309 embed + 1,020 pack) |
 | **Ultimate Morphs** | 222 | Arm Fat, Leg Fat, Hand/Foot Fat, Abdomen Width, Armpit Width/Front/Back, Eye Bag Upper/Lower/Height/Curve (tiredness), eyelash shaping, body-type presets (female heavy/athletic/old/asian) |
-| Human Anatomy (`Body/Head HA Female Heavy`, …) | per type | **avoid on hero characters: they distort the eyelids (see blender-pipeline docs/body-proportions.md)**; whole-body realistic types: Female Heavy, Athletic, Asian, Old; male equivalents |
+| Human Anatomy (`Body/Head HA Female Heavy`, …) | per type | they show an eyelid crescent in CC4's viewport only (the export is clean; see blender-pipeline docs/body-proportions.md); whole-body realistic types: Female Heavy, Athletic, Asian, Old; male equivalents |
 | Wrinkle Essentials | 48 | expression wrinkles (check the Unity/Quest cost before using) |
 
 Sliders load into the catalog by themselves once downloaded. The bridge caches the catalog per avatar, so a download made mid-session shows up after the next `load_item` of the base.
