@@ -50,6 +50,7 @@ export function createMockBridge(): MockBridge {
     searchMorphs: vi.fn(),
     setMorphs: vi.fn(),
     fixEyeElement: vi.fn(),
+    setFacePose: vi.fn(),
     applyMotion: vi.fn(),
     setTime: vi.fn(),
     listItems: vi.fn(),

@@ -31,6 +31,7 @@ const CASES: Array<[string, () => Promise<unknown>, "GET" | "POST", string, unkn
   ["createDefaultAvatar", () => b.createDefaultAvatar(), "POST", "/avatar/create", {}],
   ["deleteAvatar", () => b.deleteAvatar("Camila"), "POST", "/avatar/delete", { name: "Camila" }],
   ["undo", () => b.undo(), "POST", "/undo", {}],
+  ["setFacePose", () => b.setFacePose({ Mouth_Smile_L: 0.4 }), "POST", "/face/pose", { weights: { Mouth_Smile_L: 0.4 }, clear: true }],
   ["redo", () => b.redo(), "POST", "/redo", {}],
   ["getWorkspace", () => b.getWorkspace(), "GET", "/workspace"],
   ["setCharacter", () => b.setCharacter("sample-camila-01"), "POST", "/workspace/character", { character: "sample-camila-01" }],

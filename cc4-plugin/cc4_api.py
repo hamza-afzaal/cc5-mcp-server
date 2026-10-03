@@ -838,6 +838,48 @@ def fix_eye_element() -> dict[str, Any]:
         return {"success": False, "error": str(e)}
 
 
+def set_face_pose(weights: dict, clear: bool = True) -> dict[str, Any]:
+    """Key an expression pose on the avatar's face at time 0 (CXRP-553 pose review): {expression slider name: weight}
+    (0..1, names as in diagnostics expression_slider_names). With clear, every other expression is keyed to 0, so the
+    pose replaces whatever the face showed. Reads the weights back at time 0. One undo step. Reopen the project to
+    remove it."""
+    if not isinstance(weights, dict) or not weights:
+        return {"success": False, "error": "weights must be a non-empty {name: weight} object"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    face, profile = avatar.GetFaceComponent(), avatar.GetFacialProfileComponent()
+    if not face or not profile:
+        return {"success": False, "error": "No face / facial profile component"}
+    known = [n for c in profile.GetExpressionCategoryNames() for n in (profile.GetExpressionSliderNames(c) or [])]
+    unknown = sorted(k for k in weights if k not in known)
+    if unknown:
+        return {"success": False, "error": "Unknown expression names: " + ", ".join(unknown[:20])}
+    bad = sorted(k for k, v in weights.items() if not isinstance(v, (int, float)) or not -1.5 <= v <= 1.5)
+    if bad:
+        return {"success": False, "error": "Weights must be numbers in -1.5..1.5: " + ", ".join(bad[:20])}
+    names = known if clear else list(weights)
+    values = [float(weights.get(n, 0.0)) for n in names]
+    zero = RLPy.RTime.FromValue(0)
+    RLPy.RGlobal.BeginAction("Set Face Pose")
+    try:
+        if not face.GetClipCount():
+            face.AddClip(zero, "pose", RLPy.RTime.FromValue(1000))
+        face.BeginKeyEditing()
+        try:
+            status = face.AddExpressionKeys(zero, RLPy.WStringVector(names), RLPy.FloatVector(values), zero)
+        finally:
+            face.EndKeyEditing()
+    finally:
+        RLPy.RGlobal.EndAction()
+    RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
+    asked = list(weights)
+    got = [round(float(v), 3) for v in face.GetExpressionWeights(zero, RLPy.WStringVector(asked))]
+    worst = max(abs(g - float(weights[n])) for n, g in zip(asked, got))
+    return {"success": _ok(status) and worst < 0.02, "keyed": len(names), "read_back": dict(zip(asked, got)),
+            "max_error": round(worst, 3)}
+
+
 # --- Undo / Redo ---
 
 def _active_morph_count() -> int:
@@ -2711,6 +2753,7 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "set_morphs":            (lambda p: set_morphs(p["morphs"]), ["morphs"], DEFAULT_TIMEOUT_S),
     "reset_all_morphs":      (lambda p: reset_all_morphs(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
     "fix_eye_element":       (lambda p: fix_eye_element(), [], DEFAULT_TIMEOUT_S),
+    "set_face_pose":         (lambda p: set_face_pose(p["weights"], bool(p.get("clear", True))), ["weights"], DEFAULT_TIMEOUT_S),
     # Items
     "list_items":            (lambda p: list_items(), [], DEFAULT_TIMEOUT_S),
     "load_item":             (lambda p: load_item(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
@@ -2783,6 +2826,7 @@ POST_ROUTES: dict[str, str] = {
     "/morphs/set":          "set_morphs",
     "/morphs/reset":        "reset_all_morphs",
     "/morphs/fix_eye":      "fix_eye_element",
+    "/face/pose":           "set_face_pose",
     "/item/load":           "load_item",
     "/item/remove":         "remove_item",
     "/motion/apply":        "apply_motion",

@@ -61,4 +61,22 @@ export function registerMorphTools(server: McpServer, bridge: CC4Bridge) {
       (r) => r.success ? `Fix Eye Element applied to ${r.avatar ?? "the avatar"}.` : `Fix Eye Element failed: ${r.error}`,
     )
   );
+
+  server.tool(
+    "set_face_pose",
+    "Key an expression pose on the avatar's face at time 0, e.g. a pose from the face pose library (CXRP-553), then capture_views renders it. Weights by expression slider name (diagnostics expression_slider_names), 0..1 (CC4 allows -1.5..1.5). With clear (default) every other expression is set to 0, so the pose replaces what the face showed. Reads the weights back. Reopen the project to remove it.",
+    {
+      weights: z.record(z.string().regex(/^[A-Za-z0-9_]{1,64}$/), z.number().min(-1.5).max(1.5)).describe("{expression name: weight}"),
+      clear: z.boolean().optional().describe("Zero every other expression (default true)"),
+    },
+    async ({ weights, clear }) => {
+      if (!Object.keys(weights).length) return { content: [{ type: "text" as const, text: "weights is empty" }] };
+      return bridgeCall(
+        () => bridge.setFacePose(weights, clear ?? true),
+        (r) => r.success
+          ? `Face pose keyed (${r.keyed} expressions; read-back max error ${r.max_error}).`
+          : `Face pose failed: ${r.error ?? `read-back max error ${r.max_error}`}`,
+      );
+    }
+  );
 }

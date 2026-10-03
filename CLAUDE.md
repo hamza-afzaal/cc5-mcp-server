@@ -91,9 +91,9 @@ InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Cust
 
 **Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4): `python ..\blender-pipeline\tools\run_s4.py ..\blender-pipeline\params\<id>.json` reads `characters\<id>\exports\` and writes `characters\<id>\blender\` (see `..\blender-pipeline\CLAUDE.md`). Details of the decimation test: `docs/spikes.md`.
 
-## Tools (50) and the S1–S3 flow
+## Tools (51) and the S1–S3 flow
 
-`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `fix_eye_element`, `apply_motion` / `set_time` (seated and pose renders), `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_texture_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
+`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `fix_eye_element`, `set_face_pose` (key a face pose at time 0 for review renders), `apply_motion` / `set_time` (seated and pose renders), `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_texture_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
 
 ## Unity export profile (working)
 

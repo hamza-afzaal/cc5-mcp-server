@@ -372,6 +372,14 @@ export interface FixEyeElementResult extends OperationResult {
   avatar?: string;
 }
 
+export interface SetFacePoseResult extends OperationResult {
+  /** Expressions keyed (all 164 with clear). */
+  keyed?: number;
+  /** The requested weights as CC4 reads them back at time 0. */
+  read_back?: Record<string, number>;
+  max_error?: number;
+}
+
 export interface SetMorphsResult extends OperationResult {
   applied?: AppliedMorph[];
   problems?: Array<Record<string, unknown>>;

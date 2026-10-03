@@ -14,8 +14,8 @@ beforeEach(() => {
 });
 
 describe("registerMorphTools", () => {
-  it("registers search_morphs, set_morphs and fix_eye_element", () => {
-    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["search_morphs", "set_morphs", "fix_eye_element"]);
+  it("registers search_morphs, set_morphs, fix_eye_element and set_face_pose", () => {
+    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["search_morphs", "set_morphs", "fix_eye_element", "set_face_pose"]);
   });
 });
 
@@ -30,6 +30,30 @@ describe("fix_eye_element", () => {
     bridge.fixEyeElement.mockResolvedValue({ success: false, error: "No avatar in scene" });
     const text = (await server.getRegisteredTool("fix_eye_element")({})).content[0].text;
     expect(text).toContain("No avatar in scene");
+  });
+});
+
+describe("set_face_pose", () => {
+  const run = (args: unknown) => server.getRegisteredTool("set_face_pose")(args);
+
+  it("keys the pose and reports the read-back", async () => {
+    bridge.setFacePose.mockResolvedValue({ success: true, keyed: 164, read_back: { Mouth_Smile_L: 0.4 }, max_error: 0 });
+    const text = (await run({ weights: { Mouth_Smile_L: 0.4 } })).content[0].text;
+    expect(bridge.setFacePose).toHaveBeenCalledWith({ Mouth_Smile_L: 0.4 }, true);
+    expect(text).toBe("Face pose keyed (164 expressions; read-back max error 0).");
+  });
+
+  it("passes clear=false and reports failures", async () => {
+    bridge.setFacePose.mockResolvedValue({ success: false, error: "Unknown expression names: Nope" });
+    const text = (await run({ weights: { Nope: 1 }, clear: false })).content[0].text;
+    expect(bridge.setFacePose).toHaveBeenCalledWith({ Nope: 1 }, false);
+    expect(text).toContain("Unknown expression names: Nope");
+  });
+
+  it("reports a read-back mismatch and refuses an empty pose", async () => {
+    bridge.setFacePose.mockResolvedValue({ success: false, max_error: 0.3 });
+    expect((await run({ weights: { Mouth_Smile_L: 0.4 } })).content[0].text).toContain("read-back max error 0.3");
+    expect((await run({ weights: {} })).content[0].text).toBe("weights is empty");
   });
 });
 

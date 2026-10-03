@@ -38,6 +38,7 @@ import type {
   MorphValue,
   SetMorphsResult,
   FixEyeElementResult,
+  SetFacePoseResult,
   ApplyMotionResult,
   SetTimeResult,
   ItemList,
@@ -214,6 +215,11 @@ export class CC4Bridge {
 
   async fixEyeElement(): Promise<FixEyeElementResult> {
     return this.request<FixEyeElementResult>("/morphs/fix_eye", "POST", {});
+  }
+
+  /** Key an expression pose ({slider name: weight}) on the face at time 0; clear sets every other expression to 0. */
+  async setFacePose(weights: Record<string, number>, clear = true): Promise<SetFacePoseResult> {
+    return this.request<SetFacePoseResult>("/face/pose", "POST", { weights, clear });
   }
 
   // --- Items ---
