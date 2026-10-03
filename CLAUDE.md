@@ -82,7 +82,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - CC4 refuses an `.iTalk` both as an export include file and in `LoadMotion`. `apply_motion` loads it with `RFileIO.LoadFile(path, True, avatar, time 0)` instead.
   - A clip made for another facial profile opens a **Traditional / ExPlus** dialog. Silent mode picks Traditional, which loses the mouth and most of the brows (Happy Hi: smile 0 instead of 0.40). **ExPlus needs the owner's click.** `tools/face_capture.mjs` runs that way, one click per clip, resumable.
   - **Read face weights directly:** `diagnostics face_weights` returns `RIFaceComponent.GetExpressionWeights` sampled over the facial clip (no export, no timeline scrubbing); arg `groups` lists the expression names.
-  - The library: `python ..lender-pipeline	oolsace_poses.py library-samples` writes `characters\<id>ace\<id>_face_library.json`. Poses are keyed by shape name; the mouth (visemes, tongue) and "life" (blink, gaze, head) layers are split off; values above 1 are clamped.
+  - The library: `python ..\blender-pipeline\tools\face_poses.py library-samples` writes `characters\<id>\face\<id>_face_library.json`. Poses are keyed by shape name; the mouth (visemes, tongue) and "life" (blink, gaze, head) layers are split off; values above 1 are clamped.
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
