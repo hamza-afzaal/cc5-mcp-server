@@ -75,7 +75,7 @@ export function registerContentTools(server: McpServer, bridge: CC4Bridge, getAl
 
   server.tool(
     "apply_motion",
-    "Put an allowlisted motion or pose ('allowlist:motion/...', .rlMotion / .rlPose / .iMotion) on the current avatar at time 0, for seated/animated clipping checks and renders. Returns the timeline length in frames; use set_time to pick a frame before capture_views. Reopen the project (open_project) to remove it. Anything not allowlisted is refused.",
+    "Put an allowlisted motion, pose or facial clip ('allowlist:motion/...', .rlMotion / .rlPose / .iMotion / .iTalk) on the current avatar at time 0 (an .iTalk made for another facial profile is mapped with CC4's first choice, Traditional; for ExPlus use tools/face_capture.mjs, which leaves the dialog to the owner), for seated/animated clipping checks and renders. Returns the timeline length in frames; use set_time to pick a frame before capture_views. Reopen the project (open_project) to remove it. Anything not allowlisted is refused.",
     {
       motion: z.string().min(1).max(1024).describe("'allowlist:motion/female_sit_talk' or an allowlisted absolute path"),
     },

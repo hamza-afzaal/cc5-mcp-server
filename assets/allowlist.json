@@ -615,6 +615,312 @@
     "Sport sneakers"
    ],
    "verified": true
+  },
+  {
+   "id": "motion/expr_anger_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Anger/01_Anger_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Anger, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_anger_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Anger/02_Anger_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Anger, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_anger_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Anger/03_Anger_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Anger, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_anger_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Anger/04_Anger_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Anger, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_disgust_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Disgust/01_Disgust_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Disgust, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_disgust_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Disgust/02_Disgust_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Disgust, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_disgust_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Disgust/03_Disgust_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Disgust, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_disgust_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Disgust/04_Disgust_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Disgust, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_fear_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Fear/01_Fear_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Fear, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_fear_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Fear/02_Fear_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Fear, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_fear_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Fear/03_Fear_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Fear, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_fear_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Fear/04_Fear_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Fear, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_happy_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Happy/01_Happy_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Happy, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_happy_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Happy/02_Happy_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Happy, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_happy_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Happy/03_Happy_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Happy, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_happy_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Happy/04_Happy_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Happy, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_neutral_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Neutral/01_Neutral_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Neutral, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_neutral_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Neutral/02_Neutral_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Neutral, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_neutral_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Neutral/03_Neutral_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Neutral, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_neutral_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Neutral/04_Neutral_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Neutral, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_sad_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Sad/01_Sad_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Sad, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_sad_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Sad/02_Sad_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Sad, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_sad_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Sad/03_Sad_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Sad, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_sad_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Sad/04_Sad_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Sad, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_surprise_lo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Surprise/01_Surprise_Lo.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Surprise, Lo intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_surprise_med",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Surprise/02_Surprise_Med.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Surprise, Med intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_surprise_hi",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Surprise/03_Surprise_Hi.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Surprise, Hi intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_surprise_max",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Expression_Loop/Surprise/04_Surprise_Max.italk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 facial expression clip: Surprise, Max intensity (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_f_confident",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Female/Confident.iTalk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 female facial expression clip: Confident (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_f_gentle_look",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Female/Gentle look.iTalk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 female facial expression clip: Gentle look (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_f_glancing",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Female/Glancing.iTalk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 female facial expression clip: Glancing (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_f_normal",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Female/Normal.iTalk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 female facial expression clip: Normal (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_f_relaxed",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Female/Relaxed.iTalk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 female facial expression clip: Relaxed (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/expr_f_serious",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Expression/Female/Serious.iTalk",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CC4 female facial expression clip: Serious (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
   }
  ]
 }

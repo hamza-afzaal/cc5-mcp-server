@@ -296,6 +296,7 @@ export const DIAGNOSTIC_QUERIES = [
   "image_color",
   "content_files",
   "project_path",
+  "face_weights",
 ] as const;
 
 export type DiagnosticQuery = (typeof DIAGNOSTIC_QUERIES)[number];

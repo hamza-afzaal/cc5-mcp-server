@@ -2134,7 +2134,7 @@ def load_item(file_path: str) -> dict[str, Any]:
             "avatar": avatar.GetName() if avatar else None, "added": added}
 
 
-_MOTION_EXTENSIONS = (".rlmotion", ".rlpose", ".imotion", ".imotionplus")
+_MOTION_EXTENSIONS = (".rlmotion", ".rlpose", ".imotion", ".imotionplus", ".italk")
 
 
 def _timeline() -> dict[str, Any]:
@@ -2145,7 +2145,7 @@ def _timeline() -> dict[str, Any]:
             "end_ms": end.ToFloat()}
 
 
-def apply_motion(file_path: str) -> dict[str, Any]:
+def apply_motion(file_path: str, interactive: bool = False) -> dict[str, Any]:
     """Put a motion or pose (.rlMotion / .rlPose / .iMotion) on the current avatar at time 0
     (RFileIO.LoadMotion). Path allowlisting is enforced by the MCP server. Reopen the project to remove it."""
     decoded = urllib.parse.unquote(file_path)
@@ -2159,7 +2159,22 @@ def apply_motion(file_path: str) -> dict[str, Any]:
     if not avatar:
         return {"success": False, "error": "No avatar in scene"}
     t0 = time.time()
-    status = RLPy.RFileIO.LoadMotion(file_path, RLPy.RTime.FromValue(0), avatar)
+    if file_path.lower().endswith(".italk"):
+        # facial clip (expression track): LoadMotion rejects it; the generic loader applies it to the avatar.
+        # A clip made for another facial profile opens a Traditional / ExPlus mapping dialog; silent mode answers it.
+        g = RLPy.RGlobal
+        # interactive=True leaves the dialog to the owner (silent mode picks its first button, Traditional).
+        silent = hasattr(g, "SetSilentMode") and not interactive
+        was_silent = bool(g.GetSilentMode()) if silent else False
+        try:
+            if silent:
+                g.SetSilentMode(True)
+            status = RLPy.RFileIO.LoadFile(file_path, True, avatar, RLPy.RTime.FromValue(0))
+        finally:
+            if silent:
+                g.SetSilentMode(was_silent)
+    else:
+        status = RLPy.RFileIO.LoadMotion(file_path, RLPy.RTime.FromValue(0), avatar)
     seconds = round(time.time() - t0, 2)
     RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
     clip_frames = None
@@ -2553,6 +2568,35 @@ def _diag_expression_sliders(avatar, _arg: str) -> Any:
     return {c: list(comp.GetExpressionSliderNames(c) or []) for c in comp.GetExpressionCategoryNames()}
 
 
+def _diag_face_weights(avatar, arg: str) -> Any:
+    """Expression weights of the avatar's last facial clip (e.g. an applied .iTalk), sampled every `arg` frames
+    (default 2): {"names": [...], "fps": n, "frames": [i...], "weights": [[w per name]...]} (CXRP-553 pose library).
+    Read-only: RIFaceComponent.GetExpressionWeights at each sampled time; CC4 can't scrub the timeline from Python."""
+    face = avatar.GetFaceComponent()
+    if arg == "groups" and face:
+        return {g: list(face.GetExpressionNames(g) or []) for g in face.GetExpressionGroups()}
+    step = int(arg) if (arg or "").isdigit() and int(arg) > 0 else 2
+    profile = avatar.GetFacialProfileComponent()
+    if not face or not profile:
+        return {"success": False, "error": "No face / facial profile component"}
+    count = face.GetClipCount()
+    if not count:
+        return {"success": False, "error": "No facial clip on the avatar (apply an .iTalk first)"}
+    clip = face.GetClip(count - 1)
+    fps = RLPy.RGlobal.GetFps()
+    start = int(fps.GetFrameIndex(clip.ClipTimeToSceneTime(RLPy.RTime.FromValue(0))))
+    end = int(fps.GetFrameIndex(clip.ClipTimeToSceneTime(clip.GetClipLength())))
+    names = [n for c in profile.GetExpressionCategoryNames() for n in (profile.GetExpressionSliderNames(c) or [])]
+    wanted = RLPy.WStringVector(names)
+    frames, weights = [], []
+    for i in range(start, end + 1, step):
+        values = face.GetExpressionWeights(fps.IndexedFrameTime(i), wanted)   # FloatVector: iterates normally
+        frames.append(i)
+        weights.append([round(float(v), 4) for v in values])
+    return {"names": names, "fps": round(fps.ToFloat(), 3) if hasattr(fps, "ToFloat") else None,
+            "clip_frames": [start, end], "frames": frames, "weights": weights}
+
+
 def _diag_morph_minmax(avatar, arg: str) -> Any:
     error = _validate_morph_id(arg or "")
     if error or not arg:
@@ -2589,6 +2633,7 @@ DIAGNOSTIC_QUERIES: dict[str, Any] = {
     "skin_bone_count": _with_avatar(lambda a, _: {"count": len(a.GetSkeletonComponent().GetSkinBones())}),
     "materials_per_mesh": _with_avatar(lambda a, _: _materials_per_mesh(a)),
     "morph_minmax": _with_avatar(_diag_morph_minmax),
+    "face_weights": _with_avatar(_diag_face_weights),
     "content_files": lambda arg: browse_content(arg or "cloth_upper"),
     "plugin_path": lambda _arg: {"cc4_api": __file__},
     "morph_catalog_status": lambda _arg: morph_catalog_status(),
@@ -2670,7 +2715,7 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "list_items":            (lambda p: list_items(), [], DEFAULT_TIMEOUT_S),
     "load_item":             (lambda p: load_item(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
     "remove_item":           (lambda p: remove_scene_item(p["item_name"]), ["item_name"], DEFAULT_TIMEOUT_S),
-    "apply_motion":          (lambda p: apply_motion(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
+    "apply_motion":          (lambda p: apply_motion(p["file_path"], bool(p.get("interactive", False))), ["file_path"], LONG_TIMEOUT_S),
     "set_time":              (lambda p: set_time(int(p["frame"])), ["frame"], DEFAULT_TIMEOUT_S),
     "browse_content":        (lambda p: browse_content(p.get("folder_type", "cloth_upper")), [], DEFAULT_TIMEOUT_S),
     "set_color":             (lambda p: set_color(p["target"], float(p["r"]), float(p["g"]), float(p["b"])), ["target", "r", "g", "b"], DEFAULT_TIMEOUT_S),
