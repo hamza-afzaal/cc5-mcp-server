@@ -49,3 +49,22 @@ The 21 library clips for Megan (refreshed), Kevin and Camila.
 - Your talk stances `chat_anim_1` (StandTalk) and `chat_anim_2` (SitTalk) don't loop cleanly as they are: the
   fingers are 39–57° apart between the last and first frame, so they likely pop on Ava and the bald character today too.
 - The library versions get the same loop blend, and the library manifest gets the same `playback` / `root` fields.
+
+## v2.1 (2026-10-05): conversation A/B face the learner
+
+Your Editor check: A/B held the head 18–23° to her left with the chest forward (head-vs-chest ≈ 32°), which read as a
+glance aside. The cause: v2 also turned the chest by 20% of the correction, which pushed it past front.
+
+v2.1 corrects the neck and head only; the chest stays where the actor had it (−3 to −5°). The head now targets
+within 5° of front.
+
+| Clip | Head yaw (mean / max) | Head vs chest | Loop seam | Arm overlap |
+|---|---|---|---|---|
+| conversation_a | **5° / 6°** (v2: 22°) | 2° | 0.5° | 1.03 cm |
+| conversation_b | **5° / 5.7°** (v2: 22°) | 1° | 0° | 1.24 cm |
+
+- **Copy:** `Megan_BEAT_conversation_a.fbx`, `Megan_BEAT_conversation_b.fbx` and the updated `megan_beat_manifest.json`
+  from `characters\megan\exports\beat\unity\`.
+- **Unchanged:** fear, happy and sad (same files as v2).
+- **Kept:** natural head tilts and nods.
+- **Rollback:** v2 is in `beat\unity_v2\`.
