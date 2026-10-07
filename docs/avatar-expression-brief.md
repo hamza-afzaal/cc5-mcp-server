@@ -292,8 +292,9 @@ Unity never matches keywords in the text.
 - **Variety within a turn.** One pose held through a long, multi-sentence turn may look robotic. Fix it on the animation side only (small intensity drift, idle variation, the body-language accents); the voice doesn't change.
 - **Lip sync.** Inworld visemes, or on-device OVRLipSync.
 
-**Still open:**
-- **The shape of a gesture tag.** Recommended for phase 1: a flag on the turn (`gesture: true`), with Unity picking a clip that matches the turn's emotion from the manifest. Typed gestures (`emphasis`, `dismiss`, `self_soothe`…) come later, once CXRP-582 has the clips to back them.
+**Gesture tag (owner, 2026-10-07):**
+- Phase 1 uses a flag on the turn: `gesture: true`. Unity picks a clip that matches the turn's emotion from the manifest.
+- Typed gestures (`emphasis`, `dismiss`, `self_soothe`…) come later, once CXRP-582 has the clips to back them.
 
 ## 7. What happens next
 
