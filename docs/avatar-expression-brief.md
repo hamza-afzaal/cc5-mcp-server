@@ -226,6 +226,13 @@ Unity never matches keywords in the text.
 
 ### Emotion vocabulary v0 (draft, to be reviewed on Megan)
 
+**Approved on Megan, 2026-10-07 (CXRP-581):**
+- All 16 words are approved. Many mappings were strengthened from the draft below, because CC4's own levels are mild on
+  her face.
+- **happy** has two variants, a big smile and a soft one. Unity picks one at random per line, because "sometimes a
+  person smiles more and sometimes less".
+- **Final weights:** `characters\megan\face\megan_vocab.json`. **Sheet:** `characters\megan\face\megan_vocab_v1_sheet.png`.
+
 **Sources:**
 - **Plutchik** gives each emotion family three named intensities (apprehension → fear → terror; annoyance → anger →
   rage). That fits Q3: the *word* carries the intensity, so no separate number is needed.
