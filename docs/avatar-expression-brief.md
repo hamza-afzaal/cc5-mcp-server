@@ -188,14 +188,84 @@ assumed.
 
 ---
 
+### Owner's answers (2026-10-07)
+
+**Terms.** From here on:
+- An **action** (the owner's "gesture") is a one-time event that changes the scene: handing over a card, sitting down
+  from standing, walking to a spot.
+- **Body language** is what the body does while talking: hand use, palm on face, throwing up the hands.
+
+Actions are commands from the backend or director, and Unity just executes them. Body language follows the emotion
+(see Q6).
+
+| Q | Answer | Owner |
+|---|---|---|
+| Q1 | Both. Some emotions are hardcoded when the sim is created (the compile step); others are generated for Inworld's director queues. | backend |
+| Q2 | Draw on psychology (Plutchik's wheel, Willcox's Feelings Wheel) and find the size that's realistic without being excessive or underwhelming. Disgust stays in. Draft below. | owner + art |
+| Q3 | Fixed intensity per word to start. Avoid adding many variables at once; tune by watching it run. | art (defaults), owner (review) |
+| Q4 | Open. It depends on the backend and on the scenario. | backend |
+| Q5 | Open. The tag should probably arrive *with* the audio so they sync. The backend confirms. | backend |
+| Q6 | Body language: Unity picks from the emotion (below). Actions: explicit commands. Actions are needed but can wait; they'll become a major part of the sims later. | owner |
+| Q7 | The backend configures each scenario's baseline, with input from instructors. | backend |
+| Q8 | Play defaults at random so it never looks robotic. Proposed: the persona's baseline face plus random *neutral* body language. A random emotion on the face would show feelings that aren't there. | Unity |
+| Q9 | Content rules (what a patient may show in a scenario) belong to the backend, which creates the sim. Compatibility rules (no two clips that can't play together, cool-downs, seated limits) stay in Unity. Revisit after running it for a while. | backend + Unity |
+
+**TTS:** Inworld (most likely). Its viseme timestamps feed lip sync (CXRP-507 / 506 / 553).
+
+**Scope:** Megan is the reference character. Everything is built and approved on her first, then rolled out to Kevin,
+Camila and later avatars.
+
+**How Unity picks body language (no semantics in Unity).** The meaning is decided upstream: the backend or Inworld
+turns the line into an emotion word. Unity then does a lookup in the clip manifests, in two layers:
+1. **Talking loop by emotion.** While "anxious" is active, the plain talk loop is swapped for the fear loop.
+2. **Occasional accent.** Unity sometimes plays one body-language clip tagged with the same emotion, chosen at random
+   and with a cool-down, so nothing repeats within about 20 s.
+
+Unity never matches keywords in the text.
+
+### Emotion vocabulary v0 (draft, to be reviewed on Megan)
+
+**Sources:**
+- **Plutchik** gives each emotion family three named intensities (apprehension → fear → terror; annoyance → anger →
+  rage). That fits Q3: the *word* carries the intensity, so no separate number is needed.
+- **Willcox's wheel** supplies the everyday words a patient would actually use.
+- **Neither wheel covers physical states** (pain, nausea, fatigue). A patient sim needs them, so they're listed
+  separately.
+
+| Word | Family (Plutchik) | Face (starting mapping) | Body language today |
+|---|---|---|---|
+| neutral | — | persona baseline | talking loops |
+| warm | joy, low | `smile_warm` 0.5 | neutral talking |
+| happy | joy | `happy_med` | BEAT happy (Megan) |
+| relieved | joy + trust | `relieved` 0.6 | — |
+| worried | fear, low (apprehension) | `worried` 0.5 | — |
+| anxious | fear | `worried` + `fear_lo` | BEAT fear (Megan) |
+| scared | fear, mid | `fear_med` | BEAT fear (Megan) |
+| sad | sadness | `sad_med` | lowering head, BEAT sad (Megan) |
+| embarrassed | shame (fear + disgust) | `embarrassed` 0.6 | — |
+| frustrated | anger, low (annoyance) | `anger_lo` | frustrated posture |
+| angry | anger | `anger_med` | angry talking ×5 |
+| guarded | — (defensive) | `f_serious` 0.4 | crossing arms |
+| disgusted | disgust | `disgust_lo` | — |
+| surprised | surprise | `surprise_lo` | — |
+| *physical:* discomfort (pain) | — | `discomfort` 0.6 | — |
+| *physical:* nauseous | — | `discomfort` + `disgust_lo` | — |
+
+**Gaps:**
+- **Face:** confused, skeptical and tired have no pose yet.
+- **Body:** worried, relieved, embarrassed, disgusted, surprised and both physical states have no body language.
+  Sourcing it (Reallusion marketplace, BEAT-like motion-capture sets) is a separate piece of work.
+
 ## 7. What happens next
 
-1. **Owner + backend:** answer Q1–Q9 when the backend picks this up. The owner takes the product calls (Q2
-   vocabulary, Q6 gestures, Q9 clinical rules); the backend takes the ones that depend on how the system works. Then
-   we agree the message together.
-2. **Until then:** nothing here blocks Unity's current work (CXRP-558/559/561).
-3. **Art pipeline (us):** the word → pose mapping table per avatar, and Kevin/Camila versions of any talking loops chosen.
-4. **Unity:** the face-pose player (CXRP-560) and the gesture system (CXRP-326) against the agreed message.
+1. **Owner:** answered (2026-10-07, above).
+2. **Backend:** Q1 details, Q4, Q5, Q7, Q9 content rules, and one real example of an Inworld director-queue message.
+   It should also say whether Inworld already emits its own emotion labels; if so, the vocabulary maps onto them.
+3. **Art pipeline (us):**
+   - CXRP-581: vocabulary v0, word → face mapping reviewed on Megan.
+   - CXRP-582: sourcing the missing body language.
+   - CXRP-583: actions (sit, stand, walk); later.
+4. **Unity:** the face-pose player (CXRP-560) and body-language selection (CXRP-326) against the agreed message.
 
 **Data files** (all under `D:\Business\Code\art\characters\`):
 - face poses: `<id>\face\<id>_face_library.json`
