@@ -1,6 +1,6 @@
 {
  "templates": "D:\\Business\\Reallusion\\Reallusion Templates",
- "scanned": "2026-10-01 18:11",
+ "scanned": "2026-10-07 15:08",
  "folders": {
   "Accessory/Arm/Actor Group": {
    "files": {
@@ -505,6 +505,16 @@
   "Animation/Motion/2.Human Female/Perform/Dual Gun": {
    "files": {
     ".rlmotion": 12
+   }
+  },
+  "Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell": {
+   "files": {
+    ".rlmotion": 42
+   }
+  },
+  "Animation/Motion/Awesome Dog MoCap/Gestures Emotions": {
+   "files": {
+    ".rlmotion": 45
    }
   },
   "Animation/Motion/Coyote": {

@@ -921,6 +921,789 @@
    "exportable": true,
    "verified": true,
    "notes": "CC4 female facial expression clip: Serious (face pose library v0, CXRP-553). Captured on Megan 2026-10-02 (ExPlus mapping), check_export_license exportable."
+  },
+  {
+   "id": "motion/ad_emotion_ashamed_walk_around",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Ashamed Walk Around.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Ashamed Walk Around"
+  },
+  {
+   "id": "motion/ad_emotion_ashamed",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Ashamed.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Ashamed | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_awkward_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Awkward Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Awkward Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_awkward_turtle_hand_gesture",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Awkward Turtle Hand Gesture.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Awkward Turtle Hand Gesture"
+  },
+  {
+   "id": "motion/ad_emotion_bashful_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Bashful Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Bashful Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_behold_the_sky",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Behold the Sky.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Behold the Sky"
+  },
+  {
+   "id": "motion/ad_emotion_bored_dramatic",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Bored Dramatic.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Bored Dramatic"
+  },
+  {
+   "id": "motion/ad_emotion_bored_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Bored Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Bored Stand"
+  },
+  {
+   "id": "motion/ad_emotion_bouncy_happy_dramatic",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Bouncy Happy Dramatic.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Bouncy Happy Dramatic"
+  },
+  {
+   "id": "motion/ad_emotion_bouncy_happy_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Bouncy Happy Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Bouncy Happy Stand"
+  },
+  {
+   "id": "motion/ad_emotion_check_me_out_im_cool",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Check Me Out Im Cool.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Check Me Out Im Cool"
+  },
+  {
+   "id": "motion/ad_emotion_confused_jog",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Confused Jog.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Confused Jog"
+  },
+  {
+   "id": "motion/ad_emotion_confused_rocking",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Confused Rocking.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Confused Rocking"
+  },
+  {
+   "id": "motion/ad_emotion_confused",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Confused.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Confused"
+  },
+  {
+   "id": "motion/ad_emotion_cross_fingers",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Cross Fingers.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cross Fingers"
+  },
+  {
+   "id": "motion/ad_emotion_cry_dramatic",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Cry Dramatic.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cry Dramatic"
+  },
+  {
+   "id": "motion/ad_emotion_cry_emote",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Cry Emote.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cry Emote"
+  },
+  {
+   "id": "motion/ad_emotion_crying_contained",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Crying Contained.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Crying Contained"
+  },
+  {
+   "id": "motion/ad_emotion_crying",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Crying.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Crying"
+  },
+  {
+   "id": "motion/ad_emotion_depressed",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Depressed.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Depressed"
+  },
+  {
+   "id": "motion/ad_emotion_disappointed_dramatic",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Disappointed Dramatic.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Disappointed Dramatic"
+  },
+  {
+   "id": "motion/ad_emotion_disappointed_emote",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Disappointed Emote.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Disappointed Emote"
+  },
+  {
+   "id": "motion/ad_emotion_disappointed_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Disappointed Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Disappointed Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_enamoured",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Enamoured.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Enamoured"
+  },
+  {
+   "id": "motion/ad_emotion_excitable_fidgeting",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Excitable Fidgeting.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Excitable Fidgeting"
+  },
+  {
+   "id": "motion/ad_emotion_fall_about_laugh",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Fall About Laugh.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Fall About Laugh"
+  },
+  {
+   "id": "motion/ad_emotion_giggle_dramatic",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Giggle Dramatic.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Giggle Dramatic"
+  },
+  {
+   "id": "motion/ad_emotion_giggle",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Giggle.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Giggle"
+  },
+  {
+   "id": "motion/ad_emotion_hand_heart_1",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Hand Heart 1.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Hand Heart 1"
+  },
+  {
+   "id": "motion/ad_emotion_hand_heart_2",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Hand Heart 2.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Hand Heart 2"
+  },
+  {
+   "id": "motion/ad_emotion_hysterical_laugh",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Hysterical Laugh.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Hysterical Laugh"
+  },
+  {
+   "id": "motion/ad_emotion_jump_about_excited",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Jump About Excited.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Jump About Excited"
+  },
+  {
+   "id": "motion/ad_emotion_jumps_for_joy",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Jumps For Joy.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Jumps For Joy"
+  },
+  {
+   "id": "motion/ad_emotion_oh_wow",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Oh Wow.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Oh Wow | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_puzzled_scratch_head",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Puzzled Scratch Head.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Puzzled Scratch Head"
+  },
+  {
+   "id": "motion/ad_emotion_relief_dramatic",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Relief Dramatic.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Relief Dramatic"
+  },
+  {
+   "id": "motion/ad_emotion_relief",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Relief.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Relief | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_sad_crying",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Sad Crying.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Sad Crying"
+  },
+  {
+   "id": "motion/ad_emotion_sad_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Sad Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Sad Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_serenity_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Serenity Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Serenity Stand"
+  },
+  {
+   "id": "motion/ad_emotion_stroppy_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Stroppy Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Stroppy Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_thinking",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Thinking.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Thinking | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_timid_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Timid Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Timid Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_emotion_urika_moment",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Urika Moment.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Urika Moment"
+  },
+  {
+   "id": "motion/ad_emotion_worried",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gestures Emotions/Worried.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '45 Emotion MoCap Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Worried | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_afraid",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Afraid.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Afraid"
+  },
+  {
+   "id": "motion/ad_unwell_busting_for_a_pee",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Busting For A Pee.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Busting For A Pee"
+  },
+  {
+   "id": "motion/ad_unwell_cold_shiver_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Cold Shiver Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cold Shiver Dance"
+  },
+  {
+   "id": "motion/ad_unwell_cold_shiver_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Cold Shiver Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cold Shiver Stand"
+  },
+  {
+   "id": "motion/ad_unwell_cough_and_sneeze",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Cough and Sneeze.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cough and Sneeze"
+  },
+  {
+   "id": "motion/ad_unwell_cower_fear_crouch",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Cower Fear Crouch.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cower Fear Crouch"
+  },
+  {
+   "id": "motion/ad_unwell_cower_fear_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Cower Fear Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Cower Fear Dance"
+  },
+  {
+   "id": "motion/ad_unwell_dizzy_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Dizzy Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Dizzy Dance"
+  },
+  {
+   "id": "motion/ad_unwell_dizzy_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Dizzy Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Dizzy Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_dizzy_wobble",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Dizzy Wobble.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Dizzy Wobble"
+  },
+  {
+   "id": "motion/ad_unwell_fall_asleep_standing",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Fall Asleep Standing.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Fall Asleep Standing"
+  },
+  {
+   "id": "motion/ad_unwell_feeling_faint",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Feeling Faint.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Feeling Faint | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_fidget_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Fidget Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Fidget Dance"
+  },
+  {
+   "id": "motion/ad_unwell_fidget_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Fidget Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Fidget Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_fidgeting_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Fidgeting Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Fidgeting Stand | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_flopping_around",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Flopping Around.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Flopping Around"
+  },
+  {
+   "id": "motion/ad_unwell_freezing_cold_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Freezing Cold Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Freezing Cold Dance"
+  },
+  {
+   "id": "motion/ad_unwell_grovel_stand_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Grovel Stand Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Grovel Stand Dance"
+  },
+  {
+   "id": "motion/ad_unwell_grovel_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Grovel Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Grovel Stand"
+  },
+  {
+   "id": "motion/ad_unwell_groveling",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Groveling.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Groveling"
+  },
+  {
+   "id": "motion/ad_unwell_itchy_all_over",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Itchy All Over.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Itchy All Over"
+  },
+  {
+   "id": "motion/ad_unwell_its_too_hot_sweating",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Its Too Hot Sweating.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Its Too Hot Sweating | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_kneeling_doom",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Kneeling Doom.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Kneeling Doom"
+  },
+  {
+   "id": "motion/ad_unwell_need_a_pee",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Need A Pee.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Need A Pee"
+  },
+  {
+   "id": "motion/ad_unwell_need_a_poo",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Need A Poo.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Need A Poo"
+  },
+  {
+   "id": "motion/ad_unwell_panic_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Panic Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Panic Dance"
+  },
+  {
+   "id": "motion/ad_unwell_panic_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Panic Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Panic Stand"
+  },
+  {
+   "id": "motion/ad_unwell_panic_stations_2",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Panic Stations 2.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Panic Stations 2"
+  },
+  {
+   "id": "motion/ad_unwell_panic_stations",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Panic Stations.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Panic Stations"
+  },
+  {
+   "id": "motion/ad_unwell_pity_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Pity Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Pity Stand"
+  },
+  {
+   "id": "motion/ad_unwell_pleading",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Pleading.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Pleading"
+  },
+  {
+   "id": "motion/ad_unwell_projectile_vomit",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Projectile Vomit.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Projectile Vomit"
+  },
+  {
+   "id": "motion/ad_unwell_scratch_butt",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Scratch Butt.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Scratch Butt"
+  },
+  {
+   "id": "motion/ad_unwell_sleepy_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Sleepy Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Sleepy Stand"
+  },
+  {
+   "id": "motion/ad_unwell_sneezes",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Sneezes.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Sneezes"
+  },
+  {
+   "id": "motion/ad_unwell_stretch_and_yawn",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Stretch and Yawn.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Stretch and Yawn"
+  },
+  {
+   "id": "motion/ad_unwell_surrender_fwd",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Surrender Fwd.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Surrender Fwd"
+  },
+  {
+   "id": "motion/ad_unwell_surrender_nervous_dance",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Surrender Nervous Dance.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Surrender Nervous Dance"
+  },
+  {
+   "id": "motion/ad_unwell_surrender",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Surrender.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Surrender"
+  },
+  {
+   "id": "motion/ad_unwell_tummy_pains",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Tummy Pains.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-582 body language candidate: Tummy Pains | 2026-10-07: applied to Megan (gamebase), check_export_license exportable, exported via export_motions"
+  },
+  {
+   "id": "motion/ad_unwell_vomitting",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Vomitting.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Vomitting"
+  },
+  {
+   "id": "motion/ad_unwell_yawning_stand",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/Awesome Dog MoCap/Gesture Scared and Unwell/Yawning Stand.rlMotion",
+   "license": "Reallusion Content Store purchase 2026-10-07 (Awesome Dog MoCap, '42 Scared & Unwell Motions' pack), Reallusion Standard Content License; §2.1(C) embedded-content clause to confirm in writing (CXRP-554); check_export_license after applying",
+   "exportable": true,
+   "verified": false,
+   "notes": "CXRP-582 body language candidate: Yawning Stand"
   }
  ]
 }

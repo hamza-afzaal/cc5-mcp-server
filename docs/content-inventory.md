@@ -74,6 +74,21 @@ The owner installed the whole packs through CC4's Content Manager (Realistic Hum
 These are for agenda A (deformation checks) and seated renders. The bridge can't apply motions or poses yet.
 
 - `Animation/Motion/2.Human Female/Perform` (`.rlMotion`): **Sit Talk, Stand to Sit, Sit to Stand**, Stand Talk, Change Pose, Twirl Hair, Viewing Mirror, Catwalk, plus dances. The seated sequence for the doctor's office is now complete.
+- `Animation/Motion/Awesome Dog MoCap/` (bought 2026-10-07 on the Reallusion Content Store, CXRP-582; all 87 in the allowlist as `motion/ad_emotion_*` / `motion/ad_unwell_*`, `verified: false` until `check_export_license`):
+  - `Gestures Emotions` (45 `.rlMotion`, *45 Emotion MoCap Motions*): body language for the patient vocabulary.
+    - embarrassed: **Ashamed, Awkward Stand, Bashful Stand, Timid Stand**
+    - worried: **Worried**
+    - relieved: **Relief**
+    - sad: **Sad Stand, Disappointed Stand, Crying Contained, Depressed**
+    - frustrated: **Stroppy Stand**
+    - surprised: **Oh Wow**
+    - neutral variety: **Thinking, Puzzled Scratch Head, Confused, Serenity Stand, Giggle**
+    - The *Dramatic*, *Dance*, *Jump* and *Laugh* clips are theatrical; not for patients.
+  - `Gesture Scared and Unwell` (42 `.rlMotion`, *42 Scared & Unwell Motions*): physical states.
+    - discomfort / nausea: **Tummy Pains, Feeling Faint, Dizzy Stand, Its Too Hot Sweating, Cold Shiver Stand**
+    - worried: **Fidget Stand, Fidgeting Stand**
+    - pleading: **Pity Stand**
+    - The pack says "exaggerated" (toilet, vomit, panic and dance clips): pilot before use.
 - `Animation/Motion Plus/Actor Group/Embed` (`.iMotionPlus`): female/male standing idles (Wait, Chest Wait, Hair, Mobile, Calling) and 2-person stands. Motion Plus may carry facial animation; check what CC4 exports.
 - `Animation/Pose/Samples` (60 `.rlPose`): seated ones useful for clipping checks: **Sit Talk 5, Sit Call_1, Sit Text 2, Sitting Look On**, Sitting Shushing R. Also Stretch, Wave, Explain 2, Use Phone R, Carry Idle; the rest are action poses.
 - `Accessory/Arm/Actor Group` (`.iAcc`): cup and phone held left or right (F/M). `Accessory/Arm/Samples`: 30 more.
