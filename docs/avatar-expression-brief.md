@@ -140,7 +140,7 @@ therefore reach Unity before or with the audio (see Q5).
 
 ---
 
-## 5. Example message (a strawman to react to, not a spec)
+## 5. Example message (a strawman to react to, not a spec; superseded by the phase-1 contract in section 6)
 
 ```json
 {
@@ -264,18 +264,52 @@ Unity never matches keywords in the text.
 - **Body:** worried, relieved, embarrassed, disgusted, surprised and both physical states have no body language.
   Sourcing it (Reallusion marketplace, BEAT-like motion-capture sets) is a separate piece of work.
 
+### Backend answers (2026-10-07) and the agreed phase-1 contract
+
+**Today:**
+- A "director" LLM step picks the patient's tone once per turn, as free text (`[Speak in a guarded, clipped tone]`).
+- That text is prefixed to the line sent to Inworld. Unity never sees it: it gets raw PCM audio only.
+- The director runs only for Inworld voices.
+- A short in-character filler line ("Okay…") covers the thinking time before the main reply.
+- Scenario states carry free-text emotions ("frightened, shouting"). The persona baseline is a paragraph.
+
+**Phase 1 (agreed):**
+
+| Topic | Decision |
+|---|---|
+| Vocabulary | **This brief's list is the single list.** The director picks one word from it, and the backend turns that word into the Inworld voice instruction. One word drives voice, face and body. Inworld returns no emotion labels. |
+| Message | `avatar.emotion { turn_uuid, emotion }` on the session socket, sent **just before the turn's first audio frame**. It always arrives first, so the face never changes mid-sentence. |
+| Granularity | One emotion per turn, sent every turn; Unity ignores it if unchanged. The voice stays per turn (per-sentence voice changes sounded halting). |
+| Filler line | Plays with the baseline (or the previous turn's emotion). The turn's emotion takes over at the main reply, a sentence boundary. |
+| Baseline | A one-word `baseline_emotion` from the list. The compiler sets it, the author can edit it, and it goes to Unity in `session.init.ack`. |
+| Content rules | A per-scenario allowlist in the backend. A disallowed word is swapped for the baseline before sending. |
+| Gestures | The backend marks gesture moments: at most one big gesture per turn, never on consecutive turns. Unity enforces cool-downs, no repeats of the same clip, incompatible clips and seated limits. Scripted actions (card, sit, walk) stay separate commands. |
+| Fallback | The backend always sends a valid word; if the director times out it falls back to the state's emotion, then the baseline. Unity: unknown word → baseline face + neutral body language. |
+| Voice providers | The director will also run for Azure voices, so emotion works for any provider. |
+| Lip sync | SALSA stays for phase 1. Inworld's viseme timings (11 shapes) are a later upgrade; they may add latency. |
+
+**Later (phase 2):**
+- **Variety within a turn.** One pose held through a long, multi-sentence turn may look robotic. Fix it on the animation side only (small intensity drift, idle variation, the body-language accents); the voice doesn't change.
+- **Lip sync.** Inworld visemes, or on-device OVRLipSync.
+
+**Still open:**
+- **The shape of a gesture tag.** Recommended for phase 1: a flag on the turn (`gesture: true`), with Unity picking a clip that matches the turn's emotion from the manifest. Typed gestures (`emphasis`, `dismiss`, `self_soothe`…) come later, once CXRP-582 has the clips to back them.
+
 ## 7. What happens next
 
-1. **Owner:** answered (2026-10-07, above).
-2. **Backend:** Q1 details, Q4, Q5, Q7, Q9 content rules, and one real example of an Inworld director-queue message.
-   It should also say whether Inworld already emits its own emotion labels; if so, the vocabulary maps onto them.
+1. **Owner:** answered (2026-10-07). **Backend:** answered (2026-10-07, above). The brief is closed; the contract above is the spec.
+2. **Backend:** the phase-1 work listed above (CXRP-585).
 3. **Art pipeline (us):**
-   - CXRP-581: vocabulary v0, word → face mapping reviewed on Megan.
-   - CXRP-582: sourcing the missing body language.
-   - CXRP-583: actions (sit, stand, walk); later.
-4. **Unity:** the face-pose player (CXRP-560) and body-language selection (CXRP-326) against the agreed message.
+   - Megan's word → face mapping is approved: `characters\megan\face\megan_vocab.json` (CXRP-581).
+   - Body language: CXRP-582.
+   - Actions: CXRP-583, later.
+   - Wrinkles: CXRP-584.
+4. **Unity:**
+   - The face player (CXRP-560): it reads `megan_vocab.json`, listens for `avatar.emotion` and `session.init.ack.baseline_emotion`, and picks a random variant for words that have several.
+   - Body-language selection (CXRP-326).
 
 **Data files** (all under `D:\Business\Code\art\characters\`):
 - face poses: `<id>\face\<id>_face_library.json`
+- emotion words → faces: `megan\face\megan_vocab.json` (approved; Kevin and Camila later)
 - clips: `<id>\exports\library_v0\unity\library_v0_manifest.json`
 - BEAT: `megan\exports\beat\unity\megan_beat_manifest.json`
