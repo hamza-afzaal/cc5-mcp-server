@@ -55,7 +55,8 @@ Built from facial-coding research (FACS) for clinical realism. Megan, Kevin and 
 
 `anger`, `disgust`, `fear`, `happy`, `neutral`, `sad`, `surprise`, each as `_lo`, `_med`, `_hi`, `_max` (e.g.
 `sad_med`).
-- The strengths are CC4's own: `_lo`/`_med` are usable in conversation, while `_hi`/`_max` are theatrical.
+- The strengths are CC4's own. On Megan they are mild: `_lo`/`_med` barely differ from neutral, and `_hi` is often
+  the first readable level (CXRP-581 review, 2026-10-07). Happy hardly smiles at any strength; use `smile_warm`.
 - A scheme can either pick a named strength (`sad_med`) or use one pose per emotion with a continuous intensity. The
   second is simpler for an LLM; see question Q3.
 
