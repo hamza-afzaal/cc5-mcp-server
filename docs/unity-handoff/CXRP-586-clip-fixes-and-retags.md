@@ -40,6 +40,9 @@ Rollback: each folder's sibling `unity_pre_586\` holds the previous files.
    - Both are CC4's own *Stand to Sit* / *Sit to Stand*, fitted to Megan.
    - They chain: StandIdle → StandToSit → SittingAva (loop) → SitToStand → StandIdle.
 
+**Update (CXRP-582):** the first delivery of the two transitions started with a T-pose frame (a retarget bug for
+CC4-exported sources). They are re-fitted; re-copy both files if you already took them.
+
 ## Seat height (important for placing her on a chair)
 
 - **All seated clips assume a seat about 36 cm high.** The manifest gives `seat_contact_cm` per seated clip: the lowest
