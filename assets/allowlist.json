@@ -120,6 +120,33 @@
    "notes": "seated talking idle (doctor's office). Applied to Megan 2026-10-01 (apply_motion), check_export_license exportable."
   },
   {
+   "id": "motion/female_walk_relaxed_start",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Move/Walk Relaxed_1Start.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-583 patient action: female Walk Relaxed, walk start (idle -> walking) | 2026-10-08: exported onto Megan (gamebase) via export_motions, check_export_license exportable"
+  },
+  {
+   "id": "motion/female_walk_relaxed_loop",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Move/Walk Relaxed_2Loop.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-583 patient action: female Walk Relaxed, walk loop | 2026-10-08: exported onto Megan (gamebase) via export_motions, check_export_license exportable"
+  },
+  {
+   "id": "motion/female_walk_relaxed_end",
+   "type": "motion",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Move/Walk Relaxed_3End.rlMotion",
+   "license": "cc4-bundled template content (owner cleared 2026-09-30); check_export_license after applying",
+   "exportable": true,
+   "verified": true,
+   "notes": "CXRP-583 patient action: female Walk Relaxed, walk stop (walking -> idle) | 2026-10-08: exported onto Megan (gamebase) via export_motions, check_export_license exportable"
+  },
+  {
    "id": "motion/female_stand_to_sit",
    "type": "motion",
    "path": "D:/Business/Reallusion/Reallusion Templates/Animation/Motion/2.Human Female/Perform/Stand to Sit.rlMotion",
