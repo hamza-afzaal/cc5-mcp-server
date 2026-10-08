@@ -74,7 +74,7 @@ The owner installed the whole packs through CC4's Content Manager (Realistic Hum
 These are for agenda A (deformation checks) and seated renders. The bridge can't apply motions or poses yet.
 
 - `Animation/Motion/2.Human Female/Perform` (`.rlMotion`): **Sit Talk, Stand to Sit, Sit to Stand**, Stand Talk, Change Pose, Twirl Hair, Viewing Mirror, Catwalk, plus dances. The seated sequence for the doctor's office is now complete.
-- `Animation/Motion/Awesome Dog MoCap/` (bought 2026-10-07 on the Reallusion Content Store, CXRP-582; all 87 in the allowlist as `motion/ad_emotion_*` / `motion/ad_unwell_*`, `verified: false` until `check_export_license`):
+- `Animation/Motion/Awesome Dog MoCap/` (bought 2026-10-07 on the Reallusion Content Store, CXRP-582; all 87 in the allowlist as `motion/ad_emotion_*` / `motion/ad_unwell_*`, `verified: false` until `check_export_license`; 30 verified and delivered for Megan by 2026-10-08):
   - `Gestures Emotions` (45 `.rlMotion`, *45 Emotion MoCap Motions*): body language for the patient vocabulary.
     - embarrassed: **Ashamed, Awkward Stand, Bashful Stand, Timid Stand**
     - worried: **Worried**
