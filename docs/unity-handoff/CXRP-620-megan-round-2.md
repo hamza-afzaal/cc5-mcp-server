@@ -93,6 +93,70 @@ What we do next depends on the result:
 - **The warp goes away in (2):** we move the elbow skin off the twist bone in the weights, art side.
 - **It stays:** it's the bend. We cap it at about 140° in those clips (option A).
 
+**Result:** the twist driver made no difference, and the owner says the problem is a twist, not the bend. Fixed in §5.
+
+## 5. Round 2b: the owner's review fixes (2026-10-14)
+
+Re-copy the clips below. Rollback for the first table: `library_v0\unity_pre_620b\`. Rollback for the elbow table: `unity_pre_620b\` next to each folder, and `exports\unity_clips_pre_620b\`.
+
+| Clip | Fix |
+|---|---|
+| `Posture_Sitting_Idle` | **Jaw closed:** `CC_Base_JawRoot` held at 180°, as in every other clip. Her jaw was about 10° open in **every** version of this clip back to the CC4 source, not only in round 2; our seat tool didn't drop it. **Hands:** the fingers now follow the forearm onto the thigh. Her wrists bent about 45° outward; now 8–11° sideways and about 20° up or down. Sit, lean and legs are unchanged. |
+| `Posture_Sitting_StandToSit` | **Hands stay on the thighs through the leg cross** (frames 26–120). From 108 to 134 they move straight into the knee clasp. Before, they hung beside the lifting knee (frames 88–110), then the left hand went up to her chin. During the sit-down itself (26–82) the hands already touch the jeans (≤ 1 cm). The end pose, and so the SitTalk seam, is unchanged. |
+| `Gesture_FrustratedPosture` | **Left wrist eased**, from up to 79° flex / 62° sideways to 46° / 15°. **The right hand is back to the original.** |
+
+### Elbows: arm roll + bend (option A) + elbow skin weights
+
+**Clips (re-copy):**
+- `library_v1\unity\`: puzzled_scratch_head, disappointed_stand, worried, its_too_hot_sweating, feeling_faint, crying_contained, thinking, afraid, pity_stand (pity: only a short stretch, 42 keys)
+- `library_v0\unity\`: Conversation_anger_anim_5
+- `beat\unity\`: BEAT_happy, BEAT_disgust_a
+- `exports\unity_clips\`: **Megan_StandTalk** (your "StandTalk", which matches your 9.3 s numbers)
+
+**What the tool does** (`tools\arm_roll.py`), only while the elbow is bent 70–100° or more:
+- **Upper-arm roll:** pulled toward about 30° by swivelling the whole arm about the shoulder-wrist line, at most 35°. The hand keeps its position and orientation; the elbow moves on its circle, a little higher and wider.
+- **Bend:** capped near 142° (option A). The hand keeps its orientation; the wrist moves a few cm.
+- **Forearm roll:** left as the hand pose needs it, as you suggested. With the hand fixed, the swivel moves some roll from the upper arm into the forearm and hand. Only turning the palm would reduce both.
+
+**Measured on our clips during deep bends (≥ 100°).** Upper-arm roll before → after, and the max bend after:
+
+| Clip | Upper-arm roll during deep bends (deg) | Max bend after (L / R) |
+|---|---|---|
+| puzzled_scratch_head | R 54 → 34 | 127 |
+| disappointed_stand | L 49 → 33, R 51 → 33 | 101 |
+| worried | L 32 → 29, R 45 → 31 | 139 / 142 (was 142 / 149) |
+| its_too_hot_sweating | L 53 → 34, R 60 → 41 | 130 / 134 |
+| feeling_faint | L 32 → 29, R 41 → 32 | 127 / 131 |
+| crying_contained | L 37 → 31, R 52 → 40 | 141 / 143 (was 144 / 145) |
+| thinking | R 41 → 32 | R 143 (was 159) |
+| afraid | (already ≤ 23) | 138 / 138 (was 140 / 141) |
+| anger_anim_5 | L 50 → 42, R 50 → 40 | 104 / 102 |
+| BEAT_happy | L 73 → 51, R 74 → 48 | 137 / 141 (was 138 / 147) |
+| BEAT_disgust_a | R 67 → 44 | R 141 (was 147) |
+| StandTalk | L 44 → 36, R 43 → 38 | 121 / 124 |
+
+Most clips reach the ~30° target or are close. **BEAT_happy, disgust, anger_anim_5 and its_too_hot** stop at 40–51°: the swivel limit, since more would swing the elbow visibly wide. The hand pose is kept. No new frame-to-frame pops (largest rotation step per bone, against the previous version).
+
+**Megan's model** (`blender\megan.fbx`, copied only after the owner's OK):
+- **Elbow skin moved off `upperarm_twist_01` onto `upperarm`:** a smooth ramp from mid upper arm to the elbow (S4 `weight_shift`).
+- **Twist bone's share of the skin within 7 cm of the elbow:** 28–41% → about 1% (body and sweater).
+- Your TwistDriver now only moves the shoulder-side half of the upper arm, as intended. No other change; validate PASS. Rollback: `characters\megan\blender_pre_620b\`.
+
+**Offline, with your driver simulated:** worried at 19 s, the right elbow's dented, twisted crease becomes a clean, rounded elbow.
+
+**If the forearm still looks twisted at the elbow:** try the Avatar's **Lower Arm Twist at 0**. As we understand it, the Humanoid then keeps hand roll out of the lower-arm bone, and your TwistDriver spreads 50% of it from mid-forearm, so the elbow skin wouldn't roll with the hand. Please confirm in your Avatar settings. Per-bone rolls can't be matched one to one between our clip and your import: the Humanoid has no hand-roll muscle and carries forearm plus hand roll as one Forearm Twist. Your StandTalk forearm −70° is 96° of **hand** roll in our clip, with the forearm at 2°.
+
+### Cough moments for `Megan_AD_unwell_cough_and_sneeze`
+
+These are in its `library_v1_manifest.json` entry. We found them in the motion: quick forward jerks of the head and chest, checked by eye.
+- `"cough_frames": [23, 41, 62, 280, 465]`: hunched with a hand on the chest (23, 41, 62), a forward jerk (280), a hand to the mouth (465).
+- `"sneeze_frames": [168, 543]`: each follows a head-back wind-up (160, 535). Pulse `cough` on these too, or leave them to the body.
+
+### Your other notes
+
+- **BEAT fear 1 cm under:** keep your 1 cm lift on that clip. Our check puts its heel joints at Megan's floor height (6.2 cm), the same as happy, so we haven't found where the extra centimetre comes from.
+- **Planted-foot noise:** it is in our clip. On BEAT fear's planted frames it's about 0.2 mm per frame typical, 0.7–0.9 mm at the 95th percentile. A smoothing pass is a small follow-up if you want it.
+
 ## Not in this delivery
 
 - **Seated versions (§5):** not done. They stay off when seated, as you have them.
@@ -105,4 +169,8 @@ What we do next depends on the result:
 3. **chat_anim_2 and PointingAtPhone:** no knee jitter. LoweringHead: fingers outside the sweater. anger_anim_5 end and FrustratedPosture right hand.
 4. **BEAT fear / happy:** planted slide ≤ 1.5 cm/s on your import, and the feet on the floor without your offset.
 5. **Faces:** `crying` and `cough` play from `megan_vocab.json` v1.2. `guarded` now lowers the outer eyelids.
-6. **Elbow:** the two frame-162 screenshots from §4.
+6. **Round 2b:**
+   - Sitting_Idle: mouth closed, wrists straight on the thighs.
+   - StandToSit: hands on the thighs through the leg cross, then straight to the knee clasp.
+   - FrustratedPosture: left wrist softer, right hand as originally.
+   - Elbows: worried at 18–24 s, puzzled at 20.3 s and BEAT_happy, after both the clips **and** `megan.fbx` are copied.
