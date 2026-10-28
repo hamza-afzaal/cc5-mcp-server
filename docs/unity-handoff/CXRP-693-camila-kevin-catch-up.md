@@ -8,7 +8,7 @@ Camila and Kevin now get everything Megan got after library v0 (CXRP-582, 583, 5
 
 Megan's embarrassed face also changed (vocab v1.3). File names are unchanged unless listed as new.
 
-## 1. Models: elbow weights (owner OK needed before we copy)
+## 1. Models: elbow weights (already copied)
 
 - **What changed:** `characters\camila\blender\camila.fbx` and `characters\kevin\blender\kevin.fbx` (+ `.json`).
   The upper-arm twist weights near the elbow are moved onto the upper arm, as for Megan in CXRP-620b: 64–66 vertices
@@ -16,8 +16,9 @@ Megan's embarrassed face also changed (vocab v1.3). File names are unchanged unl
 - **What didn't:** blendshapes, meshes, materials and textures are unchanged. Validate PASS.
 - **SALSA:** the blendshape lists are identical, so its bindings stay valid.
 - **Rollback:** `characters\<id>\blender_pre_687\`.
-- **Copy:** we run `deliver_unity.py --apply` into `Avatars\Camila` and `Avatars\Kevin` once the owner says yes. The
-  dry run shows 2 changed files per avatar and 73 / 85 unchanged.
+- **Copied 2026-10-29 (owner OK):** `deliver_unity.py --apply` put `camila.fbx` + `camila.json` into `Avatars\Camila`
+  and `kevin.fbx` + `kevin.json` into `Avatars\Kevin`. All 75 / 87 files are byte-identical to the art side.
+  **Reimport both** and check that the prefabs still bind: SALSA, TwistDriver and the override controllers.
 
 ## 2. Re-copy the clip libraries
 
