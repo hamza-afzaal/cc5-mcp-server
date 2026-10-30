@@ -24,7 +24,8 @@ paste-ready message.
    - Garments that aren't CC4 content go through the garment-intake lane (as `.ccCloth`), never through S4.
    - Run `python tools\preset_refs.py <preset>` on new SkinGen and make-up presets; it lists missing textures.
 3. Write `..\cc4-recepies\recipes\<id>.json` in the format of `megan.json`. Schema 0.2 covers `skin.layers`,
-   `texture_colors`, `remove_base_items` (the underwear) and morph ids.
+   `texture_colors`, `remove_base_items` (the underwear), `remove_items` (unwanted parts of a loaded item),
+   `shader_params` (strand hair colour) and morph ids.
    - `apply_recipe` runs `fix_eye_element` after the morphs. When shaping by hand with `set_morphs`, call it after the
      last slider change; the Human Anatomy sliders otherwise leave an eyelid crescent.
 

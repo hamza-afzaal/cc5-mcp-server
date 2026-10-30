@@ -91,6 +91,8 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - **Keep CC4's own skin weights.** Copy them from the nearest vertex of a CC garment; a full data-transfer from the body made CC4 drop the thigh faces.
   - A Blender garment has **no CC4 hide-body mask**, so keep it 4–8 mm off the body, and run a body-side pass for bumps (nipples). Never push collars or cuffs: they are layered fabric and blow out.
   - Tools: `characters\bald\tools\garment_from_fbx.py` (+ `edits\*.py`) and `fit_accessories.py` (CXRP-721).
+- **Human Anatomy `.ccAvatar` bases (Female Old etc.) use the Traditional facial profile**, not CC4Extended. Our face vocabulary, face library and SALSA set-up need CC4Extended. Use Camila's base with the matching `Head/Body HA …` sliders at 1 instead (Carter, CXRP-720, 2026-10-29).
+- **Strand hair (Hair Builder `.rlhair`, e.g. Chic bun medium) takes its colour from the Digital Human Hair shader** (`RootColor`, `TipColor`, `_1st Dye Strength`), so `set_texture_color` barely changes it. Set the colour with `set_shader_parameter`; recipes record these in `shader_params` and drop unwanted hair pieces with `remove_items`.
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
