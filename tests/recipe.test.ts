@@ -47,6 +47,7 @@ function happyBridge(): MockBridge {
   b.setColor.mockResolvedValue({ success: true, applied_to: ["CC_Base_Eye/Std_Eye_R"] });
   b.removeItem.mockResolvedValue({ success: true });
   b.setTextureColor.mockImplementation(async (mesh: string, material: string) => ({ success: true, mesh, material, values: [0, 0, 30, 0, 0, 0, 0] }));
+  b.setShaderParameter.mockResolvedValue({ success: true });
   b.saveProjectAs.mockImplementation(async (p: string) => ({ success: true, path: `D:/chars/${p}.ccProject`, is_current: true }));
   b.openProject.mockResolvedValue({ success: true });
   return b;
@@ -163,6 +164,21 @@ describe("applyRecipe", () => {
     expect(report.warnings.join()).not.toMatch(/loaded but added no new scene item/);
   });
 
+  it("removes parts of loaded items and sets shader values after the texture colours", async () => {
+    const b = happyBridge();
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({
+      ...LOOK,
+      remove_items: ["Bang"],
+      shader_params: [{ mesh: "Bun", material: "Hair", parameter: "RootColor", values: [0.42, 0.41, 0.4] }],
+    }));
+    expect(report.ok).toBe(true);
+    const steps = report.steps.map((s) => s.step);
+    expect(steps.indexOf("remove_item")).toBe(steps.indexOf("remove_base_item") + 1);
+    expect(steps.slice(-3)).toEqual(["texture_color", "shader_param", "leave_skingen"]);
+    expect(b.removeItem).toHaveBeenCalledWith("Bang");
+    expect(b.setShaderParameter).toHaveBeenCalledWith("Bun", "Hair", "RootColor", [0.42, 0.41, 0.4]);
+  });
+
   it("skips the SkinGen exit without skin presets, and warns about a base item the base didn't bring", async () => {
     const b = happyBridge();
     const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({ remove_base_items: ["Panties"] }));
@@ -174,12 +190,15 @@ describe("applyRecipe", () => {
   it.each([
     ["removeItem", "remove_base_item"],
     ["setTextureColor", "texture_color"],
+    ["setShaderParameter", "shader_param"],
     ["saveProjectAs", "leave_skingen"],
     ["openProject", "leave_skingen"],
   ] as const)("stops at %s failure", async (method, step) => {
     const b = happyBridge();
     b[method].mockResolvedValue({ success: false, error: "nope" });
-    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe(LOOK));
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({
+      ...LOOK, shader_params: [{ mesh: "Bun", material: "Hair", parameter: "TipColor", values: [0.7, 0.7, 0.7] }],
+    }));
     expect(report.ok).toBe(false);
     expect(report.steps.at(-1)).toMatchObject({ step, ok: false });
   });
@@ -301,6 +320,16 @@ describe("exportRecipe", () => {
     });
     const out = await exportRecipe(b as never, fixtureAllowlist());
     expect(out.recipe.texture_colors).toEqual([{ mesh: "Hair", material: "Hair", brightness: 30 }, { mesh: "Brow", material: "Brow", brightness: 10 }]);
+  });
+
+  it("carries the applied recipe's removed item parts and shader values (CC4 can't report them)", async () => {
+    const b = sceneBridge();
+    const sp = { mesh: "Bun", material: "Hair", parameter: "TipColor", values: [0.74, 0.73, 0.71] };
+    setLastAppliedRecipe(recipe({ remove_items: ["Bang"], shader_params: [sp] }));
+    b.diagnostics.mockImplementation(async (q: string) => (q === "materials_per_mesh" ? {} : { values: [0, 0, 0, 0, 0, 0, 0] }));
+    const out = await exportRecipe(b as never, fixtureAllowlist());
+    expect(out.recipe).toMatchObject({ remove_items: ["Bang"], shader_params: [sp] });
+    expect(RecipeSchema.safeParse(out.recipe).success).toBe(true);
   });
 
   it("reads the hair tint (set_color hair) back from the hair meshes' diffuse colour", async () => {

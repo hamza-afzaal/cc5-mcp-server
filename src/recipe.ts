@@ -40,6 +40,14 @@ export const TextureColorSchema = z.object({
   yellow: Adjust,
 }).strict();
 export type TextureColor = z.infer<typeof TextureColorSchema>;
+/** One Digital Human Shader parameter on a material (e.g. a strand hair's RootColor / TipColor / dye strength). */
+export const ShaderParamSchema = z.object({
+  mesh: z.string().min(1),
+  material: z.string().min(1),
+  parameter: z.string().min(1).max(128),
+  values: z.array(z.number().finite()).min(1).max(16),
+}).strict();
+export type ShaderParam = z.infer<typeof ShaderParamSchema>;
 const ADJUST_KEYS = ["hue", "saturation", "brightness", "contrast", "cyan", "magenta", "yellow"] as const;
 
 /**
@@ -50,7 +58,7 @@ export const skinGenExitProject = (recipeId: string, now = new Date()) =>
   `${recipeId}_recipe_${now.toISOString().slice(0, 19).replace(/[-:]/g, "").replace("T", "-")}`;
 
 export const RecipeSchema = z.object({
-  /** 0.2 adds skin.layers, texture_colors and remove_base_items; 0.1 recipes still parse. */
+  /** 0.2 adds skin.layers, texture_colors, remove_base_items, remove_items and shader_params; 0.1 recipes still parse. */
   recipe_version: z.enum(["0.1", "0.2"]),
   id: z.string().regex(/^[a-z0-9][a-z0-9-]*$/, "lowercase, digits and dashes"),
   archetype: z.string().min(1),
@@ -74,8 +82,12 @@ export const RecipeSchema = z.object({
   accessories: z.array(Ref).default([]),
   /** Scene items the base avatar brings that this character doesn't wear (e.g. Camila's underwear). */
   remove_base_items: z.array(z.string().min(1)).default([]),
+  /** Parts of a loaded hair/clothing item this character doesn't wear (e.g. Chic bun's "Bang" strands). */
+  remove_items: z.array(z.string().min(1)).default([]),
   colors: z.object({ eyes: Rgb.optional(), hair: Rgb.optional() }).strict().optional(),
   texture_colors: z.array(TextureColorSchema).default([]),
+  /** Shader values set after the texture colours (strand hair takes its colour from RootColor/TipColor, not the texture). */
+  shader_params: z.array(ShaderParamSchema).default([]),
   lod_profile: z.string().optional(),
   motions: z.array(Ref).default([]),
   salsa: z.record(z.unknown()).optional(),
@@ -256,6 +268,14 @@ export async function applyRecipe(
     steps.push({ step: "remove_base_item", ok: true, detail: name });
   }
 
+  // 4a. Parts of loaded items this character doesn't wear.
+  for (const name of recipe.remove_items) {
+    current = `remove_item (${name})`;
+    const res = await bridge.removeItem(name);
+    if (!res.success) return fail("remove_item", { item: name, error: res.error });
+    steps.push({ step: "remove_item", ok: true, detail: name });
+  }
+
   // 4b. Skin base and SkinGen layers last of the loads: they put CC4 into SkinGen mode,
   // which step 7 leaves; nothing else is loaded while in it.
   const skins: Array<[string, AllowlistItem]> = [];
@@ -283,6 +303,14 @@ export async function applyRecipe(
     const res = await bridge.setTextureColor(mesh, material, adjust);
     if (!res.success) return fail("texture_color", { mesh, material, error: res.error });
     steps.push({ step: "texture_color", ok: true, detail: { mesh, material, values: res.values } });
+  }
+
+  // 6b. Shader parameters (strand hair colour lives in the shader, not the texture).
+  for (const sp of recipe.shader_params) {
+    current = `shader_param (${sp.mesh}|${sp.material}|${sp.parameter})`;
+    const res = await bridge.setShaderParameter(sp.mesh, sp.material, sp.parameter, sp.values);
+    if (!res.success) return fail("shader_param", { ...sp, error: res.error });
+    steps.push({ step: "shader_param", ok: true, detail: { mesh: sp.mesh, material: sp.material, parameter: sp.parameter } });
   }
 
   // 7. A SkinGen preset leaves CC4 in SkinGen mode (hair, brows and clothes hidden in the
@@ -406,8 +434,11 @@ export async function exportRecipe(bridge: CC4Bridge, allowlist: AllowlistIndex)
     clothes,
     accessories,
     remove_base_items: removeBaseItems,
+    // Removed parts and shader values aren't read back; carry the applied recipe's.
+    ...(prior?.remove_items.length ? { remove_items: prior.remove_items } : {}),
     ...(Object.keys(colors).length ? { colors } : {}),
     texture_colors: textureColors,
+    ...(prior?.shader_params.length ? { shader_params: prior.shader_params } : {}),
     ...(prior?.lod_profile ? { lod_profile: prior.lod_profile } : {}),
     motions: prior?.motions ?? [],
     ...(prior?.salsa ? { salsa: prior.salsa } : {}),

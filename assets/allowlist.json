@@ -1779,6 +1779,86 @@
    "exportable": true,
    "verified": false,
    "notes": "CXRP-582 body language candidate: Yawning Stand"
+  },
+  {
+   "id": "base/human_anatomy_female_old",
+   "type": "base",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Actor/Character/Human Anatomy/Female Old.ccAvatar",
+   "license": "Human Anatomy pack, reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter base (with Female Old eyes and teeth); check_export_license exportable 2026-10-29 (Traditional facial profile: not used as a base; Carter uses Camila + the HA Female Old sliders)"
+  },
+  {
+   "id": "hair/chic_bun_medium",
+   "type": "hair",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Hair/Group/Hair/Chic bun medium.rlhair",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license pending)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter; greyed with set_texture_color; check_export_license exportable on Carter 2026-10-29"
+  },
+  {
+   "id": "skin/rhs_base_female_old",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Skin Base/Realistic Human Skin/Female Old.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter skin base; check_export_license exportable on Carter 2026-10-29"
+  },
+  {
+   "id": "skin/rhs_full_female_old",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Full Skin/Realistic Human Skin/Female Old.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter full skin (alternative to the base)"
+  },
+  {
+   "id": "makeup/brow_human_anatomy_female_old",
+   "type": "makeup",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Makeup/Eyebrow/Human Anatomy/Female Old.ccSkinGenPreset",
+   "license": "reallusion content (owner cleared 2026-09-30; check_export_license after applying)",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter brows; preset_refs ok 2026-10-29; check_export_license exportable on Carter 2026-10-29"
+  },
+  {
+   "id": "skin/rhs_body_old_freckle_1",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Blemish/1_Freckle/Realistic Human Skin/Body Old Freckle 1.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter age spots; check_export_license exportable on Carter 2026-10-29"
+  },
+  {
+   "id": "skin/rhs_aged_wrinkle_f_light",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Normal Effects/2_Body/Realistic Human Skin/2_Aged Wrinkle/Wrinkle F 1Light .ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter (note the space before .ccSkinGenPreset in the file name)"
+  },
+  {
+   "id": "skin/rhs_aged_wrinkle_f_medium",
+   "type": "skin",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Skin/Normal Effects/2_Body/Realistic Human Skin/2_Aged Wrinkle/Wrinkle F 2Medium.ccSkinGenPreset",
+   "license": "reallusion content, Realistic Human Skin pack (Extended licence, order 11236583); check_export_license after applying",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter; check_export_license exportable on Carter 2026-10-29"
   }
  ]
 }
