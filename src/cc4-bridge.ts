@@ -38,6 +38,13 @@ import type {
   MorphValue,
   SetMorphsResult,
   FixEyeElementResult,
+  ExportObjResult,
+  CreateMorphSliderOptions,
+  CreateMorphSliderResult,
+  LoadTextureResult,
+  ExportObjOptions,
+  LoadGarmentResult,
+  TextureChannel,
   SetFacePoseResult,
   ApplyMotionResult,
   SetTimeResult,
@@ -215,6 +222,29 @@ export class CC4Bridge {
 
   async fixEyeElement(): Promise<FixEyeElementResult> {
     return this.request<FixEyeElementResult>("/morphs/fix_eye", "POST", {});
+  }
+
+  /** Export the avatar's body as OBJ in bind pose (the source for a morph target made in Blender). */
+  async exportObj(path: string, options: ExportObjOptions = {}): Promise<ExportObjResult> {
+    return this.request<ExportObjResult>("/export/obj", "POST", { path, axis: "z", ...options }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  /** Garment intake: put a CC4-skinned FBX made or edited in Blender on the avatar as clothing. */
+  async loadGarmentFbx(path: string): Promise<LoadGarmentResult> {
+    return this.request<LoadGarmentResult>("/item/garment", "POST", { path }, LONG_REQUEST_TIMEOUT_MS);
+  }
+
+  /** Load a workspace image into a material channel (e.g. a head diffuse baked in Blender). */
+  async loadTexture(meshName: string, materialName: string, channel: TextureChannel, imagePath: string): Promise<LoadTextureResult> {
+    return this.request<LoadTextureResult>("/material/texture/load", "POST",
+      { mesh_name: meshName, material_name: materialName, channel, image_path: imagePath });
+  }
+
+  /** Create a shaping slider from an OBJ target (the avatar's topology) and export_obj's .ObjKey; applied at 1.0. */
+  async createMorphSlider(targetPath: string, checksumPath: string, name: string,
+    options: CreateMorphSliderOptions = {}): Promise<CreateMorphSliderResult> {
+    return this.request<CreateMorphSliderResult>("/morphs/create_slider", "POST",
+      { target_path: targetPath, checksum_path: checksumPath, name, ...options }, LONG_REQUEST_TIMEOUT_MS);
   }
 
   /** Key an expression pose ({slider name: weight}) on the face at time 0; clear sets every other expression to 0. */

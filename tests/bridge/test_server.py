@@ -240,6 +240,45 @@ class BridgeHttpTest(unittest.TestCase):
         # opening does not make it a saved copy: irreversible steps stay refused
         self.assertNotIn(os.path.normcase(os.path.realpath(proj)), {os.path.normcase(p) for p in cc4_api.bridge_state.saved_as_paths})
 
+    def test_export_obj(self):
+        import cc4_api
+        self.assertIn("outside the workspace", cc4_api.export_obj(os.path.join(tempfile.gettempdir(), "x.obj"))["error"])
+        r = cc4_api.export_obj("bald_src")
+        self.assertTrue(r["success"], r)
+        self.assertTrue(r["path"].endswith(os.path.join("exports", "bald_src.obj")))
+        self.assertIn("Refusing to overwrite", cc4_api.export_obj("bald_src")["error"])
+
+    def test_load_garment_fbx_only_workspace_fbx(self):
+        import cc4_api
+        self.assertIn("outside the workspace", cc4_api.load_garment_fbx(os.path.join(tempfile.gettempdir(), "a.fbx"))["error"])
+        self.assertIn("extension", cc4_api.load_garment_fbx("a.obj")["error"])
+        self.assertIn("not found", cc4_api.load_garment_fbx("missing.fbx")["error"])
+
+    def test_load_texture_only_workspace_images(self):
+        import cc4_api
+        self.assertIn("channel", cc4_api.load_texture("CC_Base_Body", "Std_Skin_Head", "glow", "a.png")["error"])
+        self.assertIn("outside the workspace",
+                      cc4_api.load_texture("CC_Base_Body", "Std_Skin_Head", "diffuse", os.path.join(tempfile.gettempdir(), "a.png"))["error"])
+        self.assertIn("extension", cc4_api.load_texture("CC_Base_Body", "Std_Skin_Head", "diffuse", "a.exe")["error"])
+        self.assertIn("not found", cc4_api.load_texture("CC_Base_Body", "Std_Skin_Head", "diffuse", "missing.png")["error"])
+
+    def test_create_morph_slider_needs_the_checksum(self):
+        import cc4_api
+        exports = os.path.join(WORKSPACE, "_testbench", "exports")
+        os.makedirs(exports, exist_ok=True)
+        for name in ("head_t.obj", "head_t.ObjKey"):
+            open(os.path.join(exports, name), "w").close()
+        self.assertIn("not found", cc4_api.create_morph_slider("missing.obj", "head_t.ObjKey", "Head T")["error"])
+        self.assertIn("checksum", cc4_api.create_morph_slider("head_t.obj", "head_t.obj", "Head T")["error"])
+        self.assertIn("name", cc4_api.create_morph_slider("head_t.obj", "head_t.ObjKey", "bad/name")["error"])
+        made = cc4_api.create_morph_slider("head_t.obj", "head_t.ObjKey", "Head T")
+        self.assertTrue(made["success"], made)
+        setting = fake_rlpy._Shaping.created[-1]
+        self.assertEqual((setting.MorphName, setting.Category, setting.AxisSettingForObj, setting.AdjustBonesToFitMorph),
+                         ("Head T", fake_rlpy.ESetCategory_Head, fake_rlpy.EAxisSetting_ZUp, False))
+        self.assertTrue(setting.TargetMorphChecksumFilePath.endswith("head_t.ObjKey"))
+        self.assertEqual(fake_rlpy._Shaping.weights.get("Head T"), 1.0)  # applied explicitly at 1
+
     def test_absolute_paths_inside_workspace_are_allowed(self):
         import cc4_api
         inside = os.path.join(WORKSPACE, "_testbench", "exports", "a.fbx")

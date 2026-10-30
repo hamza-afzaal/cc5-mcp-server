@@ -14,22 +14,40 @@ beforeEach(() => {
 });
 
 describe("registerMorphTools", () => {
-  it("registers search_morphs, set_morphs, fix_eye_element and set_face_pose", () => {
-    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["search_morphs", "set_morphs", "fix_eye_element", "set_face_pose"]);
+  it("registers the morph tools", () => {
+    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(
+      ["search_morphs", "set_morphs", "fix_eye_element", "export_obj", "create_morph_slider", "set_face_pose"]);
   });
 });
 
-describe("fix_eye_element", () => {
-  it("reports success", async () => {
-    bridge.fixEyeElement.mockResolvedValue({ success: true, avatar: "Camila" });
-    const text = (await server.getRegisteredTool("fix_eye_element")({})).content[0].text;
-    expect(text).toBe("Fix Eye Element applied to Camila.");
+describe("export_obj", () => {
+  it("defaults to z-up and reports the file", async () => {
+    bridge.exportObj.mockResolvedValue({ success: true, path: "D:/c/bald/exports/src.obj", size_bytes: 10, axis: "z", seconds: 1 });
+    const text = (await server.getRegisteredTool("export_obj")({ path: "src" })).content[0].text;
+    expect(bridge.exportObj).toHaveBeenCalledWith("src", {});
+    expect(text).toContain("src.obj");
   });
 
   it("reports failure", async () => {
-    bridge.fixEyeElement.mockResolvedValue({ success: false, error: "No avatar in scene" });
-    const text = (await server.getRegisteredTool("fix_eye_element")({})).content[0].text;
+    bridge.exportObj.mockResolvedValue({ success: false, error: "No avatar in scene" });
+    const text = (await server.getRegisteredTool("export_obj")({ path: "src" })).content[0].text;
     expect(text).toContain("No avatar in scene");
+  });
+});
+
+describe("create_morph_slider", () => {
+  const run = (args: unknown) => server.getRegisteredTool("create_morph_slider")(args);
+
+  it("passes the checksum and options and reports the slider", async () => {
+    bridge.createMorphSlider.mockResolvedValue({ success: true, name: "Bald Head", category: "head", ids: ["x_bald head"], avatar: "Kevin", seconds: 3 });
+    const text = (await run({ target_path: "t.obj", checksum_path: "t.ObjKey", name: "Bald Head", category: "head" })).content[0].text;
+    expect(bridge.createMorphSlider).toHaveBeenCalledWith("t.obj", "t.ObjKey", "Bald Head", { category: "head" });
+    expect(text).toContain("Slider 'Bald Head' (head, id x_bald head) created and applied to Kevin");
+  });
+
+  it("reports failure", async () => {
+    bridge.createMorphSlider.mockResolvedValue({ success: false, error: "CreateSlider returned Success but no slider named 'x' exists" });
+    expect((await run({ target_path: "t.obj", checksum_path: "t.ObjKey", name: "x" })).content[0].text).toContain("no slider named");
   });
 });
 

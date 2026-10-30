@@ -83,6 +83,14 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - A clip made for another facial profile opens a **Traditional / ExPlus** dialog. Silent mode picks Traditional, which loses the mouth and most of the brows (Happy Hi: smile 0 instead of 0.40). **ExPlus needs the owner's click.** `tools/face_capture.mjs` runs that way, one click per clip, resumable.
   - **Read face weights directly:** `diagnostics face_weights` returns `RIFaceComponent.GetExpressionWeights` sampled over the facial clip (no export, no timeline scrubbing); arg `groups` lists the expression names.
   - The library: `python ..\blender-pipeline\tools\face_poses.py library-samples` writes `characters\<id>\face\<id>_face_library.json`. Poses are keyed by shape name; the mouth (visemes, tongue) and "life" (blink, gaze, head) layers are split off; values above 1 are clamped.
+- **Custom morph sliders from Python need the `.ObjKey`.** `export_obj` writes a bind-pose body OBJ plus an `.ObjKey` checksum (the `GenerateDrmProtectedFile` option). Reshape the OBJ in Blender, keeping the vertex order, then run `create_morph_slider` with that checksum. Without the checksum, `CreateSlider` returns Success and does nothing; the UI asks for it instead (2026-10-29). **Adjust Bones to Fit Morph rolled the bald man's eyes down**, pupils behind the lower lid, so it's off by default. The bald man's head (CXRP-721) uses `characters\bald\tools\head_wrap.py`.
+- **Garment intake works from Python (2026-10-29):**
+  - Export a CC4 FBX with **Reset Bone Scale on**. Without it, Blender's bind pose is wrong and the garment lands rotated and 4.6x too big.
+  - Take the garment and the armature into Blender, edit it, and export mesh + armature.
+  - Load it with `load_garment_fbx` (`RFileIO.LoadClotheFromFbx`): a round trip is exact to 0.01 mm. CC4 returns a failure status even when the garment loads.
+  - **Keep CC4's own skin weights.** Copy them from the nearest vertex of a CC garment; a full data-transfer from the body made CC4 drop the thigh faces.
+  - A Blender garment has **no CC4 hide-body mask**, so keep it 4–8 mm off the body, and run a body-side pass for bumps (nipples). Never push collars or cuffs: they are layered fabric and blow out.
+  - Tools: `characters\bald\tools\garment_from_fbx.py` (+ `edits\*.py`) and `fit_accessories.py` (CXRP-721).
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
@@ -91,9 +99,9 @@ InstaLOD *Merge Materials by type* (export dialog) · Optimize & Decimate **Cust
 
 **Hero route (decided 2026-09-23):** apply recipe → save copy → Convert to Game Base (Single Material, separate eyelash, 2048) in the UI → export. Clothing reduction and clipping fixes happen in the Blender stage (S4): `python ..\blender-pipeline\tools\run_s4.py ..\blender-pipeline\params\<id>.json` reads `characters\<id>\exports\` and writes `characters\<id>\blender\` (see `..\blender-pipeline\CLAUDE.md`). Details of the decimation test: `docs/spikes.md`.
 
-## Tools (51) and the S1–S3 flow
+## Tools (55) and the S1–S3 flow
 
-`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `fix_eye_element`, `set_face_pose` (key a face pose at time 0 for review renders), `apply_motion` / `set_time` (seated and pose renders), `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `set_color`, `set_texture_color`, `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
+`apply_recipe` → `capture_views` (Gate 1) → `save_project_as` → optional `convert_lod` / `merge_materials` → `start_export_fbx` (+ `lod_label`) → `get_export_status` (FBX counts + design §4 budget check) → `export_motions`. Plus `open_project`, `search_morphs`, `set_morphs`, `fix_eye_element`, `export_obj` / `create_morph_slider` (custom head/body shape from Blender), `set_face_pose` (key a face pose at time 0 for review renders), `apply_motion` / `set_time` (seated and pose renders), `list_items`, `get_inventory`, `load_item` (allowlisted only), `remove_item`, `load_garment_fbx` (garment intake), `set_color`, `set_texture_color`, `load_texture` (workspace image into a material channel), `set_character`, `export_recipe`, `check_export_license`, `diagnostics` (read-only allowlist), `undo`/`redo`, and the kept look-dev tools (lights, camera, materials/shader, expression info). There's no code-execution tool.
 
 ## Unity export profile (working)
 

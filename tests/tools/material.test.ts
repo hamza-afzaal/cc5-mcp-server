@@ -27,8 +27,21 @@ beforeEach(() => {
 // ── tool registration ─────────────────────────────────────────────────────────
 
 describe("registerMaterialTools – registration", () => {
-  it("registers exactly 5 tools", () => {
-    expect(server.tool).toHaveBeenCalledTimes(6);
+  it("registers exactly 7 tools", () => {
+    expect(server.tool).toHaveBeenCalledTimes(7);
+  });
+
+  it("load_texture passes the channel and reports the file", async () => {
+    bridge.loadTexture.mockResolvedValue({ success: true, mesh: "CC_Base_Body", material: "Std_Skin_Head", channel: "diffuse", path: "D:/c/bald/head.png" });
+    const text = (await server.getRegisteredTool("load_texture")({ mesh_name: "CC_Base_Body", material_name: "Std_Skin_Head", channel: "diffuse", image_path: "head.png" })).content[0].text;
+    expect(bridge.loadTexture).toHaveBeenCalledWith("CC_Base_Body", "Std_Skin_Head", "diffuse", "head.png");
+    expect(text).toBe("Loaded D:/c/bald/head.png into CC_Base_Body/Std_Skin_Head diffuse.");
+  });
+
+  it("load_texture reports failure", async () => {
+    bridge.loadTexture.mockResolvedValue({ success: false, error: "Image not found: x.png" });
+    const text = (await server.getRegisteredTool("load_texture")({ mesh_name: "a", material_name: "b", channel: "normal", image_path: "x.png" })).content[0].text;
+    expect(text).toContain("Image not found");
   });
 
   it("registers get_shader_parameters", () => {

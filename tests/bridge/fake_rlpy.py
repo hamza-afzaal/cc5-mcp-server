@@ -38,10 +38,36 @@ class _Shaping:
         return list(self.MORPHS[cat])
 
     def GetShapingMorphDisplayNames(self, cat):
-        return ["Body Thin"]
+        return ["Body Thin"] if cat == "Body" else list(self.MORPHS[cat])
 
     def GetShapingMorphMinMax(self, morph_id):
         return FloatPair(-1.0, 1.0)
+
+    def SetShapingMorphWeight(self, morph_id, value):
+        _Shaping.weights[morph_id] = value
+
+    def GetShapingMorphWeight(self, morph_id):
+        return _Shaping.weights.get(morph_id, 0.0)
+
+    weights = {}
+
+    def CreateSlider(self, setting, output_path):
+        """Like CC4: reports Success either way, but only makes the slider when a checksum file is set."""
+        _Shaping.created.append(setting)
+        if getattr(setting, "TargetMorphChecksumFilePath", ""):
+            _Shaping.MORPHS.setdefault("Actor/Head", []).append(setting.MorphName)
+        return RStatus.Success
+
+    created = []
+
+
+class RMorphSliderSetting:
+    """Records every setter call as an attribute (SetMorphName('x') -> .MorphName == 'x')."""
+
+    def __getattr__(self, name):
+        if name.startswith("Set"):
+            return lambda *args: setattr(self, name[3:], args[0] if len(args) == 1 else args)
+        raise AttributeError(name)
 
 
 class _Avatar:
@@ -84,6 +110,10 @@ class RGlobal:
     def EndAction():
         pass
 
+    @staticmethod
+    def ObjectModified(obj, kind):
+        pass
+
 
 class RFileIO:
     loaded = []
@@ -98,6 +128,12 @@ class RFileIO:
         RFileIO.loaded.append(path)
         return RStatus.Success
 
+    @staticmethod
+    def ExportObjFile(obj, path, option):
+        with open(path, "w") as f:
+            f.write("v 0 0 0\n")
+        return RStatus.Success
+
 
 class RApplication:
     @staticmethod
@@ -110,6 +146,22 @@ class RExportFbxSetting:
 
 
 EObjectModifiedType_Attribute = 1
+EExport3DFileOption__None = 0
+EExport3DFileOption_AxisYUp = 1
+EExport3DFileOption_BodyPart = 8
+EExport3DFileOption_ResetToBindPose = 64
+EExport3DFileOption_GenerateDrmProtectedFile = 4
+EExport3DFileOption_ExportMaterial = 512
+EExport3DFileOption_EyePart = 16
+EExport3DFileOption_FullBodyPart = 1024
+EExport3DFileOption_AllClothes = 32
+ESetCategory_Body = 0
+ESetCategory_Head = 1
+EChooseBase_Current = 1
+EChooseBase_Default = 0
+EChooseBase_File = 2
+EAxisSetting_YUp = 1
+EAxisSetting_ZUp = 2
 EObjectModifiedType_Material = 4
 EExportFbxOptions3_ExportJson = 1
 EExportFbxOptions3_TraditionalUv = 4

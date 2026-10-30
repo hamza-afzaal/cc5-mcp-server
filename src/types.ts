@@ -372,6 +372,62 @@ export interface FixEyeElementResult extends OperationResult {
   avatar?: string;
 }
 
+export interface ExportObjResult extends OperationResult {
+  path?: string;
+  axis?: "y" | "z";
+  seconds?: number;
+  size_bytes?: number;
+  /** The .ObjKey files written next to the OBJ (create_morph_slider needs one). */
+  checksum_files?: string[];
+}
+
+export interface ExportObjOptions {
+  axis?: "y" | "z";
+  /** usemtl groups, a .mtl and the textures */
+  materials?: boolean;
+  /** the eyeballs, tear line and eye occlusion too */
+  eyes?: boolean;
+  /** every body part (eyes, teeth, ...), like the UI's nude bind-pose export: use for custom head sliders */
+  full?: boolean;
+  /** the worn clothes too */
+  clothes?: boolean;
+  /** write the .ObjKey checksum create_morph_slider needs (default true) */
+  checksum?: boolean;
+}
+
+export interface LoadGarmentResult extends OperationResult {
+  path?: string;
+  seconds?: number;
+  added?: { clothes: string[]; hair: string[]; accessories: string[] };
+  failed_meshes?: string[];
+  /** CC4's own status; it reports failure even when the garment loads, so success is judged by what was added */
+  status_ok?: boolean;
+}
+
+export type TextureChannel = "diffuse" | "normal" | "roughness" | "ao";
+
+export interface LoadTextureResult extends OperationResult {
+  mesh?: string;
+  material?: string;
+  channel?: TextureChannel;
+  path?: string;
+}
+
+export interface CreateMorphSliderOptions {
+  category?: "head" | "body";
+  axis?: "y" | "z";
+  adjust_bones?: boolean;
+}
+
+export interface CreateMorphSliderResult extends OperationResult {
+  name?: string;
+  category?: string;
+  ids?: string[];
+  adjust_bones?: boolean;
+  seconds?: number;
+  avatar?: string;
+}
+
 export interface SetFacePoseResult extends OperationResult {
   /** Expressions keyed (all 164 with clear). */
   keyed?: number;
@@ -448,5 +504,5 @@ export interface WorkspaceInfo {
   folder: string;
 }
 
-export type ViewPreset = "full" | "head" | "three_quarter" | "profile";
+export type ViewPreset = "full" | "head" | "three_quarter" | "profile" | "side" | "back";
 export type LodLevel = "actorbuild" | "lod1" | "lod2";

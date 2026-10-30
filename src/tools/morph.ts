@@ -63,6 +63,45 @@ export function registerMorphTools(server: McpServer, bridge: CC4Bridge) {
   );
 
   server.tool(
+    "export_obj",
+    "Export the avatar's body mesh as OBJ in bind pose (body part only), e.g. as the source for a morph target reshaped in Blender. Bare names go to <character>/exports/. Edit only vertex positions and keep the vertex order, then pass the edited OBJ and the .ObjKey checksum written here to create_morph_slider.",
+    {
+      path: z.string().min(1).max(512).describe("Output .obj (bare name or a path inside the workspace)"),
+      axis: z.enum(["y", "z"]).optional().describe("Up axis (default z)"),
+      materials: z.boolean().optional().describe("Also write usemtl groups, a .mtl and the textures (e.g. to find the head material's UVs for a texture bake)"),
+      eyes: z.boolean().optional().describe("Also the eyeballs, tear line and eye occlusion"),
+      full: z.boolean().optional().describe("Every body part, like CC4's nude bind-pose export. Use this for create_morph_slider: a body-only target makes CC4 drop the eyes"),
+      clothes: z.boolean().optional().describe("Also the worn clothes (e.g. to fit an accessory in Blender)"),
+      checksum: z.boolean().optional().describe("Write the .ObjKey (default true)"),
+    },
+    async ({ path, ...options }) => bridgeCall(
+      () => bridge.exportObj(path, options),
+      (r) => r.success
+        ? `Exported ${r.path} (${r.size_bytes} bytes, ${r.axis}-up, ${r.seconds}s). Checksum: ${r.checksum_files?.join(", ") || "none"}.`
+        : `OBJ export failed: ${r.error}`,
+    )
+  );
+
+  server.tool(
+    "create_morph_slider",
+    "CC4's Morph Slider Editor: create a shaping slider from an OBJ target with the avatar's own topology (export_obj, reshaped in Blender), compared with the avatar as it is now, and apply it at 1.0. Needs the .ObjKey checksum from the same export_obj (without it CC4 silently does nothing). adjust_bones (default false) refits the skeleton; it rolled the bald man's eyes down, so check the eyes if you turn it on.",
+    {
+      target_path: z.string().min(1).max(512).describe("Target .obj inside the workspace"),
+      checksum_path: z.string().min(1).max(512).describe("The .ObjKey written by export_obj for the source OBJ"),
+      name: z.string().regex(/^[A-Za-z0-9 _-]{1,64}$/).describe("Slider name"),
+      category: z.enum(["head", "body"]).optional().describe("Slider category (default head)"),
+      axis: z.enum(["y", "z"]).optional().describe("Up axis of the OBJ (default z)"),
+      adjust_bones: z.boolean().optional().describe("Refit bones to the new shape (default false)"),
+    },
+    async ({ target_path, checksum_path, name, ...options }) => bridgeCall(
+      () => bridge.createMorphSlider(target_path, checksum_path, name, options),
+      (r) => r.success
+        ? `Slider '${r.name}' (${r.category}, id ${r.ids?.join(", ")}) created and applied to ${r.avatar} in ${r.seconds}s.`
+        : `Create slider failed: ${r.error}`,
+    )
+  );
+
+  server.tool(
     "set_face_pose",
     "Key an expression pose on the avatar's face at time 0, e.g. a pose from the face pose library (CXRP-553), then capture_views renders it. Weights by expression slider name (diagnostics expression_slider_names), 0..1 (CC4 allows -1.5..1.5). With clear (default) every other expression is set to 0, so the pose replaces what the face showed. Reads the weights back. Reopen the project to remove it.",
     {

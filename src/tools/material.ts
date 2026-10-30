@@ -84,6 +84,23 @@ export function registerMaterialTools(server: McpServer, bridge: CC4Bridge) {
   );
 
   server.tool(
+    "load_texture",
+    "Load an image from the workspace into a material channel (diffuse, normal, roughness or ao), e.g. a head diffuse baked in Blender onto the CC head UVs. One undo step. Check with capture_views.",
+    {
+      mesh_name: z.string().max(256).describe("Mesh name (from get_material_info), e.g. CC_Base_Body"),
+      material_name: z.string().max(256).describe("Material name (from get_material_info), e.g. Std_Skin_Head"),
+      channel: z.enum(["diffuse", "normal", "roughness", "ao"]).describe("Material channel"),
+      image_path: z.string().min(1).max(512).describe("PNG/JPG/TGA inside the workspace (bare names: <character>/exports/)"),
+    },
+    async ({ mesh_name, material_name, channel, image_path }) => bridgeCall(
+      () => bridge.loadTexture(mesh_name, material_name, channel, image_path),
+      (result) => result.success
+        ? `Loaded ${result.path} into ${result.mesh}/${result.material} ${result.channel}.`
+        : `Failed: ${result.error}`,
+    )
+  );
+
+  server.tool(
     "get_shader_parameters",
     "Get the Digital Human Shader parameters for a material (skin roughness scales, SSS radius/falloff/IOR, micronormal strength, specular, etc.). Each value is a list of floats. Use get_material_info first for valid mesh/material names, then set_shader_parameter to change one.",
     {

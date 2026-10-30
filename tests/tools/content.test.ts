@@ -23,7 +23,7 @@ beforeEach(() => {
 
 describe("registerContentTools", () => {
   it("registers the item tools", () => {
-    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["list_items", "get_inventory", "load_item", "apply_motion", "set_time", "remove_item", "browse_content"]);
+    expect(server.tool.mock.calls.map((c) => c[0])).toEqual(["list_items", "get_inventory", "load_item", "apply_motion", "set_time", "remove_item", "load_garment_fbx", "browse_content"]);
   });
 });
 
@@ -127,5 +127,20 @@ describe("set_time", () => {
     bridge.setTime.mockResolvedValue({ success: false, error: "CC4 did not move the timeline" });
     const text = (await server.getRegisteredTool("set_time")({ frame: 30 })).content[0].text;
     expect(text).toBe("Failed: CC4 did not move the timeline");
+  });
+});
+
+describe("load_garment_fbx", () => {
+  const run = (args: unknown) => server.getRegisteredTool("load_garment_fbx")(args);
+
+  it("reports the added garment", async () => {
+    bridge.loadGarmentFbx.mockResolvedValue({ success: true, added: { clothes: ["Tie", "Belt"], hair: [], accessories: [] }, seconds: 1.6, failed_meshes: [] });
+    expect((await run({ path: "tie_belt.fbx" })).content[0].text).toBe("Added Tie, Belt in 1.6s.");
+    expect(bridge.loadGarmentFbx).toHaveBeenCalledWith("tie_belt.fbx");
+  });
+
+  it("explains an empty load", async () => {
+    bridge.loadGarmentFbx.mockResolvedValue({ success: false, added: { clothes: [], hair: [], accessories: [] } });
+    expect((await run({ path: "x.fbx" })).content[0].text).toContain("skinned to the CC4 skeleton");
   });
 });

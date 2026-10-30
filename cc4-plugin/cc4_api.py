@@ -838,6 +838,121 @@ def fix_eye_element() -> dict[str, Any]:
         return {"success": False, "error": str(e)}
 
 
+_OBJ_AXES = {"z": "EExport3DFileOption__None", "y": "EExport3DFileOption_AxisYUp"}
+
+
+def export_obj(path: str, axis: str = "z", checksum: bool = True, materials: bool = False,
+               eyes: bool = False, full: bool = False, clothes: bool = False) -> dict[str, Any]:
+    """Export the avatar's body mesh as OBJ in bind pose (RFileIO.ExportObjFile, BodyPart | ResetToBindPose): the
+    source mesh for a morph target made in Blender (CXRP-721). Edit only vertex positions and keep the vertex order,
+    then pass the edited OBJ and this export's .ObjKey to create_morph_slider."""
+    if axis not in _OBJ_AXES:
+        return {"success": False, "error": f"axis must be one of {sorted(_OBJ_AXES)}"}
+    path, path_error = workspace_path(path, "exports")
+    if path_error:
+        return {"success": False, "error": path_error}
+    if not path.lower().endswith(".obj"):
+        path += ".obj"
+    if os.path.exists(path):
+        return {"success": False, "error": f"Refusing to overwrite: {path}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    # full: every body part (eyes, teeth, tear line, ...), like the UI's "nude character in bind pose" export. A morph
+    # target made from it keeps CC's eye placement; a body-only target makes CC guess, and the eyes drop ~1.3 cm.
+    part = RLPy.EExport3DFileOption_FullBodyPart if full else RLPy.EExport3DFileOption_BodyPart
+    option = getattr(RLPy, _OBJ_AXES[axis]) | part | RLPy.EExport3DFileOption_ResetToBindPose
+    if checksum:  # writes the .ObjKey the Morph Slider Editor asks for when the target derives from Reallusion content
+        option |= RLPy.EExport3DFileOption_GenerateDrmProtectedFile
+    if materials:  # usemtl groups + .mtl, e.g. to find the head material's faces and UVs
+        option |= RLPy.EExport3DFileOption_ExportMaterial
+    if eyes:  # the eyeballs too (after the body), e.g. to check a head slider leaves them in place
+        option |= RLPy.EExport3DFileOption_EyePart
+    if clothes:  # the worn clothes too, e.g. to fit an accessory onto the shirt in Blender
+        option |= RLPy.EExport3DFileOption_AllClothes
+    t0 = time.time()
+    status = RLPy.RFileIO.ExportObjFile(avatar, path, option)
+    if not (_ok(status) and os.path.isfile(path)):
+        return {"success": False, "error": f"ExportObjFile failed ({status})", "path": path}
+    base = os.path.splitext(path)[0]
+    keys = [f for f in os.listdir(os.path.dirname(path))
+            if f.lower().endswith(".objkey") and f.lower().startswith(os.path.basename(base).lower())]
+    return {"success": True, "path": path, "axis": axis, "seconds": round(time.time() - t0, 2),
+            "size_bytes": os.path.getsize(path), "checksum_files": [os.path.join(os.path.dirname(path), f) for f in keys]}
+
+
+_SLIDER_AXES = {"z": "EAxisSetting_ZUp", "y": "EAxisSetting_YUp"}
+_SLIDER_CATEGORIES = {"head": "ESetCategory_Head", "body": "ESetCategory_Body"}
+
+
+def create_morph_slider(target_path: str, checksum_path: str, name: str, category: str = "head", axis: str = "z",
+                        adjust_bones: bool = False, source_path: str = "") -> dict[str, Any]:
+    """CC4's Morph Slider Editor from Python (RIAvatarShapingComponent.CreateSlider): a new shaping slider whose target
+    is an OBJ with the avatar's own topology (export_obj, reshaped in Blender), compared with the avatar as it is now,
+    and applied at 1.0. checksum_path is the .ObjKey export_obj wrote: without it CreateSlider returns Success and
+    does nothing. adjust_bones refits the skeleton to the new shape; it rolled the bald man's eyes down (2026-10-29),
+    so it is off by default."""
+    for value, allowed, label in ((category, _SLIDER_CATEGORIES, "category"), (axis, _SLIDER_AXES, "axis")):
+        if value not in allowed:
+            return {"success": False, "error": f"{label} must be one of {sorted(allowed)}"}
+    if not name or len(name) > 64 or not set(name.lower()) <= _CHARACTER_ID_CHARS | {" "}:
+        return {"success": False, "error": "name must be 1-64 letters, digits, spaces, '-' or '_'"}
+    files = {}
+    wanted = [("target", target_path, ".obj"), ("checksum", checksum_path, ".objkey")]
+    if source_path and source_path != "default":
+        wanted.append(("source", source_path, ".iavatar"))
+    for key, given, ext in wanted:
+        path, path_error = workspace_path(given, "exports")
+        path_error = path_error or _validate_path(path, {ext})
+        if path_error:
+            return {"success": False, "error": f"{key}: {path_error}"}
+        if not os.path.isfile(path):
+            return {"success": False, "error": f"{key} file not found: {path}"}
+        files[key] = path
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    shaping = avatar.GetAvatarShapingComponent()
+    if not shaping:
+        return {"success": False, "error": "Avatar has no shaping component"}
+    setting = RLPy.RMorphSliderSetting()
+    setting.SetMorphName(name)
+    setting.SetCategory(getattr(RLPy, _SLIDER_CATEGORIES[category]))
+    setting.SetMorphValueRange(0.0, 100.0)
+    if source_path == "default":  # compared with CC's neutral base instead of the avatar as it is
+        setting.SetSourceBaseType(RLPy.EChooseBase_Default)
+    elif "source" in files:
+        setting.SetSourceBaseType(RLPy.EChooseBase_File)
+        setting.SetSourceFilePath(files["source"])
+    else:
+        setting.SetSourceBaseType(RLPy.EChooseBase_Current)
+    setting.SetTargetFilePath(files["target"])
+    setting.SetTargetMorphChecksumFilePath(files["checksum"])
+    setting.SetAxisSettingForObj(getattr(RLPy, _SLIDER_AXES[axis]))
+    setting.SetAdjustBonesToFitMorph(bool(adjust_bones))
+    setting.SetAutoApplyToCurrentCharacter(True)
+    t0 = time.time()
+    RLPy.RGlobal.BeginAction("Create Morph Slider")
+    try:
+        result = shaping.CreateSlider(setting, "")
+    finally:
+        RLPy.RGlobal.EndAction()
+    RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
+    _invalidate_caches()
+    status = result[0] if isinstance(result, (tuple, list)) else result  # SWIG may also return the output path
+    if not _ok(status):
+        return {"success": False, "error": f"CreateSlider failed ({status})"}
+    ids = sorted({m["id"] for cat in get_morph_catalog().values() for m in cat if m.get("display_name") == name})
+    if not ids:  # CreateSlider reports Success even when it did nothing (e.g. without a checksum)
+        return {"success": False, "error": "CreateSlider returned Success but no slider named '%s' exists" % name}
+    applied = set_morphs([{"id": ids[0], "value": 1.0}])  # AutoApplyToCurrentCharacter isn't reliable (2026-10-29)
+    if not applied.get("success"):
+        return {"success": False, "error": "slider created but not applied: %s" % applied.get("error"), "ids": ids}
+    return {"success": True, "name": name, "category": category, "ids": ids,
+            "adjust_bones": bool(adjust_bones), "seconds": round(time.time() - t0, 2), "avatar": avatar.GetName()}
+
+
 def set_face_pose(weights: dict, clear: bool = True) -> dict[str, Any]:
     """Key an expression pose on the avatar's face at time 0 (CXRP-553 pose review): {expression slider name: weight}
     (0..1, names as in diagnostics expression_slider_names). With clear, every other expression is keyed to 0, so the
@@ -1399,6 +1514,66 @@ def get_diffuse_color(mesh_name: str, material_name: str) -> dict[str, Any]:
         return {"success": True, "r": color.Red() / 255.0, "g": color.Green() / 255.0, "b": color.Blue() / 255.0}
     except Exception as e:
         return {"success": False, "error": str(e)}
+
+
+_TEXTURE_CHANNELS = {"diffuse": "EMaterialTextureChannel_Diffuse", "normal": "EMaterialTextureChannel_Normal",
+                     "roughness": "EMaterialTextureChannel_Roughness", "ao": "EMaterialTextureChannel_AmbientOcclusion"}
+
+
+def load_texture(mesh_name: str, material_name: str, channel: str, image_path: str) -> dict[str, Any]:
+    """Load an image from the workspace into a material channel (RIMaterialComponent.LoadImageToTexture), e.g. a head
+    diffuse baked in Blender (CXRP-721). One undo step."""
+    if channel not in _TEXTURE_CHANNELS:
+        return {"success": False, "error": f"channel must be one of {sorted(_TEXTURE_CHANNELS)}"}
+    error = _validate_material_names(mesh_name, material_name)
+    if error:
+        return {"success": False, "error": error}
+    path, path_error = workspace_path(image_path, "exports")
+    path_error = path_error or _validate_path(path, {".png", ".jpg", ".jpeg", ".tga"})
+    if path_error:
+        return {"success": False, "error": path_error}
+    if not os.path.isfile(path):
+        return {"success": False, "error": f"Image not found: {path}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    mat_comp, error = _get_valid_mesh_material(avatar, mesh_name, material_name)
+    if error:
+        return {"success": False, "error": error}
+    RLPy.RGlobal.BeginAction("Load Texture")
+    try:
+        status = mat_comp.LoadImageToTexture(mesh_name, material_name, getattr(RLPy, _TEXTURE_CHANNELS[channel]), path)
+        RLPy.RGlobal.ObjectModified(avatar, _EOMTYPE_MATERIAL)
+    finally:
+        RLPy.RGlobal.EndAction()
+    if not _ok(status):
+        return {"success": False, "error": f"LoadImageToTexture failed ({status})", "path": path}
+    return {"success": True, "mesh": mesh_name, "material": material_name, "channel": channel, "path": path}
+
+
+def set_opacity(mesh_name: str, material_name: str, opacity: float) -> dict[str, Any]:
+    """Material opacity 0..1 (RIMaterialComponent.AddOpacityKey at the current time), e.g. 0 to hide the canvas shoes
+    that stay on under garment-intake dress shoes for their heel lift (S4 then drops the mesh). One undo step."""
+    error = _validate_material_names(mesh_name, material_name)
+    if error:
+        return {"success": False, "error": error}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    mat_comp, error = _get_valid_mesh_material(avatar, mesh_name, material_name)
+    if error:
+        return {"success": False, "error": error}
+    key = RLPy.RKey()
+    key.SetTime(RLPy.RGlobal.GetTime())
+    RLPy.RGlobal.BeginAction("Set Opacity")
+    try:
+        # CC4's opacity weight is 0..100 (a key of 1.0 left the mesh at 1 %, 2026-10-29)
+        status = mat_comp.AddOpacityKey(key, mesh_name, material_name, 100.0 * max(0.0, min(1.0, float(opacity))))
+        RLPy.RGlobal.ObjectModified(avatar, _EOMTYPE_MATERIAL)
+    finally:
+        RLPy.RGlobal.EndAction()
+    return {"success": _ok(status), "mesh": mesh_name, "material": material_name,
+            "opacity": float(mat_comp.GetOpacity(mesh_name, material_name))}
 
 
 def set_texture_color(mesh_name: str, material_name: str, hue: float = 0, saturation: float = 0,
@@ -2176,6 +2351,58 @@ def load_item(file_path: str) -> dict[str, Any]:
             "avatar": avatar.GetName() if avatar else None, "added": added}
 
 
+def load_garment_fbx(path: str) -> dict[str, Any]:
+    """Garment intake: put a garment made or edited in Blender on the avatar as CC4 clothing
+    (RFileIO.LoadClotheFromFbx, which transfers the skin weights from the body). The FBX must sit on the avatar in its
+    bind pose; only workspace files are accepted. Save the result as .ccCloth from CC4 to reuse it."""
+    path, path_error = workspace_path(path, "exports")
+    path_error = path_error or _validate_path(path, {".fbx"})
+    if path_error:
+        return {"success": False, "error": path_error}
+    if not os.path.isfile(path):
+        return {"success": False, "error": f"FBX not found: {path}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    before = _item_names(avatar)
+    failed = RLPy.WStringVector()
+    t0 = time.time()
+    status = RLPy.RFileIO.LoadClotheFromFbx(avatar, path, failed)
+    seconds = round(time.time() - t0, 2)
+    _invalidate_caches()
+    avatar = get_first_avatar()
+    after = _item_names(avatar) if avatar else {}
+    added = {k: [n for n in after.get(k, []) if n not in before.get(k, [])] for k in after}
+    # LoadClotheFromFbx returns a non-Success status even when the garment loads (2026-10-29): judge by what was added
+    return {"success": any(added.values()), "status_ok": _ok(status), "path": path,
+            "seconds": seconds, "added": added, "failed_meshes": [str(m) for m in failed]}
+
+
+_CLOTH_TYPES = {"upper": "EClotheType_Upper", "lower": "EClotheType_Lower", "shoes": "EClotheType_Shoes",
+                "gloves": "EClotheType_Gloves", "accessory": "EClotheType_Accessory"}
+
+
+def set_cloth_type(item_name: str, cloth_type: str) -> dict[str, Any]:
+    """Set a clothing item's CC4 type (RICloth.SetClotheType), e.g. 'shoes' for shoes brought in by garment intake.
+    Reports the avatar's lowest body point before and after (a shoe type can carry CC4's heel lift)."""
+    if cloth_type not in _CLOTH_TYPES:
+        return {"success": False, "error": f"cloth_type must be one of {sorted(_CLOTH_TYPES)}"}
+    avatar = get_first_avatar()
+    if not avatar:
+        return {"success": False, "error": "No avatar in scene"}
+    item = next((c for c in avatar.GetClothes() if c.GetName() == item_name), None)
+    if item is None:
+        return {"success": False, "error": f"Clothing not found: {item_name}"}
+    RLPy.RGlobal.BeginAction("Set Cloth Type")
+    try:
+        status = item.SetClotheType(getattr(RLPy, _CLOTH_TYPES[cloth_type]))
+    finally:
+        RLPy.RGlobal.EndAction()
+    RLPy.RGlobal.ObjectModified(avatar, RLPy.EObjectModifiedType_Attribute)
+    _invalidate_caches()
+    return {"success": _ok(status), "item": item_name, "type": cloth_type, "now": str(item.GetClotheType())}
+
+
 _MOTION_EXTENSIONS = (".rlmotion", ".rlpose", ".imotion", ".imotionplus", ".italk")
 
 
@@ -2428,10 +2655,12 @@ def check_export_license(item: str = "") -> dict[str, Any]:
 # --- capture_views ---
 
 _VIEW_PRESETS = {"full": "ECameraLocationType_Front", "head": "ECameraLocationType_Face",
-                 "three_quarter": "ECameraLocationType_Front", "profile": "ECameraLocationType_Face"}
+                 "three_quarter": "ECameraLocationType_Front", "profile": "ECameraLocationType_Face",
+                 "side": "ECameraLocationType_Front", "back": "ECameraLocationType_Front"}
 THREE_QUARTER_DEG = 35.0
 # The Preview Camera can't be moved, so turned views turn the avatar (and restore it): head side profile for chin/jaw.
-_TURN_DEG = {"three_quarter": THREE_QUARTER_DEG, "profile": 90.0}
+# side / back: the full body turned (clothing checks: trouser seat, tucked shirt hem)
+_TURN_DEG = {"three_quarter": THREE_QUARTER_DEG, "profile": 90.0, "side": 90.0, "back": 180.0}
 
 
 def _up_axis(avatar) -> tuple:
@@ -2753,11 +2982,21 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "set_morphs":            (lambda p: set_morphs(p["morphs"]), ["morphs"], DEFAULT_TIMEOUT_S),
     "reset_all_morphs":      (lambda p: reset_all_morphs(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
     "fix_eye_element":       (lambda p: fix_eye_element(), [], DEFAULT_TIMEOUT_S),
+    "export_obj":            (lambda p: export_obj(p["path"], p.get("axis", "z"), bool(p.get("checksum", True)),
+                                                   bool(p.get("materials", False)), bool(p.get("eyes", False)),
+                                                   bool(p.get("full", False)), bool(p.get("clothes", False))),
+                              ["path"], LONG_TIMEOUT_S),
+    "create_morph_slider":   (lambda p: create_morph_slider(p["target_path"], p["checksum_path"], p["name"], p.get("category", "head"),
+                                                            p.get("axis", "z"), bool(p.get("adjust_bones", False)),
+                                                            p.get("source_path", "")),
+                              ["target_path", "checksum_path", "name"], LONG_TIMEOUT_S),
     "set_face_pose":         (lambda p: set_face_pose(p["weights"], bool(p.get("clear", True))), ["weights"], DEFAULT_TIMEOUT_S),
     # Items
     "list_items":            (lambda p: list_items(), [], DEFAULT_TIMEOUT_S),
     "load_item":             (lambda p: load_item(p["file_path"]), ["file_path"], LONG_TIMEOUT_S),
     "remove_item":           (lambda p: remove_scene_item(p["item_name"]), ["item_name"], DEFAULT_TIMEOUT_S),
+    "load_garment_fbx":      (lambda p: load_garment_fbx(p["path"]), ["path"], LONG_TIMEOUT_S),
+    "set_cloth_type":        (lambda p: set_cloth_type(p["item_name"], p["cloth_type"]), ["item_name", "cloth_type"], DEFAULT_TIMEOUT_S),
     "apply_motion":          (lambda p: apply_motion(p["file_path"], bool(p.get("interactive", False))), ["file_path"], LONG_TIMEOUT_S),
     "set_time":              (lambda p: set_time(int(p["frame"])), ["frame"], DEFAULT_TIMEOUT_S),
     "browse_content":        (lambda p: browse_content(p.get("folder_type", "cloth_upper")), [], DEFAULT_TIMEOUT_S),
@@ -2792,6 +3031,8 @@ ACTIONS: dict[str, tuple[Any, list[str], float]] = {
     "get_material_info":     (lambda p: get_material_info(p.get("avatar_name", "")), [], DEFAULT_TIMEOUT_S),
     "get_diffuse_color":     (lambda p: get_diffuse_color(p["mesh_name"], p["material_name"]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
     "set_texture_color":     (lambda p: set_texture_color(p["mesh_name"], p["material_name"], *[float(p.get(k, 0)) for k in ("hue", "saturation", "brightness", "contrast", "cyan", "magenta", "yellow")]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
+    "set_opacity":           (lambda p: set_opacity(p["mesh_name"], p["material_name"], float(p["opacity"])), ["mesh_name", "material_name", "opacity"], DEFAULT_TIMEOUT_S),
+    "load_texture":          (lambda p: load_texture(p["mesh_name"], p["material_name"], p["channel"], p["image_path"]), ["mesh_name", "material_name", "channel", "image_path"], DEFAULT_TIMEOUT_S),
     "set_diffuse_color":     (lambda p: set_diffuse_color(p["mesh_name"], p["material_name"], float(p["r"]), float(p["g"]), float(p["b"])), ["mesh_name", "material_name", "r", "g", "b"], DEFAULT_TIMEOUT_S),
     "get_shader_parameters": (lambda p: get_shader_parameters(p["mesh_name"], p["material_name"]), ["mesh_name", "material_name"], DEFAULT_TIMEOUT_S),
     "set_shader_parameter":  (lambda p: set_shader_parameter(p["mesh_name"], p["material_name"], p["parameter_name"], list(p["values"])), ["mesh_name", "material_name", "parameter_name", "values"], DEFAULT_TIMEOUT_S),
@@ -2826,9 +3067,13 @@ POST_ROUTES: dict[str, str] = {
     "/morphs/set":          "set_morphs",
     "/morphs/reset":        "reset_all_morphs",
     "/morphs/fix_eye":      "fix_eye_element",
+    "/export/obj":          "export_obj",
+    "/morphs/create_slider": "create_morph_slider",
     "/face/pose":           "set_face_pose",
     "/item/load":           "load_item",
     "/item/remove":         "remove_item",
+    "/item/garment":        "load_garment_fbx",
+    "/item/cloth_type":     "set_cloth_type",
     "/motion/apply":        "apply_motion",
     "/timeline/set":        "set_time",
     "/content/browse":      "browse_content",
@@ -2850,6 +3095,8 @@ POST_ROUTES: dict[str, str] = {
     "/material/color/get":  "get_diffuse_color",
     "/material/color/set":  "set_diffuse_color",
     "/material/texture_color/set": "set_texture_color",
+    "/material/texture/load": "load_texture",
+    "/material/opacity/set": "set_opacity",
     "/material/shader/get": "get_shader_parameters",
     "/material/shader/set": "set_shader_parameter",
     "/diagnostics":         "diagnostics",

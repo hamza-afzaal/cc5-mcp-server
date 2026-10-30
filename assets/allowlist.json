@@ -622,6 +622,54 @@
    "verified": true
   },
   {
+   "id": "clothes/slim_fit_pants_a1",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Slim fit pants_A1.ccCloth",
+   "license": "variant of Slim fit pants (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [
+    "Slim fit pants_A1",
+    "Slim fit pants"
+   ],
+   "verified": false
+  },
+  {
+   "id": "clothes/slim_fit_pants_a2",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Slim fit pants_A2.ccCloth",
+   "license": "variant of Slim fit pants (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [
+    "Slim fit pants_A2",
+    "Slim fit pants"
+   ],
+   "verified": false
+  },
+  {
+   "id": "clothes/slim_fit_pants_a3",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Slim fit pants_A3.ccCloth",
+   "license": "variant of Slim fit pants (owner cleared 2026-09-30); check_export_license exportable 2026-10-29",
+   "exportable": true,
+   "scene_names": [
+    "Slim fit pants_A3",
+    "Slim fit pants"
+   ],
+   "verified": true
+  },
+  {
+   "id": "clothes/slim_fit_pants_a4",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Pants/Slim fit pants_A4.ccCloth",
+   "license": "variant of Slim fit pants (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [
+    "Slim fit pants_A4",
+    "Slim fit pants"
+   ],
+   "verified": false
+  },
+  {
    "id": "clothes/knee_length_skirt",
    "type": "clothes",
    "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Skirts/Knee length skirt.ccCloth",

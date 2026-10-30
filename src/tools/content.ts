@@ -116,6 +116,18 @@ export function registerContentTools(server: McpServer, bridge: CC4Bridge, getAl
   );
 
   server.tool(
+    "load_garment_fbx",
+    "Garment intake: put a garment made or edited in Blender on the avatar as CC4 clothing. The FBX must hold the garment skinned to the CC4 skeleton (start from a CC4 FBX export with Reset Bone Scale on; characters/<id>/tools/garment_from_fbx.py). A Blender garment has no CC4 hide-body mask, so keep it a few mm off the body. Workspace files only.",
+    {
+      path: z.string().min(1).max(512).describe("FBX inside the workspace (bare names: <character>/exports/)"),
+    },
+    async ({ path }) => bridgeCall(() => bridge.loadGarmentFbx(path),
+      (r) => (r.success
+        ? `Added ${r.added?.clothes.join(", ")} in ${r.seconds}s${r.failed_meshes?.length ? `; failed meshes: ${r.failed_meshes.join(", ")}` : ""}.`
+        : `Nothing added: ${r.error ?? "CC4 loaded no clothing from the FBX (is it skinned to the CC4 skeleton?)"}`)),
+  );
+
+  server.tool(
     "browse_content",
     "Browse CC4's installed content folders (for authoring assets/allowlist.json). Returns up to 200 file paths. Loading still requires an allowlist entry.",
     {
