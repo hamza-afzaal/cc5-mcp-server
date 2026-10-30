@@ -30,6 +30,7 @@ import type {
   SetTextureColorResult,
   TextureColorAdjust,
   ShaderParameters,
+  SetOpacityResult,
   SetShaderParameterResult,
 } from "../../src/types.js";
 
@@ -94,6 +95,7 @@ export function createMockBridge(): MockBridge {
     setDiffuseColor: vi.fn<[string, string, number, number, number], Promise<SetDiffuseColorResult>>(),
     setTextureColor: vi.fn<[string, string, TextureColorAdjust], Promise<SetTextureColorResult>>(),
     getShaderParameters: vi.fn<[string, string], Promise<ShaderParameters>>(),
+    setOpacity: vi.fn<[string, string, number], Promise<SetOpacityResult>>(),
     setShaderParameter: vi.fn<[string, string, string, number[]], Promise<SetShaderParameterResult>>(),
   };
 }

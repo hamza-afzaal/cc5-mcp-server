@@ -179,6 +179,38 @@ describe("applyRecipe", () => {
     expect(b.setShaderParameter).toHaveBeenCalledWith("Bun", "Hair", "RootColor", [0.42, 0.41, 0.4]);
   });
 
+  it("loads Blender garments from the character folder after the items, and sets opacity after the shader values", async () => {
+    const b = happyBridge();
+    b.loadGarmentFbx.mockImplementation(async (p: string) => ({
+      success: false, error: "CC4 status failure", added: { clothes: [path.basename(p, ".fbx")], hair: [], accessories: [] },
+    }));
+    b.setOpacity.mockResolvedValue({ success: true, opacity: 0 });
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({
+      ...LOOK,
+      garment_fbx: ["garments/v21/carter_slacks.fbx"],
+      opacity: [{ mesh: "Canvas_shoes", material: "Canvas_shoes", opacity: 0 }],
+    }));
+    expect(report.ok).toBe(true);
+    const steps = report.steps.map((s) => s.step);
+    expect(steps.indexOf("load_garment")).toBe(steps.indexOf("remove_base_item") + 1);
+    expect(steps.indexOf("load_garment")).toBeLessThan(steps.indexOf("load_skin"));
+    expect(steps.slice(-3)).toEqual(["texture_color", "opacity", "leave_skingen"]);
+    expect(b.loadGarmentFbx).toHaveBeenCalledWith(path.join(CHAR_DIR, "garments/v21/carter_slacks.fbx"));
+    expect(b.setOpacity).toHaveBeenCalledWith("Canvas_shoes", "Canvas_shoes", 0);
+  });
+
+  it("stops when a garment FBX adds nothing, and rejects garment paths outside the character folder", async () => {
+    const b = happyBridge();
+    b.loadGarmentFbx.mockResolvedValue({ success: false, error: "not skinned" });
+    const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({ garment_fbx: ["garments/x.fbx"] }));
+    expect(report.ok).toBe(false);
+    expect(report.steps.at(-1)).toMatchObject({ step: "load_garment", ok: false, detail: { path: "garments/x.fbx", error: "not skinned" } });
+    for (const bad of ["D:/x.fbx", "/x.fbx", "\\x.fbx", "../bald/x.fbx", "garments/x.obj"]) {
+      expect(() => recipe({ garment_fbx: [bad] })).toThrow();
+    }
+    expect(() => recipe({ opacity: [{ mesh: "m", material: "x", opacity: 1.5 }] })).toThrow();
+  });
+
   it("skips the SkinGen exit without skin presets, and warns about a base item the base didn't bring", async () => {
     const b = happyBridge();
     const report = await applyRecipe(b as never, fixtureAllowlist(), recipe({ remove_base_items: ["Panties"] }));
@@ -322,13 +354,14 @@ describe("exportRecipe", () => {
     expect(out.recipe.texture_colors).toEqual([{ mesh: "Hair", material: "Hair", brightness: 30 }, { mesh: "Brow", material: "Brow", brightness: 10 }]);
   });
 
-  it("carries the applied recipe's removed item parts and shader values (CC4 can't report them)", async () => {
+  it("carries the applied recipe's removed item parts, Blender garments, shader values and opacity (CC4 can't report them)", async () => {
     const b = sceneBridge();
     const sp = { mesh: "Bun", material: "Hair", parameter: "TipColor", values: [0.74, 0.73, 0.71] };
-    setLastAppliedRecipe(recipe({ remove_items: ["Bang"], shader_params: [sp] }));
+    const op = { mesh: "Canvas_shoes", material: "Canvas_shoes", opacity: 0 };
+    setLastAppliedRecipe(recipe({ remove_items: ["Bang"], shader_params: [sp], garment_fbx: ["garments/v21/carter_slacks.fbx"], opacity: [op] }));
     b.diagnostics.mockImplementation(async (q: string) => (q === "materials_per_mesh" ? {} : { values: [0, 0, 0, 0, 0, 0, 0] }));
     const out = await exportRecipe(b as never, fixtureAllowlist());
-    expect(out.recipe).toMatchObject({ remove_items: ["Bang"], shader_params: [sp] });
+    expect(out.recipe).toMatchObject({ remove_items: ["Bang"], shader_params: [sp], garment_fbx: ["garments/v21/carter_slacks.fbx"], opacity: [op] });
     expect(RecipeSchema.safeParse(out.recipe).success).toBe(true);
   });
 

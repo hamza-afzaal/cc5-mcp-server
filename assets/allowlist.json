@@ -1859,6 +1859,266 @@
    "scene_names": [],
    "verified": true,
    "notes": "CXRP-720 Carter; check_export_license exportable on Carter 2026-10-29"
+  },
+  {
+   "id": "clothes/rolled_sleeves_shirt",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Rolled sleeves shirt.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/rolled_sleeves_shirt_a1",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Rolled sleeves shirt_A1.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/rolled_sleeves_shirt_a2",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Rolled sleeves shirt_A2.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/rolled_sleeves_shirt_a3",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Rolled sleeves shirt_A3.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/rolled_sleeves_shirt_a4",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Rolled sleeves shirt_A4.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/rolled_sleeves_shirt_a5",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Rolled sleeves shirt_A5.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/knee_length_skirt_a1",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Skirts/Knee length skirt_A1.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/knee_length_skirt_a2",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Skirts/Knee length skirt_A2.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/knee_length_skirt_a3",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Skirts/Knee length skirt_A3.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/knee_length_skirt_a4",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Skirts/Knee length skirt_A4.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/long_slim_coat",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Coats/Long slim coat.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": true,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/long_slim_coat_a1",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Coats/Long slim coat_A1.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/long_slim_coat_a2",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Coats/Long slim coat_A2.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/long_slim_coat_a3",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Coats/Long slim coat_A3.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/turtleneck_sweater_a1",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Turtleneck sweater_A1.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/turtleneck_sweater_a2",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Turtleneck sweater_A2.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/turtleneck_sweater_a3",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Turtleneck sweater_A3.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/turtleneck_sweater_a4",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Turtleneck sweater_A4.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/layered_sweater_a1",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Layered sweater_A1.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/layered_sweater_a2",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Layered sweater_A2.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/layered_sweater_a3",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Layered sweater_A3.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "clothes/layered_sweater_a4",
+   "type": "clothes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shirts/Layered sweater_A4.ccCloth",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "shoes/canvas_shoes_a1",
+   "type": "shoes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shoes/Canvas Shoes_A1.ccShoes",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "shoes/canvas_shoes_a2",
+   "type": "shoes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shoes/Canvas Shoes_A2.ccShoes",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "shoes/canvas_shoes_a3",
+   "type": "shoes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shoes/Canvas Shoes_A3.ccShoes",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
+  },
+  {
+   "id": "shoes/canvas_shoes_a4",
+   "type": "shoes",
+   "path": "D:/Business/Reallusion/Reallusion Templates/Cloth/Shoes/Canvas Shoes_A4.ccShoes",
+   "license": "reallusion content (owner cleared 2026-09-30); check_export_license pending",
+   "exportable": true,
+   "scene_names": [],
+   "verified": false,
+   "notes": "CXRP-720 Carter outfit candidate"
   }
  ]
 }

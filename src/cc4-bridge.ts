@@ -27,6 +27,7 @@ import type {
   SetTextureColorResult,
   TextureColorAdjust,
   ShaderParameters,
+  SetOpacityResult,
   SetShaderParameterResult,
   DiagnosticQuery,
   OperationResult,
@@ -475,6 +476,12 @@ export class CC4Bridge {
       mesh_name: meshName,
       material_name: materialName,
     });
+  }
+
+  /** Material opacity 0..1 (e.g. 0 hides canvas shoes kept on under modelled shoes for their heel lift). */
+  async setOpacity(meshName: string, materialName: string, opacity: number): Promise<SetOpacityResult> {
+    return this.request<SetOpacityResult>("/material/opacity/set", "POST",
+      { mesh_name: meshName, material_name: materialName, opacity });
   }
 
   async setShaderParameter(

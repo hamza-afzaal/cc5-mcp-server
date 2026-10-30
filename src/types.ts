@@ -183,6 +183,13 @@ export interface ShaderParameters extends OperationResult {
   parameters?: Record<string, number[]>;
 }
 
+export interface SetOpacityResult extends OperationResult {
+  mesh?: string;
+  material?: string;
+  /** CC4's opacity weight, 0..100 */
+  opacity?: number;
+}
+
 export interface SetShaderParameterResult extends OperationResult {
   mesh?: string;
   material?: string;

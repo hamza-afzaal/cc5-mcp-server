@@ -61,6 +61,8 @@ const CASES: Array<[string, () => Promise<unknown>, "GET" | "POST", string, unkn
   ["setDiffuseColor", () => b.setDiffuseColor("CC_Base_Teeth", "Std_Upper_Teeth", 0.9, 0.88, 0.8), "POST", "/material/color/set",
     { mesh_name: "CC_Base_Teeth", material_name: "Std_Upper_Teeth", r: 0.9, g: 0.88, b: 0.8 }],
   ["getShaderParameters", () => b.getShaderParameters("CC_Base_Body", "Std_Skin_Head"), "POST", "/material/shader/get", { mesh_name: "CC_Base_Body", material_name: "Std_Skin_Head" }],
+  ["setOpacity", () => b.setOpacity("Canvas_shoes", "Canvas_shoes", 0), "POST", "/material/opacity/set",
+    { mesh_name: "Canvas_shoes", material_name: "Canvas_shoes", opacity: 0 }],
   ["setShaderParameter", () => b.setShaderParameter("CC_Base_Body", "Std_Skin_Head", "Micro Roughness Scale", [0.4]), "POST", "/material/shader/set",
     { mesh_name: "CC_Base_Body", material_name: "Std_Skin_Head", parameter_name: "Micro Roughness Scale", values: [0.4] }],
   ["browseContent", () => b.browseContent("shoes"), "POST", "/content/browse", { folder_type: "shoes" }],
