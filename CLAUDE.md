@@ -93,6 +93,7 @@ The bridge **refuses to write outside `characters\`** (`CC4_WORKSPACE`). Never w
   - Tools: `characters\bald\tools\garment_from_fbx.py` (+ `edits\*.py`) and `fit_accessories.py` (CXRP-721).
 - **Human Anatomy `.ccAvatar` bases (Female Old etc.) use the Traditional facial profile**, not CC4Extended. Our face vocabulary, face library and SALSA set-up need CC4Extended. Use Camila's base with the matching `Head/Body HA …` sliders at 1 instead (Carter, CXRP-720, 2026-10-29).
 - **Strand hair (Hair Builder `.rlhair`, e.g. Chic bun medium) takes its colour from the Digital Human Hair shader** (`RootColor`, `TipColor`, `_1st Dye Strength`), so `set_texture_color` barely changes it. Set the colour with `set_shader_parameter`; recipes record these in `shader_params` and drop unwanted hair pieces with `remove_items`.
+- **Exporting a Game Base avatar at subdivision level 1 (`SetExportLevel(1)`) crashes CC4 4.70** (Megan, 2026-10-31; level 0 is fine). For a denser head use the S4 step `head_subdiv` (`..\blender-pipeline\tools\head_subdiv.py`, CXRP-621) instead.
 - A SWIG call with a wrong argument type can crash CC4. Check signatures in CC4's `RLPy.py` / `docs/rlpy-api-reference.md` first.
 
 ### UI-only (manual checklist steps)
