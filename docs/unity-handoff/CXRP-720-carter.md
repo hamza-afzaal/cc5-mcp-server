@@ -15,6 +15,24 @@ Treat her as a **new avatar**: fresh import, fresh prefab. The existing `Avatars
 ponytail and rocker jeans) is **not touched**; the new model goes to a new folder, `CarterV2`. Decide with the owner
 whether she replaces the legacy prefab or sits beside it.
 
+## Fix round 1 (2026-10-31): your review of 2026-10-31
+
+The model is rebuilt; the clips are unchanged (same body and skeleton, so reuse the imported ones). Re-import
+`carter.fbx` + `carter.json` (+ the changed textures, 29 files) over `CarterV2`; mesh, material and shape names and
+order are unchanged (body 152, brow 47, tongue 41 shapes), so the prefab's SALSA and vocab bindings stay valid.
+
+| Your item | Fix |
+|---|---|
+| 1. Back of the head bare below the bun | The scalp cap's painted hair is now grey (just under the strands' grey), so it reads as her hair drawn tight into the bun. No extra hair: the Chic bun's only other piece is long loose hair, and CC4 takes one hairstyle |
+| 2. Skin through the scalp | The head skin sat within 1 mm of the cap (104 vertices outside it). Every skin vertex near the cap now sits 3 mm under it; the hairline is unchanged |
+| 3. Skin/turtleneck through the cardigan | Skin 1 cm under the cardigan; turtleneck 3 mm in where the cardigan covers it (contacts within 1 mm on the upper back: turtleneck 3 → 0) |
+| 4. Skin too shiny | `Roughness_Value` 0.55 on `Ga_Skin_Body` (smoothness 0.45 instead of 0.63) |
+| 5. Bare ankle seated | Mid-calf charcoal socks (`Carter_Socks` material, merged into `Canvas_shoes` by Game Base), hidden under the flats' upper |
+| 6. Bun darker than the hair | The bun's RLHair specular settings now match `Hair1_Transparency` (Specular 0.8, Secondary 1.0) |
+
+**Camila:** your hair fix is in her JSON now (`Soft_Waves_Lob_Transparency`: `Roughness_Value` 0.55, normal strength 50),
+so a CCiC rebuild keeps it. Only `camila.json` changes; trilinear filtering stays your import setting.
+
 ## 1. Model (copied 2026-10-30, all files byte-identical)
 
 | From | To |
