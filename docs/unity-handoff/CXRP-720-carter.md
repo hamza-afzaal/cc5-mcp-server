@@ -15,7 +15,7 @@ Treat her as a **new avatar**: fresh import, fresh prefab. The existing `Avatars
 ponytail and rocker jeans) is **not touched**; the new model goes to a new folder, `CarterV2`. Decide with the owner
 whether she replaces the legacy prefab or sits beside it.
 
-## 1. Model (not copied yet: waits for the owner's OK)
+## 1. Model (copied 2026-10-30, all files byte-identical)
 
 | From | To |
 |---|---|

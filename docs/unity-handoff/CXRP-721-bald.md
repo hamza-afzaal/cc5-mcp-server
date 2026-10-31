@@ -11,7 +11,7 @@ The bald man (today's `BaldGuyPrefab`) is rebuilt end to end through the same pi
 
 Treat him as a **new avatar**: fresh import, fresh prefab. Nothing from the old prefab's model carries over.
 
-## 1. Model (not copied yet: waits for the owner's OK)
+## 1. Model (copied 2026-10-30, all files byte-identical)
 
 | From | To |
 |---|---|
