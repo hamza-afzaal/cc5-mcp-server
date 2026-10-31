@@ -15,6 +15,23 @@ Treat her as a **new avatar**: fresh import, fresh prefab. The existing `Avatars
 ponytail and rocker jeans) is **not touched**; the new model goes to a new folder, `CarterV2`. Decide with the owner
 whether she replaces the legacy prefab or sits beside it.
 
+## Fix round 2 (2026-10-31): your `bench_results/cxrp720/art_handoff.md`
+
+JSON and texture only; the FBX is unchanged, so no re-import of the mesh is needed.
+
+| Your item | Fix |
+|---|---|
+| 1.1 Back of the head | Left as the grey painted scalp (you: "otherwise we can call it done"); a base hair layer needs another hairstyle, which is the owner's call |
+| 1.2 Skin shine | `Roughness_Value` on the skin removed from the reasoning (CCiC ignores it there, thanks). The wrinkle normal is at **half strength** (`Ga_Skin_Body` normal `Strength` 50), which CCiC carries. Keep your hand-set skin smoothness 0.45 for now |
+| 1.3 Socks glossy | `Carter_Socks` `Roughness_Value` 0.8 (smoothness 0.2, as you set by hand) |
+| 1.4 Skin at the shoe opening | Her foot skin (below 16 cm, always inside socks and flats) is painted the socks' near-black in `Ga_Skin_Body_Diffuse.png`, so the sliver reads as sock |
+| 2. Kevin's hair | `Classic_Slick_Back_Transparency`: `Roughness_Value` 0.55, normal strength 50 (as Camila's); only `kevin.json` changes |
+
+Files: Carter `carter.json` + `carter.fbm\Ga_Skin_Body_Diffuse.png`; Kevin `kevin.json`.
+
+**Section 3 (animation):** noted. The seam and hitch fixes and a library v1 are separate pipeline work and not in this
+round. The web GLBs already use `Sitting_Idle` for seated, as you do.
+
 ## Fix round 1 (2026-10-31): your review of 2026-10-31
 
 The model is rebuilt; the clips are unchanged (same body and skeleton, so reuse the imported ones). Re-import
