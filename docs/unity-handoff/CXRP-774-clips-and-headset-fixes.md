@@ -25,7 +25,7 @@ Mesh names, materials and blendshapes are unchanged in both models. Re-import `b
 | 5 | Megan's chat_anim_2 / Carter's LoweringHead loop seams | **In.** 0.00 cm; the end now flows into frame 0 at the same speed |
 | 6 | PointingAtPhone hitches (~1.5 s, ~2.7 s) | **In.** Softened (worst 5.8 → ~4.9); not fully gone |
 | 7 | Megan's feet slide between BEAT and AD clips | **In.** All her standing clips share one foot placement (within 0.6 cm). Clips that take a step still end where the step lands |
-| 8 | Body clips for the 12 missing emotion words | **Partly in.** The four priority words (worried, anxious, discomfort, sad) as 11 loops on Kevin, Camila, the bald man and Carter (Megan already had them), each with a `_Seated` version (Megan's too). **Still to come:** the other emotion words |
+| 8 | Body clips for the 12 missing emotion words | **In** (second delivery below). First delivery: The four priority words (worried, anxious, discomfort, sad) as 11 loops on Kevin, Camila, the bald man and Carter (Megan already had them), each with a `_Seated` version (Megan's too). **Still to come:** the other emotion words |
 | 9 | Seated HandingAppointmentCard / PointingAtPhone | **In**, all five avatars (`*_Seated.fbx`) |
 | 10 | Carter's shoe-opening sliver and back-of-head hair | Already done earlier (CXRP-720 fix rounds 1–2); nothing new here |
 
@@ -38,7 +38,41 @@ Things to look at when you test:
 - **Standing cold shiver (the self-hug):** Kevin 1.8 cm, the bald man 3.7 cm in two blips of about 0.1 s, Carter 3.2 cm briefly.
 - **Manifests:** built on your live copies, with entries added for the new clips.
 
-## Every changed file
+## Item 8, second delivery (2026-11-02): the rest of the emotion words
+
+Kevin, Camila, the bald man and Carter now have all 25 of Megan's curated Awesome Dog clips (they had 11). Megan's
+manifest marks which emotion words each clip serves (`emotion`, `emotions`); the new manifests for the other bodies
+carry the same fields.
+
+| Emotion word | New clips (`<Name>_AD_....fbx`) |
+|---|---|
+| embarrassed | `emotion_ashamed`, `emotion_awkward_stand`, `emotion_bashful_stand`, `emotion_timid_stand` |
+| relieved | `emotion_relief` |
+| frustrated | `emotion_stroppy_stand` (seated only, as Megan's) |
+| surprised | `emotion_oh_wow` |
+| neutral | `emotion_thinking`, `emotion_puzzled_scratch_head` |
+| nauseous | `unwell_feeling_faint`, `unwell_dizzy_stand` (seated only, as Megan's) |
+| scared | `unwell_afraid` |
+| happy | `emotion_giggle` |
+| (action) | `unwell_cough_and_sneeze` |
+
+Each has a `_Seated` version on every body (Megan's too), except stroppy and dizzy, and these held back:
+- `oh_wow` seated, on all five avatars: the arms went 6–8 cm through the torso and thighs.
+- `bashful` seated, on Megan and Carter: 8 cm.
+
+Use the standing clip for those.
+
+Checks:
+- Every loop closes with the hands 0.00 cm apart. Worst seated pop 6.9.
+- Standing `thinking` needed two extra fit passes on the other bodies: the forearm went 6 cm into the chest when the hand reaches the chin. It is now 1.6 cm or less.
+
+Files (114 under `Avatars\`):
+- `Kevin`, `Camila`, `BaldGuy`: `Animations\LibraryV1\`, 14 clips + 11 `_Seated` each.
+- `CarterV2`: 14 clips + 10 `_Seated`.
+- `Megan`: 10 `_Seated`.
+- `library_v1_manifest.json` updated in all five.
+
+## Every changed file (first delivery)
 
 Models: `BaldGuy\bald.fbx`, `BaldGuy\bald.json` (findings 1–2), `Megan\megan.fbx` (finding 3).
 
